@@ -1,0 +1,166 @@
+﻿html {
+    height: auto;
+    min-height: 100%;
+}
+
+body {
+    background: url(../images/bg_login.jpg) center center no-repeat #d2d6de;
+    background-size: cover;
+    height: 100% !important;
+    width: 100%;
+    position: fixed;
+    min-height: 100%;
+}
+
+.wrapper {
+    height: 100% !important;
+    width: 100%;
+}
+
+.h-p100 {
+    height: 100% !important;
+}
+
+.container {
+    max-width: 100%;
+}
+
+.justify-content-md-center {
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+}
+
+.align-items-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-xl-4 {
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+@media (min-width: 992px) {
+    .col-lg-6 {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+@media (min-width: 768px) {
+    .col-md-8 {
+        -ms-flex: 0 0 66.666667%;
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%;
+    }
+}
+
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: rgba(170, 168, 168, 0.78);
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 6px;
+}
+
+.card {
+    margin-bottom: 2.143rem;
+    border: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.shadow-none {
+    box-shadow: none !important;
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.p-3 {
+    padding: 3px !important;
+}
+
+form {
+    min-height: 100%;
+    height: 100% !important;
+    width: 100%;
+}
+
+#btnlogin {
+    font-family: 'HELVETICANEUE';
+    float: left;
+    background: black;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.lnkfg {
+    margin-top: 8px;
+    font-weight: bold;
+    font-size: 13px;
+    margin-right: 5px;
+    float: right !important;
+    color: #ffc91e;
+    margin-left: 10px;
+    text-transform: uppercase;
+}
+
+    .lnkfg:hover {
+        color: #ffc50d !important;
+    }
+
+
+.form-group label {
+    color: white;
+}
+
+.text-dark {
+    color: white;
+}
+
+
+.txtemailrg{
+    padding:0 5px;
+}
+
+#pnsussecc label{
+    color:white;
+}
+
+.mes-error {
+    background: #e60d0d;
+    text-align: center;
+    color:white;
+}
+
+.mes-sucess {
+    background: blue;
+    text-align: center;
+    color: white;
+}
