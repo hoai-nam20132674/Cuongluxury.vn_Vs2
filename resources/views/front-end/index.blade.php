@@ -1,1001 +1,674 @@
 @extends('front-end.layout.default')
 
 @section('head')
-	    <meta name="robots" content="noodp,index,follow" />
-	    <meta name="google" content="notranslate" />
-	    <meta name="keywords" content="{{$system->seo_keyword}}" />
-	    <meta name="description" content="{{$system->seo_description}}" />
-	    <meta property="og:type" content="website" />
-        <meta property="og:title" content="{{$system->title}}" />
-	    <meta property="og:description" content="{{$system->seo_description}}" />
-        <meta property="og:url" content="{{$system->website}}" />
-        <meta property="og:image" content="{{asset('uploads/images/ogimage/'.$system->ogimage)}}" />
-        <meta property="og:locale" content="vi_VN" />
-	    <title>{{$system->title}}</title>
-        <style type="text/css">
-            .effect {
-              text-align: center;
-              display: inline-block;
-              position: relative;
-              text-decoration: none;
-              color: #fff;
-              text-transform: capitalize;
-              /* background-color: - add your own background-color */
-              /*font-family: "Roboto", sans-serif;*/
-              /* put your font-family */
-              font-size: 18px;
-              padding: 20px 0px;
-              width: 150px;
-              border-radius: 6px;
-              overflow: hidden;
-            }
-
-            /* effect-1 styles */
-            .effect.effect-1 {
-              transition: all 0.2s linear 0s;
-            }
-            .effect.effect-1:before {
-              content: "";
-              font-family: FontAwesome;
-              font-size: 15px;
-              position: absolute;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              right: 0;
-              top: 0;
-              opacity: 0;
-              height: 100%;
-              width: 40px;
-              transition: all 0.2s linear 0s;
-            }
-            .effect.effect-1:hover {
-              text-indent: -20px;
-            }
-            .effect.effect-1:hover:before {
-              opacity: 1;
-              text-indent: 0px;
-            }
-            .show-more{
-                padding: 5px 10px;
-                background: #b80000;
-                border-radius: 30px;
-            }
-            .show-more:hover {
-                color: #fff;
-                background: #cb0006;
-                box-shadow: 0px 0px 10px 0px #ff4800;
-                transition: 0.3s;
-            }
-            .our-contact {
-                /*background: url('images/bg-pattern-dot.png') 0 0 repeat !important;*/
-                background: url('images/bg-contact.png');
-                background-size: cover;
-                background-attachment: fixed;
-            }
-            .our-team {
-                /*background: url('images/bg-pattern-dot.png') 0 0 repeat !important;*/
-                
-            }
-            .contact-title:before {
-                top: 0;
-                left: 0;
-                bottom: 0;
-                width: 5px;
-                content: '';
-                border-radius: 3px;
-                position: absolute;
-                background-color: #ffc107;
-            }
-            /*out team*/
-            .team-upper-part {
-                position: relative;
-                overflow: hidden;
-                text-align: center;
-            }
-            .team-upper-part .social-list {
-                position: absolute;
-                bottom: -37px;
-                width: 100%;
-                transition: 600ms;
-                transform: scaleY(0);
-                z-index: 1;
-            }
-            .team-upper-part .social-list li {
-                float: none;
-                margin-right: 2px;
-                display: inline;
-            }
-            .team-upper-part .social-list li a {
-                border-radius: 5px;
-                background: #f3f1f200;
-                color: #03324d;
-            }
-            .social-list li a {
-                background: #303743;
-                height: 35px;
-                width: 35px;
-                display: inline-block;
-                color: #fff;
-                text-align: center;
-                border-radius: 50%;
-                line-height: 42px;
-                font-size: 16px;
-            }
-            .team-block:hover .team-upper-part .social-list {
-                transform: scaleY(1);
-                bottom: 30px;
-            }
-            .team-block .team-bottom-part {
-                text-align: center;
-                padding: 30px 20px;
-                position: relative;
-                /*background: #f8f8f8;*/
-            }
-            .team-block .team-bottom-part:before {
-                content: "";
-                position: absolute;
-                background: #b80000;
-                bottom: 0;
-                height: 3px;
-                width: 0;
-                left: 0;
-                transition: 600ms;
-                right: 0;
-                margin: 0 auto;
-            }
-            .team-block .team-bottom-part:after {
-                content: "";
-                height: 3px;
-                width: 40%;
-                left: 0;
-                right: 0;
-                margin: 0 auto;
-                position: absolute;
-                bottom: 0;
-                background: #b80000;
-                transition: 400ms;
-            }
-            .team-block:hover .team-bottom-part:before {
-                width: 100%;
-            }
-            .team-upper-part:after {
-                content: "";
-                position: absolute;
-                background: #03324d;
-                height: 100%;
-                width: 100%;
-                left: 0;
-                top: 0;
-                opacity: 0.7;
-                z-index: 0;
-                transition: 500ms;
-                transform: scaleX(0);
-            }
-            .team-block:hover .team-upper-part:after {
-                transform: scaleY(1);
-            }
-            .team-upper-part .social-list li a:hover {
-                background: #f3f1f200;
-                color: #fff;
-            }
-            .why_chose_us .details h3{
-                height: 50px;
-                font-size: 16px;
-            }
-            .why_chose_us .details p{
-                height: 150px;
-
-            }
-            /* === HEADING STYLE #1 === */
-            h2 {
-              position: relative;
-              padding: 0;
-              margin: 0;
-              /*font-family: "Raleway", sans-serif;*/
-              font-weight: 300;
-              font-size: 40px;
-              color: #080808;
-              -webkit-transition: all 0.4s ease 0s;
-              -o-transition: all 0.4s ease 0s;
-              transition: all 0.4s ease 0s;
-            }
-            .main-title h2 {
-              text-align: center;
-              text-transform: uppercase;
-              padding-bottom: 5px;
-            }
-            .main-title h2:before {
-              width: 28px;
-              height: 5px;
-              display: block;
-              content: "";
-              position: absolute;
-              bottom: 3px;
-              left: 50%;
-              margin-left: -14px;
-              background-color: #b80000;
-            }
-            .main-title h2:after {
-              width: 100px;
-              height: 1px;
-              display: block;
-              content: "";
-              position: relative;
-              margin-top: 10px;
-              left: 50%;
-              margin-left: -50px;
-              background-color: #b80000;
-            }
-            .slider-item{
-                overflow: hidden;
-            }
-            /*css popup*/
-            .background-popup {
-                width: 100%; 
-                height: 10000px; 
-                background-color: #000; 
-                opacity: 0.7; 
-                position: fixed; 
-                top: 0px; 
-                z-index: 10000;
-            }
-            .popup {
-                width: 700px; 
-                /*height: 500px; */
-                position: fixed; 
-                top: 25%; 
-                left: 25%; 
-                z-index: 20000; 
-                top: 50%; 
-                left: 50%; 
-                margin-left: -350px; 
-                margin-top: -300px;
-                /*background-color: #086748;*/
-            }
-            .close-popup {
-                position: absolute; 
-                right: -50px; 
-                top: -50px;
-            }
-            .close-popup a {
-                color: red; 
-                font-size: 40px; 
-                font-weight: 800;
-
-            }
-            @media (max-width: 768px) {
-                .popup {
-                    width: 340px; 
-                    /*height: 340px; */
-                    position: fixed; 
-                    top: 25%; 
-                    left: 25%; 
-                    z-index: 20000; 
-                    top: 50%; 
-                    left: 50%; 
-                    margin-left: -170px; 
-                    margin-top: -170px;
-                }
-                .close-popup {
-                    position: absolute; 
-                    right: 0px; 
-                    top: -50px;
-                }
-                .hoa-dao-left {
-                    display: none;
-                }
-                .hoa-dao-right {
-                    display: none;
-                }
-            }
-            /*end css popup*/
-        </style>
+	<title>Cuong Luxury</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="google-site-verification" content="4GneTy3UPEfpKBItZcT4ob0uAKRPvzGRcTm84Qd076M" />
+    <meta http-equiv="Content-Language" content="vi" />
+    <meta name="copyright" content="Copyright" />
+    <meta name="description" content="Cuong Luxury là đơn vị uy tín với hơn 10 năm kinh nghiệm trong lĩnh vực mua bán, trao đổi, ký gửi các thương hiệu đồng hồ hiệu chính hãng hàng đầu tại Việt Nam như Hublot, Rolex, Patek Philippe, Franck Muller, ..." />
+    <meta name="keywords" content="Cuong Luxury, đồng hồ cao cấp chính hãng, Hublot, Rolex, Patek Philippe, Franck Muller, Vertu, Richard Mille..." />
+    <meta name="geo.placename" content="39 Quang Trung, Hoàn Kiếm" />
+    <meta name="DC.title" content="CuongLuxury" />
+    <meta property="og:type" name="ogtype" content="Website" />
+    <meta property="og:title" name="ogtitle" content="Cuong Luxury" />
+    <meta property="og:description" name="ogdescription" content="Cuong Luxury là đơn vị uy tín với hơn 10 năm kinh nghiệm trong lĩnh vực mua bán, trao đổi, ký gửi các thương hiệu đồng hồ hiệu chính hãng hàng đầu tại Việt Nam như Hublot, Rolex, Patek Philippe, Franck Muller, ..." />
+    <meta property="og:url" name="ogurl" content="https://cuongluxury.vn/" />
+    <meta property="og:image" name="ogimage" content="https://cuongluxury.vn/templates/home/images/banner-zalo-e.png" />
+    <meta property="og:image:alt" name="og:image:alt" content="Cuong Luxury" />
+    <meta property="og:sitename" content="https://cuongluxury.vn/" />
+    <link rel="canonical" href="https://cuongluxury.vn/" />
 @endsection
 
 
 @section('content')
-    @if(isset($popup))
-    <div class="main-popup">
+    <!-- Slide đầu trang -->
+    @include('front-end.layout.section_slide')
+    <!-- End slide đầu trang -->
 
-        <div class="background-popup">
-            
-        </div>
-        <div class="popup">
-            <div class="close-popup">
-                <a href="#" title="ĐÓNG">[X]</a>
-                
-            </div>
-            <a href="{{$popup->href}}" target="{{$popup->target}}" class=" bdr_none" ng-click="signup()">
-                <img src="{{asset('uploads/images/popups/'.$popup->url)}}" alt="Popup" width="100%">
-            </a>
-            
-        </div>
-    </div>
-    @endif
-    <section class="main-slider pt0 pb0 m0a">
-        
-            <div class="container-fluid p0">
-                <!-- <div class="row">
-                    <div class="col-md-12"> -->
-                        <div class="main-banner-wrapper home10">
-                            <div class="fp_single_item_slider ovh">
-                                @foreach($slides as $item)
-                                    <div class="item" href="{{$item->href}}">
-                                        <a href="{{$item->href}}" target="{{$item->target}}">
-                                            <img width="100%" src="{{asset('uploads/images/sliders/'.$item->url)}}" alt="">
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    <!-- </div>
-                </div> -->
-            </div>
-        
-    </section>  
-    
-    <!-- Nổi bật -->
-    <section id="best-property" class="best-property pb30 pt30 maxw1600 m0a" style="z-index: 0;">
-        <div class="container">
-            <div class="row posr">
-                <div class="col-lg-12">
-                    <div class="home_content home6">
-                        
-                        <div class="home_adv_srch_opt home6">
-                            <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="pills-ban" data-toggle="pill" href="#ban" role="tab" aria-controls="pills-ban" aria-selected="true">{{__('Đang bán')}}</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-thue" data-toggle="pill" href="#thue" role="tab" aria-controls="pills-thue" aria-selected="false">{{__('Cho thuê')}}</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content home1_adsrchfrm" id="pills-tabContent">
-                                <div class="tab-pane fade show active" id="ban" role="tabpanel" aria-labelledby="pills-ban">
-                                    <div class="home1-advnc-search home6">
-                                        <form action="search-b">
-                                            <ul class="h1ads_1st_list mb0 row">
-                                                <li class="list-inline-item col-md-3">
-                                                    <div class="form-group">
-                                                        <input type="text" name="keyword" class="form-control" id="exampleInputName1" placeholder="{{__('Nhập từ khóa')}}...">
-                                                    </div>
-                                                </li>
-                                                <li class="list-inline-item col-md-2">
-                                                    <div class="search_option_two">
-                                                        <div class="candidate_revew_select">
-                                                            <select class="selectpicker w100 show-tick" name="bed">
-                                                                <option value="">{{__('phòng ngủ')}}</option>
-                                                                <option value="1PN">{{__('1PN')}}</option>
-                                                                <option value="1PN+1">{{__('1PN+1')}}</option>
-                                                                <option value="2PN">{{__('2PN')}}</option>
-                                                                <option value="2PN+1">{{__('2PN+1')}}</option>
-                                                                <option value="3PN">{{__('3PN')}}</option>
-                                                                <option value="3PN+1">{{__('3PN+1')}}</option>
-                                                                <option value="4PN">{{__('4PN')}}</option>
-                                                                <option value="5PN">{{__('5PN')}}</option>
-                                                                <option value="Dual Key">{{__('Dual Key')}}</option>
-                                                                <option value="Studio">{{__('Studio')}}</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-inline-item col-md-2">
-                                                    <div class="search_option_two">
-                                                        <div class="candidate_revew_select">
-                                                            <select class="selectpicker w100 show-tick" name="price">
-                                                                <option value="">{{__('Giá bán')}}</option>
-                                                                @php
-                                                                    $locale = Config::get('app.locale');
-                                                                @endphp
-                                                                @if($locale == 'vi')
-                                                                <option value="0-2000000000">{{__('Dưới 2 tỷ')}}</option>
-                                                                <option value="2000000000-3000000000">{{__('Từ 2 - 3 tỷ')}}</option>
-                                                                <option value="3000000000-5000000000">{{__('Từ 3 - 5 tỷ')}}</option>
-                                                                <option value="5000000000-7000000000">{{__('Từ 5 - 7 tỷ')}}</option>
-                                                                <option value="7000000000-9000000000">{{__('Từ 7 - 9 tỷ')}}</option>
-                                                                <option value="9000000000-12000000000">{{__('Từ 9 - 12 tỷ')}}</option>
-                                                                <option value="12000000000-+">{{__('Trên 12 tỷ')}}</option>
-                                                                @elseif($locale == 'ko')
-                                                                <option value="0-100000">{{__('100.000$ 이하')}}</option>
-                                                                <option value="100000-150000">{{__('100.000 - 150.000$')}}</option>
-                                                                <option value="150000-220000">{{__('150.000 - 220.000$')}}</option>
-                                                                <option value="220000-300000">{{__('220.000 - 300.000$')}}</option>
-                                                                <option value="300000-400000">{{__('300.000 - 400.000$')}}</option>
-                                                                <option value="400000-520000">{{__('400.000 - 520.000$')}}</option>
-                                                                <option value="520000-+">{{__('520.000$ 이상')}}</option>
-                                                                @elseif($locale == 'en')
-                                                                <option value="0-100000">{{__('Under 100.000$')}}</option>
-                                                                <option value="100000-150000">{{__('100.000 - 150.000$')}}</option>
-                                                                <option value="150000-220000">{{__('150.000 - 220.000$')}}</option>
-                                                                <option value="220000-300000">{{__('220.000 - 300.000$')}}</option>
-                                                                <option value="300000-400000">{{__('300.000 - 400.000$')}}</option>
-                                                                <option value="400000-520000">{{__('400.000 - 520.000$')}}</option>
-                                                                <option value="520000-+">{{__('Over 520.000$')}}</option>
-                                                                @endif
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-inline-item col-md-3">
-                                                    <div class="search_option_two">
-                                                        <div class="candidate_revew_select">
-                                                            <select class="selectpicker w100 show-tick" name="huong">
-                                                                <option value="">{{__('hướng')}}</option>
-                                                                <option value="Tây, Nam">{{__('Tây Nam')}}</option>
-                                                                <option value="Tây, Bắc">{{__('Tây Bắc')}}</option>
-                                                                <option value="Tây Nam - Tây Bắc">{{__('Tây Nam - Tây Bắc')}}</option>
-                                                                <option value="Tây Bắc - Đông Bắc">{{__('Tây Bắc - Đông Bắc')}}</option>
-                                                                <option value="Tây Bắc">{{__('Tây Bắc')}}</option>
-                                                                <option value="Đông Nam- Đông Bắc">{{__('Đông Nam - Đông Bắc')}}</option>
-                                                                <option value="Đông Nam">{{__('Đông Nam')}}</option>
-                                                                <option value="Đông Nam- Tây Nam">{{__('Đông Nam - Tây Nam')}}</option>
-                                                                <option value="Đông Bắc">{{__('Đông Bắc')}}</option>
-                                                                <option value="Chính Tây">{{__('Chính Tây')}}</option>
-                                                                <option value="Chính Nam">{{__('Chính Nam')}}</option>
-                                                                <option value="Chính Đông">{{__('Chính Đông')}}</option>
-                                                                <option value="Chính Bắc">{{__('Chính Bắc')}}</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                
-                                                <li class="list-inline-item col-md-2">
-                                                    <div class="search_option_button">
-                                                        <button type="submit" class="btn btn-thm">{{__('tìm kiếm')}}</button>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </form>
-                                    </div>
-                                </div>
-                                
+    <!-- Cam kết -->
+    @include('front-end.layout.section_pledge')
+    <!-- End cam kết -->
 
-                                <div class="tab-pane fade" id="thue" role="tabpanel" aria-labelledby="pills-thue">
-                                    <div class="home1-advnc-search home6">
-                                        <form action="search-t">
-                                            <ul class="h1ads_1st_list mb0 row">
-                                                <li class="list-inline-item col-md-3">
-                                                    <div class="form-group">
-                                                        <input type="text" name="keyword" class="form-control" id="exampleInputName1" placeholder="{{__('Nhập từ khóa')}}...">
-                                                    </div>
-                                                </li>
-                                                <li class="list-inline-item col-md-2">
-                                                    <div class="search_option_two">
-                                                        <div class="candidate_revew_select">
-                                                            <select class="selectpicker w100 show-tick" name="bed">
-                                                                <option value="">{{__('phòng ngủ')}}</option>
-                                                                <option value="1PN">{{__('1PN')}}</option>
-                                                                <option value="1PN+1">{{__('1PN+1')}}</option>
-                                                                <option value="2PN">{{__('2PN')}}</option>
-                                                                <option value="2PN+1">{{__('2PN+1')}}</option>
-                                                                <option value="3PN">{{__('3PN')}}</option>
-                                                                <option value="3PN+1">{{__('3PN+1')}}</option>
-                                                                <option value="4PN">{{__('4PN')}}</option>
-                                                                <option value="5PN">{{__('5PN')}}</option>
-                                                                <option value="Dual Key">{{__('Dual Key')}}</option>
-                                                                <option value="Studio">{{__('Studio')}}</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-inline-item col-md-2">
-                                                    <div class="search_option_two">
-                                                        <div class="candidate_revew_select">
-                                                            <select class="selectpicker w100 show-tick" name="price">
-                                                                <option value="">{{__('Giá thuê')}}</option>
-                                                                @php
-                                                                    $locale = Config::get('app.locale');
-                                                                @endphp
-                                                                @if($locale == "vi")
-                                                                    <option value="0-10000000">{{__('Dưới 10 triệu')}}</option>
-                                                                    <option value="10000000-15000000">{{__('Từ 10 - 15 triệu')}}</option>
-                                                                    <option value="15000000-20000000">{{__('Từ 15 - 20 triệu')}}</option>
-                                                                    <option value="20000000-25000000">{{__('Từ 20 - 25 triệu')}}</option>
-                                                                    <option value="25000000-40000000">{{__('Từ 25 - 40 triệu')}}</option>
-                                                                    <option value="40000000-+">{{__('Trên 40 triệu')}}</option>
-                                                                @else
-                                                                    <option value="0-500">{{__('Dưới 500$')}}</option>
-                                                                    <option value="500-850">{{__('Từ 500 - 850$')}}</option>
-                                                                    <option value="850-1000">{{__('Từ 850 - 1000$')}}</option>
-                                                                    <option value="1000-1500">{{__('Từ 1000 - 1500$')}}</option>
-                                                                    <option value="1500-2000">{{__('Từ 1500 - 2000$')}}</option>
-                                                                    <option value="2000-+">{{__('Trên 2000$')}}</option>
-                                                                @endif
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="list-inline-item col-md-3">
-                                                    <div class="search_option_two">
-                                                        <div class="candidate_revew_select">
-                                                            <select class="selectpicker w100 show-tick" name="huong">
-                                                                <option value="">{{__('hướng')}}</option>
-                                                                <option value="Tây, Nam">{{__('Tây Nam')}}</option>
-                                                                <option value="Tây, Bắc">{{__('Tây Bắc')}}</option>
-                                                                <option value="Tây Nam - Tây Bắc">{{__('Tây Nam - Tây Bắc')}}</option>
-                                                                <option value="Tây Bắc - Đông Bắc">{{__('Tây Bắc - Đông Bắc')}}</option>
-                                                                <option value="Tây Bắc">{{__('Tây Bắc')}}</option>
-                                                                <option value="Đông Nam- Đông Bắc">{{__('Đông Nam - Đông Bắc')}}</option>
-                                                                <option value="Đông Nam">{{__('Đông Nam')}}</option>
-                                                                <option value="Đông Nam- Tây Nam">{{__('Đông Nam - Tây Nam')}}</option>
-                                                                <option value="Đông Bắc">{{__('Đông Bắc')}}</option>
-                                                                <option value="Chính Tây">{{__('Chính Tây')}}</option>
-                                                                <option value="Chính Nam">{{__('Chính Nam')}}</option>
-                                                                <option value="Chính Đông">{{__('Chính Đông')}}</option>
-                                                                <option value="Chính Bắc">{{__('Chính Bắc')}}</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                
-                                                <li class="list-inline-item col-md-2">
-                                                    <div class="search_option_button">
-                                                        <button type="submit" class="btn btn-thm">{{__('tìm kiếm')}}</button>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Banner quảng cáo đầu trang -->
+    @include('front-end.layout.section_adsHeader')
+    <!-- End banner quảng cáo đầu trang -->
+
+    <section>
+       <section class='productscates-st' style='background:transparent' >
+          <div class='productscates-headding'><span style='color:#ba8562'>Đồng hồ</span><img src='https://cuongluxury.vn/uploads/products/cates/59-line-11.png' alt='Đồng hồ' /></div>
+          <div class='productscates-headding2'><span  style='color:#fff'>Patek Philippe</span></div>
+          <div class='container pb-30'>
+             <div class='productscates-boxslider owl-carousel'>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/patek-philippe-complications-5905r-001' title='Patek Philippe Complications 5905R-001 Like New 2020'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/5905r001.png?width=350&height=350&mode=crop' alt='Patek Philippe Complications 5905R-001 Like New 2020' /></a></div>
+                      <div class='prdboxsli-ccname'>Patek Philippe</div>
+                      <div class='prdboxsli-key'>MSP: 5905R-001</div>
+                      <div class='prdboxsli-title'><a href='/patek-philippe-complications-5905r-001' title='Patek Philippe Complications 5905R-001 Like New 2020'>Patek Philippe Complications 5905R-001 Like New 2020</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>1.720.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
                 </div>
-            </div>
-        </div>
-        <div class="container-fluid ovh">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="main-title text-center animate__animated animate__fadeIn">
-                        <a href="san-pham-noi-bat"><h2>{{__('Sản Phẩm Nổi Bật')}}</h2></a>
-                        <!-- <p>Cập nhật những căn hộ được nhiều người quan tâm nhất</p> -->
-                    </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/patek-philippe-complications-5205r-011' title='Patek Philippe Complications 5205R-011 '><img loading='lazy' src='https://cuongluxury.vn/uploads/products/5205-011.png?width=350&height=350&mode=crop' alt='Patek Philippe Complications 5205R-011 ' /></a></div>
+                      <div class='prdboxsli-ccname'>Patek Philippe</div>
+                      <div class='prdboxsli-key'>MSP: 5205R-011 </div>
+                      <div class='prdboxsli-title'><a href='/patek-philippe-complications-5205r-011' title='Patek Philippe Complications 5205R-011 '>Patek Philippe Complications 5205R-011 </a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>1.580.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="slide-product-3 ovh">
-                        @foreach($products_hl as $item)
-                            @include('front-end.layout.product-item2')
-                        @endforeach
-                        
-                    </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/patek-philippe-complications-5930g-010-like-new' title='Patek Philippe Complications 5930G-010 Like New'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/5930g-001.png?width=350&height=350&mode=crop' alt='Patek Philippe Complications 5930G-010 Like New' /></a></div>
+                      <div class='prdboxsli-ccname'>Patek Philippe</div>
+                      <div class='prdboxsli-key'>MSP: 5930G-010</div>
+                      <div class='prdboxsli-title'><a href='/patek-philippe-complications-5930g-010-like-new' title='Patek Philippe Complications 5930G-010 Like New'>Patek Philippe Complications 5930G-010 Like New</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>1.700.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
                 </div>
-                
-            </div>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <a class="effect effect-1 show-more" href="{{URL::route('productsHot')}}" title="Learn More">{{__('Xem thêm')}}</a>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/patek-philippe-complications-5930p-001' title='Patek Philippe Complications 5930P-001'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/5930p001.png?width=350&height=350&mode=crop' alt='Patek Philippe Complications 5930P-001' /></a></div>
+                      <div class='prdboxsli-ccname'>Patek Philippe</div>
+                      <div class='prdboxsli-key'>MSP: 5930P-001</div>
+                      <div class='prdboxsli-title'><a href='/patek-philippe-complications-5930p-001' title='Patek Philippe Complications 5930P-001'>Patek Philippe Complications 5930P-001</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>4.320.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
                 </div>
-            </div>
-        </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/patek-philippe-aquanaut-5968g-001' title='Patek Philippe Aquanaut 5968G-001'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/5968g001.png?width=350&height=350&mode=crop' alt='Patek Philippe Aquanaut 5968G-001' /></a></div>
+                      <div class='prdboxsli-ccname'>Patek Philippe</div>
+                      <div class='prdboxsli-key'>MSP: 5968G-001</div>
+                      <div class='prdboxsli-title'><a href='/patek-philippe-aquanaut-5968g-001' title='Patek Philippe Aquanaut 5968G-001'>Patek Philippe Aquanaut 5968G-001</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>3.360.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/patek-philippe-complications-4948r-001' title='Patek Philippe Complications 4948R-001'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/4948r001.png?width=350&height=350&mode=crop' alt='Patek Philippe Complications 4948R-001' /></a></div>
+                      <div class='prdboxsli-ccname'>Patek Philippe</div>
+                      <div class='prdboxsli-key'>MSP: 4948R-001</div>
+                      <div class='prdboxsli-title'><a href='/patek-philippe-complications-4948r-001' title='Patek Philippe Complications 4948R-001'>Patek Philippe Complications 4948R-001</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>1.730.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class='comment_button '><a href='/patek-philippe'>Xem thêm</a></div>
+          </div>
+       </section>
+       <section class='productscates-st' style='background: url(images/bg/17-rolexx.jpg) #000' >
+          <div class='productscates-headding2'><span  style='color:#fff'>Rolex</span></div>
+          <div class='container pb-30'>
+             <div class='productscates-boxslider owl-carousel'>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/rolex-submariner-date-steel-black-bezel-dial' title='Rolex Submariner Date Steel Black Bezel & Dial  '><img loading='lazy' src='https://cuongluxury.vn/uploads/products/rolex-steel-submariner-date-watch---black-bezel---black-dial---2020-release.png?width=350&height=350&mode=crop' alt='Rolex Submariner Date Steel Black Bezel & Dial  ' /></a></div>
+                      <div class='prdboxsli-ccname'>Rolex</div>
+                      <div class='prdboxsli-key'>MSP: 126610LN</div>
+                      <div class='prdboxsli-title'><a href='/rolex-submariner-date-steel-black-bezel-dial' title='Rolex Submariner Date Steel Black Bezel & Dial  '>Rolex Submariner Date Steel Black Bezel & Dial  </a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>398.000.000<span class='dvtt'>đ</span></span></span></span></span><span class='old-price'><span class='price-container'><span class='price-wrapper'><span class='price'>405.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/rolex-datejust-rolesor-everose-gold-white-mother-of-pearl-diamond-dial' title='Rolex Datejust Rolesor Everose Gold White Mother Of Pearl Diamond Dial'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/rolex-steel-and-everose-rolesor-datejust-36-watch-fluted-bezel-white-mother-of-pearl-diamond-dial-jubilee-bracelet.png?width=350&height=350&mode=crop' alt='Rolex Datejust Rolesor Everose Gold White Mother Of Pearl Diamond Dial' /></a></div>
+                      <div class='prdboxsli-ccname'>Rolex</div>
+                      <div class='prdboxsli-key'>MSP: 126231</div>
+                      <div class='prdboxsli-title'><a href='/rolex-datejust-rolesor-everose-gold-white-mother-of-pearl-diamond-dial' title='Rolex Datejust Rolesor Everose Gold White Mother Of Pearl Diamond Dial'> Rolex Datejust Rolesor Everose Gold White Mother Of Pearl...</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>478.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/rolex-datejust-rolesor-white-gold-dark-rhodium-diamond-dial' title='Rolex Datejust Rolesor White Gold Dark Rhodium Diamond Dial'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/rolex-datejust-steel-and-white-gold-rolesor-bezel-dark-rhodium-diamond-dial.png?width=350&height=350&mode=crop' alt='Rolex Datejust Rolesor White Gold Dark Rhodium Diamond Dial' /></a></div>
+                      <div class='prdboxsli-ccname'>Rolex</div>
+                      <div class='prdboxsli-key'>MSP: 126334</div>
+                      <div class='prdboxsli-title'><a href='/rolex-datejust-rolesor-white-gold-dark-rhodium-diamond-dial' title='Rolex Datejust Rolesor White Gold Dark Rhodium Diamond Dial'>Rolex Datejust Rolesor White Gold Dark Rhodium Diamond Dial</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>395.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/rolex-datejust-everose-rolesor-mop-diamond-dial-31mm' title='Rolex Datejust Everose Rolesor MOP Diamond Dial 31mm'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/22.png?width=350&height=350&mode=crop' alt='Rolex Datejust Everose Rolesor MOP Diamond Dial 31mm' /></a></div>
+                      <div class='prdboxsli-ccname'>Rolex</div>
+                      <div class='prdboxsli-key'>MSP: 278271-0026</div>
+                      <div class='prdboxsli-title'><a href='/rolex-datejust-everose-rolesor-mop-diamond-dial-31mm' title='Rolex Datejust Everose Rolesor MOP Diamond Dial 31mm'>Rolex Datejust Everose Rolesor MOP Diamond Dial 31mm</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>450.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/rolex-datejust-everose-rolesor-salmon-diamond-dial-31mm' title='Rolex Datejust Everose Rolesor Salmon Diamond Dial 31mm'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/48-11.png?width=350&height=350&mode=crop' alt='Rolex Datejust Everose Rolesor Salmon Diamond Dial 31mm' /></a></div>
+                      <div class='prdboxsli-ccname'>Rolex</div>
+                      <div class='prdboxsli-key'>MSP: 278271-0016</div>
+                      <div class='prdboxsli-title'><a href='/rolex-datejust-everose-rolesor-salmon-diamond-dial-31mm' title='Rolex Datejust Everose Rolesor Salmon Diamond Dial 31mm'>Rolex Datejust Everose Rolesor Salmon Diamond Dial 31mm</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>375.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/rolex-datejust-everose-rolesor-chocolate-roman-diamond-dial-31mm' title='Rolex Datejust Everose Rolesor Chocolate Roman Diamond Dial 31mm'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/55.png?width=350&height=350&mode=crop' alt='Rolex Datejust Everose Rolesor Chocolate Roman Diamond Dial 31mm' /></a></div>
+                      <div class='prdboxsli-ccname'>Rolex</div>
+                      <div class='prdboxsli-key'>MSP: 278271-0004</div>
+                      <div class='prdboxsli-title'><a href='/rolex-datejust-everose-rolesor-chocolate-roman-diamond-dial-31mm' title='Rolex Datejust Everose Rolesor Chocolate Roman Diamond Dial 31mm'>Rolex Datejust Everose Rolesor Chocolate Roman Diamond Dial 31mm</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>368.000.000<span class='dvtt'>đ</span></span></span></span></span><span class='old-price'><span class='price-container'><span class='price-wrapper'><span class='price'>379.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class='comment_button '><a href='/rolex'>Xem thêm</a></div>
+          </div>
+       </section>
+       <section class='productscates-st' style='background: url(/images/bg/hubot.jpg) #000' >
+          <div class='productscates-headding2'><span  style='color:#fff'>Hublot</span></div>
+          <div class='container pb-30'>
+             <div class='productscates-boxslider owl-carousel'>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/hublot-spirit-of-big-bang-titanium-moonphase' title='Hublot Spirit Of Big Bang Titanium Moonphase'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/a2.png?width=350&height=350&mode=crop' alt='Hublot Spirit Of Big Bang Titanium Moonphase' /></a></div>
+                      <div class='prdboxsli-ccname'>Hublot</div>
+                      <div class='prdboxsli-key'>MSP: 647.NX.1137.RX</div>
+                      <div class='prdboxsli-title'><a href='/hublot-spirit-of-big-bang-titanium-moonphase' title='Hublot Spirit Of Big Bang Titanium Moonphase'>Hublot Spirit Of Big Bang Titanium Moonphase</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>385.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/hublot-big-bang-one-click-king-gold-diamonds' title='Hublot Big Bang One Click King Gold Diamonds'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/hublot-big-bang-one-click-king-gold-diamonds.png?width=350&height=350&mode=crop' alt='Hublot Big Bang One Click King Gold Diamonds' /></a></div>
+                      <div class='prdboxsli-ccname'>Hublot</div>
+                      <div class='prdboxsli-key'>MSP: 465.OX.1180.RX.1204</div>
+                      <div class='prdboxsli-title'><a href='/hublot-big-bang-one-click-king-gold-diamonds' title='Hublot Big Bang One Click King Gold Diamonds'>Hublot Big Bang One Click King Gold Diamonds</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>545.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/hublot-big-bang-sang-bleu-i-steel-pave' title='Hublot Big Bang Sang Bleu I Steel Pavé'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/hublot-big-bang-sang-bleu-i-steel-pave.png?width=350&height=350&mode=crop' alt='Hublot Big Bang Sang Bleu I Steel Pavé' /></a></div>
+                      <div class='prdboxsli-ccname'>Hublot</div>
+                      <div class='prdboxsli-key'>MSP: 465.SS.1117.VR.1704</div>
+                      <div class='prdboxsli-title'><a href='/hublot-big-bang-sang-bleu-i-steel-pave' title='Hublot Big Bang Sang Bleu I Steel Pavé'>Hublot Big Bang Sang Bleu I Steel Pavé</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>450.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/hublot-spirit-of-big-bang-king-gold-blue-diamond' title='Hublot Spirit Of Big Bang King Gold Blue Diamond'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/a3.png?width=350&height=350&mode=crop' alt='Hublot Spirit Of Big Bang King Gold Blue Diamond' /></a></div>
+                      <div class='prdboxsli-ccname'>Hublot</div>
+                      <div class='prdboxsli-key'>MSP: 665.OX.7180.LR.1204</div>
+                      <div class='prdboxsli-title'><a href='/hublot-spirit-of-big-bang-king-gold-blue-diamond' title='Hublot Spirit Of Big Bang King Gold Blue Diamond'>Hublot Spirit Of Big Bang King Gold Blue Diamond</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>565.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/hublot-big-bang-one-click-steel-white-full-diamond' title='Hublot Big Bang One Click Steel White Full Diamond'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/full-diamon.png?width=350&height=350&mode=crop' alt='Hublot Big Bang One Click Steel White Full Diamond' /></a></div>
+                      <div class='prdboxsli-ccname'>Hublot</div>
+                      <div class='prdboxsli-key'>MSP: SKU01666</div>
+                      <div class='prdboxsli-title'><a href='/hublot-big-bang-one-click-steel-white-full-diamond' title='Hublot Big Bang One Click Steel White Full Diamond'>Hublot Big Bang One Click Steel White Full Diamond</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>370.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/hublot-spirit-of-big-bang-king-gold-black-diamond-39mm' title='Hublot Spirit Of Big Bang King Gold Black Diamond 39mm'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/hublot-spirit-of-big-bang-king-gold-diamonds-39mm.png?width=350&height=350&mode=crop' alt='Hublot Spirit Of Big Bang King Gold Black Diamond 39mm' /></a></div>
+                      <div class='prdboxsli-ccname'>Hublot</div>
+                      <div class='prdboxsli-key'>MSP: 665.OX.1180.RX.1204</div>
+                      <div class='prdboxsli-title'><a href='/hublot-spirit-of-big-bang-king-gold-black-diamond-39mm' title='Hublot Spirit Of Big Bang King Gold Black Diamond 39mm'>Hublot Spirit Of Big Bang King Gold Black Diamond 39mm</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>565.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class='comment_button '><a href='/hublot'>Xem thêm</a></div>
+          </div>
+       </section>
+       <section class='productscates-st' style='background: url(/images/bg/franck.jpg) #000' >
+          <div class='productscates-headding2'><span  style='color:#fff'>Franck Muller</span></div>
+          <div class='container pb-30'>
+             <div class='productscates-boxslider owl-carousel'>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/franck-muller-vanguard-rose-gold-full-diamonds' title='Franck Muller Vanguard Rose Gold Full Diamonds'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/34-franck-muller-vanguard-rose-gold-full-diamonds.png?width=350&height=350&mode=crop' alt='Franck Muller Vanguard Rose Gold Full Diamonds' /></a></div>
+                      <div class='prdboxsli-ccname'>Franck Muller</div>
+                      <div class='prdboxsli-key'>MSP: V41 Rose Gold</div>
+                      <div class='prdboxsli-title'><a href='/franck-muller-vanguard-rose-gold-full-diamonds' title='Franck Muller Vanguard Rose Gold Full Diamonds'>Franck Muller Vanguard Rose Gold Full Diamonds</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>273.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/franck-muller-vanguard-yachting-rose-gold-full-diamonds' title='Franck Muller Vanguard Yachting Rose Gold Full Diamonds'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/41-franck-muller-vanguard-yachting-rose-gold-full-diamonds.png?width=350&height=350&mode=crop' alt='Franck Muller Vanguard Yachting Rose Gold Full Diamonds' /></a></div>
+                      <div class='prdboxsli-ccname'>Franck Muller</div>
+                      <div class='prdboxsli-key'>MSP: V41 Yachting Gold</div>
+                      <div class='prdboxsli-title'><a href='/franck-muller-vanguard-yachting-rose-gold-full-diamonds' title='Franck Muller Vanguard Yachting Rose Gold Full Diamonds'>Franck Muller Vanguard Yachting Rose Gold Full Diamonds</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>284.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/franck-muller-vanguard-steel-full-diamonds' title='Franck Muller Vanguard Steel Full Diamonds'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/franck-muller-vanguard-steel-full-diamonds.png?width=350&height=350&mode=crop' alt='Franck Muller Vanguard Steel Full Diamonds' /></a></div>
+                      <div class='prdboxsli-ccname'>Franck Muller</div>
+                      <div class='prdboxsli-key'>MSP: V41 Steel Black</div>
+                      <div class='prdboxsli-title'><a href='/franck-muller-vanguard-steel-full-diamonds' title='Franck Muller Vanguard Steel Full Diamonds'>Franck Muller Vanguard Steel Full Diamonds</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>170.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/franck-muller-double-mystery-blue' title='Franck Muller Double Mystery Blue'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/fm-dm-b.png?width=350&height=350&mode=crop' alt='Franck Muller Double Mystery Blue' /></a></div>
+                      <div class='prdboxsli-ccname'>Franck Muller</div>
+                      <div class='prdboxsli-key'>MSP: DM42D1RCD (OG)-BLUE</div>
+                      <div class='prdboxsli-title'><a href='/franck-muller-double-mystery-blue' title='Franck Muller Double Mystery Blue'>Franck Muller Double Mystery Blue</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>965.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/franck-muller-vanguard-yachting-steel-full-diamonds' title='Franck Muller Vanguard Yachting Steel Full Diamonds'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/3-franck-muller-vanguard-yachting-steel-full-diamonds.png?width=350&height=350&mode=crop' alt='Franck Muller Vanguard Yachting Steel Full Diamonds' /></a></div>
+                      <div class='prdboxsli-ccname'>Franck Muller</div>
+                      <div class='prdboxsli-key'>MSP: V41 Yachting Steel</div>
+                      <div class='prdboxsli-title'><a href='/franck-muller-vanguard-yachting-steel-full-diamonds' title='Franck Muller Vanguard Yachting Steel Full Diamonds'>Franck Muller Vanguard Yachting Steel Full Diamonds</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>138.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+                <div class='item'>
+                   <div class='prdboxsli-item'>
+                      <div class='prdboxsli-thumb'><a href='/franck-muller-vanguard-yachting-rose-gold' title='Franck Muller Vanguard Yachting Rose Gold'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/52-franck-muller-vanguard-yachting-rose-gold.png?width=350&height=350&mode=crop' alt='Franck Muller Vanguard Yachting Rose Gold' /></a></div>
+                      <div class='prdboxsli-ccname'>Franck Muller</div>
+                      <div class='prdboxsli-key'>MSP: V41 Yachting Gold</div>
+                      <div class='prdboxsli-title'><a href='/franck-muller-vanguard-yachting-rose-gold' title='Franck Muller Vanguard Yachting Rose Gold'>Franck Muller Vanguard Yachting Rose Gold</a></div>
+                      <div class='prdboxsli-price'>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>225.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class='comment_button '><a href='/franck-muller'>Xem thêm</a></div>
+          </div>
+       </section>
+    </section>
+    <section class='productscates-st' style='background: url(/images/bg/vertu.jpg) #000'>
+       <div class='productscates-headding'><span style='color:#ba8562'>Vertu</span><img src='https://cuongluxury.vn/uploads/products/cates/line-11.png' alt='Vertu' /></div>
+       <div class='container pb-30'>
+          <div class='productscates-boxslider owl-carousel'>
+             <div class='item'>
+                <div class='prdboxsli-item'>
+                   <div class='prdboxsli-thumb'><a href='/vertu-signature-s-pure-black-mix-gold' title='Vertu Signature S Pure Black Mix Gold'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/vertu-signature-s-pure-black-mix-gold.png?width=350&height=350&mode=crop' alt='Vertu Signature S Pure Black Mix Gold' /></a></div>
+                   <div class='prdboxsli-ccname'>Vertu</div>
+                   <div class='prdboxsli-key'>MSP: SKU01500</div>
+                   <div class='prdboxsli-title'><a href='/vertu-signature-s-pure-black-mix-gold' title='Vertu Signature S Pure Black Mix Gold'>Vertu Signature S Pure Black Mix Gold</a></div>
+                   <div class='prdboxsli-price'>
+                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>125.000.000<span class='dvtt'>đ</span></span></span></span></span><span class='old-price'><span class='price-container'><span class='price-wrapper'><span class='price'>150.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                   </div>
+                </div>
+             </div>
+             <div class='item'>
+                <div class='prdboxsli-item'>
+                   <div class='prdboxsli-thumb'><a href='/vertu-signature-s-rose-gold-diamonds' title='Vertu Signature S Rose Gold Diamonds'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/s2.png?width=350&height=350&mode=crop' alt='Vertu Signature S Rose Gold Diamonds' /></a></div>
+                   <div class='prdboxsli-ccname'>Vertu</div>
+                   <div class='prdboxsli-key'>MSP: SKU01491</div>
+                   <div class='prdboxsli-title'><a href='/vertu-signature-s-rose-gold-diamonds' title='Vertu Signature S Rose Gold Diamonds'>Vertu Signature S Rose Gold Diamonds</a></div>
+                   <div class='prdboxsli-price'>
+                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>235.000.000<span class='dvtt'>đ</span></span></span></span></span><span class='old-price'><span class='price-container'><span class='price-wrapper'><span class='price'>295.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                   </div>
+                </div>
+             </div>
+             <div class='item'>
+                <div class='prdboxsli-item'>
+                   <div class='prdboxsli-thumb'><a href='/vertu-signature-s-navy-alligator-stainless-steel-2017' title='Vertu Signature S Navy Alligator Stainless Steel 2017'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/vertu-signature-s-navy-alligator-stainless-steel.png?width=350&height=350&mode=crop' alt='Vertu Signature S Navy Alligator Stainless Steel 2017' /></a></div>
+                   <div class='prdboxsli-ccname'>Vertu</div>
+                   <div class='prdboxsli-key'>MSP: SKU01458</div>
+                   <div class='prdboxsli-title'><a href='/vertu-signature-s-navy-alligator-stainless-steel-2017' title='Vertu Signature S Navy Alligator Stainless Steel 2017'>Vertu Signature S Navy Alligator Stainless Steel 2017</a></div>
+                   <div class='prdboxsli-price'>
+                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>140.000.000<span class='dvtt'>đ</span></span></span></span></span><span class='old-price'><span class='price-container'><span class='price-wrapper'><span class='price'>190.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                   </div>
+                </div>
+             </div>
+             <div class='item'>
+                <div class='prdboxsli-item'>
+                   <div class='prdboxsli-thumb'><a href='/vertu-signature-s-clous-de-paris-rose-gold' title='Vertu Signature S Clous De Paris Rose Gold'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/vertu-signature-s-clous-de-paris-red-gold-2--2016.png?width=350&height=350&mode=crop' alt='Vertu Signature S Clous De Paris Rose Gold' /></a></div>
+                   <div class='prdboxsli-ccname'>Vertu</div>
+                   <div class='prdboxsli-key'>MSP: SKU01451</div>
+                   <div class='prdboxsli-title'><a href='/vertu-signature-s-clous-de-paris-rose-gold' title='Vertu Signature S Clous De Paris Rose Gold'>Vertu Signature S Clous De Paris Rose Gold</a></div>
+                   <div class='prdboxsli-price'>
+                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>290.000.000<span class='dvtt'>đ</span></span></span></span></span><span class='old-price'><span class='price-container'><span class='price-wrapper'><span class='price'>330.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                   </div>
+                </div>
+             </div>
+             <div class='item'>
+                <div class='prdboxsli-item'>
+                   <div class='prdboxsli-thumb'><a href='/vertu-signature-s-centurion-rose-gold-diamonds-bespoke' title='Vertu Signature S Centurion Rose Gold Diamonds Bespoke'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/s1.png?width=350&height=350&mode=crop' alt='Vertu Signature S Centurion Rose Gold Diamonds Bespoke' /></a></div>
+                   <div class='prdboxsli-ccname'>Vertu</div>
+                   <div class='prdboxsli-key'>MSP: SKU01498</div>
+                   <div class='prdboxsli-title'><a href='/vertu-signature-s-centurion-rose-gold-diamonds-bespoke' title='Vertu Signature S Centurion Rose Gold Diamonds Bespoke'>Vertu Signature S Centurion Rose Gold Diamonds Bespoke</a></div>
+                   <div class='prdboxsli-price'>
+                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>295.000.000<span class='dvtt'>đ</span></span></span></span></span><span class='old-price'><span class='price-container'><span class='price-wrapper'><span class='price'>375.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                   </div>
+                </div>
+             </div>
+             <div class='item'>
+                <div class='prdboxsli-item'>
+                   <div class='prdboxsli-thumb'><a href='/vertu-signature-s-ultimate-black' title='Vertu Signature S Ultimate Black'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/vertu-signature-s-u-ltimate-black.png?width=350&height=350&mode=crop' alt='Vertu Signature S Ultimate Black' /></a></div>
+                   <div class='prdboxsli-ccname'>Vertu</div>
+                   <div class='prdboxsli-key'>MSP: SKU01495</div>
+                   <div class='prdboxsli-title'><a href='/vertu-signature-s-ultimate-black' title='Vertu Signature S Ultimate Black'>Vertu Signature S Ultimate Black</a></div>
+                   <div class='prdboxsli-price'>
+                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>189.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div class='comment_button '><a href='/vertu'>Xem thêm</a></div>
+       </div>
+    </section>
+    <section class='banner-st'>
+       <div class='container'>
+          <div class='row'>
+             <div class='banner-boxsh'>
+                <div class='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
+                   <div class='banner-boxh'><a href='' title='Banner 1'><img src='https://cuongluxury.vn/uploads/qc/baner-12233333333333.jpg?width=600&mode=crop' alt='Banner 1' /></a></div>
+                </div>
+                <div class='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
+                   <div class='banner-boxh'><a href='https://cuongluxury.vn/cuong-luxury-diem-den-ly-tuong-de-trai-nghiem-va-mua-sam-dong-ho-cao-cap' title='Banner 2'><img src='https://cuongluxury.vn/uploads/qc/baner-23-nen.jpg?width=600&mode=crop' alt='Banner 2' /></a></div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </section>
+    <section class='productscates-st' style='background: url(/images/bg/trang-sucs-2.jpg) #000'>
+       <div class='productscates-headding'><span style='color:#ba8562'>Trang sức</span><img src='https://cuongluxury.vn/uploads/products/cates/26-line-11.png' alt='Trang sức' /></div>
+       <div class='container pb-30'>
+          <div class='productscates-boxslider owl-carousel'>
+             <div class='item'>
+                <div class='prdboxsli-item'>
+                   <div class='prdboxsli-thumb'><a href='/cartier-love-ring-white-gold-diamonds-serrated-motifs' title='Cartier Love Ring White Gold Diamonds Serrated Motifs'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/cartier-love-ring-white-gold-diamonds-serrated-motifs.png?width=350&height=350&mode=crop' alt='Cartier Love Ring White Gold Diamonds Serrated Motifs' /></a></div>
+                   <div class='prdboxsli-ccname'>Trang sức</div>
+                   <div class='prdboxsli-key'>MSP: SKU01538</div>
+                   <div class='prdboxsli-title'><a href='/cartier-love-ring-white-gold-diamonds-serrated-motifs' title='Cartier Love Ring White Gold Diamonds Serrated Motifs'>Cartier Love Ring White Gold Diamonds Serrated Motifs</a></div>
+                   <div class='prdboxsli-price'>
+                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>65.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                   </div>
+                </div>
+             </div>
+             <div class='item'>
+                <div class='prdboxsli-item'>
+                   <div class='prdboxsli-thumb'><a href='/van-cleef-arples-magic-alhambra-ring-rose-gold-full-pave' title='Van Cleef & Arples Magic Alhambra Ring Rose Gold Full Pavé'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/van-cleef--arples-magic-alhambra-ring-rose-gold-full-pave.png?width=350&height=350&mode=crop' alt='Van Cleef & Arples Magic Alhambra Ring Rose Gold Full Pavé' /></a></div>
+                   <div class='prdboxsli-ccname'>Trang sức</div>
+                   <div class='prdboxsli-key'>MSP: SKU01525</div>
+                   <div class='prdboxsli-title'><a href='/van-cleef-arples-magic-alhambra-ring-rose-gold-full-pave' title='Van Cleef & Arples Magic Alhambra Ring Rose Gold Full Pavé'>Van Cleef & Arples Magic Alhambra Ring Rose Gold Full Pavé</a></div>
+                   <div class='prdboxsli-price'>
+                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>60.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                   </div>
+                </div>
+             </div>
+             <div class='item'>
+                <div class='prdboxsli-item'>
+                   <div class='prdboxsli-thumb'><a href='/graff-princess-butterfly-with-pave-diamonds-earring' title='Graff Princess Butterfly With Pavé Diamonds Earring'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/1a.png?width=350&height=350&mode=crop' alt='Graff Princess Butterfly With Pavé Diamonds Earring' /></a></div>
+                   <div class='prdboxsli-ccname'>Trang sức</div>
+                   <div class='prdboxsli-key'>MSP: SKU01523</div>
+                   <div class='prdboxsli-title'><a href='/graff-princess-butterfly-with-pave-diamonds-earring' title='Graff Princess Butterfly With Pavé Diamonds Earring'>Graff Princess Butterfly With Pavé Diamonds Earring</a></div>
+                   <div class='prdboxsli-price'>
+                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>84.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                   </div>
+                </div>
+             </div>
+             <div class='item'>
+                <div class='prdboxsli-item'>
+                   <div class='prdboxsli-thumb'><a href='/graff-princess-butterfly-with-pave-diamonds-ring' title='Graff Princess Butterfly With Pavé Diamonds Ring'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/6qq.png?width=350&height=350&mode=crop' alt='Graff Princess Butterfly With Pavé Diamonds Ring' /></a></div>
+                   <div class='prdboxsli-ccname'>Trang sức</div>
+                   <div class='prdboxsli-key'>MSP: SKU01522</div>
+                   <div class='prdboxsli-title'><a href='/graff-princess-butterfly-with-pave-diamonds-ring' title='Graff Princess Butterfly With Pavé Diamonds Ring'>Graff Princess Butterfly With Pavé Diamonds Ring</a></div>
+                   <div class='prdboxsli-price'>
+                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>56.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                   </div>
+                </div>
+             </div>
+             <div class='item'>
+                <div class='prdboxsli-item'>
+                   <div class='prdboxsli-thumb'><a href='/bulgari-serpenti-viper-ring-white-gold-full-pave' title='Bulgari Serpenti Viper Ring White Gold Full Pavé'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/14qq.png?width=350&height=350&mode=crop' alt='Bulgari Serpenti Viper Ring White Gold Full Pavé' /></a></div>
+                   <div class='prdboxsli-ccname'>Trang sức</div>
+                   <div class='prdboxsli-key'>MSP: SKU01521</div>
+                   <div class='prdboxsli-title'><a href='/bulgari-serpenti-viper-ring-white-gold-full-pave' title='Bulgari Serpenti Viper Ring White Gold Full Pavé'>Bulgari Serpenti Viper Ring White Gold Full Pavé</a></div>
+                   <div class='prdboxsli-price'>
+                      <div class='item-price'><span class='special-price-contact'><span class='price-container'><span class='price-wrapper'><span class='price'>Liên hệ: 0987.56.56.56 </span></span></span></span></div>
+                   </div>
+                </div>
+             </div>
+             <div class='item'>
+                <div class='prdboxsli-item'>
+                   <div class='prdboxsli-thumb'><a href='/tiffany-co-white-gold-baguette-diamonds-ring' title='Tiffany & Co White Gold Baguette Diamonds Ring'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/tiffany--co-white-gold-baguette-diamonds-ring.png?width=350&height=350&mode=crop' alt='Tiffany & Co White Gold Baguette Diamonds Ring' /></a></div>
+                   <div class='prdboxsli-ccname'>Trang sức</div>
+                   <div class='prdboxsli-key'>MSP: SKU01518</div>
+                   <div class='prdboxsli-title'><a href='/tiffany-co-white-gold-baguette-diamonds-ring' title='Tiffany & Co White Gold Baguette Diamonds Ring'>Tiffany & Co White Gold Baguette Diamonds Ring</a></div>
+                   <div class='prdboxsli-price'>
+                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>74.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div class='comment_button '><a href='/trang-suc'>Xem thêm</a></div>
+       </div>
     </section>
 
-    <!-- Chủ đầu tư -->
-    <section id="feature-property" class="feature-property pt0 pb0 maxw1600 m0a">
-        <div class="container-fluid ovh">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="main-title mb30 text-center">
-                        <a href="chu-dau-tu-bc5"><h2>{{__('Chủ Đầu Tư')}}</h2></a>
-                        <!-- <p>Tổng hợp những căn hộ mới được nhiều người quan tâm nhất</p> -->
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="slide-blog-4">
-                        @php
-                            
-                            if($cdt == null){
-                                $cdt = [];
-                            }
-                            else{
-                                $cdt = $cdt->blogs()->where('display',1)->orderBy('id','DESC')->take(8)->get();
-                            }
-                            
-                        @endphp
-                        @foreach($cdt as $item)
-                            <div class="for_blog feat_property item" href="{{$item->url}}">
-                                <div class="thumb">
-                                    <img class="img-whp" src="{{asset('uploads/images/blogs/'.$item->avata)}}" alt="1.jpg">
-                                    <!-- <div class="blog_tag">Construction</div> -->
-                                </div>
-                                <div class="details">
-                                    <div class="tc_content">
-                                        <div class="dtls_headr">
-                                            <ul class="tag">
-                                                
-                                                @foreach($item->categories as $cate)
-                                                    @if($cate->parent_id != null)
-                                                    <li class="list-inline-item" style="background: #2d4571; padding: 0 5px"><a href="{{$cate->url}}">{{$cate->name}}</a></li>
-                                                    @endif
-                                                @endforeach
-                                            </ul>
-                                            
-                                        </div>
-                                        <h4><a href="{{$item->url}}" title="{{$item->name}}">{!! \Illuminate\Support\Str::words($item->name, 10,'...')  !!}</a></h4>
-                                        
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        @endforeach
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Why choose -->
-    <section id="why-choose" class="why-choose pb0 maxw1600 m0a">
-        <div class="container-fluid ovh">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="main-title text-center  ">
-                        <h2 class="animate__animated animate__bounce">{{__("Tại Sao Chọn Chúng Tôi")}}</h2>
-                        <!-- <p>Cập nhật những căn hộ được nhiều người quan tâm nhất</p> -->
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="feature_property_home3_slider ovh">
-                        <div class="why_chose_us style2">
-                            <div class="icon">
-                                <span class="bx bx-rocket"></span>
-                            </div>
-                            <div class="details">
-                                <h3>{{__('Nghiệp Vụ Chuyên Môn Cao')}}</h3>
-                                <p>{{__('Trình độ ngoại ngữ tốt, dày dặn kinh nghiệm bán hàng, am hiểu sâu sắc về pháp lý và quy trình giao dịch bất động sản là những gì khách hàng thấy được từ các chuyên viên kinh doanh của chúng tôi')}}.</p>
-                            </div>
-                        </div>
-                        <div class="why_chose_us style2">
-                            <div class="icon">
-                                <span class="bx bx-network-chart"></span>
-                            </div>
-                            <div class="details">
-                                <h3>{{__('Sản Phẩm Đa Dạng')}}</h3>
-                                <p>{{__('Nguồn cung căn hộ đa dạng từ hơn 20 dự án thuộc nhiều phân khúc căn hộ bình dân, trung cấp đến căn hộ cao cấp trên địa bàn Hà Nội; đáp ứng mọi nhu cầu của quý khách hàng')}}.</p>
-                            </div>
-                        </div>
-                        <div class="why_chose_us style2">
-                            <div class="icon">
-                                <span class="bx bx-donate-heart"></span>
-                            </div>
-                            <div class="details">
-                                <h3>{{__('Tin Cậy Chuyên Nghiệp')}}</h3>
-                                <p>{{__('Sự minh bạch thông tin trong tư vấn, chính xác trong thủ tục giao dịch và lợi ích tối đa của khách hàng luôn là ưu tiên hàng đầu của KKUMHOUSE')}}</p>
-                            </div>
-                        </div>
-                        <div class="why_chose_us style2">
-                            <div class="icon">
-                                <span class="bx bx-analyse"></span>
-                            </div>
-                            <div class="details">
-                                <h3>{{__('Lâu Dài Bền Vững')}}</h3>
-                                <p>{{__('Trao niềm tin, nhận tín nhiệm” luôn là tôn chỉ làm việc của chúng tôi. Dịch vụ hậu mãi và các hỗ trợ sau giao dịch luôn làm quý khách hàng hài lòng khi lựa chọn KKUMHOUSE')}}.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-            
-        </div>
-    </section>
-	
 
-    <!-- Feature Properties -->
-    <section id="feature-property" class="feature-property pb0 maxw1600 m0a">
-        <div class="container-fluid ovh">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="main-title mb30 text-center">
-                        <a href="san-pham-thue-pc3"><h2>{{__('Sản Phẩm Cho Thuê')}}</h2></a>
-                        <!-- <p>Tổng hợp những căn hộ mới được nhiều người quan tâm nhất</p> -->
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="slide-product-5">
-                        @php
-                            
-                            if($hct == null){
-                                $hct = [];
-                            }
-                            else{
-                                $hct = $hct->products()->where('display',1)->orderBy('id','DESC')->take(8)->get();
-                            }
-                            
-                        @endphp
-                        @foreach($hct as $item)
-                            @include('front-end.layout.product-item-5')
-                        @endforeach
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Feature Properties -->
-    <section id="feature-property" class="feature-property pt0 pb0 maxw1600 m0a">
-        <div class="container-fluid ovh">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="main-title mb30 text-center">
-                        <a href="san-pham-chuyen-nhuong-pc1"><h2>{{__('Sản Phẩm Chuyển Nhượng')}}</h2></a>
-                        <!-- <p>Tổng hợp những căn hộ mới được nhiều người quan tâm nhất</p> -->
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="slide-product-5">
-                        @php
-                            
-                            if($hcn == null){
-                                $hcn = [];
-                            }
-                            else{
-                                $hcn = $hcn->products()->where('display',1)->orderBy('id','DESC')->take(8)->get();
-                            }
-                            
-                        @endphp
-                        @foreach($hcn as $item)
-                            @include('front-end.layout.product-item-5')
-                        @endforeach
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Feature Properties -->
-    <section id="feature-property" class="feature-property pt0 pb0 maxw1600 m0a">
-        <div class="container-fluid ovh">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="main-title mb30 text-center">
-                        <a href="san-pham-dac-biet-pc7"><h2>{{__('Sản Phẩm Đặc Biệt')}}</h2></a>
-                        <!-- <p>Tổng hợp những căn hộ mới được nhiều người quan tâm nhất</p> -->
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="slide-product-5">
-                        @php
-                            
-                            if($hdb == null){
-                                $hdb = [];
-                            }
-                            else{
-                                $hdb = $hdb->products()->where('display',1)->orderBy('id','DESC')->take(8)->get();
-                            }
-                            
-                        @endphp
-                        @foreach($hdb as $item)
-                            @include('front-end.layout.product-item-5')
-                        @endforeach
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Feature Properties -->
-    <section id="blogs" class="feature-property pt0 pb0 maxw1600 m0a">
-        <div class="container-fluid ovh">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="main-title mb30 text-center">
-                        <a href="tin-tuc-bc1"><h2>{{__('TIN TỨC & SỰ KIỆN')}}</h2></a>
-                        <!-- <p>Tổng hợp những căn hộ mới được nhiều người quan tâm nhất</p> -->
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="slide-blog-4">
-                        @foreach($blogs as $item)
-                            <div class="for_blog feat_property item" href="{{$item->url}}">
-                                <div class="thumb">
-                                    <img class="img-whp" src="{{asset('uploads/images/blogs/'.$item->avata)}}" alt="1.jpg">
-                                    <!-- <div class="blog_tag">Construction</div> -->
-                                </div>
-                                <div class="details">
-                                    <div class="tc_content">
-                                        <h4><a href="{{$item->url}}" title="{{$item->name}}">{!! \Illuminate\Support\Str::words($item->name, 10,'...')  !!}</a></h4>
-                                        <!-- <p title="{{$item->short_description}}">{!! \Illuminate\Support\Str::words($item->short_description, 15,'...')  !!}</p> -->
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        @endforeach
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Our Contact -->
-    <section class="our-contact pt30 pb30 bgc-f7">
-        <div class="maxw1600 m0a">
-            <div class="container-fluid">
+    <section class="awe-section-5">
+        <div class="section_tour-holiday">
+            <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 offset-lg-3">
-                        <div class="main-title mb30 text-center">
-                            <h2>{{__('Liên Hệ Với Chúng Tôi')}}</h2>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6">
-                        <div class="form_grid">
-                            <h4 class="mb5">{{__('Gửi Yêu Cầu Hỗ Trợ Tư Vấn')}}</h4>
-                            
-                            <form class="contact_form" id="contact_form" name="contact_form" action="{{URL::route('addContact')}}" method="post" novalidate="novalidate">
-                                {{ csrf_field() }}
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input id="form_name" name="name" class="form-control" required="required" type="text" placeholder="{{__('họ tên')}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input id="form_phone" name="phone" class="form-control required phone" required="required" type="number" placeholder="{{__('điện thoại')}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <input id="form_email" name="email" class="form-control required email" type="email" placeholder="{{__('email')}}">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-6" style="display: none;">
-                                        <div class="form-group">
-                                            <input id="form_da" name="da" class="form-control required" type="text" placeholder="{{__('dự án')}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <textarea id="form_message" name="message" class="form-control required" rows="3" required="required" placeholder="{{__('ghi chú')}}"></textarea>
-                                        </div>
-                                        <div class="form-group mb0">
-                                            <button type="submit" class="btn btn-lg btn-thm">{{__('Gửi Yêu Cầu')}}</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-xl-6">
-                        @include('front-end.layout.info')
+                    <div class="section_tour-new_title">
+                        <h2>Cảm nhận khách hàng</h2>
                     </div>
                 </div>
+                <div class="ykkh owl-carousel ">
+                    <div class='item'><div class='ykkh-item'><div class='ykkh-img'><a href='/btv-hai-van-tu-tin-khoe-dang-cung-sieu-pham-patek-philippe-complications-4947r-001-tai-cuong-luxury' title='BTV HẢI VÂN TỰ TIN KHOE DÁNG CÙNG SIÊU PHẨM PATEK PHILIPPE COMPLICATIONS 4947R-001 TẠI CUONG LUXURY'><img alt='BTV HẢI VÂN TỰ TIN KHOE DÁNG CÙNG SIÊU PHẨM PATEK PHILIPPE COMPLICATIONS 4947R-001 TẠI CUONG LUXURY' src='https://cuongluxury.vn/uploads/news/btv-hai-van-tu-tin-khoe-dang.jpg?width=150&height=110&mode=crop'></a></div><div class='ykkh-content'><div class='ykkh-title'><a href='/btv-hai-van-tu-tin-khoe-dang-cung-sieu-pham-patek-philippe-complications-4947r-001-tai-cuong-luxury' title='BTV HẢI VÂN TỰ TIN KHOE DÁNG CÙNG SIÊU PHẨM PATEK PHILIPPE COMPLICATIONS 4947R-001 TẠI CUONG LUXURY'> BTV HẢI VÂN TỰ TIN KHOE DÁNG CÙNG SIÊU PHẨM PATEK PHILIPPE COMPLICATIONS...</a></div><div class='ykkh-desc'> Trong lần mua sắm này, BTV Hải Vân quyết định bổ sung vào bộ sưu tập của mình chiếc đồng hồ...</div><div class='ykkh-readmore hidden'><a href='/chuyen-muc-tin-tuc' title='Xem thêm'>Xem thêm</a></div></div></div><div class='ykkh-item'><div class='ykkh-img'><a href='/ca-si-dinh-kien-phong-ruoc-franck-muller-yachting-rose-gold-diamonds-ve-dinh' title='CA SĨ ĐINH KIẾN PHONG “RƯỚC” FRANCK MULLER YACHTING ROSE GOLD DIAMONDS “VỀ DINH”'><img alt='CA SĨ ĐINH KIẾN PHONG “RƯỚC” FRANCK MULLER YACHTING ROSE GOLD DIAMONDS “VỀ DINH”' src='https://cuongluxury.vn/uploads/news/ca-sy-dinh-kien-phong-ruoc-franck-muller-yachting-rose-gold-diamonds-ve-dinh-02.png?width=150&height=110&mode=crop'></a></div><div class='ykkh-content'><div class='ykkh-title'><a href='/ca-si-dinh-kien-phong-ruoc-franck-muller-yachting-rose-gold-diamonds-ve-dinh' title='CA SĨ ĐINH KIẾN PHONG “RƯỚC” FRANCK MULLER YACHTING ROSE GOLD DIAMONDS “VỀ DINH”'>CA SĨ ĐINH KIẾN PHONG “RƯỚC” FRANCK MULLER YACHTING ROSE GOLD DIAMONDS “VỀ DINH”</a></div><div class='ykkh-desc'> Vừa qua, tại Showroom Cuong Luxury, nam ca sĩ Đinh Kiến Phong đã chính thức sở hữu Franck...</div><div class='ykkh-readmore hidden'><a href='/cam-nhan-khach-hang' title='Xem thêm'>Xem thêm</a></div></div></div></div><div class='item'><div class='ykkh-item'><div class='ykkh-img'><a href='/cuong-luxury-don-khach-quy-tu-sai-gon-de-so-huu-duoc-sieu-pham-dang-cap-toi-khong-quan-duong-xa' title='CUONG LUXURY ĐÓN KHÁCH QUÝ TỪ SÀI GÒN - “ĐỂ SỞ HỮU ĐƯỢC SIÊU PHẨM ĐẲNG CẤP, TÔI KHÔNG QUẢN ĐƯỜNG XA”'><img alt='CUONG LUXURY ĐÓN KHÁCH QUÝ TỪ SÀI GÒN - “ĐỂ SỞ HỮU ĐƯỢC SIÊU PHẨM ĐẲNG CẤP, TÔI KHÔNG QUẢN ĐƯỜNG XA”' src='https://cuongluxury.vn/uploads/news/cuong-luxury-don-khach-quy-tu-sai-gon-3.jpg?width=150&height=110&mode=crop'></a></div><div class='ykkh-content'><div class='ykkh-title'><a href='/cuong-luxury-don-khach-quy-tu-sai-gon-de-so-huu-duoc-sieu-pham-dang-cap-toi-khong-quan-duong-xa' title='CUONG LUXURY ĐÓN KHÁCH QUÝ TỪ SÀI GÒN - “ĐỂ SỞ HỮU ĐƯỢC SIÊU PHẨM ĐẲNG CẤP, TÔI KHÔNG QUẢN ĐƯỜNG XA”'> CUONG LUXURY ĐÓN KHÁCH QUÝ TỪ SÀI GÒN - “ĐỂ SỞ HỮU ĐƯỢC SIÊU PHẨM ĐẲNG CẤP, TÔI...</a></div><div class='ykkh-desc'> “Tôi tình cờ biết đến Cuong Luxury qua một người bạn là “fan cứng” của Cuong Luxury bao năm...</div><div class='ykkh-readmore hidden'><a href='/cam-nhan-khach-hang' title='Xem thêm'>Xem thêm</a></div></div></div><div class='ykkh-item'><div class='ykkh-img'><a href='/chia-se-hanh-trinh-12-nam-dong-hanh-cung-cuong-luxury-cua-ms-hang' title='CHIA SẺ HÀNH TRÌNH 12 NĂM ĐỒNG HÀNH CÙNG CUONG LUXURY CỦA MS HẰNG'><img alt='CHIA SẺ HÀNH TRÌNH 12 NĂM ĐỒNG HÀNH CÙNG CUONG LUXURY CỦA MS HẰNG' src='https://cuongluxury.vn/uploads/news/chia-se-hanh-trinh-12-nam-dong-hanh-cung-cuong-luxury-cua-ms-hang-1.jpg?width=150&height=110&mode=crop'></a></div><div class='ykkh-content'><div class='ykkh-title'><a href='/chia-se-hanh-trinh-12-nam-dong-hanh-cung-cuong-luxury-cua-ms-hang' title='CHIA SẺ HÀNH TRÌNH 12 NĂM ĐỒNG HÀNH CÙNG CUONG LUXURY CỦA MS HẰNG'>CHIA SẺ HÀNH TRÌNH 12 NĂM ĐỒNG HÀNH CÙNG CUONG LUXURY CỦA MS HẰNG</a></div><div class='ykkh-desc'> 2020 khép lại trong không khí vô cùng ấm áp của mùa xuân đương tới. Cuong Luxury có dịp nhìn...</div><div class='ykkh-readmore hidden'><a href='/cam-nhan-khach-hang' title='Xem thêm'>Xem thêm</a></div></div></div></div><div class='item'><div class='ykkh-item'><div class='ykkh-img'><a href='/cuong-luxury-tu-hao-la-dia-chi-vang-giup-nguoi-phu-nu-hien-dai-khang-dinh-ca-tinh' title='CUONG LUXURY TỰ HÀO LÀ "ĐỊA CHỈ VÀNG" GIÚP NGƯỜI PHỤ NỮ HIỆN ĐẠI KHẢNG ĐỊNH CÁ TÍNH'><img alt='CUONG LUXURY TỰ HÀO LÀ "ĐỊA CHỈ VÀNG" GIÚP NGƯỜI PHỤ NỮ HIỆN ĐẠI KHẢNG ĐỊNH CÁ TÍNH' src='https://cuongluxury.vn/uploads/news/cuong-luxury-tu-hao-la-dia-chi-vang-giup-phu-nu-hien-dai-khang-dinh-ca-tinh-02.png?width=150&height=110&mode=crop'></a></div><div class='ykkh-content'><div class='ykkh-title'><a href='/cuong-luxury-tu-hao-la-dia-chi-vang-giup-nguoi-phu-nu-hien-dai-khang-dinh-ca-tinh' title='CUONG LUXURY TỰ HÀO LÀ "ĐỊA CHỈ VÀNG" GIÚP NGƯỜI PHỤ NỮ HIỆN ĐẠI KHẢNG ĐỊNH CÁ TÍNH'>CUONG LUXURY TỰ HÀO LÀ "ĐỊA CHỈ VÀNG" GIÚP NGƯỜI PHỤ NỮ HIỆN ĐẠI KHẢNG ĐỊNH CÁ TÍNH</a></div><div class='ykkh-desc'> Là một cô gái xinh đẹp, luôn rạng ngời bởi nụ cười vô cùng duyên dáng, Ms Hường là một trong...</div><div class='ykkh-readmore hidden'><a href='/cam-nhan-khach-hang' title='Xem thêm'>Xem thêm</a></div></div></div></div>
+                </div>
+                <div class="comment_button "><a href="/cam-nhan-khach-hang">Comments</a></div>
             </div>
         </div>
-        
     </section>
 
-    <!-- Our Team -->
-    <section class="our-team bgc-f7">
-        <div class="maxw1600 m0a">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-6 offset-lg-3">
-                        <div class="main-title mb30 text-center">
-                            <h2>{{__('Chúng Tôi Là Ai')}}</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-3">
-                        <div class="team_slider">
-                            <!-- <div class="team-block mb30">
-                                <div class="team-upper-part">
-                                    <img class="img-full" width="100%" src="{{asset('images/gd.png')}}" alt="">
-                                    <ul class="social-list">
-                                        <li class="list-inline-item" ><a target="_blank" href="{{$system->facebook}}">
-                                            <img src="{{asset('images/icon-fb.png')}}" alt="">
-                                        </a></li>
-                                        <li class="list-inline-item"><a target="_blank" href="{{$system->instagram}}">
-                                            <img src="{{asset('images/icon-insta.png')}}" alt="">
-                                        </a></li>
-                                        <li class="list-inline-item"><a target="_blank" href="{{$system->blog_naver}}">
-                                            <img src="{{asset('images/icon-blog-naver.png')}}" alt="">
-                                        </a></li>
-                                        <li class="list-inline-item"><a target="_blank" href="https://zalo.me/0888851098">
-                                            <img src="{{asset('images/icon-zalo.png')}}" alt="">
-                                        </a></li>
-                                    </ul>
-                                </div>
-                                <div class="team-bottom-part">
-                                    <h3 class="team-title mrb-5"><a href="#"><span style="font-size: 18px">{{__('bà')}}: </span>{{__('Đặng Thị Tình')}}</a></h3>
-                                    <h4 class="designation f-weight-500 text-gray">{{__('Giám đốc KKUMHOUSE')}}</h4>
-                                </div>
-                            </div>
 
-                            <div class="team-block mb30">
-                                <div class="team-upper-part">
-                                    <img class="img-full" width="100%" src="{{asset('images/gd2.png')}}" alt="">
-                                    <ul class="social-list">
-                                        <li class="list-inline-item" ><a target="_blank" href="{{$system->facebook}}">
-                                            <img src="{{asset('images/icon-fb.png')}}" alt="">
-                                        </a></li>
-                                        <li class="list-inline-item"><a target="_blank" href="{{$system->instagram}}">
-                                            <img src="{{asset('images/icon-insta.png')}}" alt="">
-                                        </a></li>
-                                        <li class="list-inline-item"><a target="_blank" href="{{$system->blog_naver}}">
-                                            <img src="{{asset('images/icon-blog-naver.png')}}" alt="">
-                                        </a></li>
-                                        <li class="list-inline-item"><a target="_blank" href="https://zalo.me/0385268088">
-                                            <img src="{{asset('images/icon-zalo.png')}}" alt="">
-                                        </a></li>
-                                    </ul>
+    <section class="new-home-section ">
+        <div class="new-title">
+            <div class="title-home">
+                <span>Tin tức</span>
+                <img src="https://cuongluxury.vn/templates/home/images/line-3.png" alt="Tin tức" />
+            </div>
+        </div>
+        <div class="new-block container">
+            <div class="row">
+                <div class='col-lg-6 col-xs-12'>
+                    <div class='new-one'><div class='new-one-img'><a href='/nhung-dieu-co-ban-ban-can-biet-ve-muc-do-sai-so-cua-dong-ho-co' title='Những điều cơ bản bạn cần biết về mức độ sai số của đồng hồ cơ'><img class='img-project' src='https://cuongluxury.vn/uploads/news/nhung-dieu-co-ban-ban-can-biet-ve-muc-do-sai-so-cua-dong-ho-co-1.jpg?width=100&height=100&mode=crop' alt='Những điều cơ bản bạn cần biết về mức độ sai số của đồng hồ cơ'></a></div><div class='new-one-contents'><div class='new-one-title'><a href='/nhung-dieu-co-ban-ban-can-biet-ve-muc-do-sai-so-cua-dong-ho-co' title='Những điều cơ bản bạn cần biết về mức độ sai số của đồng hồ cơ'>Những điều cơ bản bạn cần biết về mức độ sai số của đồng hồ cơ</a></div><div class='new-one-desc'> Nói đến những bộ máy chuyển động của đồng hồ cơ, chúng ta có thể nhanh chóng mường tượng ra một hệ thống cấu trúc phức tạp bao gồm nhiều chi tiết bánh răng...</div></div></div><div class='new-one'><div class='new-one-img'><a href='/hop-xoay-dong-ho-la-gi-tai-sao-ban-nen-su-dung-no-va-su-dung-hop-xoay-dong-ho-sao-moi-dung' title='Hộp xoay đồng hồ là gì, tại sao bạn nên sử dụng nó? Và sử dụng Hộp xoay đồng hồ sao mới đúng?'><img class='img-project' src='https://cuongluxury.vn/uploads/news/hop-xoay-dong-ho-la-gi-va-tai-sao-ban-nen-su-dung-no-3.jpg?width=100&height=100&mode=crop' alt='Hộp xoay đồng hồ là gì, tại sao bạn nên sử dụng nó? Và sử dụng Hộp xoay đồng hồ sao mới đúng?'></a></div><div class='new-one-contents'><div class='new-one-title'><a href='/hop-xoay-dong-ho-la-gi-tai-sao-ban-nen-su-dung-no-va-su-dung-hop-xoay-dong-ho-sao-moi-dung' title='Hộp xoay đồng hồ là gì, tại sao bạn nên sử dụng nó? Và sử dụng Hộp xoay đồng hồ sao mới đúng?'> Hộp xoay đồng hồ là gì, tại sao bạn nên sử dụng nó? Và sử dụng Hộp xoay đồng hồ sao...</a></div><div class='new-one-desc'> Đối với những người yêu thích và sử dụng đồng hồ cơ cao cấp, việc sở hữu một chiếc Hộp xoay dành cho đồng hồ là việc vô cùng hữu ích. Tuy nhiên, không phải...</div></div></div>
+                </div>
+                <div class='col-lg-6 col-xs-12'>
+                    <div class='new-one'><div class='new-one-img'><a href='/huong-dan-su-dung-va-bao-quan-dong-ho-co-cao-cap' title='Hướng dẫn sử dụng và bảo quản đồng hồ cơ cao cấp'><img class='img-project' src='https://cuongluxury.vn/uploads/news/5-huong-dan-bao-quan-va-su-dung-dong-ho-co-cao-cap-5.jpg?width=100&height=100&mode=crop' alt='Hướng dẫn sử dụng và bảo quản đồng hồ cơ cao cấp'></a></div><div class='new-one-contents'><div class='new-one-title'><a href='/huong-dan-su-dung-va-bao-quan-dong-ho-co-cao-cap' title='Hướng dẫn sử dụng và bảo quản đồng hồ cơ cao cấp'>Hướng dẫn sử dụng và bảo quản đồng hồ cơ cao cấp</a></div><div class='new-one-desc'> Để sở hữu được một chiếc đồng hồ cơ cao cấp không phải là điều dễ dàng bởi chúng thường có mức giá rất cao trên thị trường. Tuy nhiên, khi đã có chúng trong...</div></div></div><div class='new-one'><div class='new-one-img'><a href='/kham-pha-y-nghia-cua-cac-ky-hieu-viet-tat-tren-ma-tham-chieu-cua-dong-ho-rolex' title='Khám phá ý nghĩa của các ký hiệu viết tắt trên mã tham chiếu của đồng hồ Rolex'><img class='img-project' src='https://cuongluxury.vn/uploads/news/cach-doc-ma-tham-chieu-tren-dong-ho-rolex-3.jpg?width=100&height=100&mode=crop' alt='Khám phá ý nghĩa của các ký hiệu viết tắt trên mã tham chiếu của đồng hồ Rolex'></a></div><div class='new-one-contents'><div class='new-one-title'><a href='/kham-pha-y-nghia-cua-cac-ky-hieu-viet-tat-tren-ma-tham-chieu-cua-dong-ho-rolex' title='Khám phá ý nghĩa của các ký hiệu viết tắt trên mã tham chiếu của đồng hồ Rolex'>Khám phá ý nghĩa của các ký hiệu viết tắt trên mã tham chiếu của đồng hồ Rolex</a></div><div class='new-one-desc'> Nếu bạn là một người yêu thích đồng hồ, đặc biệt là những dòng sản phẩm mang thương hiệu Rolex, hẳn bạn sẽ hoang mang rất nhiều khi bắt đầu tìm hiểu về...</div></div></div>
+                </div>
+           <div class='col-xs-12'><div class="comment_button "><a href="/tin-tuc">Comments</a></div>
+              </div></div>
+        </div>
+    </section>
+
+
+    <section class="video-st ">
+        <div class="video-title">
+            <span>Video Review</span>
+            <img src="https://cuongluxury.vn/templates/home/images/line-4.png" alt="Video Review" />
+        </div>
+        <div class="video-block container">
+            <div class="video-home-box owl-carousel">
+                
+                        <div class="item">
+                            <div class="video-items">
+                                <div class="video-thumb">
+                                    <a href="https://www.youtube.com/watch?v=SCghdXh2A2Y" data-fancybox="" data-width="640" data-height="360" title="Siêu phẩm Patek Philippe Complications mang nét đẹp cổ điển vượt thời gian">
+                                        <img src="https://cuongluxury.vn/uploads/videos/714ecdf90f45fb1ba254.jpg?width=600&height=400&mode=crop" alt="Siêu phẩm Patek Philippe Complications mang nét đẹp cổ điển vượt thời gian" />
+                                    </a>
+                                    <a href="https://www.youtube.com/watch?v=SCghdXh2A2Y" data-fancybox="" data-width="640" data-height="360" title="" class="i-play"></a>
                                 </div>
-                                <div class="team-bottom-part">
-                                    <h3 class="team-title mrb-5"><a href="page-single-team.html"><span style="font-size: 18px">{{__('bà')}}: </span>{{__('Lê Thị Thùy')}}</a></h3>
-                                    <h4 class="designation f-weight-500 text-gray">{{__('TPKD khối Khách hàng Hàn Quốc')}}</h4>
-                                </div>
-                            </div> -->
-                            <div class="team-block mb30">
-                                <div class="team-upper-part">
-                                    <img class="img-full" width="100%" src="{{asset('images/gd3.png')}}" alt="">
-                                    <ul class="social-list">
-                                        <li class="list-inline-item" ><a target="_blank" href="{{$system->facebook}}">
-                                            <img src="{{asset('images/icon-fb.png')}}" alt="">
-                                        </a></li>
-                                        <li class="list-inline-item"><a target="_blank" href="{{$system->instagram}}">
-                                            <img src="{{asset('images/icon-insta.png')}}" alt="">
-                                        </a></li>
-                                        <li class="list-inline-item"><a target="_blank" href="{{$system->blog_naver}}">
-                                            <img src="{{asset('images/icon-blog-naver.png')}}" alt="">
-                                        </a></li>
-                                        <li class="list-inline-item"><a target="_blank" href="https://zalo.me/{{$system->zalo}}">
-                                            <img src="{{asset('images/icon-zalo.png')}}" alt="">
-                                        </a></li>
-                                    </ul>
-                                </div>
-                                <div class="team-bottom-part">
-                                    <h3 class="team-title mrb-5"><a href="page-single-team.html">{{__('Hotline 24/7')}}</a></h3>
-                                    <h4 class="designation f-weight-500 text-gray">{{__($system->phone)}}</h4>
+                                <div class="video-desc">
+                                     Patek Philippe Complications 5396R-001 là một mẫu đồng hồ ấn tượng không chỉ bởi thiết kế có phần tối giản, tinh tế, chứa trọn phong cách của một siêu phẩm Dresswatch cổ điển,...
                                 </div>
                             </div>
                         </div>
-                    </div>
                     
-                </div>
+                        <div class="item">
+                            <div class="video-items">
+                                <div class="video-thumb">
+                                    <a href="https://youtu.be/fl4Pvec2cOc" data-fancybox="" data-width="640" data-height="360" title="Review Patek Philippe Complications 5930G-010 | Tuyệt tác hiếm có của ngành chế tác đồng hồ">
+                                        <img src="https://cuongluxury.vn/uploads/videos/patexxt-recovered.jpg?width=600&height=400&mode=crop" alt="Review Patek Philippe Complications 5930G-010 | Tuyệt tác hiếm có của ngành chế tác đồng hồ" />
+                                    </a>
+                                    <a href="https://youtu.be/fl4Pvec2cOc" data-fancybox="" data-width="640" data-height="360" title="" class="i-play"></a>
+                                </div>
+                                <div class="video-desc">
+                                     💼 𝐏𝐚𝐭𝐞𝐤 𝐏𝐡𝐢𝐥𝐢𝐩𝐩𝐞 𝐂𝐨𝐦𝐩𝐥𝐢𝐜𝐚𝐭𝐢𝐨𝐧𝐬 𝐖𝐨𝐫𝐥𝐝 𝐓𝐢𝐦𝐞 𝐅𝐥𝐲𝐛𝐚𝐜𝐤 𝐂𝐡𝐫𝐨𝐧𝐨𝐠𝐫𝐚𝐩𝐡 𝟓𝟗𝟑𝟎𝐆-𝟎𝟏𝟎 - Tuyệt tác hiếm có của ngành chế tác đồng...
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item">
+                            <div class="video-items">
+                                <div class="video-thumb">
+                                    <a href="https://youtu.be/S4mWSSAmPug" data-fancybox="" data-width="640" data-height="360" title="Review Patek Philippe Aquanaut 5968G | Tuyệt tác đồng hồ thể thao thanh lịch thế hệ mới">
+                                        <img src="https://cuongluxury.vn/uploads/videos/untitled-2.jpg?width=600&height=400&mode=crop" alt="Review Patek Philippe Aquanaut 5968G | Tuyệt tác đồng hồ thể thao thanh lịch thế hệ mới" />
+                                    </a>
+                                    <a href="https://youtu.be/S4mWSSAmPug" data-fancybox="" data-width="640" data-height="360" title="" class="i-play"></a>
+                                </div>
+                                <div class="video-desc">
+                                     💼 𝐏𝐚𝐭𝐞𝐤 𝐏𝐡𝐢𝐥𝐢𝐩𝐩𝐞 𝐀𝐪𝐮𝐚𝐧𝐚𝐮𝐭 𝟓𝟗𝟔𝟖𝐆 𝐅𝐥𝐲𝐁𝐚𝐜𝐤 𝐂𝐡𝐫𝐨𝐧𝐨𝐠𝐫𝐚𝐩𝐡 💼
+
+    Là một trong những mẫu đồng hồ sáng giá nhất thuộc bộ sưu tập Aquanaut -...
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item">
+                            <div class="video-items">
+                                <div class="video-thumb">
+                                    <a href="https://youtu.be/Ur5ck82Z4Mg" data-fancybox="" data-width="640" data-height="360" title="Khám phá "Nữ hoàng của đêm tiệc" - Franck Muller Double Mystery Blue">
+                                        <img src="https://cuongluxury.vn/uploads/videos/untitled-1.jpg?width=600&height=400&mode=crop" alt="Khám phá "Nữ hoàng của đêm tiệc" - Franck Muller Double Mystery Blue" />
+                                    </a>
+                                    <a href="https://youtu.be/Ur5ck82Z4Mg" data-fancybox="" data-width="640" data-height="360" title="" class="i-play"></a>
+                                </div>
+                                <div class="video-desc">
+                                     Sở hữu bộ vỏ có kích thước rất lớn - lên đến 42mm - Franck Muller Double Mystery Blue dễ dàng khiến mọi người choáng ngợp nhờ hơn 500 viên kim cương thiên nhiên với đủ kích...
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item">
+                            <div class="video-items">
+                                <div class="video-thumb">
+                                    <a href="https://youtu.be/7KNiXfSHl_I" data-fancybox="" data-width="640" data-height="360" title="Review Mặt số thiên thạch siêu hiếm trên Rolex Day-Date Everose Gold Meteorite Diamond Dial">
+                                        <img src="https://cuongluxury.vn/uploads/videos/z3598918261563aab0d55e1d991e7c121335e4d9729ed4.jpg?width=600&height=400&mode=crop" alt="Review Mặt số thiên thạch siêu hiếm trên Rolex Day-Date Everose Gold Meteorite Diamond Dial" />
+                                    </a>
+                                    <a href="https://youtu.be/7KNiXfSHl_I" data-fancybox="" data-width="640" data-height="360" title="" class="i-play"></a>
+                                </div>
+                                <div class="video-desc">
+                                     Rolex Day-Date Everose Gold Meteorite Diamond Dial
+
+    Nổi bật với vẻ ngoài được hoàn thiện từ Vàng hồng Everose Gold sang trọng và rực rỡ, Day-Date Everose Gold Meteorite...
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item">
+                            <div class="video-items">
+                                <div class="video-thumb">
+                                    <a href="https://youtu.be/GKOtmfUhmhM" data-fancybox="" data-width="640" data-height="360" title="Patek Philippe Complications 5205R-011 Annual Calendar Moonphase">
+                                        <img src="https://cuongluxury.vn/uploads/videos/thumbnail-pateck.jpg?width=600&height=400&mode=crop" alt="Patek Philippe Complications 5205R-011 Annual Calendar Moonphase" />
+                                    </a>
+                                    <a href="https://youtu.be/GKOtmfUhmhM" data-fancybox="" data-width="640" data-height="360" title="" class="i-play"></a>
+                                </div>
+                                <div class="video-desc">
+                                     Bắt nhịp xu hướng thời trang màu xanh lá đang rất hot trên thị trường đồng hồ xa xỉ, ngay trong những tháng đầu năm 2022, Patek Philippe đã làm mới bộ sưu tập Annual Calendar...
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item">
+                            <div class="video-items">
+                                <div class="video-thumb">
+                                    <a href="https://www.youtube.com/watch?v=73WKjRJ0r5c" data-fancybox="" data-width="640" data-height="360" title="Hublot Big Bang One Click King Gold Diamond - Sang trọng, Thể thao và Cá tính">
+                                        <img src="https://cuongluxury.vn/uploads/videos/18-f39fb12a739687c8de87.jpg?width=600&height=400&mode=crop" alt="Hublot Big Bang One Click King Gold Diamond - Sang trọng, Thể thao và Cá tính" />
+                                    </a>
+                                    <a href="https://www.youtube.com/watch?v=73WKjRJ0r5c" data-fancybox="" data-width="640" data-height="360" title="" class="i-play"></a>
+                                </div>
+                                <div class="video-desc">
+                                     Là dòng sản phẩm đặc trưng của Hublot, sở hữu tính năng One Click tiện dụng, Hublot Big Bang One Click King Gold Diamond nổi bật với bộ vỏ sandwich 5 tầng, được làm hoàn toàn...
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="item">
+                            <div class="video-items">
+                                <div class="video-thumb">
+                                    <a href="https://www.youtube.com/watch?v=9TpYlKuKKBw" data-fancybox="" data-width="640" data-height="360" title="Hublot Big Bang Chronograph Steel Diamonds - Bước đột phá trong thế giới đồng hồ thể thao thanh lịch">
+                                        <img src="https://cuongluxury.vn/uploads/videos/9bb27e3fbc8348dd1192.jpg?width=600&height=400&mode=crop" alt="Hublot Big Bang Chronograph Steel Diamonds - Bước đột phá trong thế giới đồng hồ thể thao thanh lịch" />
+                                    </a>
+                                    <a href="https://www.youtube.com/watch?v=9TpYlKuKKBw" data-fancybox="" data-width="640" data-height="360" title="" class="i-play"></a>
+                                </div>
+                                <div class="video-desc">
+                                     Là một dòng sản phẩm phong cách thể thao thanh lịch, Hublot Big Bang Chronograph Steel Diamonds không chỉ gây ấn tượng với vẻ ngoài năng động đến từ tính năng Chronograph, mà...
+                                </div>
+                            </div>
+                        </div>
+                    
             </div>
+            <div class="comment_button "><a href="/videos" title="Tìm hiểu thêm">Tìm hiểu thêm</a></div>
         </div>
-        
     </section>
 
 @endsection
 
 @section('js')
-    <script type="text/javascript" src="{{asset('js/pricing-slider.js')}}"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js'></script>
-    <script type="text/javascript">
-        $(function() {
-            $(".text-typed").typed({
-                strings: ["OCATE YOUR DREAM HOUSE", "OCATE YOUR DREAM HOUSE"],
-                typeSpeed: 50,
-                backSpeed: 20,
-                backDelay: 2000,
-                showCursor: true,
-                loop: true
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            
-            $(".close-popup").click(function(){
-                $(".main-popup").css("display", "none");
-            });
-            $(".background-popup").click(function(){
-                $(".main-popup").css("display", "none");
-            });
-        });
-    </script>
+    
 
 @endsection
