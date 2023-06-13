@@ -95,7 +95,7 @@ class Controller extends BaseController
         $slides = Slider::where('display',1)->orderBy('stt','ASC')->get();
         $popup = Popup::where('display',1)->orderBy('id','DESC')->get()->first();
         // return view('front-end.index',compact('system','menus','categories','products_hl','hct','hcn','cdt','hdb','blogs','slides','popup'));
-        return view('front-end.index');
+        return view('front-end.cart');
 
     }
     public function findProductCateTranslate($cate,$locale){

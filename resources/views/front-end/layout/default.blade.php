@@ -86,7 +86,7 @@ return true;
         
 @include('front-end.layout.header')
     <h1 class="hidden">Cường Luxury</h1>
-    <p>&nbsp;</p>
+    <!-- <p>&nbsp;</p> -->
 @yield('content')
         
 @include('front-end.layout.footer')

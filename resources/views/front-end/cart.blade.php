@@ -1,499 +1,667 @@
 @extends('front-end.layout.default')
-@section('body-name')
-   body-cart
-@endsection
+
 @section('head')
-	
+    <title>Cuong Luxury</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="google-site-verification" content="4GneTy3UPEfpKBItZcT4ob0uAKRPvzGRcTm84Qd076M" />
+    <meta http-equiv="Content-Language" content="vi" />
+    <meta name="copyright" content="Copyright" />
+    <meta name="description" content="Cuong Luxury là đơn vị uy tín với hơn 10 năm kinh nghiệm trong lĩnh vực mua bán, trao đổi, ký gửi các thương hiệu đồng hồ hiệu chính hãng hàng đầu tại Việt Nam như Hublot, Rolex, Patek Philippe, Franck Muller, ..." />
+    <meta name="keywords" content="Cuong Luxury, đồng hồ cao cấp chính hãng, Hublot, Rolex, Patek Philippe, Franck Muller, Vertu, Richard Mille..." />
+    <meta name="geo.placename" content="39 Quang Trung, Hoàn Kiếm" />
+    <meta name="DC.title" content="CuongLuxury" />
+    <meta property="og:type" name="ogtype" content="Website" />
+    <meta property="og:title" name="ogtitle" content="Cuong Luxury" />
+    <meta property="og:description" name="ogdescription" content="Cuong Luxury là đơn vị uy tín với hơn 10 năm kinh nghiệm trong lĩnh vực mua bán, trao đổi, ký gửi các thương hiệu đồng hồ hiệu chính hãng hàng đầu tại Việt Nam như Hublot, Rolex, Patek Philippe, Franck Muller, ..." />
+    <meta property="og:url" name="ogurl" content="https://cuongluxury.vn/" />
+    <meta property="og:image" name="ogimage" content="https://cuongluxury.vn/templates/home/images/banner-zalo-e.png" />
+    <meta property="og:image:alt" name="og:image:alt" content="Cuong Luxury" />
+    <meta property="og:sitename" content="https://cuongluxury.vn/" />
+    <link rel="canonical" href="https://cuongluxury.vn/" />
 
-	    <meta charset="utf-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <meta name="theme-color" content="#0871ce">
-
-	    <meta http-equiv="content-language" content="vi" />
-	    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	    <meta name="author" content="Template" />
-	    <meta name='COPYRIGHT' content='&copy; Template' />
-	    <meta name="robots" content="noodp,index,follow" />
-	    <meta name="google" content="notranslate" />
-	    <meta name="keywords" content="" />
-	    <meta name="description" content="" />
-	    <meta property="og:type" content="website" />
-	    <meta property="og:title" content="Giỏ hàng" />
-	    <meta property="og:description" content="" />
-	    <meta property="og:site_name" content="Giỏ hàng" />
-	    <meta property="og:url" content="{{$system->website}}/gio-hang" />
-	    <meta property="og:image" content="" />
-	    <meta property="og:locale" content="vi_VN" />
-	    <link rel="canonical" href="" /> 
-	    <title>Giỏ hàng</title>
-
-	    <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/owl.carousel.min.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/toastr.min.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/fontawesome.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/cloudzoom.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/select2.min.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/select2-bootstrap4.min.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/pretty-checkbox.min.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/brands.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/solid.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/all.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/chat.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/card.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/jquery-ui.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/checkout.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/stylev2.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/style.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/custom.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/stars.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/product-detail.css')}}" rel="stylesheet">
-	    <link href="{{asset('css/gio-hang.css')}}" rel="stylesheet">
-	    <!-- <link href="css/ban-do-dac-san.css?v=1612447411" rel="stylesheet"> -->
-	    <link href="{{asset('css/lich-su-don-hang.css')}}" rel="stylesheet">
-	    <style>
-	    	.cart__submit{
-	    		background: #03ab9a;
-	    	}
-	    	.item-price{
-	    		color: red;
-
-	    	}
-	    	.item-oldprice{
-	    		color: #cecece;
-	    		text-decoration: line-through;
-	    	}
-	        .f-items_show-fullname .f-items_name{
-	            overflow: hidden;
-	            text-overflow: ellipsis;
-	            display: -webkit-box;
-	            -webkit-line-clamp: 2;
-	            -webkit-box-orient: vertical;
-	        }
-	        .f-items_show-fullname .f-items_name:hover{
-	            -webkit-line-clamp: inherit;
-	            text-align: justify;
-	        }
-	        .b__price .ml-auto {
-	            line-height: 1.8em;
-	        }
-	        @media (min-width: 992px){
-	            .f-items .f-items__ls {
-	                display: flex;
-	                height: inherit;
-	                justify-content: space-between;
-	                align-items: baseline;
-	                min-height: 34px;
-	            }
-	        }
-
-	        .modal.fade .modal-dialog{
-	            transform: unset;
-	        }
-
-	        [id|=textAngular-editableFix]{
-	            display: none !important;
-	        }
-	        
-	        @media (max-width: 575px){
-	        	.b-header{
-		        	display: none;
-		        }
-	        }
-	    </style>
-
-
-	<!--[if lt IE 9]>
-	        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	    <![endif]-->
-	    <script>
-	        var user;
-	    </script>
-
-	    <style>
-	        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-	            display: none !important;
-	        }
-	    </style>
-	
 @endsection
+
 
 @section('content')
-
-@if( Session::has('flash_message'))
-    <div style="display: none;" class="note note-{{ Session::get('flash_level')}}">
-        <p class="flash_message" level="{{Session::get('flash_level')}}">{{ Session::get('flash_message')}}</p>
-    </div>
-@endif
-@if( count($errors) > 0)
-                
-    @foreach($errors->all() as $error)
-        <div style="display: none;" class="note note-danger">
-            <p class="error">{{$error}}</p>
+<link href="{{asset('css/base.scss.css')}}" rel="stylesheet" type="text/css" />
+    <section class="bread-crumb margin-bottom-10 a-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="title-head margin-top-0">
+                    Giỏ hàng
+                </div>
+                <ul class="breadcrumb" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <li class="home">
+                        <a itemprop="url" href="/" title="Trang chủ"><span itemprop="title">Trang chủ</span></a>
+                    </li>
+                    <li><span><i class="fa fa-angle-right"></i></span><strong itemprop="title">Giỏ hàng</strong></li>
+                    
+                </ul>
+            </div>
         </div>
-    @endforeach
-        
-@endif
+    </div>
+</section>
 
-<div class="page-cart-v3" ng-controller="review_product_in_cart">
-	<div class="container">
-		<div class="page-cart-content">
-			<div class="product-buy">
-				<a href="/"><label class="cart-products__title">TRANG CHỦ </label><i class="fas fa-chevron-right" style="padding: 0 5px;"></i></a>
-				<label class="cart-products__title"> GIỎ HÀNG</label>
-				<span class="cart-products__count">({{Cart::count()}})</span>
-				
-			</div>
-			<div class="cart">
-				<div class="cart-inner">
-					<div class="cart-products-inner">
-						<div class="cart-products__group">
-							<div class="cart-product-item">
-								<ul class="cart-products__products list-group">
-									@if(count($items_cart) == 0)
-										<div class="a__cart" ng-show="packages.length == 0">
+<section id="columns" class="columns-container">
+    <div class="container">
+
+        <div class="cart-page-s">
+
+            <div class="page-wrap">
+
                 
-							                <p class="p1">Giỏ hàng của bạn chưa có sản phẩm</p>
-							                <p class="p2"><a class="btn btn-outline-primary" href="/">Mua sắm ngay</a></p>
-							            </div>
-									@else
-									@foreach($items_cart as $item)
-									<li class="cart-products__product list-group-item ng-scope" item-id="{{$item->rowId}}">
-										<ul class="product-by-shop list-group">
-											<li class="list-group-item">
-												<div class="merchant">
-													<a href="/{{$item->options->shop_name}}-si{{$item->options->shop_id}}">
-														<img src="{{asset('uploads/images/users/avatars/'.$item->options->shop_avatar)}}">
-														<div class="merchant__name ng-binding">{{$item->options->shop_name}}</div>
-													</a>
-												</div>
-											</li>
+    <script src="/templates/home/js/numeral.min.js" type='text/javascript'></script>
+<div class='cart_detail'>
 
-											<li class="list-group-item ng-scope item-product" >
-												<div class="item-cart">
+    <div id="pncartdetail">
+   
+        <h3>1. THÔNG TIN GIỎ HÀNG</h3>
+        
+                <table style="width: 98%;" cellpadding="5" class="table cart" cellspacing="1">
+                    <tr>
+                        <td width='10%'><b>Hình ảnh</b></td>
+                        
+                        <td class="hidden-xs"><b>Tên sản phẩm</b></td>
+                        <td width='12%'><b>Số lượng</b></td>
+                        <td width='12%'><b>Đơn giá</b></td>
+                        <td width='12%'><b>Thành tiền</b></td>
+                        <td width='8%'></td>
+                    </tr>
+            
+                <tr>
+                    <td align="center"><a href="https://cuongluxury.vn/hublot-spirit-of-big-bang-king-gold-blue-diamond" title="Hublot Spirit Of Big Bang King Gold Blue Diamond">
+                        <img style="height: 80px" class="imgprd-cart" src="https://cuongluxury.vn/uploads/products/a3.png" alt="Hublot Spirit Of Big Bang King Gold Blue Diamond" /></a></td>
+                    
+                    <td class="hidden-xs" valign="top"><a href="https://cuongluxury.vn/hublot-spirit-of-big-bang-king-gold-blue-diamond" title="Hublot Spirit Of Big Bang King Gold Blue Diamond">
+                        Hublot Spirit Of Big Bang King Gold Blue Diamond  <br> 
+                        <p>Mã sản phẩm: 665.OX.7180.LR.1204</p>
+                    </a>
 
-													<div class="cart-products__img">
-														<a href="/{{$item->options->url}}">
-															<img alt="" src="{{asset('uploads/images/products/details/'.$item->options->img)}}">
-														</a>
-													</div>
-													<div class="cart-products__content">
-														<div class="product-name">
-															<p class="ng-binding">{{$item->name}}</p>
-															<span item-id="{{$item->rowId}}" class="btn-delete-product delete-item-cart" href="{{URL::route('removeItemCart',$item->rowId)}}" >Xóa</span>
-														</div>
-														<div class="product-price-cart">
-															<!-- <div class="product-price-current">
-																<span class="ng-binding">199.000đ</span>
-															</div> -->
-															<div class="product-price-discount" >
-																@if($item->price == $item->options->oldprice)
-																<span class="item-price">{!!number_format($item->price)!!} đ</span>
-																
-																@else
-																<span class="item-price">{!!number_format($item->price)!!} đ</span>
-																<span class="seperate">|</span>
-																<span class="item-oldprice">{!!number_format($item->options->oldprice)!!} đ</span>
-																@endif
-																
-															</div>
-														</div>
-														<div class="product-quantity">
-															<div class="quantity">
-																<span class="minus" id="{{$item->id}}">
-																	<img src="{{asset('images/minus.png')}}" alt="">
-																</span>
-																<input type="number" id="{{$item->id}}" min="1" onchange="updateCart({{$item->id}})" string-to-number="" old-value="{{$item->qty}}" value="{{$item->qty}}" class="">
-																<span class="plus" id="{{$item->id}}">
-																	<img src="{{asset('images/plus.png')}}" alt="">
-																</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</li>
-										</ul>
-									</li>
-									@endforeach
-									@endif
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="cart-total-prices">
-					<div class="show-mobile">
-						<div class="cart-prices">
-							<div class="prices">
-								<div class="prices__items">
-									<span class="prices__text">Tổng ({{Cart::count()}} sản phẩm)</span>
+                    </td>
+                    <td align="center">
+                        <input type="number" class="txtnumc" min="1"  name='5819' id='sl1'
+                            value='1' size="1">
+                         <input type="hidden" class="pr1" value="565000000" />
+                    </td>
+                    <td><span class='pri'>565.000.000</span><span class="hidden prci">565000000</span></td>
+                    <td>
+                            <span class="thanhtien1">565.000.000</span>
+                    </td>
+                    <td>
+                        <a onclick="return confirm(&#39;Bạn có muốn xóa không?&#39;);" id="LinkButton2" class="lnkdel" href="javascript:__doPostBack(&#39;ctl19$ctl00$ctl00$ctl00$rpcart$ctl01$LinkButton2&#39;,&#39;&#39;)">Xóa</a>
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td align="center"><a href="https://cuongluxury.vn/hublot-classic-fusion-titanium-black-42mm" title="Hublot Classic Fusion Titanium Black 42mm">
+                        <img style="height: 80px" class="imgprd-cart" src="https://cuongluxury.vn/uploads/products/hublot-classic-fusion-titanium.png" alt="Hublot Classic Fusion Titanium Black 42mm" /></a></td>
+                    
+                    <td class="hidden-xs" valign="top"><a href="https://cuongluxury.vn/hublot-classic-fusion-titanium-black-42mm" title="Hublot Classic Fusion Titanium Black 42mm">
+                        Hublot Classic Fusion Titanium Black 42mm  <br> 38
+                        <p>Mã sản phẩm: 542.NX.1171.LR</p>
+                    </a>
 
-								</div>
-								<div class="prices__total">
-									<span>Tổng tiền hàng</span>
-									<div class="prices__value prices__value--final" value="{{Cart::subtotal()}}">{{Cart::subtotal()}} đ
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<a href="{{URL::route('order')}}" class="cart__submit btn btn-primary btn-block">
-							Tiến hành đặt hàng
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                    </td>
+                    <td align="center">
+                        <input type="number" class="txtnumc" min="1"  name='5794' id='sl2'
+                            value='3' size="1">
+                         <input type="hidden" class="pr2" value="135000000" />
+                    </td>
+                    <td><span class='pri'>135.000.000</span><span class="hidden prci">135000000</span></td>
+                    <td>
+                            <span class="thanhtien2">465.000.000</span>
+                    </td>
+                    <td>
+                        <a onclick="return confirm(&#39;Bạn có muốn xóa không?&#39;);" id="LinkButton2" class="lnkdel" href="javascript:__doPostBack(&#39;ctl19$ctl00$ctl00$ctl00$rpcart$ctl02$LinkButton2&#39;,&#39;&#39;)">Xóa</a>
+                    </td>
+                </tr>
+            
+                </table>
+            
+        <p style="text-align: right; padding-top: 10px; margin-right: 20px;">
+            Tổng tiền: <b class="tto">
+                <span class="totals_price"><span class='prnum'>1.030.000.000 </span><span class='s_unit'>đ</span></span></b>
+        </p>
+        <p class='tool_cart'>
+            <input type="submit" name="ctl19$ctl00$ctl00$ctl00$btncontinue" value="Tiếp tục mua" id="btncontinue" class="btnbuycontinue btn" />
+            <input type="submit" name="ctl19$ctl00$ctl00$ctl00$btnbuys" value="Đặt hàng" id="btnbuys" class="btn" />
+            <input type="submit" name="ctl19$ctl00$ctl00$ctl00$btncancel" value="Hủy đơn hàng" id="btncancel" class="btncancelorder btn" />
+              <input type="hidden" value="2" name="numitemincart" id="numitemincart" />
+        </p>
+    
 </div>
 
+<div class="row">
+    <div class="customer-frm col-md-6">
+        <div class="buy-form">
+            <h3 class="legend">2. Thông tin Khách Hàng</h3>
+            <p>
+                <span class="msg_error">
+                    </span>
+            </p>
+            <ul class="filter-list">
+                <li class="filter-username">
+                    <div class="group-radio hidden">
+                        <div class="radio-1">
+                            <input id="rdmale" type="radio" name="ctl19$ctl00$ctl00$ctl00$gdsex" value="rdmale" checked="checked" />
+                            <label for="gender-male">Anh</label>
+
+
+                        </div>
+                        <div class="radio-1">
+                            <input id="rdfemale" type="radio" name="ctl19$ctl00$ctl00$ctl00$gdsex" value="rdfemale" />
+                            <label for="gender-male">Chị</label>
+
+                        </div>
+                    </div>
+                    <label>Họ tên</label>
+                    <input name="ctl19$ctl00$ctl00$ctl00$txtname" type="text" id="txtname" class="fullname mipt" placeholder="Nhập họ và tên của bạn..." />
+                </li>
+                <li  class="filter-username">
+                     <label>Số điện thoại</label>
+                    <input name="ctl19$ctl00$ctl00$ctl00$txtphone" type="text" id="txtphone" class="phone mipt" placeholder="Nhập số điện thoại của bạn..." />
+
+                </li>
+                <li  class="filter-username">
+                     <label>Email</label>
+                    <input name="ctl19$ctl00$ctl00$ctl00$txtemail" type="text" id="txtemail" class="email mipt" placeholder="Email (cần nhập email để nhận được thông tin đơn hàng)" />
+
+                </li>
+
+
+
+                <li >
+                    <label class="toglAddress"><i class="fa fa-location-arrow"></i> Địa chỉ, thời gian GIAO HÀNG NHANH</label>
+                    <li class="info-add  filter-username hidden">
+                        <label>Tỉnh thành</label>
+                            
+                       </li>
+                   <li class="info-add  filter-username hidden">
+                         <label>Quận / huyện</label>
+
+                            
+                       </li>
+                       <li class="info-add hidden filter-username hidden">
+                              <label>Phường / Xã</label>
+                            
+                        </li>
+                  
+                    <li class="filter-username">
+                          <label>Địa chỉ</label>
+                        <input name="ctl19$ctl00$ctl00$ctl00$txtaddress" type="text" id="txtaddress" class="address mipt" placeholder="Số nhà - Tên đường" />
+
+                    </li>
+                    <li  class="filter-username">
+                          <label>Ghi chú</label>
+                        <textarea name="ctl19$ctl00$ctl00$ctl00$txtcontent" rows="6" cols="46" id="txtcontent" class="mtxt comment" placeholder="Ghi chú khi giao hàng (vd: ngày, giờ giao hàng)">
+</textarea>
+
+                    </li>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="popup-buyform ipayment col-md-6" style="height:auto">
+        <div class="info-payment">
+            <label class="toglAddress"><i class="fa fa-money"></i> Hình thức thanh toán</label>
+             <div class="p-row  active"  style='display:block' >
+                <input id="rdtructiep" type="radio" name="ctl19$ctl00$ctl00$ctl00$pm" value="rdtructiep" checked="checked" />
+
+                <label for="bank_transfer" class="lbl-rado">Thanh toán trực tiếp</label>
+                <div class="redirect_box boxContent">
+                    <div>
+Thanh to&aacute;n trực tiếp tại Showroom:</div>
+<div>
+- CS1: 39 Quang Trung, Ho&agrave;n Kiếm, H&agrave; Nội</div>
+<div>
+- CS2: 39 V&otilde; Văn Dũng, Đống Đa, H&agrave; Nội</div>
+
+                </div>
+            </div>
+            <div class="p-row "  style='display:block' >
+                <input id="bank_transfer" type="radio" name="ctl19$ctl00$ctl00$ctl00$pm" value="bank_transfer" />
+
+                <label for="bank_transfer" class="lbl-rado">Thanh toán qua ngân hàng</label>
+                <div class="bank_transfer_box boxContent" style="display: none;">
+                    <div>
+Thanh to&aacute;n chuyển khoản qua ng&acirc;n h&agrave;ng</div>
+<div>
+&nbsp;</div>
+<div>
+<strong>1. Ng&acirc;n h&agrave;ng TMCP VietComBank</strong></div>
+<div>
+Số t&agrave;i khoản: 1017885586</div>
+<div>
+Chủ t&agrave;i khoản: L&ecirc; Thị Th&uacute;y Lan</div>
+<div>
+&nbsp;</div>
+<div>
+<strong>2. Ng&acirc;n h&agrave;ng TMCP TechComBank</strong></div>
+<div>
+Số t&agrave;i khoản: 19025943874021</div>
+<div>
+Chủ t&agrave;i khoản: L&ecirc; Thị Th&uacute;y Lan</div>
+<div>
+&nbsp;</div>
+
+                </div>
+            </div>
+            <div class="p-row  "  style='display:block' >
+                <input id="cod_payment" type="radio" name="ctl19$ctl00$ctl00$ctl00$pm" value="cod_payment" />
+                <label for="cod_payment" class="lbl-rado">Thanh toán tại nhà (COD)</label>
+                <div class="cod_payment_box boxContent" style="display: none;">
+                    <p>
+Thanh to&aacute;n khi kh&aacute;ch h&agrave;ng nhận được h&agrave;ng</p>
+
+                </div>
+            </div>
+
+            <div class="p-row cod-row" style="display: none;">
+                <input id="ATM_ONLINE" type="radio" name="ctl19$ctl00$ctl00$ctl00$pm" value="ATM_ONLINE" />
+                <label>Thanh toán online bằng thẻ ngân hàng nội địa</label>
+
+                <div class="boxContent">
+                    <p>
+                        <i>
+                            <span style="color: #ff5a00; font-weight: bold; text-decoration: underline;">Lưu ý</span>: Bạn cần đăng ký Internet-Banking hoặc dịch vụ thanh toán trực tuyến tại ngân hàng trước khi thực hiện.</i>
+                    </p>
+
+                    <ul class="cardList clearfix">
+
+                        <li class="bank-online-methods ">
+                            <label for="vcb_ck_on">
+                                <i class="VCB" title="Ngân hàng TMCP Ngoại Thương Việt Nam"></i>
+                                <input id="VCB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="VCB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="vnbc_ck_on">
+                                <i class="DAB" title="Ngân hàng Đông Á"></i>
+                                <input id="DAB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="DAB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="tcb_ck_on">
+                                <i class="TCB" title="Ngân hàng Kỹ Thương"></i>
+                                <input id="TCB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="TCB" />
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="sml_atm_mb_ck_on">
+                                <i class="MB" title="Ngân hàng Quân Đội"></i>
+                                <input id="MB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="MB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="shb_ck_on">
+                                <i class="SHB" title="Ngân hàng Sài Gòn - Hà Nội"></i>
+                                <input id="SHB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="SHB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="sml_atm_vib_ck_on">
+                                <i class="VIB" title="Ngân hàng Quốc tế"></i>
+                                <input id="VIB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="VIB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="sml_atm_vtb_ck_on">
+                                <i class="ICB" title="Ngân hàng Công Thương Việt Nam"></i>
+                                <input id="ICB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="ICB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="sml_atm_exb_ck_on">
+                                <i class="EXB" title="Ngân hàng Xuất Nhập Khẩu"></i>
+                                <input id="EXB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="EXB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="sml_atm_acb_ck_on">
+                                <i class="ACB" title="Ngân hàng Á Châu"></i>
+                                <input id="ACB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="ACB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="sml_atm_hdb_ck_on">
+                                <i class="HDB" title="Ngân hàng Phát triển Nhà TPHCM"></i>
+                                <input id="HDB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="HDB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="sml_atm_msb_ck_on">
+                                <i class="MSB" title="Ngân hàng Hàng Hải"></i>
+                                <input id="MSB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="MSB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="sml_atm_nvb_ck_on">
+                                <i class="NVB" title="Ngân hàng Nam Việt"></i>
+                                <input id="NVB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="NVB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="sml_atm_vab_ck_on">
+                                <i class="VAB" title="Ngân hàng Việt Á"></i>
+                                <input id="VAB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="VAB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="sml_atm_vpb_ck_on">
+                                <i class="VPB" title="Ngân Hàng Việt Nam Thịnh Vượng"></i>
+                                <input id="VPB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="VPB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="sml_atm_scb_ck_on">
+                                <i class="SCB" title="Ngân hàng Sài Gòn Thương tín"></i>
+                                <input id="SCB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="SCB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="ojb_ck_on">
+                                <i class="OJB" title="Ngân hàng Đại Dương"></i>
+                                <input id="OJB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="OJB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="bnt_atm_pgb_ck_on">
+                                <i class="PGB" title="Ngân hàng Xăng dầu Petrolimex"></i>
+                                <input id="PGB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="PGB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="bnt_atm_gpb_ck_on">
+                                <i class="GPB" title="Ngân hàng TMCP Dầu khí Toàn Cầu"></i>
+                                <input id="GPB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="GPB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="bnt_atm_agb_ck_on">
+                                <i class="AGB" title="Ngân hàng Nông nghiệp &amp; Phát triển nông thôn"></i>
+                                <input id="AGB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="AGB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="bnt_atm_sgb_ck_on">
+                                <i class="SGB" title="Ngân hàng Sài Gòn Công Thương"></i>
+                                <input id="SGB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="SGB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="bnt_atm_nab_ck_on">
+                                <i class="NAB" title="Ngân hàng Nam Á"></i>
+                                <input id="NAB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="NAB" />
+
+                            </label>
+                        </li>
+
+                        <li class="bank-online-methods ">
+                            <label for="sml_atm_bab_ck_on">
+                                <i class="BAB" title="Ngân hàng Bắc Á"></i>
+                                <input id="BAB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="BAB" />
+
+                            </label>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+            <div class="p-row cod-row" style="display: none;">
+                <label>
+                    <input id="VISA" type="radio" name="ctl19$ctl00$ctl00$ctl00$pm" value="VISA" />
+                    Thanh toán bằng thẻ Visa hoặc MasterCard</label>
+                <div class="boxContent">
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<div class='d_buyinfo'>
+</div>
+<div class="clear"></div>
+<p class='tool_cart'>
+    <input type="submit" name="ctl19$ctl00$ctl00$ctl00$btneditcart" value="Sửa đơn hàng" id="btneditcart" class="btneditorder btn" />
+    <input type="submit" name="ctl19$ctl00$ctl00$ctl00$btnorder" value="Đặt hàng" id="btnorder" class="btnpayment btn" />
+    <input type="submit" name="ctl19$ctl00$ctl00$ctl00$btncancelorder" value="Hủy đơn hàng" id="btncancelorder" class="btncancelorder btn" />
+    
+</p>
+    
+    
+
+</div>
+<style>
+       ul.bankList {
+                clear: both;
+                height: 202px;
+                width: 636px;
+            }
+
+            .boxContent {
+               display: none;
+    margin-left: 20px;
+    padding: 20px;
+    border: 1px solid #e4e4e4;
+            }
+
+            .active .boxContent {
+                display: block !important;
+            }
+
+            ul.bankList li {
+                list-style-position: outside;
+                list-style-type: none;
+                cursor: pointer;
+                float: left;
+                margin-right: 0;
+                padding: 5px 2px;
+                text-align: center;
+                width: 90px;
+            }
+
+            .list-content li {
+                list-style: none outside none;
+                margin: 0 0 10px;
+            }
+
+                .list-content li .boxContent {
+                    display: none;
+                    width: 636px;
+                    border: 1px solid #cccccc;
+                    padding: 10px;
+                }
+
+                .list-content li.active .boxContent {
+                    display: block;
+                }
+
+                .list-content li .boxContent ul {
+                    height: 280px;
+                }
+
+            
+            ul.cardList li {
+                cursor: pointer;
+                float: left;
+                margin-right: 0;
+                padding: 5px 4px;
+                text-align: center;
+                width: 90px;
+            }
+    .prdimg {
+        float: left;
+        width: 100px;
+    }
+    .ttgh {
+        border: 1px solid #f0f0f0;
+        padding: 10px;
+    }
+    .tta {
+        margin-top: 10px;
+        padding: 10px 0px 10px 0px;
+        text-align: right;
+        border-top: 1px solid #f0f0f0;
+    }
+    .itghslg {
+        float: left;
+    }
+    .itghtt {
+        float: right;color:red;
+    }
+    .ghit {
+        padding: 5px 0px;
+    }
+    .ttdh table {
+        width: 100%;border-left:1px solid #f0f0f0;border-top:1px solid #f0f0f0;
+    }
+        .ttdh table td {
+            padding: 5px;
+        }
+    .ttdh table tr {
+        border-bottom: 1px solid #f0f0f0;
+        border-right:1px solid #f0f0f0;
+    }
+    .cart_detail h3 {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .title_c {
+        width: 94px;
+        display: inline-block;
+    }
+
+    .d_buyinfo {
+        float: left;
+    }
+
+    .d_payment {
+    }
+    #pnordersuccess {
+        margin-bottom: 30px;
+    }
+    #pnmessage {
+        text-align: center;
+        font-weight: bold;
+        margin: 50px 0px;
+    }
+
+    .cardList {
+        list-style: none;
+    }
+#btnorder{width:170px}
+.btn{max-width:180px;font-size:17px;}
+#btncancel{display:inline-block}
+</style>
+<script>
+    $('input[name="ctl17$ctl00$ctl00$ctl00$pm"]').bind('click', function () {
+        $('.p-row').removeClass('active');
+        $(this).parent('div.p-row').addClass('active');
+    });
+    $(document).on("change", '.txtnumc', function () {
+        var numitemincart = parseInt($("#numitemincart").val());
+        var total = 0;
+        var i;
+        for (i = 1; i <= numitemincart; i++) {
+            total += numeral($(".pr" + i).val()).value() * numeral($("#sl" + i).val()).value();
+            
+            $(".thanhtien" + i).html(numeral(numeral($(".pr" + i).val()).value() * numeral($("#sl" + i).val()).value()).format('0,0').replace(",", ".").replace(",", ".").replace(",", ".") + " ") ;
+        }
+        $(".totals_price .prnum").html(numeral(total).format('0,0').replace(",", ".").replace(",", ".").replace(",", ".") + " ") ;
+       // $(".total2 .prnum").html(numeral(total).format('0,0').replace(",", ".").replace(",", ".").replace(",", ".") + " ");
+    });
+    $(document).on("change", '#ddlcity', function () {
+        var id = $(this).val();
+        $.ajax({
+            type: "POST",
+            url: "/webservices/srv.asmx/GetDistrict",
+            data: "{ city: '" + id + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $("#ddlqh").html("");
+                $("#ddlqh").html(data.d);
+                px();
+            },
+            error: function (data) {
+            }
+        })
+    });
+    $(document).on("change", '#ddlqh', function () {
+        px();
+    });
+    function px() {
+        var id = $("#ddlqh").val();
+        $.ajax({
+            type: "POST",
+            url: "/webservices/srv.asmx/GetPX",
+            data: "{ qh: '" + id + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $("#ddlpx").html("");
+                $("#ddlpx").html(data.d);
+            },
+            error: function (data) {
+            }
+        })
+    }
+</script>
+
+            </div>
+        </div>
+    </div>
+</section>
 
 @endsection
+
 @section('js')
-	<script>
-        var baseUrl = '';
-        var csrf_token = '9OsL--E0oa2MS4oboU1Hra_tBw7_bNckXWiqU0YhXUGNjl2ku2DU5b89s1TVOz_Z2dVUN5NaknQsIccwEkIoOQ==' ? '9OsL--E0oa2MS4oboU1Hra_tBw7_bNckXWiqU0YhXUGNjl2ku2DU5b89s1TVOz_Z2dVUN5NaknQsIccwEkIoOQ==' : '';
-        var csrfTokenName = '_csrf' ? '_csrf' : '';
-        const locationVersion = '';
-    </script>
-    <script src="/js/jquery.js?v=1568371444"></script>
-    <!-- <script src="https://domain.com/assets/d6da31be/yii.js?v=1566957476"></script> -->
-    <script src="/js/bootstrap.js?v=1568371445"></script>
-    <script src="/js/progressive-image.js?v=1603338120"></script>
-    <script src="/js/jquery-ui.min.js?v=1603338120"></script>
-    <script src="/js/bootstrap.min.js?v=1603338120"></script>
-    <script src="/js/owl.carousel.min.js?v=1603338120"></script>
-    <!-- <script src="https://domain.com/static/v2/js/brands.js?v=1603338120"></script> -->
-    <!-- <script src="https://domain.com/static/v2/js/solid.js?v=1603338120"></script> -->
-    <script src="/js/fontawesome.js?v=1603338120"></script>
-    <script src="/js/jquery.nstSlider.js?v=1603338120"></script>
-    <script src="/js/cloudzoom.js?v=1603338120"></script>
-    <script src="/js/select2.full.min.js?v=1603338119"></script>
-    <script src="/js/jstars.min.js?v=1603338120"></script>
-    <script src="/js/style.js?v=1614350823"></script>
-    <!-- <script src="https://domain.com/jsv2/lib/imboclient.min.js?v=1603338118"></script> -->
-    <!-- <script src="https://domain.com/jsv2/lib/bootbox.js?v=1603338118"></script> -->
-    <script src="/js/angular.min.js?v=1603338118"></script>
-    <script src="/js/angular-filedialog.js?v=1603338118"></script>
-    <script src="/js/angular-animate.min.js?v=1603338118"></script>
-    <script src="/js/angular-ui-bootstrap.min.js?v=1603338118"></script>
-    <script src="/js/moment.min.js?v=1603338118"></script>
-    <script src="/js/angular-moment.min.js?v=1603338118"></script>
-    <script src="/js/angular-local-storage.min.js?v=1603338118"></script>
-    <script src="/js/customSelect.js?v=1603338118"></script>
-    <script src="/js/angular-recaptcha.js?v=1603338118"></script>
-    <!-- <script src="https://domain.com/jsv2/lib/simple.money.format.js?v=1603338118"></script> -->
-    <script src="/js/text-angular-rangy.min.js?v=1603338118"></script>
-    <script src="/js/text-angular-sanitize.min.js?v=1603338118"></script>
-    <script src="/js/text-angular.min.js?v=1603338118"></script>
-    <script src="/js/text-angular-setup.js?v=1603338118"></script>
-    <!-- <script src="https://domain.com/jsv2/lib/firebase-app.js?v=1603338118"></script> -->
-    <!-- <script src="https://domain.com/jsv2/lib/firebase-messaging.js?v=1603338118"></script> -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script> -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-database.js"></script> -->
-    <!-- <script src="https://domain.com/jsv2/inputmask.js?v=1603338118"></script> -->
-    <!-- <script src="https://domain.com/jsv2/utils.js?v=1603338118"></script> -->
-    <script src="/js/app.js?v=1614350823"></script>
-    <!-- <script src="https://domain.com/jsv2/wallet.js?v=1603338118"></script> -->
-    <script src="/js/modal.js?v=1603338118"></script>
-    <script src="/js/firebase-notification.js?v=1603338118"></script>
-    <script src="/js/auth.js?v=1603338118"></script>
-    <!-- <script src="/js/main.js?v=1605193566"></script> -->
-    <!-- <script src="/js/product.js?v=1610977888"></script> -->
-    <!-- <script src="https://domain.com/jsv2/order.js?v=1603338118"></script> -->
-    <!-- <script src="https://domain.com/jsv2/cartv2.js?v=1610981070"></script> -->
-    <!-- <script src="https://domain.com/jsv2/cartmb.js?v=1603338118"></script> -->
-    <!-- <script src="https://domain.com/jsv2/user.js?v=1603338118"></script> -->
-    <script src="/js/footer.js?v=1603338118"></script>
-    <script src="/js/search.js?v=1603338118"></script>
-    <!-- <script src="https://domain.com/jsv2/home.js?v=1603338118"></script> -->
-    <script src="/js/style-jsv2.js?v=1608046089"></script>
-    <!-- <script src="https://domain.com/jsv2/lodash.min.js?v=1603338118"></script> -->
-    <script src="/js/angularjs-dropdown-multiselect.min.js?v=1603338118"></script>
-    <!-- <script src="https://domain.com/jsv2/o2o-detail.js?v=1603338118"></script> -->
-    <!-- <script src="https://domain.com/jsv2/o2o.js?v=1603338118"></script> -->
-    <!-- <script src="https://domain.com/jsv2/chat.js?v=1603338118"></script> -->
-    <script src="/js/angularfire.min.js?v=1603338118"></script>
-    <!-- <script src="https://domain.com/jsv2/popup.js?v=1603338118"></script> -->
-    <!-- <script src="https://domain.com/jsv2/flashsale-homepage.js?v=1610286800"></script> -->
-    <!-- <script src="https://domain.com/jsv2/flashsale-page.js?v=1603338118"></script> -->
-    <!-- <script src="https://domain.com/jsv2/browse.js?v=1603338118"></script> -->
-    <script src="/js/currency-mask.js?v=1603338118"></script>
-    <!-- <script src="https://domain.com/jsv2/custom-select.js?v=1603338118"></script> -->
-    <!-- <script src="https://domain.com/jsv2/toastr.min.js?v=1603338118"></script> -->
-    <!-- <script src="https://domain.com/jsv2/product-family-notification.js?v=1603338118"></script> -->
-    <!-- <script src="https://domain.com/jsv2/notifications-page.js?v=1607615500"></script> -->
-    <!-- <script src="https://domain.com/jsv2/buy-card.js?v=1603338131"></script> -->
-    <!-- <script src="https://domain.com/jsv2/telecharge-viettel.js?v=1603338118"></script> -->
-    <!-- <script src="https://domain.com/jsv2/wallet-withdrawals.js?v=1605193566"></script> -->
-    <!-- <script src="https://domain.com/jsv2/history-order.js?v=1610977888"></script> -->
-    <!-- <script src="https://domain.com/jsv2/recommendation.js?v=1614350823"></script>  -->
-    <script>
-        CloudZoom.quickStart();
-        $('.nstSlider').nstSlider({
-            "rounding": {
-                "1000000" : "10000000"
-            },
-            "left_grip_selector": ".leftGrip",
-            "right_grip_selector": ".rightGrip",
-            "value_bar_selector": ".bar",
-            "value_changed_callback": function(cause, leftValue, rightValue) {
-                $('.leftLabel').val(leftValue);
-                $('.rightLabel').val(rightValue);
-            }
-        });
-    </script>
-
-
-    <script>
-        $(document).ready(function(){
-            $("#show-all-tinh-thanh").click(function(){
-                $("#tinh-thanh").removeClass("tinh-thanh");
-            });
-        });
-
-        $(document).ready(function(){
-            if($("#top-referrer-detail")){
-                $(window).scroll(function() {
-                    var scroll = $(window).scrollTop();
-                    if (scroll >= 50) {
-                        $("#top-referrer-detail").addClass("detail-fixed-top");
-                    }else{
-                        $("#top-referrer-detail").removeClass("detail-fixed-top");
-                    }
-                });
-            };
-
-
-            $(".login_succses_mobile").click(function(){
-                $(".login_succses_menu_mobile").toggle();
-            });
-        })
-    </script>
-    <script type="text/javascript">
-        $(document).on('click', '.add-to-cart', function(event) {
-            event.preventDefault();
-            url = $(this).attr('href');
-            $.ajax({
-                type: 'GET',
-                url: url,
-                dataType: 'html',
-                success: function(data) {
-                    toastr.success('Đã thêm vào giỏ hàng');
-                    // $('.total-item-in-cart').text(data);
-                    console.log(data);
-
-                }
-            });
-        });
-        $(document).on('click', '.delete-item-cart', function(event) {
-            event.preventDefault();
-            url = $(this).attr('href');
-            item_id = $(this).attr('item-id');
-
-            $.ajax({
-                type: 'GET',
-                url: url,
-                dataType: 'json',
-                success: function(data) {
-                    toastr.success('Đã xóa khỏi giỏ hàng');
-                    $('.cart-products__product[item-id='+item_id+']').remove();
-                    $('.total-item-in-cart').text(data[0]);
-                    $('.cart-products__count').text('('+data[0]+')');
-                    $('.prices__value').text(data[1]+' đ');
-                    $('.prices__value').attr('value',data[1]);
-                    // console.log(item_id);
-
-                }
-            });
-        });
-        $(document).on('click', '.minus', function(event) {
-            event.preventDefault();
-            id = $(this).attr('id');
-            value = parseInt($('input[id='+id+']').val());
-            if(value == 1){
-
-            }
-            else{
-            	new_value = value-1;
-            	$('input[id='+id+']').val(new_value);
-            	$('input[id='+id+']').attr('old-value',new_value);
-            	$('input[id='+id+']').attr('value',new_value);
-            	url = '/add-to-cart/'+id+'--1';
-            	$.ajax({
-	                type: 'GET',
-	                url: url,
-	                dataType: 'json',
-	                success: function(data) {
-	                    
-	                    $('.total-item-in-cart').text(data[0]);
-	                    $('.cart-products__count').text('('+data[0]+')');
-	                    $('.prices__value').text(data[1]+' đ');
-	                    $('.prices__value').attr('value',data[1]);
-	                    toastr.success('Đã cập nhật giỏ hàng');
-	                    
-
-	                }
-	            });
-
-            }
-            
-            
-        });
-        $(document).on('click', '.plus', function(event) {
-            event.preventDefault();
-            id = $(this).attr('id');
-            value = parseInt($('input[id='+id+']').val());
-            new_value = value+1;
-        	$('input[id='+id+']').val(new_value);
-        	$('input[id='+id+']').attr('old-value',new_value);
-        	$('input[id='+id+']').attr('value',new_value);
-        	url = '/add-to-cart/'+id+'-1';
-        	$.ajax({
-                type: 'GET',
-                url: url,
-                dataType: 'json',
-                success: function(data) {
-                    
-                    $('.total-item-in-cart').text(data[0]);
-                    $('.cart-products__count').text('('+data[0]+')');
-                    $('.prices__value').text(data[1]+' đ');
-                    $('.prices__value').attr('value',data[1]);
-                    toastr.success('Đã cập nhật giỏ hàng');
-
-                }
-            });
-        });
-        function updateCart(id){
-        	value = parseInt($('input[id='+id+']').val());
-        	oldvalue = parseInt($('input[id='+id+']').attr('old-value'));
-        	if(value <=0){
-        		$('input[id='+id+']').val(oldvalue);
-	        	toastr.warning('Số lượng nhập phải lớn hoặc hoặc bằng 1');
-        	}
-        	else{
-	        	count_item_update = value-oldvalue;
-	        	$('input[id='+id+']').attr('old-value',value);
-	        	$('input[id='+id+']').attr('value',value);
-	        	url = '/add-to-cart/'+id+'-'+count_item_update;
-	        	$.ajax({
-	                type: 'GET',
-	                url: url,
-	                dataType: 'json',
-	                success: function(data) {
-	                    
-	                    $('.total-item-in-cart').text(data[0]);
-	                    $('.cart-products__count').text('('+data[0]+')');
-	                    $('.prices__value').text(data[1]+' đ');
-	                    $('.prices__value').attr('value',data[1]);
-	                    toastr.success('Đã cập nhật giỏ hàng');
-
-	                }
-	            });
-			}
-        }
-    </script>
+    
 
 @endsection
