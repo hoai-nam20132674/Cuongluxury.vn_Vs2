@@ -17,7 +17,7 @@
         <div class="website-logo">
             <a href="index.html">
                 <div class="logo">
-                    <img class="logo-size" src="http://brandio.io/envato/iofrm/html/images/logo-light.svg" alt="">
+                    <img class="logo-size" src="https://cuongluxury.vn/uploads/images/images/a/Cuong-Luxury-1.jpg" alt="">
                 </div>
             </a>
         </div>
@@ -31,7 +31,7 @@
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
-                        <h3>BẤT ĐỘNG SẢN KKUMHOUSE</h3>
+                        <h3>CƯỜNG LUXURY</h3>
                         <p></p>
                         <div class="page-links">
                             <a href="#" class="active">Login</a><a href="#">Register</a>

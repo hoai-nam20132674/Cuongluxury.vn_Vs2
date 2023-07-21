@@ -74,7 +74,12 @@
                                     Danh mục sản phẩm
                                 </a>
                             </li>
-                            
+                            <li class="nav-item " id="cms-plugins-product-categories">
+                                <a href="{{URL::route('properties')}}" class="nav-link">
+                                    <i class="fas fa-glass-martini"></i>
+                                    Thuộc tính sản phẩm
+                                </a>
+                            </li>
                             
                         </ul>
                     </li>

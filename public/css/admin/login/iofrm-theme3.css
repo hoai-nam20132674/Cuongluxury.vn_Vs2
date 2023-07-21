@@ -80,7 +80,8 @@
 
 .img-holder .bg {
     opacity: 1;
-    background-image: url("../../../uploads/images/bg-login.jpg");
+    background-position: left;
+    background-image: url("https://cuongluxury.vn/uploads/images/images/a/Cuong-Luxury-1.jpg");
 }
 
 .form-holder {

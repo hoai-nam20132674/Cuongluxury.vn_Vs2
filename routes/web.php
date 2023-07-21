@@ -163,6 +163,14 @@ Route::get('admin/contacts', 'HomeController@contacts')->name('contacts');
 Route::get('admin/contact/delete/{id}', 'HomeController@deleteContact')->name('deleteContact');
 Route::get('admin/contact/deleteContacts', 'HomeController@deleteContacts')->name('deleteContacts');
 // End Contact
+//properties
+Route::get('admin/properties', 'HomeController@properties')->name('properties');
+Route::get('admin/properties/add', 'HomeController@addProperties')->name('addProperties');
+Route::post('admin/properties/add', 'HomeController@postAddProperties')->name('postAddProperties');
+Route::get('admin/properties/edit/{id}', 'HomeController@editProperties')->name('editProperties');
+Route::post('admin/properties/edit/{id}', 'HomeController@postEditProperties')->name('postEditProperties');
+Route::get('admin/properties-value/delete/{id}', 'HomeController@deletePropertiesValue')->name('deletePropertiesValue');
+//end properties
 
 Route::get('admin/test', 'HomeController@test')->name('test');
 

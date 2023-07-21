@@ -15,6 +15,11 @@
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/admin/slug.css')}}">
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/admin/seo-helper.css')}}">
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/admin/upload-image.css')}}">
+    <style type="text/css">
+        .ml-30 {
+            margin-left: 30px !important;
+        }
+    </style>
 @endsection
 @section('content')
 	<div class="page-content ">
@@ -235,37 +240,98 @@
                         </div>
                     </div>
                     <input class="hidden" type="number" name="product_cate_id" value="{{$request->product_cate_id}}">
-                    <div class="widget meta-boxes">
-                        <div class="widget-title">
-                            <h4><label for="image" class="control-label">Avata</label></h4>
-                        </div>
-                        <div class="widget-body">
-                            <div class="image-box" style="border: 1px solid #e2e2e2;">
-                                <div class="file-upload">   
-                                    <div class="file-upload-content file-upload-content100" style="position: relative;">
-                                        <img width="100%" class="file-upload-image file-upload-image100" src="{{asset('uploads/images/icon-image.gif')}}" alt="your image" />
-                                        <div class="image-title-wrap image-title-wrap100" style="position: absolute;top: 0px; right: 0px;">
-                                            <button type="button" onclick="removeUploadTest(100)" class="remove-image">Ảnh đại diện</button>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="widget meta-boxes">
+                                <div class="widget-title">
+                                    <h4><label for="image" class="control-label">Ảnh đại diện</label></h4>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="image-box" style="border: 1px solid #e2e2e2;">
+                                        <div class="file-upload">   
+                                            <div class="file-upload-content file-upload-content100" style="position: relative;">
+                                                <img width="100%" class="file-upload-image file-upload-image100" src="https://icones.pro/wp-content/uploads/2021/06/icone-d-image-rouge.png" alt="your image" />
+                                                <!-- <div class="image-title-wrap image-title-wrap100" style="position: absolute;top: 0px; right: 0px;">
+                                                    <button type="button" onclick="removeUploadTest(100)" class="remove-image">Ảnh đại diện</button>
+                                                </div> -->
+                                                <input required style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input100" type='file' required name="avata" onchange="readURLTest(this,100);" accept="image/*" />
+                                            </div>
                                         </div>
-                                        <input required style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input100" type='file' required name="avata" onchange="readURLTest(this,100);" accept="image/*" />
+            
                                     </div>
                                 </div>
-    
                             </div>
-
-    
-
+                        </div>
+                        <div class="col-md-6">
+                            <div class="widget meta-boxes">
+                                <div class="widget-title">
+                                    <h4><label for="image" class="control-label">Ảnh bìa</label></h4>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="image-box" style="border: 1px solid #e2e2e2;">
+                                        <div class="file-upload">   
+                                            <div class="file-upload-content file-upload-content1" style="position: relative;">
+                                                <img width="100%" class="file-upload-image file-upload-image1" src="https://icones.pro/wp-content/uploads/2021/06/icone-d-image-rouge.png" alt="your image" />
+                                                <!-- <div class="image-title-wrap image-title-wrap1" style="position: absolute;top: 0px; right: 0px;">
+                                                    <button type="button" onclick="removeUploadTest(1)" class="remove-image">Ảnh bìa</button>
+                                                </div> -->
+                                                <input required style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input1" type='file' required name="banner" onchange="readURLTest(this,1);" accept="image/*" />
+                                            </div>
+                                        </div>
+            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget meta-boxes">
+                        <div class="widget-title">
+                            <h4><label for="categories[]" class="control-label required" aria-required="true">Thuộc tính</label></h4>
+                        </div>
+                        <div class="widget-body">
+                            <div class="form-group form-group-no-margin ">
+                                <div class="multi-choices-widget list-item-checkbox mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar" style="position: relative; overflow: visible; padding: 0px;">
+                                    <div id="mCSB_1" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical_horizontal mCSB_outside" tabindex="0" style="max-height: 320px; overflow-y: auto;">
+                                        <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y mCS_x_hidden mCS_no_scrollbar_x" style="position: relative; top: 0px; left: 0px; width: 343.5px;" dir="ltr">
+                                            <ul>
+                                                @foreach($properties as $pp)
+                                                    <li value="{{$pp->id}}">
+                                                        <label>
+                                                            <input type="checkbox" value="{{$pp->id}}" name="properties[]">
+                                                            {{__($pp->name)}}
+                                                        </label>
+                                                    </li>
+                                                    @php
+                                                        $values = $pp->propertie_values;
+                                                    @endphp
+                                                    @foreach($values as $value)
+                                                        <li value="{{$value->id}}" class="ml-30">
+                                                            <label>
+                                                                <i class="bx bx-subdirectory-right"></i>
+                                                                {{__($value->value)}}
+                                                            </label>
+                                                        </li>
+                                                    @endforeach
+                                                @endforeach
+                                               
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
 
                         </div>
                     </div>
                             
-                    </div>
-    </div>
-
-            </form>
-    
-                        </div>
                 </div>
+            </div>
+
+        </form>
+    
+   </div>
+</div>
 @endsection
 @section('js')
 	<script src="{{asset('js/admin/respond.min.js')}}"></script>

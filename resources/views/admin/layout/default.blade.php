@@ -35,7 +35,40 @@
     <script type="text/javascript" src="{{asset('auth/ckeditor/ckeditor.js')}}"></script>
     <script type="text/javascript" src="{{asset('auth/ckfinder/ckfinder.js')}}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
+    <style type="text/css">
+        
+        .preloader2 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+            background-color: rgba(255, 255, 255, 0.82);
+        }
+        .preloader2 .preloader-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: block;
+        }
+        .preloader2 .preloader-loading::after {
+            content: " ";
+            display: block;
+            border-radius: 50%;
+            border-width: 1px;
+            border-style: solid;
+            -webkit-animation: lds-dual-ring 0.5s linear infinite;
+            animation: lds-dual-ring 0.5s linear infinite;
+            width: 40px;
+            height: 40px;
+            border-color: #5897fb #00000000 #5897fb #00000000;
+        }
+        @keyframes lds-dual-ring { 0% { transform : rotate(0deg); } 100% { transform : rotate(360deg);}}
+        @-webkit-keyframes lds-dual-ring { 0% { transform : rotate(0deg); } 100% { transform : rotate(360deg);}}
+
+    </style>
 
     
     </head>
@@ -160,7 +193,8 @@
                     </style></defs><title>Asset 2</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M56,0H48.5V4.4a32.25,32.25,0,1,0,.65,55.32,6.93,6.93,0,0,0,6.29,4H64.5V8.45A8.45,8.45,0,0,0,56,0ZM32.25,54.93S16.33,41,16.33,32.25a15.92,15.92,0,0,1,31.83,0C48.17,41,32.25,54.93,32.25,54.93Z" /><circle class="cls-1" cx="32.25" cy="32.25" r="8.33" /></g></g></svg></symbol>
     </svg>
 </div>
-    <div class="preloader"></div>
+    <!-- <div class="preloader"></div> -->
+    <div class="preloader2" id="preloader-active" style=""><div class="preloader-loading"></div></div>
     <div class="page-wrapper">
 
         @include('admin.layout.header')
@@ -295,7 +329,7 @@
         return slug;
     }
      $(document).ready(function() {
-        $('.preloader').hide();
+        $('.preloader2').hide();
         var title = $('input[name="title"]').val();
         var url = $('input[name="url"]').val();
         var seo_description = $('textarea[name="seo_description"]').val();

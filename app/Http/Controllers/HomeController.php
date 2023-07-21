@@ -35,6 +35,8 @@ use App\Blog;
 use App\Service;
 use App\ServiceCate;
 use App\Product;
+use App\Properties;
+use App\PropertiesValue;
 use App\ProductCate;
 use App\ProductImage;
 use App\System;
@@ -531,7 +533,8 @@ class HomeController extends Controller
         else{
             $categories = ProductCate::where('lang','vi')->where('parent_id',null)->get();
         }
-        return view('admin.addProductCategorie',compact('categories','request'));
+        $properties = Properties::where('status',1)->with('propertie_values')->get();
+        return view('admin.addProductCategorie',compact('categories','request','properties'));
     }
     public function postAddProductCategorie(addProductCategorieRequest $request){
         $item = new ProductCate;
@@ -703,6 +706,56 @@ class HomeController extends Controller
 
     
     // end product
+    // properties
+
+    public function properties(Request $request){
+        $properties = Properties::orderBy('created_at','DESC')->with('propertie_values')->paginate(500);
+        // dd($properties);
+        return view('admin.properties',compact('properties','request'));
+    }
+    public function addProperties(){
+        return view('admin.addProperties');
+    }
+    public function postAddProperties(Request $request){
+        $pp = new Properties;
+        $pp->add($request);
+        return redirect()->route('properties')->with(['flash_level'=>'success','flash_message'=>'Thêm thuộc tính thành công']);
+    }
+    public function editProperties($id){
+        $pp = Properties::where('id',$id)->with('propertie_values')->get()->first();
+        return view('admin.editProperties',compact('pp'));
+    }
+    public function postEditProperties(Request $request, $id){
+        $pp = new Properties;
+        $pp->edit($request,$id);
+        return redirect()->back()->with(['flash_level'=>'success','flash_message'=>'Sửa thuộc tính thành công']);
+    }
+    public function deletePropertiesValue($id){
+        $item = PropertiesValue::where('id',$id)->get()->first();
+        $item->delete();
+        return redirect()->back()->with(['flash_level'=>'success','flash_message'=>'Xóa giá trị thuộc tính thành công']);
+    }
+
+    // public function deleteContact($id){
+    //     $item = Contact::where('id',$id)->get()->first();
+    //     $item->delete();
+    //     return redirect()->route('contacts')->with(['flash_level'=>'success','flash_message'=>'Xóa liên hệ thành công']); 
+    // }
+    // public function deleteContacts(Request $request){
+    //     if(isset($request->contacts_id)){
+    //         $str_ids = $request->contacts_id;
+    //         $ids = array();
+    //         $ids = explode(",",$str_ids);
+    //         $count = count($ids);
+    //         for($j=0;$j<$count;$j++){
+    //             $item = Contact::where('id',$ids[$j])->get()->first();
+    //             $item->delete();
+    //         }
+    //     }
+    //     return redirect()->route('contacts')->with(['flash_level'=>'success','flash_message'=>'Xóa liên hệ thành công']); 
+    // }
+
+    // end properties
     // system 
     public function editSystem(){
         if(Auth::user()->role == 1){

@@ -22,6 +22,7 @@ class CreateProductCatesTable extends Migration
             $table->longText('seo_description')->nullable();
             $table->string('seo_keyword')->nullable();
             $table->string('avata')->nullable();
+            $table->string('banner')->nullable();
             $table->string('lang')->nullable();
             $table->boolean('display');
             $table->timestamps();
