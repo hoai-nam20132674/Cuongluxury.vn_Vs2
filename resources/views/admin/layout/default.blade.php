@@ -36,6 +36,28 @@
     <script type="text/javascript" src="{{asset('auth/ckfinder/ckfinder.js')}}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style type="text/css">
+        .modal .modal-header .btn-close {
+          box-sizing: content-box;
+          width: 1em;
+          height: 1em;
+          padding: 1em;
+          color: #000;
+          background: transparent url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3E%3C/svg%3E") 50%/1em auto no-repeat;
+          border: 0;
+          border-radius: 0.25rem;
+          opacity: 0.5;
+          box-shadow: none !important;
+          filter: invert(1) grayscale(100%) brightness(200%);
+          margin: 0 10px;
+        }
+        .modal .modal-header .btn-close:hover {
+          color: #000;
+          text-decoration: none;
+          opacity: 0.75;
+        }
+        .modal{
+            z-index: 100000;
+        }
         
         .preloader2 {
             position: fixed;
@@ -297,6 +319,10 @@
         event.preventDefault();
         var url = $(this).attr('data-section');
         $(".confirm-delete").attr('href',url);
+    });
+    $(document).on('click', 'button[data-bs-dismiss="modal"]', function(event) {
+      event.preventDefault();
+      $(".modal").modal("hide");
     });
 </script>
 <script type="text/javascript">

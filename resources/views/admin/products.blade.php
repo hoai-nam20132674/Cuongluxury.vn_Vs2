@@ -87,7 +87,6 @@
 											<th  title="Tên" class="text-left column-key-name">Tên</th>
 											<th  title="Tên gian hàng" class="text-left column-key-name-shop">Người đăng</th>
 											<th  title="Categories" width="300px" class="no-sort column-key-updated_at">Danh mục</th>
-											<th title="Loại bất động sản" width="100px">Loại BĐS</th>
 											<th  title="Ngày tạo" width="100px" class=" column-key-created_at">Ngày tạo</th>
 											<th  title="Trạng thái" width="100px" class=" column-key-status">Trạng thái</th>
 											<th title="Ngôn ngữ" width="200px" class="text-center">
@@ -134,7 +133,6 @@
 															
 														@endforeach
 													</td>
-													<td>@if($product->lbds == 0) Đang bán @else Cho thuê @endif</td>
 													<td class="  column-key-created_at">{{$product->created_at}}</td>
 													@if($product->display ==1 )
 														<td class="  column-key-status"><span class="label-success status-label">Xuất bản</span></td>

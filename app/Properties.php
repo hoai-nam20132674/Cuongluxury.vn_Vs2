@@ -13,6 +13,12 @@ class Properties extends Model
     public function propertie_values(){
         return $this->hasMany('App\PropertiesValue');
     }
+    public function categories(){
+        return $this->belongsToMany('App\ProductCate','cate_properties','propertie_id','cate_id');
+    }
+    public function products(){
+        return $this->belongsToMany('App\Product','product_properties_variations','propertie_id','product_id');
+    }
     public function add($request){
         $this->name = $request->name;
         $this->status = $request->status;

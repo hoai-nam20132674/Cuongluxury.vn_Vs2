@@ -17,7 +17,7 @@ class CheckAdmin
     public function handle($request, Closure $next)
     {
         if (Auth::user()->role == 4 || Auth::user()->role == 3) {
-            return redirect()->route('index');
+            return redirect()->route('home');
         }
         return $next($request);
     }

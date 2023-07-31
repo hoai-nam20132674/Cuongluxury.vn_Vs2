@@ -28,16 +28,12 @@ class CreateProductsTable extends Migration
             $table->string('avata')->nullable();
             $table->bigInteger('price');
             $table->boolean('tiente')->nullable();
-            $table->integer('bed')->nullable();
-            $table->integer('bath')->nullable();
-            $table->integer('area')->nullable();
             $table->bigInteger('sale')->nullable();
             $table->string('lang')->nullable();
-            $table->string('da')->nullable();
             $table->string('ma')->nullable();
+            $table->boolean('stock')->nullable();
             $table->boolean('highlight')->nullable();
             $table->integer('view')->nullable();
-            $table->boolean('lbds')->nullable();
             $table->timestamps();
         });
     }

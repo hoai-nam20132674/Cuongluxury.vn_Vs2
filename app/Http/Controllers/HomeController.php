@@ -542,15 +542,15 @@ class HomeController extends Controller
         return redirect()->route('productCategories')->with(['flash_level'=>'success','flash_message'=>'Thêm danh mục sản phẩm thành công']); 
     }
     public function editProductCategorie($id){
-        $cate = ProductCate::where('id',$id)->get()->first();
+        $cate = ProductCate::where('id',$id)->with('properties')->get()->first();
         $categories = ProductCate::where('lang',$cate->lang)->where('parent_id',null)->get();
-        
+        $properties = Properties::with('propertie_values')->get();
         if($cate->parent_id != ''){
             $parent = ProductCate::where('id',$cate->parent_id)->get()->first();
-            return view('admin.editProductCategorie',['cate'=>$cate, 'categories'=>$categories,'parent'=>$parent]);
+            return view('admin.editProductCategorie',['cate'=>$cate, 'categories'=>$categories,'parent'=>$parent,'properties'=>$properties]);
         }
         else{
-            return view('admin.editProductCategorie',['cate'=>$cate, 'categories'=>$categories]);
+            return view('admin.editProductCategorie',['cate'=>$cate, 'categories'=>$categories,'properties'=>$properties]);
         }
         
     }
@@ -603,9 +603,9 @@ class HomeController extends Controller
         else{
             $categories = ProductCate::where('lang','vi')->where('parent_id',null)->get();
         }
-        
+        $properties = Properties::with('propertie_values')->get();
         $users = User::where('role',3)->get();
-        return view('admin.addProduct',compact('categories','users','request'));
+        return view('admin.addProduct',compact('categories','users','request','properties'));
     }
     public function postAddProduct(addProductRequest $request){
         $item = new Product;
@@ -620,10 +620,10 @@ class HomeController extends Controller
     }
     public function editProduct($id){
         
-        $product = Product::where('id',$id)->with('user','images')->get()->first();
+        $product = Product::where('id',$id)->with('user','images','properties_value_filter')->get()->first();
         $categories = ProductCate::where('lang',$product->lang)->where('parent_id',null)->get();
-        
-        return view('admin.editProduct',compact('categories','product'));
+        $properties = Properties::with('propertie_values')->get();
+        return view('admin.editProduct',compact('categories','product','properties'));
         
     }
     public function postEditProduct(editProductRequest $request, $id){

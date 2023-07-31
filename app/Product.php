@@ -10,6 +10,8 @@ use App\User;
 use Carbon\Carbon;
 use App\Notification;
 use App\ProductLang;
+use App\ProductPropertiesVariation;
+use App\ProductPropertiesValueFilter;
 use Image;
 use Validator;
 use Illuminate\Support\Str;
@@ -22,6 +24,12 @@ class Product extends Model
     public function categories(){
         return $this->belongsToMany('App\ProductCate','pcids','product_id','cate_id');
     }
+    public function properties_value_filter(){
+        return $this->belongsToMany('App\PropertiesValue','product_properties_value_filters','product_id','propertie_value_id');
+    }
+    public function properties(){
+        return $this->belongsToMany('App\Properties','product_properties_variations','product_id','propertie_id');
+    }
     public function user(){
         return $this->belongsTo('App\User');
     }
@@ -30,6 +38,9 @@ class Product extends Model
     }
     public function langs(){
         return $this->hasMany('App\ProductLang');
+    }
+    public function products_variation(){
+        return $this->hasMany('App\ProductVariations');
     }
     public function add($request){
     	$this->name = $request->name;
@@ -46,13 +57,9 @@ class Product extends Model
     	$this->content = $request->content;
     	$this->display = $request->display;
         $this->ma = $request->ma;
-        $this->da = $request->da;
-        $this->lbds = $request->lbds;
         $this->short_description = $request->short_description;
         $this->highlight = $request->highlight;
         $this->tiente = $request->tiente;
-        $this->nt = $request->nt;
-        $this->huong = $request->huong;
         $this->price = preg_replace( '/\D/', '', $request->price);
         if(isset($request->sale)){
             $this->sale = preg_replace( '/\D/', '', $request->sale);
@@ -64,9 +71,6 @@ class Product extends Model
             $this->lang='vi';
         }
         $this->view = rand(150,500);
-    	$this->bed = $request->bed;
-        $this->bath = $request->bath;
-        $this->area = $request->area;
     	$this->save();
         $url = $request->url.'-pi'.$this->id;
         $this->url = $url;
@@ -92,6 +96,26 @@ class Product extends Model
                 $pcid->product_id = $this->id;
                 $pcid->cate_id = $categories[$j];
                 $pcid->save();
+            }
+        }
+        $properties_filter = $request->properties_filter;
+        if(isset($properties_filter)){
+            $count = count($properties_filter);
+            for($j=0;$j<$count;$j++){
+                $item = new ProductPropertiesValueFilter;
+                $item->product_id = $this->id;
+                $item->propertie_value_id = $properties_filter[$j];
+                $item->save();
+            }
+        }
+        $properties_variation = $request->properties_variation;
+        if(isset($properties_variation)){
+            $count = count($properties_variation);
+            for($j=0;$j<$count;$j++){
+                $item = new ProductPropertiesVariation;
+                $item->product_id = $this->id;
+                $item->propertie_id = $properties_variation[$j];
+                $item->save();
             }
         }
         if($request->product_id == null){
@@ -187,17 +211,10 @@ class Product extends Model
         $product->content = $request->content;
         $product->display = $request->display;
         $product->ma = $request->ma;
-        $product->da = $request->da;
-        $product->lbds = $request->lbds;
         $product->highlight = $request->highlight;
         $product->view = $request->view;
         $product->lang=$request->lang;
-        $product->bed = $request->bed;
-        $product->bath = $request->bath;
-        $product->area = $request->area;
         $product->tiente = $request->tiente;
-        $product->nt = $request->nt;
-        $product->huong = $request->huong;
         $product->short_description = $request->short_description;
         $product->price =  preg_replace( '/\D/', '', $request->price);
         if(isset($request->sale)){

@@ -15,6 +15,11 @@
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/admin/slug.css')}}">
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/admin/seo-helper.css')}}">
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/admin/upload-image.css')}}">
+    <style type="text/css">
+        .ml-30 {
+            margin-left: 30px !important;
+        }
+    </style>
 @endsection
 @section('content')
 	<div class="page-content ">
@@ -248,7 +253,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div><strong>Bản dịch</strong>
+                                <!-- <div><strong>Bản dịch</strong>
                                     @if($cate->lang == 'vi')
                                         @php
                                             $ko = $cate->langs()->where('lang','ko')->first();
@@ -324,43 +329,113 @@
                                         </div>
                                     @endif
                                     
-                                </div>
+                                </div> -->
                             
 
                             </div>
                         </div>
                     </div>
-                    <div class="widget meta-boxes">
-                        <div class="widget-title">
-                            <h4><label for="image" class="control-label">Avata</label></h4>
-                        </div>
-                        <div class="widget-body">
-                            <div class="image-box" style="border: 1px solid #e2e2e2;">
-                                <div class="file-upload">   
-                                    <div class="file-upload-content file-upload-content100" style="position: relative;">
-                                        <img width="100%" class="file-upload-image file-upload-image100" src="{{asset('uploads/images/products/categories/'.$cate->avata)}}" alt="your image" />
-                                        <div class="image-title-wrap image-title-wrap100" style="position: absolute;top: 0px; right: 0px;">
-                                            <button type="button" onclick="removeUploadTest(100)" class="remove-image">Ảnh đại diện</button>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="widget meta-boxes">
+                                <div class="widget-title">
+                                    <h4><label for="image" class="control-label">Ảnh đại diện</label></h4>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="image-box" style="border: 1px solid #e2e2e2;">
+                                        <div class="file-upload">   
+                                            <div class="file-upload-content file-upload-content100" style="position: relative;">
+                                                <img width="100%" class="file-upload-image file-upload-image100" src="{{asset('uploads/images/products/categories/'.$cate->avata)}}" alt="your image" />
+                                                <!-- <div class="image-title-wrap image-title-wrap100" style="position: absolute;top: 0px; right: 0px;">
+                                                    <button type="button" onclick="removeUploadTest(100)" class="remove-image">Ảnh đại diện</button>
+                                                </div> -->
+                                                <input style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input100" type='file' name="avata" onchange="readURLTest(this,100);" accept="image/*" />
+                                            </div>
                                         </div>
-                                        <input style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input100" type='file' name="avata" onchange="readURLTest(this,100);" accept="image/*" />
+            
                                     </div>
                                 </div>
-    
                             </div>
-
-    
-
-
+                        </div>
+                        <div class="col-md-6">
+                            <div class="widget meta-boxes">
+                                <div class="widget-title">
+                                    <h4><label for="image" class="control-label">Ảnh bìa</label></h4>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="image-box" style="border: 1px solid #e2e2e2;">
+                                        <div class="file-upload">   
+                                            <div class="file-upload-content file-upload-content99" style="position: relative;">
+                                                <img width="100%" class="file-upload-image file-upload-image99" src="{{asset('uploads/images/products/categories/'.$cate->banner)}}" alt="your image" />
+                                                <!-- <div class="image-title-wrap image-title-wrap99" style="position: absolute;top: 0px; right: 0px;">
+                                                    <button type="button" onclick="removeUploadTest(99)" class="remove-image">Ảnh bìa</button>
+                                                </div> -->
+                                                <input style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input99" type='file' name="banner" onchange="readURLTest(this,99);" accept="image/*" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                            
-                    </div>
-    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="widget meta-boxes">
+                                <div class="widget-title">
+                                    <h4><label for="categories[]" class="control-label required" aria-required="true">Thuộc tính</label></h4>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="form-group form-group-no-margin ">
+                                        <div class="multi-choices-widget list-item-checkbox mCustomScrollbar _mCS_1 mCS-autoHide mCS_no_scrollbar" style="position: relative; overflow: visible; padding: 0px;">
+                                            <div id="mCSB_1" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical_horizontal mCSB_outside" tabindex="0" style="max-height: 320px; overflow-y: auto;">
+                                                <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y mCS_x_hidden mCS_no_scrollbar_x" style="position: relative; top: 0px; left: 0px; width: 343.5px;" dir="ltr">
+                                                    <ul>
+                                                        @php
+                                                            $cate_properties = $cate->properties;
+                                                            $array = App\Http\Controllers\Controller::arrayColumn($cate_properties,'id');
+                                                        @endphp
+                                                        @foreach($properties as $pp)
+                                                            <li value="{{$pp->id}}">
+                                                                <label>
+                                                                    @if(in_array($pp->id,$array))
+                                                                        <input type="checkbox" checked value="{{$pp->id}}" name="properties[]">
+                                                                    {{__($pp->name)}}
+                                                                    @else
+                                                                        <input type="checkbox" value="{{$pp->id}}" name="properties[]">
+                                                                    {{__($pp->name)}}
+                                                                    @endif
+                                                                    
+                                                                </label>
+                                                            </li>
+                                                            @php
+                                                                $values = $pp->propertie_values;
+                                                            @endphp
+                                                            @foreach($values as $value)
+                                                                <li value="{{$value->id}}" class="ml-30">
+                                                                    <label>
+                                                                        <i class="bx bx-subdirectory-right"></i>
+                                                                        {{__($value->value)}}
+                                                                    </label>
+                                                                </li>
+                                                            @endforeach
+                                                        @endforeach
+                                                       
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
 
-            </form>
-    
+                                </div>
+                            </div>
                         </div>
+                    </div>           
                 </div>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection
 @section('js')
 	<script src="{{asset('js/admin/respond.min.js')}}"></script>
