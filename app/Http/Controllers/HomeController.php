@@ -37,6 +37,9 @@ use App\ServiceCate;
 use App\Product;
 use App\Properties;
 use App\PropertiesValue;
+use App\ProductPropertiesVariation;
+use App\ProductVariations;
+use App\ProductVariationsPropertiesValue;
 use App\ProductCate;
 use App\ProductImage;
 use App\System;
@@ -56,6 +59,7 @@ use App\Imports\UsersImport;
 use App\Imports\UserImport;
 use Maatwebsite\Excel\HeadingRowImport;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -624,6 +628,55 @@ class HomeController extends Controller
         $categories = ProductCate::where('lang',$product->lang)->where('parent_id',null)->get();
         $properties = Properties::with('propertie_values')->get();
         return view('admin.editProduct',compact('categories','product','properties'));
+        
+    }
+    public function postEditProductPropertiesVariation(Request $request,$id){
+        $properties_variation = $request->properties_variation;
+        if(isset($properties_variation)){
+            $itemDeletes = ProductPropertiesVariation::where('product_id',$id)->whereNotIn('propertie_id',$properties_variation)->get();
+            foreach($itemDeletes as $itemDelete){
+                $itemDelete->delete();
+            }
+            $count = count($properties_variation);
+            for($j=0;$j<$count;$j++){
+                $item = ProductPropertiesVariation::where('propertie_id',$properties_variation[$j])->where('product_id',$id)->get();
+                if(count($item)==0){
+                    $a = new ProductPropertiesVariation;
+                    $a->product_id = $id;
+                    $a->propertie_id = $properties_variation[$j];
+                    $a->save();
+                }
+                
+            }
+        }
+        return redirect()->route('editProduct',$id)->with(['flash_level'=>'success','flash_message'=>'Sửa thuộc tính thành công hãy tạo phiên bản sản phẩm mới với thuộc tính đã được cập nhật']);
+    }
+    public function postAddProductVariation(Request $request,$id){
+        $productVariation = new ProductVariations;
+        $productVariation->product_id = $id;
+        $productVariation->sku = $request->product_variation_ma;
+        if(isset($request->product_variation_price)){
+            $productVariation->price = preg_replace( '/\D/', '',$request->product_variation_price);
+        }
+        if(isset($request->product_variation_sale)){
+            $productVariation->sale = preg_replace( '/\D/', '',$request->product_variation_sale);
+        }
+        $productVariation->tiente = $request->product_variation_tiente;
+        $productVariation->stock = $request->product_variation_stock;
+        $productVariation->save();
+        $product_variation_properties_value = $request->product_variation_properties_value;
+        if(isset($product_variation_properties_value)){
+            $count = count($product_variation_properties_value);
+            for($j=0;$j<$count;$j++){
+                if($product_variation_properties_value[$j]){
+                    $item = new ProductVariationsPropertiesValue;
+                    $item->pro_var_id = $productVariation->id;
+                    $item->propertie_value_id = $product_variation_properties_value[$j];
+                    $item->save();
+                }
+            }
+        }
+        return redirect()->route('editProduct',$id)->with(['flash_level'=>'success','flash_message'=>'Thêm phiên bản sản phẩm thành công']);
         
     }
     public function postEditProduct(editProductRequest $request, $id){

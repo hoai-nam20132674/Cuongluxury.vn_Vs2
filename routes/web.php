@@ -107,7 +107,9 @@ Route::get('admin/product/categorie/delete/{id}', 'HomeController@deleteProductC
 Route::get('admin/product/categorie/deleteProductCategories', 'HomeController@deleteProductCategories')->name('deleteProductCategories');
 Route::get('admin/product/image/delete/{id}', 'HomeController@deleteProductImage')->name('deleteProductImage');
 Route::get('admin/product/checkMa/{ma}', 'HomeController@checkProductMa')->name('checkProductMa');
-// Route::get('admin/product/image/delete/{id}', 'HomeController@deleteProductImage')->name('deleteProductImage');
+Route::post('admin/product/postEditProductPropertiesVariation/{id}', 'HomeController@postEditProductPropertiesVariation')->name('postEditProductPropertiesVariation');
+Route::post('admin/product/postAddProductVariation/{id}', 'HomeController@postAddProductVariation')->name('postAddProductVariation');
+Route::post('admin/product/postEditProductVariation/{id}', 'HomeController@postEditProductVariation')->name('postEditProductVariation');
 // end product route
 
 // system 

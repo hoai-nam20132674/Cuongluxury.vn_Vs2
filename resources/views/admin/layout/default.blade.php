@@ -56,7 +56,7 @@
           opacity: 0.75;
         }
         .modal{
-            z-index: 100000;
+/*            z-index: 100000;*/
         }
         
         .preloader2 {

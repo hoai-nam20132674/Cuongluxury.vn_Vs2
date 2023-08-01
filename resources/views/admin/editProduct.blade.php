@@ -300,47 +300,69 @@
                                         <table class="table table-striped table-hover vertical-middle table-hover-variants" id="botble-ecommerce-tables-product-variation-table-24">
                                             <thead>
                                                 <tr>
-                                                    <th title="ID" width="20px">ID</th>
-                                                    <th title="Thumbnail" width="100px" class="text-center">Thumbnail</th>
-                                                    <th title="Color" class="text-start" width="90">Color</th>
-                                                    <th title="Size" class="text-start" width="90">Size</th>
-                                                    <th title="Price" width="20px">Price</th>
-                                                    <th title="Is default" width="100px" class="text-center">Is default</th>
+                                                    <th title="ID" width="" class="text-center">STT</th>
+                                                    <th title="ID" width="">SKU</th>
+                                                    @foreach($product->properties as $item)
+                                                    <th title="{{$item->name}}" class="text-start" width="90">{{$item->name}}</th>
+                                                    @endforeach
+                                                    <th title="Giá" width="">Giá</th>
+                                                    <th title="Giá" width="">Sale</th>
+                                                    <th title="Giá" width="">Tình trạng</th>
+                                                    <th title="Is default" width="" class="text-center">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr role="row" class="odd">
-                                                    <td class="sorting_1">64</td>
-                                                    <td class=" text-center"><img src="https://wowy.botble.com/storage/products/24-1-150x150.jpg" width="70" alt="Image">
-                                                    </td>
-                                                    <td class=" text-start">Black</td>
-                                                    <td class=" text-start">L</td>
-                                                    <td>
-                                                        <div>$93.48</div><del class="text-danger small">$123.00</del>
-                                                    </td>
-                                                    <td class=" text-center">
-                                                        <label>
-                                                            <input data-url="https://wowy.botble.com/admin/ecommerce/products/set-default-product-variation/64" data-bs-toggle="tooltip" title="" name="variation_default_id" type="radio" value="64" data-bs-original-title="Set this variant as default"
-                                                            aria-label="Set this variant as default">
-                                                        </label>
-                                                    </td>
-                                                </tr>
-                                                <tr role="row" class="even">
-                                                    <td class="sorting_1">63</td>
-                                                    <td class=" text-center"><img src="https://wowy.botble.com/storage/products/24-150x150.jpg" width="70" alt="Image">
-                                                    </td>
-                                                    <td class=" text-start">Brown</td>
-                                                    <td class=" text-start">S</td>
-                                                    <td>
-                                                        <div>$107.01</div><del class="text-danger small">$123.00</del>
-                                                    </td>
-                                                    <td class=" text-center">
-                                                        <label>
-                                                            <input data-url="https://wowy.botble.com/admin/ecommerce/products/set-default-product-variation/63" data-bs-toggle="tooltip" title="" checked="checked" name="variation_default_id" type="radio" value="63" data-bs-original-title="Set this variant as default"
-                                                            aria-label="Set this variant as default">
-                                                        </label>
-                                                    </td>
-                                                </tr>
+                                                @php
+                                                    $i=0;
+                                                    $products_variation = $product->products_variation;
+                                                @endphp
+                                                @foreach($products_variation as $product_variation)
+                                                    <tr role="row" class="odd">
+                                                        <td class="sorting_1 text-center">{{++$i}}</td>
+                                                        <td class="sorting_1">{{$product_variation->sku}}</td>
+                                                        @php
+                                                            $properties_value = $product_variation->properties_value;
+                                                        @endphp
+
+                                                        @foreach($product->properties as $item)
+                                                            @php
+                                                                $tg = 0;
+                                                            @endphp
+                                                            @foreach($properties_value as $propertie_value)
+                                                                @if($item->id == $propertie_value->properties_id)
+                                                                    <td class=" text-start">{{$propertie_value->value}}</td>
+                                                                    @php
+                                                                        $tg = 1;
+                                                                    @endphp
+                                                                @else
+                                                                @endif
+                                                            @endforeach
+                                                            @if($tg == 0)
+                                                                <td class=" text-start">--Rỗng--</td>
+                                                            @endif
+                                                        @endforeach
+
+                                                        <td class=" text-start">{!!number_format($product_variation->price)!!}</td>
+                                                        <td>
+                                                            <div>{!!number_format($product_variation->sale)!!}</div><del class="text-danger small">{!!number_format($product_variation->price)!!}</del>
+                                                        </td>
+                                                        <td class=" text-start">@if($product_variation->stock)Còn hàng @else Hết hàng @endif</td>
+                                                        <td class=" text-center">
+                                                            <div class="table-actions">
+
+                                                                <a href="javascript:void(0)" variation_id="{{$product_variation->id}}" onclick="openEditProductVariationModal(this,{{$product_variation->id}});" style="font-size:10px" class="btn-edit-product-variation btn btn-icon btn-sm btn-primary" data-toggle="tooltip" data-original-title="Sửa">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </a>
+                                                    
+                                                                <a href="#" style="font-size:10px" class="btn btn-icon btn-sm btn-danger deleteDialog delete" data-toggle="tooltip" data-section="{{URL::route('deleteProduct',$product->id)}}" role="button" data-original-title="Xóa bản ghi">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                
+                                                
                                             </tbody>
                                         </table>
                                     </div>
@@ -348,191 +370,8 @@
                                 <br>
                                 
                             </div>
-                            <div id="select-attribute-sets-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="select-attribute-sets-modal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-info">
-                                            <h4 class="modal-title">
-                                <strong>Chọn thuộc tính tạo biến thể sản phẩm</strong>
-                                </h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                                        </div>
-                                        <div class="modal-body with-padding">
-                                            @php
-                                                $p = $product->properties;
-                                                $array = App\Http\Controllers\Controller::arrayColumn($p,'id');
-                                            @endphp
-                                            @foreach($properties as $propertie)
-                                                @if(in_array($propertie->id,$array))
-                                                <label>
-                                                    <input type="checkbox" class="attribute-set-item" name="properties_variation[]" value="{{$propertie->id}}" checked>{{$propertie->name}}
-                                                </label> &nbsp;
-                                                @else
-                                                <label>
-                                                    <input type="checkbox" class="attribute-set-item" name="properties_variation[]" value="{{$propertie->id}}">{{$propertie->name}}
-                                                </label> &nbsp;
-                                                @endif
-                                            @endforeach
-                                            <div class="alert alert-warning mt-3">
-                                                <span>Thao tác này sẽ tải lại trang để cập nhật dữ liệu!</span>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="float-start btn btn-warning" data-bs-dismiss="modal">Hủy bỏ</button>
-                                            <button type="submit" class="float-end btn btn-info " id="store-related-attributes-button">Lưu chỉnh sửa</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="add-new-product-variation-modal" class="modal fade show" tabindex="-1" aria-labelledby="add-new-product-variation-modal" data-backdrop="static" data-keyboard="false" aria-modal="true" role="dialog">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-info">
-                                            <h4 class="modal-title"><strong>Tạo phiên bản sản phẩm mới</strong></h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
-                                        </div>
-                                        <div class="modal-body with-padding">
-                                            <div class="half-circle-spinner loading-spinner" style="display: none;">
-                                                <div class="circle circle-1"></div>
-                                                <div class="circle circle-2"></div>
-                                            </div>
-
-
-
-                                            <div class="variation-form-wrapper">
-                                                <form action="">
-                                                    <div class="row">
-                                                        @foreach($product->properties as $item)
-                                                        <div class="col-md-4 col-sm-6">
-                                                            <div class="form-group mb-3">
-                                                                <label for="attribute-color" class="text-title-field required">{{$item->name}}</label>
-                                                                <div class="ui-select-wrapper form-group ">
-                                                                    <select id="attribute-color" class="select2-attributes select-search-full ui-select select2-hidden-accessible" data-id="1" name="attribute_sets[1]" tabindex="-1" aria-hidden="true" data-select2-id="select2-data-attribute-color">
-                                                                        <!-- <option value="" selected="selected" data-select2-id="select2-data-82-eyzy">-- Select --</option> -->
-                                                                        @foreach($item->propertie_values as $value)
-                                                                        <option value="{{$value->id}}">{{$value->value}}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                        <svg class="svg-next-icon svg-next-icon-size-16">
-                                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                                                                <path d="M10 16l-4-4h8l-4 4zm0-12L6 8h8l-4-4z"></path>
-                                                                            </svg>
-                                                                        </svg>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                        @endforeach
-                                                    </div>
-                                                    <hr>
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="form-group"  >
-                                
-                                                                <label for="ma" class="control-label required">Mã sản phẩm</label>
-                                                                @if(isset($request->product_id))
-                                                                    <input class="form-control" placeholder="nhập mã" value="{{$pr->ma}}" name="ma_variation" type="text" required id="ma_variation">
-                                                                @else
-                                                                    <input class="form-control" placeholder="nhập mã" onchange="checkMa()" value="{{old('ma_variation')}}" name="ma_variation" type="text" required id="ma_variation">
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group"  >
-                                
-                                                                <label for="ma" class="control-label required">Giá</label>
-                                                                @if(isset($request->product_id))
-                                                                    <input class="form-control" placeholder="giá sản phẩm" value="{{$pr->price}}" oninput="replaceValue(this.name);" name="price_variation" type="text" required id="price_variation">
-                                                                @else
-                                                                    <input class="form-control" placeholder="giá sản phẩm" oninput="replaceValue(this.name);" value="{{old('price_variation')}}" name="price_variation" type="text" required id="price_variation">
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group"  >
-                                
-                                                                <label for="ma" class="control-label">Giá sale</label>
-                                                                @if(isset($request->product_id))
-                                                                    <input class="form-control" placeholder="giá sale" value="{{$pr->sale}}" oninput="replaceValue(this.name);" name="sale_variation" type="text" required id="sale_variation">
-                                                                @else
-                                                                    <input class="form-control" placeholder="giá sale" oninput="replaceValue(this.name);" value="{{old('sale_variation')}}" name="sale_variation" type="text" required id="sale_variation">
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="form-group"  >
-                                
-                                                                <label for="ma" class="control-label required">Tiền tệ</label>
-                                                                <div class="ui-select-wrapper">
-                                                                    <select class="form-control ui-select ui-select" id="tiente_variation" name="tiente_variation">
-                                                                        
-                                                                        <option value="0">VNĐ</option>
-                                                                        <option value="1">$$$</option>
-                                                                    </select>
-                                                                    <svg class="svg-next-icon svg-next-icon-size-16">
-                                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
-                                                                    </svg>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <div class="form-group"  >
-                                
-                                                                <label for="ma" class="control-label required">Trạng thái</label>
-                                                                <div class="ui-select-wrapper">
-                                                                    <select class="form-control ui-select ui-select" id="stock_variation" name="stock_variation">
-                                                                        
-                                                                        <option value="1">Còn hàng</option>
-                                                                        <option value="0">Hết hàng</option>
-                                                                    </select>
-                                                                    <svg class="svg-next-icon svg-next-icon-size-16">
-                                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
-                                                                    </svg>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </form>
-
-                                                <script id="gallery_select_image_template" type="text/x-custom-template">
-                                                    <div class="list-photo-hover-overlay">
-                                                        <ul class="photo-overlay-actions">
-                                                            <li>
-                                                                <a class="mr10 btn-trigger-edit-gallery-image" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Change image">
-                                                                    <i class="fa fa-edit"></i>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a class="mr10 btn-trigger-remove-gallery-image" data-bs-toggle="tooltip" data-placement="bottom" data-bs-original-title="Delete image">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="custom-image-box image-box">
-                                                        <input type="hidden" name="__name__" class="image-data">
-                                                        <img src="https://wowy.botble.com/vendor/core/core/base/images/placeholder.png" alt="Preview image" class="preview_image">
-                                                        <div class="image-box-actions">
-                                                            <a class="btn-images" data-result="images[]" data-action="select-image">
-                                                    Choose image
-                                                </a> |
-                                                            <a class="btn_remove_image">
-                                                                <span></span>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </script>
-
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="float-start btn btn-warning" data-bs-dismiss="modal" fdprocessedid="lkwys">Hủy bỏ</button>
-                                            <button type="submit" class="float-end btn btn-info " id="store-product-variation-button" fdprocessedid="g6wv3d">Lưu thay đổi</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -994,6 +833,305 @@
             </div>
 
         </form>
+        <div id="select-attribute-sets-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="select-attribute-sets-modal" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <form id="postEditProductPropertiesVariation" method="post" action="{{URL::route('postEditProductPropertiesVariation',$product->id)}}" enctype="multipart/form-data" >
+                    @csrf
+                    <input type="text" class="hidden" name="product_id" value="{{$product->id}}">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h4 class="modal-title">
+                <strong>Chọn thuộc tính tạo biến thể sản phẩm</strong>
+                </h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                        </div>
+                        <div class="modal-body with-padding">
+                            @php
+                                $p = $product->properties;
+                                $array = App\Http\Controllers\Controller::arrayColumn($p,'id');
+                            @endphp
+                            @foreach($properties as $propertie)
+                                @if(in_array($propertie->id,$array))
+                                <label>
+                                    <input type="checkbox" class="attribute-set-item" name="properties_variation[]" value="{{$propertie->id}}" checked>{{$propertie->name}}
+                                </label> &nbsp;
+                                @else
+                                <label>
+                                    <input type="checkbox" class="attribute-set-item" name="properties_variation[]" value="{{$propertie->id}}">{{$propertie->name}}
+                                </label> &nbsp;
+                                @endif
+                            @endforeach
+                            <div class="alert alert-warning mt-3">
+                                <span>Thao tác này sẽ tải lại trang để cập nhật dữ liệu!</span>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="float-start btn btn-warning" data-bs-dismiss="modal">Hủy bỏ</button>
+                            <button type="submit" class="float-end btn btn-info ">Lưu chỉnh sửa</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="add-new-product-variation-modal" class="modal fade show" tabindex="-1" aria-labelledby="add-new-product-variation-modal" data-backdrop="static" data-keyboard="false" aria-modal="true" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <form id="postAddProductVariation" method="post" action="{{URL::route('postAddProductVariation',$product->id)}}" enctype="multipart/form-data" >
+                    @csrf
+                    <div class="modal-content">
+                        <div class="modal-header bg-info">
+                            <h4 class="modal-title"><strong>Tạo phiên bản sản phẩm mới</strong></h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                        </div>
+                        <div class="modal-body with-padding">
+                            <div class="half-circle-spinner loading-spinner" style="display: none;">
+                                <div class="circle circle-1"></div>
+                                <div class="circle circle-2"></div>
+                            </div>
+                            <div class="variation-form-wrapper">
+                                <form action="">
+                                    <div class="row">
+                                        @foreach($product->properties as $item)
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="form-group mb-3">
+                                                <label for="attribute-color" class="text-title-field required">{{$item->name}}</label>
+                                                <div class="ui-select-wrapper form-group ">
+                                                    <select id="attribute-color" class="select2-attributes select-search-full ui-select select2-hidden-accessible" data-id="1" name="product_variation_properties_value[]" tabindex="-1" aria-hidden="true" data-select2-id="select2-data-attribute-color">
+                                                        <option value="" selected="selected" data-select2-id="select2-data-82-eyzy">-- Chọn thuộc tính --</option>
+                                                        @foreach($item->propertie_values as $value)
+                                                        <option value="{{$value->id}}">{{$value->value}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                        <svg class="svg-next-icon svg-next-icon-size-16">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                                <path d="M10 16l-4-4h8l-4 4zm0-12L6 8h8l-4-4z"></path>
+                                                            </svg>
+                                                        </svg>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group"  >
+                
+                                                <label for="ma" class="control-label required">Mã sản phẩm</label>
+                                                @if(isset($request->product_id))
+                                                    <input class="form-control" placeholder="nhập mã" value="{{$pr->ma}}" name="product_variation_ma" type="text" required id="product_variation_ma">
+                                                @else
+                                                    <input class="form-control" placeholder="nhập mã" onchange="checkMa()" value="{{old('product_variation_ma')}}" name="product_variation_ma" type="text" required id="product_variation_ma">
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group"  >
+                
+                                                <label for="ma" class="control-label required">Giá</label>
+                                                @if(isset($request->product_id))
+                                                    <input class="form-control" placeholder="giá sản phẩm" value="{{$pr->price}}" oninput="replaceValue(this.name);" name="product_variation_price" type="text" required id="product_variation_price">
+                                                @else
+                                                    <input class="form-control" placeholder="giá sản phẩm" oninput="replaceValue(this.name);" value="{{old('product_variation_price')}}" name="product_variation_price" type="text" required id="product_variation_price">
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group"  >
+                
+                                                <label for="ma" class="control-label">Giá sale</label>
+                                                @if(isset($request->product_id))
+                                                    <input class="form-control" placeholder="giá sale" value="{{$pr->sale}}" oninput="replaceValue(this.name);" name="product_variation_sale" type="text" required id="product_variation_sale">
+                                                @else
+                                                    <input class="form-control" placeholder="giá sale" oninput="replaceValue(this.name);" value="{{old('product_variation_sale')}}" name="product_variation_sale" type="text" required id="product_variation_sale">
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group"  >
+                
+                                                <label for="ma" class="control-label required">Tiền tệ</label>
+                                                <div class="ui-select-wrapper">
+                                                    <select class="form-control ui-select ui-select" id="product_variation_tiente" name="product_variation_tiente">
+                                                        
+                                                        <option value="0">VNĐ</option>
+                                                        <option value="1">$$$</option>
+                                                    </select>
+                                                    <svg class="svg-next-icon svg-next-icon-size-16">
+                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group"  >
+                
+                                                <label for="ma" class="control-label required">Trạng thái</label>
+                                                <div class="ui-select-wrapper">
+                                                    <select class="form-control ui-select ui-select" id="product_variation_stock" name="product_variation_stock">
+                                                        
+                                                        <option value="1">Còn hàng</option>
+                                                        <option value="0">Hết hàng</option>
+                                                    </select>
+                                                    <svg class="svg-next-icon svg-next-icon-size-16">
+                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="float-start btn btn-warning" data-bs-dismiss="modal" fdprocessedid="lkwys">Hủy bỏ</button>
+                            <button type="submit" class="float-end btn btn-info " id="store-product-variation-button" fdprocessedid="g6wv3d">Thêm mới</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        @foreach($products_variation as $product_variation)
+            <div id="edit-product-variation-modal" variation_id="{{$product_variation->id}}" class="modal fade show" tabindex="-1" aria-labelledby="edit-product-variation-modal" data-backdrop="static" data-keyboard="false" aria-modal="true" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <form id="postEditProductVariation" method="post" action="{{URL::route('postEditProductVariation',$product_variation->id)}}" enctype="multipart/form-data" >
+                        @csrf
+                        <div class="modal-content">
+                            <div class="modal-header bg-info">
+                                <h4 class="modal-title"><strong>Sửa phiên bản sản phẩm</strong></h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                            </div>
+                            <div class="modal-body with-padding">
+                                <div class="half-circle-spinner loading-spinner" style="display: none;">
+                                    <div class="circle circle-1"></div>
+                                    <div class="circle circle-2"></div>
+                                </div>
+                                <div class="variation-form-wrapper">
+                                    <form action="">
+                                        <div class="row">
+                                            @php
+                                                $properties_value = $product_variation->properties_value;
+                                                $array = App\Http\Controllers\Controller::arrayColumn($properties_value,'id');
+                                            @endphp
+                                            @foreach($product->properties as $item)
+
+                                            <div class="col-md-4 col-sm-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="attribute-color" class="text-title-field required">{{$item->name}}</label>
+                                                    <div class="ui-select-wrapper form-group ">
+                                                        <select id="attribute-color" class="select2-attributes select-search-full ui-select select2-hidden-accessible" data-id="1" name="product_variation_properties_value[]" tabindex="-1" aria-hidden="true" data-select2-id="select2-data-attribute-color">
+
+                                                            
+                                                            @php
+                                                                $i=0;
+                                                            @endphp
+                                                            @foreach($item->propertie_values as $value)
+                                                                @if(in_array($value->id,$array))
+                                                                    <option selected value="{{$value->id}}">{{$value->value}}</option>
+                                                                    @php
+                                                                        $i=1;
+                                                                    @endphp
+                                                                @else
+                                                                    <option value="{{$value->id}}">{{$value->value}}</option>
+                                                                @endif
+                                                            @endforeach
+                                                            @if($i == 0)
+                                                                <option value="" selected="selected" data-select2-id="select2-data-82-eyzy">-- Chọn thuộc tính --</option>
+                                                            @endif
+                                                        </select>
+                                                            <svg class="svg-next-icon svg-next-icon-size-16">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                                    <path d="M10 16l-4-4h8l-4 4zm0-12L6 8h8l-4-4z"></path>
+                                                                </svg>
+                                                            </svg>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group"  >
+                    
+                                                    <label for="ma" class="control-label required">Mã sản phẩm</label>
+                                                    <input class="form-control" placeholder="nhập mã" onchange="checkMa()" value="{{$product_variation->sku}}" name="product_variation_ma" type="text" required id="product_variation_ma">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group"  >
+                    
+                                                    <label for="ma" class="control-label required">Giá</label>
+                                                    <input class="form-control" placeholder="giá sản phẩm" oninput="replaceValue(this.name);" value="{!!number_format($product_variation->price)!!}" name="product_variation_price" type="text" required id="product_variation_price">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group"  >
+                    
+                                                    <label for="ma" class="control-label">Giá sale</label>
+                                                    <input class="form-control" placeholder="giá sale" oninput="replaceValue(this.name);" value="{!!number_format($product_variation->sale)!!}" name="product_variation_sale" type="text" required id="product_variation_sale">
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group"  >
+                    
+                                                    <label for="ma" class="control-label required">Tiền tệ</label>
+                                                    <div class="ui-select-wrapper">
+                                                        <select class="form-control ui-select ui-select" id="product_variation_tiente" name="product_variation_tiente">
+                                                            @if($product_variation->tiente)
+                                                                <option value="0">VNĐ</option>
+                                                                <option value="1" selected>$$$</option>
+                                                            @else
+                                                                <option value="0" selected>VNĐ</option>
+                                                                <option value="1">$$$</option>
+                                                            @endif
+                                                        </select>
+                                                        <svg class="svg-next-icon svg-next-icon-size-16">
+                                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group"  >
+                    
+                                                    <label for="ma" class="control-label required">Trạng thái</label>
+                                                    <div class="ui-select-wrapper">
+                                                        <select class="form-control ui-select ui-select" id="product_variation_stock" name="product_variation_stock">
+                                                            @if($product_variation->stock)
+                                                                <option value="1" selected>Còn hàng</option>
+                                                                <option value="0">Hết hàng</option>
+                                                            @else
+                                                                <option value="1">Còn hàng</option>
+                                                                <option value="0" selected>Hết hàng</option>
+                                                            @endif
+                                                        </select>
+                                                        <svg class="svg-next-icon svg-next-icon-size-16">
+                                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="float-start btn btn-warning" data-bs-dismiss="modal" fdprocessedid="lkwys">Hủy bỏ</button>
+                                <button type="submit" class="float-end btn btn-info " id="store-product-variation-button" fdprocessedid="g6wv3d">Lưu thay đổi</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        @endforeach
+        
     
     </div>
 </div>
@@ -1022,6 +1160,14 @@
     <script src="{{asset('js/admin/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('js/admin/table.js')}}"></script>
     <script type="text/javascript">
+        // $(document).on('click', '.btn-edit-product-variation2', function(event) {
+        //   event.preventDefault();
+        //   $("#edit-product-variation-modal").modal("show");
+        // });
+        function openEditProductVariationModal(e,id){
+            $('#edit-product-variation-modal[variation_id="'+id+'"]').modal("show");
+            
+        }
         $(document).on('click', '.btn-trigger-select-product-attributes', function(event) {
           event.preventDefault();
           $("#select-attribute-sets-modal").modal("show");
@@ -1033,6 +1179,10 @@
         function showloading(){
             $('.preloader').show();
         }
+        function mySubmitFunction(e,obj){
+            e.preventDefault();
+            console.log(obj);
+        };
         function more_image(){
             var i = parseInt($(".file").length);
             i=i+1;
