@@ -175,9 +175,9 @@
             
                                             <label for="ma" class="control-label required">Giá</label>
                                             @if(isset($request->product_id))
-                                                <input class="form-control" placeholder="giá sản phẩm" value="{{$pr->price}}" oninput="replaceValue(this.name);" name="price" type="text" required id="price">
+                                                <input class="form-control" placeholder="giá sản phẩm" value="{{$pr->price}}" oninput="replaceValue(this);" name="price" type="text" required id="price">
                                             @else
-                                                <input class="form-control" placeholder="giá sản phẩm" oninput="replaceValue(this.name);" value="{{old('price')}}" name="price" type="text" required id="price">
+                                                <input class="form-control" placeholder="giá sản phẩm" oninput="replaceValue(this);" value="{{old('price')}}" name="price" type="text" required id="price">
                                             @endif
                                         </div>
                                     </div>
@@ -186,9 +186,9 @@
             
                                             <label for="ma" class="control-label">Giá sale</label>
                                             @if(isset($request->product_id))
-                                                <input class="form-control" placeholder="giá sale" value="{{$pr->sale}}" oninput="replaceValue(this.name);" name="sale" type="text" required id="sale">
+                                                <input class="form-control" placeholder="giá sale" value="{{$pr->sale}}" oninput="replaceValue(this);" name="sale" type="text" required id="sale">
                                             @else
-                                                <input class="form-control" placeholder="giá sale" oninput="replaceValue(this.name);" value="{{old('sale')}}" name="sale" type="text" required id="sale">
+                                                <input class="form-control" placeholder="giá sale" oninput="replaceValue(this);" value="{{old('sale')}}" name="sale" type="text" required id="sale">
                                             @endif
                                         </div>
                                     </div>
@@ -568,14 +568,14 @@
         }
         // end format number
         function replaceValue(e){
-            value = $('input[name='+e+']').val();
-            value = value.replace(/\D/g,'');
-            if(value<1000){
+            val = e.value;
+            val = val.replace(/\D/g,'');
+            if(val<1000){
                 // value = value*1000;
             }
-            value = addCommas(value);
-            $('input[name='+e+']').val(value);
-            console.log(e);
+            val = addCommas(val);
+            e.value = val;
+            // console.log(e);
         }
         function checkMa(){
             ma = $('input[name="ma"]').val();

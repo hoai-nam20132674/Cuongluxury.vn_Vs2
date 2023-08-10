@@ -679,6 +679,64 @@ class HomeController extends Controller
         return redirect()->route('editProduct',$id)->with(['flash_level'=>'success','flash_message'=>'Thêm phiên bản sản phẩm thành công']);
         
     }
+    public function postEditProductVariation(Request $request,$id){
+        $productVariation = ProductVariations::where('id',$id)->get()->first();
+        $productVariation->sku = $request->product_variation_ma;
+        if(isset($request->product_variation_price)){
+            $productVariation->price = preg_replace( '/\D/', '',$request->product_variation_price);
+        }
+        if(isset($request->product_variation_sale)){
+            $productVariation->sale = preg_replace( '/\D/', '',$request->product_variation_sale);
+        }
+        $productVariation->tiente = $request->product_variation_tiente;
+        $productVariation->stock = $request->product_variation_stock;
+        $productVariation->save();
+        $product_variation_properties_value = $request->product_variation_properties_value;
+        if(isset($product_variation_properties_value)){
+            foreach($product_variation_properties_value as $item){
+                if($item == null){
+
+                }
+                else{
+                    $ids = explode('-',$item);
+                    if(count($ids) == 1){
+                        $pro_var_pro_val = new ProductVariationsPropertiesValue;
+                        $pro_var_pro_val->pro_var_id = $id;
+                        $pro_var_pro_val->propertie_value_id = $ids[0];
+                        $pro_var_pro_val->save();
+                    }
+                    else{
+                        $pro_var_pro_val = ProductVariationsPropertiesValue::where('id',$ids[1])->get()->first();
+                        if(isset($pro_var_pro_val)){
+                            $pro_var_pro_val->propertie_value_id = $ids[0];
+                            $pro_var_pro_val->save();
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+        
+        return redirect()->route('editProduct',$productVariation->product_id)->with(['flash_level'=>'success','flash_message'=>'Sửa phiên bản sản phẩm thành công']);
+        // dd($product_variation_properties_value);
+    }
+    public function checkProVariationSku(Request $request){
+        if(isset($request->pro_var_id) && isset($request->sku)){
+            $productVariation = ProductVariations::where('id','!=',$request->pro_var_id)->where('sku',$request->sku)->get()->first();
+            if(isset($productVariation)){
+                return 0;
+            }
+            else{
+                return 1;
+            }
+        }
+    }
+    public function deleteProductVariation($id){
+        $item = ProductVariations::where('id',$id)->get()->first();
+        $item->delete();
+        return redirect()->back()->with(['flash_level'=>'success','flash_message'=>'Xóa biến thể sản phẩm thành công']);
+    }
     public function postEditProduct(editProductRequest $request, $id){
         $item = new Product;
         $item->edit($request,$id);

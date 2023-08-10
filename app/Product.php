@@ -70,7 +70,6 @@ class Product extends Model
         else{
             $this->lang='vi';
         }
-        $this->view = rand(150,500);
     	$this->save();
         $url = $request->url.'-pi'.$this->id;
         $this->url = $url;
@@ -212,7 +211,6 @@ class Product extends Model
         $product->display = $request->display;
         $product->ma = $request->ma;
         $product->highlight = $request->highlight;
-        $product->view = $request->view;
         $product->lang=$request->lang;
         $product->tiente = $request->tiente;
         $product->short_description = $request->short_description;

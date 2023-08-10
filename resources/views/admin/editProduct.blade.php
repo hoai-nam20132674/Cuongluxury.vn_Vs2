@@ -224,7 +224,7 @@
                                     <label for="ma" class="control-label required">Giá</label>
                                     @if(isset($request->product_id))
                                     @else
-                                        <input class="form-control" placeholder="giá sản phẩm" oninput="replaceValue(this.name)" value="{{$product->price}}" name="price" type="text" required id="price">
+                                        <input class="form-control" placeholder="giá sản phẩm" oninput="replaceValue(this)" value="{{$product->price}}" name="price" type="text" required id="price">
                                     @endif
                                 </div>
                             </div>
@@ -234,7 +234,7 @@
                                     <label for="ma" class="control-label">Giá sale</label>
                                     @if(isset($request->product_id))
                                     @else
-                                        <input class="form-control" placeholder="giá sale" oninput="replaceValue(this.name)" value="{{$product->sale}}" name="sale" type="text" required id="sale">
+                                        <input class="form-control" placeholder="giá sale" oninput="replaceValue(this)" value="{{$product->sale}}" name="sale" type="text" required id="sale">
                                     @endif
                                 </div>
                             </div>
@@ -354,7 +354,7 @@
                                                                     <i class="fa fa-edit"></i>
                                                                 </a>
                                                     
-                                                                <a href="#" style="font-size:10px" class="btn btn-icon btn-sm btn-danger deleteDialog delete" data-toggle="tooltip" data-section="{{URL::route('deleteProduct',$product->id)}}" role="button" data-original-title="Xóa bản ghi">
+                                                                <a href="javascript:void(0)" style="font-size:10px" class="btn btn-icon btn-sm btn-danger deleteDialog delete" data-toggle="tooltip" data-section="{{URL::route('deleteProductVariation',$product_variation->id)}}" role="button" data-original-title="Xóa bản ghi">
                                                                     <i class="fa fa-trash"></i>
                                                                 </a>
                                                             </div>
@@ -627,31 +627,7 @@
                     </div>
 
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="widget meta-boxes">
-                                <div class="widget-title">
-                                    <h4><label for="view" class="control-label" aria-required="fale">Số lượng tiếp cận</label></h4>
-                                </div>
-                                
-                                    <div class="main-form" style="margin-bottom: 0px">
-                                        <div class="form-body">
-                                            <div class="form-group" style="margin-bottom: 0px" >
-                                                <input class="form-control" placeholder="Số người tiếp cận" value="{{$product->view}}" name="view" type="number" id="view">
-                                            </div>
-
-
-                                            <input type="hidden" name="model" value="">
-
-
-
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="widget meta-boxes">
                         <div class="widget-title">
                             <h4><label for="categories[]" class="control-label required" aria-required="true">Danh mục</label></h4>
@@ -873,7 +849,7 @@
                 </form>
             </div>
         </div>
-        <div id="add-new-product-variation-modal" class="modal fade show" tabindex="-1" aria-labelledby="add-new-product-variation-modal" data-backdrop="static" data-keyboard="false" aria-modal="true" role="dialog">
+        <div id="add-new-product-variation-modal" variation_id="0" class="modal fade show" tabindex="-1" aria-labelledby="add-new-product-variation-modal" data-backdrop="static" data-keyboard="false" aria-modal="true" role="dialog">
             <div class="modal-dialog modal-lg">
                 <form id="postAddProductVariation" method="post" action="{{URL::route('postAddProductVariation',$product->id)}}" enctype="multipart/form-data" >
                     @csrf
@@ -918,11 +894,9 @@
                                             <div class="form-group"  >
                 
                                                 <label for="ma" class="control-label required">Mã sản phẩm</label>
-                                                @if(isset($request->product_id))
-                                                    <input class="form-control" placeholder="nhập mã" value="{{$pr->ma}}" name="product_variation_ma" type="text" required id="product_variation_ma">
-                                                @else
-                                                    <input class="form-control" placeholder="nhập mã" onchange="checkMa()" value="{{old('product_variation_ma')}}" name="product_variation_ma" type="text" required id="product_variation_ma">
-                                                @endif
+                                                
+                                                <input class="form-control ma-variation-0" placeholder="nhập mã" oninput="checkSkuVariation(this,0)" value="{{old('product_variation_ma')}}" name="product_variation_ma" type="text" required id="product_variation_ma">
+                                                
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -930,9 +904,9 @@
                 
                                                 <label for="ma" class="control-label required">Giá</label>
                                                 @if(isset($request->product_id))
-                                                    <input class="form-control" placeholder="giá sản phẩm" value="{{$pr->price}}" oninput="replaceValue(this.name);" name="product_variation_price" type="text" required id="product_variation_price">
+                                                    <input class="form-control" placeholder="giá sản phẩm" value="{{$pr->price}}" oninput="replaceValue(this);" name="product_variation_price" type="text" required id="product_variation_price">
                                                 @else
-                                                    <input class="form-control" placeholder="giá sản phẩm" oninput="replaceValue(this.name);" value="{{old('product_variation_price')}}" name="product_variation_price" type="text" required id="product_variation_price">
+                                                    <input class="form-control" placeholder="giá sản phẩm" oninput="replaceValue(this);" value="{{old('product_variation_price')}}" name="product_variation_price" type="text" required id="product_variation_price">
                                                 @endif
                                             </div>
                                         </div>
@@ -941,9 +915,9 @@
                 
                                                 <label for="ma" class="control-label">Giá sale</label>
                                                 @if(isset($request->product_id))
-                                                    <input class="form-control" placeholder="giá sale" value="{{$pr->sale}}" oninput="replaceValue(this.name);" name="product_variation_sale" type="text" required id="product_variation_sale">
+                                                    <input class="form-control" placeholder="giá sale" value="{{$pr->sale}}" oninput="replaceValue(this);" name="product_variation_sale" type="text" required id="product_variation_sale">
                                                 @else
-                                                    <input class="form-control" placeholder="giá sale" oninput="replaceValue(this.name);" value="{{old('product_variation_sale')}}" name="product_variation_sale" type="text" required id="product_variation_sale">
+                                                    <input class="form-control" placeholder="giá sale" oninput="replaceValue(this);" value="{{old('product_variation_sale')}}" name="product_variation_sale" type="text" required id="product_variation_sale">
                                                 @endif
                                             </div>
                                         </div>
@@ -986,7 +960,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="float-start btn btn-warning" data-bs-dismiss="modal" fdprocessedid="lkwys">Hủy bỏ</button>
-                            <button type="submit" class="float-end btn btn-info " id="store-product-variation-button" fdprocessedid="g6wv3d">Thêm mới</button>
+                            <button type="submit" class="float-end btn btn-info btn-submit-edit-provariation-0" id="store-product-variation-button" fdprocessedid="g6wv3d">Thêm mới</button>
                         </div>
                     </div>
                 </form>
@@ -1025,16 +999,37 @@
                                                             
                                                             @php
                                                                 $i=0;
+                                                                $check = 0;
+                                                                $pro_var_pro_val = null;
+                                                                foreach($item->propertie_values as $value){
+                                                                    if(in_array($value->id,$array)){
+                                                                        $check = 1;
+                                                                        $pro_var_pro_val = App\ProductVariationsPropertiesValue::where('pro_var_id',$product_variation->id)->where('propertie_value_id',$value->id)->get()->first();
+                                                                    }
+                                                                }
+
                                                             @endphp
                                                             @foreach($item->propertie_values as $value)
-                                                                @if(in_array($value->id,$array))
-                                                                    <option selected value="{{$value->id}}">{{$value->value}}</option>
-                                                                    @php
-                                                                        $i=1;
-                                                                    @endphp
+                                                                @if($check)
+                                                                    @if(in_array($value->id,$array))
+                                                                        <option selected value="{{$value->id}}-{{$pro_var_pro_val->id}}">{{$value->value}}</option>
+                                                                        @php
+                                                                            $i=1;
+                                                                        @endphp
+                                                                    @else
+                                                                        <option value="{{$value->id}}-{{$pro_var_pro_val->id}}">{{$value->value}}</option>
+                                                                    @endif
                                                                 @else
-                                                                    <option value="{{$value->id}}">{{$value->value}}</option>
+                                                                    @if(in_array($value->id,$array))
+                                                                        <option selected value="{{$value->id}}">{{$value->value}}</option>
+                                                                        @php
+                                                                            $i=1;
+                                                                        @endphp
+                                                                    @else
+                                                                        <option value="{{$value->id}}">{{$value->value}}</option>
+                                                                    @endif
                                                                 @endif
+                                                                
                                                             @endforeach
                                                             @if($i == 0)
                                                                 <option value="" selected="selected" data-select2-id="select2-data-82-eyzy">-- Chọn thuộc tính --</option>
@@ -1051,13 +1046,13 @@
                                             </div>
                                             @endforeach
                                         </div>
-                                        <hr>
+                                        <!-- <hr> -->
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group"  >
                     
                                                     <label for="ma" class="control-label required">Mã sản phẩm</label>
-                                                    <input class="form-control" placeholder="nhập mã" onchange="checkMa()" value="{{$product_variation->sku}}" name="product_variation_ma" type="text" required id="product_variation_ma">
+                                                    <input class="form-control ma-variation-{{$product_variation->id}}" placeholder="nhập mã" oninput="checkSkuVariation(this,{{$product_variation->id}})" value="{{$product_variation->sku}}" name="product_variation_ma" type="text" required id="product_variation_ma">
                                                     
                                                 </div>
                                             </div>
@@ -1065,7 +1060,7 @@
                                                 <div class="form-group"  >
                     
                                                     <label for="ma" class="control-label required">Giá</label>
-                                                    <input class="form-control" placeholder="giá sản phẩm" oninput="replaceValue(this.name);" value="{!!number_format($product_variation->price)!!}" name="product_variation_price" type="text" required id="product_variation_price">
+                                                    <input class="form-control" placeholder="giá sản phẩm" oninput="replaceValue(this);" value="{!!number_format($product_variation->price)!!}" name="product_variation_price" type="text" required id="product_variation_price">
                                                     
                                                 </div>
                                             </div>
@@ -1073,7 +1068,7 @@
                                                 <div class="form-group"  >
                     
                                                     <label for="ma" class="control-label">Giá sale</label>
-                                                    <input class="form-control" placeholder="giá sale" oninput="replaceValue(this.name);" value="{!!number_format($product_variation->sale)!!}" name="product_variation_sale" type="text" required id="product_variation_sale">
+                                                    <input class="form-control" placeholder="giá sale" oninput="replaceValue(this);" value="{!!number_format($product_variation->sale)!!}" name="product_variation_sale" type="text" required id="product_variation_sale">
                                                     
                                                 </div>
                                             </div>
@@ -1124,14 +1119,35 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="float-start btn btn-warning" data-bs-dismiss="modal" fdprocessedid="lkwys">Hủy bỏ</button>
-                                <button type="submit" class="float-end btn btn-info " id="store-product-variation-button" fdprocessedid="g6wv3d">Lưu thay đổi</button>
+                                <button type="submit" class="float-end btn btn-info btn-submit-edit-provariation-{{$product_variation->id}}" id="store-product-variation-button" fdprocessedid="g6wv3d">Lưu thay đổi</button>
                             </div>
                         </div>
                     </form>
+                    
                 </div>
             </div>
         @endforeach
-        
+        <div class="modal fade modal-confirm-delete" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h4 class="modal-title"><i class="til_img"></i><strong>Xác nhận xóa</strong></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body with-padding">
+                        <div>Bạn có chắc chắn muốn xóa bản ghi này?</div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="float-left btn btn-warning" data-dismiss="modal">Huỷ bỏ</button>
+                        <a class="confirm-delete" href=""><button class="float-right btn btn-danger">Xóa</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     
     </div>
 </div>
@@ -1219,15 +1235,50 @@
         // end format number
         
         function replaceValue(e){
-            value = $('input[name='+e+']').val();
-            value = value.replace(/\D/g,'');
-            if(value<1000){
+            val = e.value;
+            val = val.replace(/\D/g,'');
+            if(val<1000){
                 // value = value*1000;
             }
-            value = addCommas(value);
-            $('input[name='+e+']').val(value);
-            console.log(e);
+            val = addCommas(val);
+            e.value = val;
+            // console.log(e);
         }
+        function checkSkuVariation(e,id){
+            sku = e.value;
+            var btn_submit = 'btn-submit-edit-provariation-'+id;
+            var select = 'ma-variation-'+id;
+            if(sku == ''){
+                toastr.warning('Vui lòng nhập mã sản phẩm');
+                $('input.'+select+'').removeClass('is-valid');
+                $('input.'+select+'').addClass('is-not-valid');
+                $(':input.'+btn_submit+'[type="submit"]').prop('disabled', true);
+            }
+            else{
+                url = '/admin/product/proVariation/checkSku?pro_var_id='+id+'&sku='+sku;
+
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    dataType: 'html',
+                    success: function(data) {
+                        if(data == 1){
+                            $('input.'+select+'').addClass('is-valid');
+                            $('input.'+select+'').removeClass('is-not-valid');
+                            $(':input.'+btn_submit+'[type="submit"]').prop('disabled', false);
+                        }
+                        else{
+                            toastr.warning('Mã sản phẩm đã tồn tại');
+                            $('input.'+select+'').removeClass('is-valid');
+                            $('input.'+select+'').addClass('is-not-valid');
+                            $(':input.'+btn_submit+'[type="submit"]').prop('disabled', true);
+                        }
+                    }
+                });
+            }
+            
+        }
+        
         
         price = $('input[name="price"]').val();
         price = addCommas(price);

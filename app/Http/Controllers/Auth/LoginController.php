@@ -41,7 +41,7 @@ class LoginController extends Controller
     }
 
     public function login() {
-        return view('admin.login');
+        return view('admin.loginv2');
     }
     public function postLogin(Request $request){
         $login =array(
@@ -67,7 +67,7 @@ class LoginController extends Controller
         $request->session()->regenerate();
 
         
-        return redirect()->route('index');
+        return redirect()->route('login');
 
     }
 

@@ -110,6 +110,9 @@ Route::get('admin/product/checkMa/{ma}', 'HomeController@checkProductMa')->name(
 Route::post('admin/product/postEditProductPropertiesVariation/{id}', 'HomeController@postEditProductPropertiesVariation')->name('postEditProductPropertiesVariation');
 Route::post('admin/product/postAddProductVariation/{id}', 'HomeController@postAddProductVariation')->name('postAddProductVariation');
 Route::post('admin/product/postEditProductVariation/{id}', 'HomeController@postEditProductVariation')->name('postEditProductVariation');
+Route::get('admin/product/deleteProductVariation/{id}', 'HomeController@deleteProductVariation')->name('deleteProductVariation');
+Route::get('admin/product/proVariation/checkSku', 'HomeController@checkProVariationSku')->name('checkProVariationSku');
+
 // end product route
 
 // system 
