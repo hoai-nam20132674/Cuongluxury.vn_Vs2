@@ -91,7 +91,20 @@
                                 </svg>
                             </div>
                         </div>
-    
+                        <div class="form-group"  >
+            
+                            <label for="content" class="control-label">Mô tả</label>
+                            <textarea class="form-control" rows="4" placeholder="Nội dung" data-counter="4000" name="content" cols="50" id="content">{{old('content')}}</textarea>
+                            <script type="text/javascript">
+                              var editor = CKEDITOR.replace('content',{
+                               language:'vi',
+                               filebrowserImageBrowseUrl : '/auth/ckfinder/ckfinder.html?type=Images',
+                               filebrowserFlashBrowseUrl : '/auth/ckfinder/ckfinder.html?type=Flash',
+                               filebrowserImageUploadUrl : '/auth/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+                               filebrowserFlashUploadUrl : '/auth/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+                               });
+                             </script>﻿
+                        </div>
                         
     
                         <div class="form-group" >

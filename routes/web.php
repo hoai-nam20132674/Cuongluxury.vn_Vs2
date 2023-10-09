@@ -55,6 +55,32 @@ Route::get('admin/blog/categorie/delete/{id}', 'HomeController@deleteBlogCategor
 Route::get('admin/blog/categorie/deleteBlogCategories', 'HomeController@deleteBlogCategories')->name('deleteBlogCategories');
 // end blog route
 
+// video route
+Route::get('admin/videos', 'HomeController@videos')->name('videos');
+Route::get('admin/video/add', 'HomeController@addVideo')->name('addVideo');
+Route::post('admin/video/add', 'HomeController@postAddVideo')->name('postAddVideo');
+Route::get('admin/video/edit/{id}', 'HomeController@editVideo')->name('editVideo');
+Route::post('admin/video/edit/{id}', 'HomeController@postEditVideo')->name('postEditVideo');
+Route::get('admin/video/delete/{id}', 'HomeController@deleteVideo')->name('deleteVideo');
+Route::get('admin/video/deleteVideos', 'HomeController@deleteVideos')->name('deleteVideos');
+Route::get('admin/video/categories', 'HomeController@videoCategories')->name('videoCategories');
+Route::get('admin/video/categorie/add', 'HomeController@addVideoCategorie')->name('addVideoCategorie');
+Route::post('admin/video/categorie/add', 'HomeController@postAddVideoCategorie')->name('postAddVideoCategorie');
+Route::get('admin/video/categorie/edit/{id}', 'HomeController@editVideoCategorie')->name('editVideoCategorie');
+Route::post('admin/video/categorie/edit/{id}', 'HomeController@postEditVideoCategorie')->name('postEditVideoCategorie');
+Route::get('admin/video/categorie/delete/{id}', 'HomeController@deleteVideoCategorie')->name('deleteVideoCategorie');
+Route::get('admin/video/categorie/deleteVideoCategories', 'HomeController@deleteVideoCategories')->name('deleteVideoCategories');
+// end video route
+
+// Payment
+Route::get('admin/payments', 'HomeController@payments')->name('payments');
+Route::get('admin/payment/add', 'HomeController@addPayment')->name('addPayment');
+Route::post('admin/payment/add', 'HomeController@postAddPayment')->name('postAddPayment');
+Route::get('admin/payment/edit/{id}', 'HomeController@editPayment')->name('editPayment');
+Route::post('admin/payment/edit/{id}', 'HomeController@postEditPayment')->name('postEditPayment');
+Route::get('admin/payment/delete/{id}', 'HomeController@deletePayment')->name('deletePayment');
+// End Payment
+
 // page route
 Route::get('admin/pages', 'HomeController@pages')->name('pages');
 Route::get('admin/page/add', 'HomeController@addPage')->name('addPage');

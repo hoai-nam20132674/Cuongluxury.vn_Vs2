@@ -18,8 +18,8 @@ class CreateMenusTable extends Migration
             $table->string('title')->nullable();
             $table->string('url')->nullable();
             $table->string('icon')->nullable();
-            $table->string('target');
-            $table->string('type');
+            $table->string('target')->nullable();
+            $table->string('type')->nullable();
             $table->integer('type_id')->nullable();
             $table->bigInteger('parent_id')->nullable();
             $table->integer('stt')->nullable();

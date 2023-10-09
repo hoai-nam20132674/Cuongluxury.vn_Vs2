@@ -83,6 +83,29 @@
                             
                         </ul>
                     </li>
+                    <li class="nav-item " id="cms-plugins-ecommerce">
+                        <a href="#" class="nav-link nav-toggle">
+                            <i class="fa fa-cube"></i>
+                            <span class="title">Video</span>
+                            <span class="arrow "></span>
+                        </a>
+                        <ul class="sub-menu  hidden-ul ">
+                            <li class="nav-item " id="cms-plugins-ecommerce-customer">
+                                <a href="{{URL::route('videos')}}" class="nav-link">
+                                    <i class="fa fa-cubes"></i>
+                                    Danh sách video
+                                </a>
+                            </li>
+                            <li class="nav-item " id="cms-plugins-product-categories">
+                                <a href="{{URL::route('videoCategories')}}" class="nav-link">
+                                    <i class="fa fa-list"></i>
+                                    Danh mục video
+                                </a>
+                            </li>
+                            
+                            
+                        </ul>
+                    </li>
                     @if(Auth::user()->role ==1)
                     <li class="nav-item " id="cms-plugins-simple-slider">
                         <a href="{{URL::route('users')}}" class="nav-link nav-toggle">
@@ -100,7 +123,7 @@
                         </a>
                     </li>
                     
-                    <li class="nav-item " id="cms-plugins-simple-slider">
+                    <!-- <li class="nav-item " id="cms-plugins-simple-slider">
                         <a href="{{URL::route('yeucaus')}}" class="nav-link nav-toggle">
                             <i class="fa fa-retweet"></i>
                             <span class="title">Yêu cầu BĐS</span>
@@ -113,7 +136,7 @@
                             <span class="title">Ký gửi BĐS</span>
                         </a>
                         
-                    </li>
+                    </li> -->
                     @if(Auth::user()->role ==1)
                     <li class="nav-item " id="cms-core-appearance">
                         <a href="#" class="nav-link nav-toggle">
@@ -158,21 +181,18 @@
                             <span class="arrow "></span>
                         </a>
                         <ul class="sub-menu  hidden-ul ">
-                            
-                            <!-- <li class="nav-item " id="cms-core-user">
-                                <a href="{{URL::route('users')}}?role=2" class="nav-link">
-                                    <i class="fa fa-user"></i>
-                                    Quản trị viên
-                                </a>
-                            </li> -->
-                            
                             <li class="nav-item " id="cms-core-system-information">
                                 <a href="{{URL::route('editSystem')}}" class="nav-link">
                                     <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
                                     Cài đặt hệ thống
                                 </a>
                             </li>
-                            
+                            <li class="nav-item " id="cms-core-user">
+                                <a href="{{URL::route('payments')}}" class="nav-link">
+                                    <i class="fas fa-credit-card"></i>
+                                    Phương thức thanh toán
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     @endif

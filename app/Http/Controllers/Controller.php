@@ -92,10 +92,28 @@ class Controller extends BaseController
         // $products = Product::where('display',1)->where('lang',$locale)->with('categories')->orderBy('id','DESC')->get();
         $categories = ProductCate::where('display',1)->where('lang',$locale)->whereNull('parent_id')->get();
         $blogs = Blog::where('display',1)->where('lang',$locale)->orderBy('id','DESC')->get();
+        //------------
         $slides = Slider::where('display',1)->orderBy('stt','ASC')->get();
-        $popup = Popup::where('display',1)->orderBy('id','DESC')->get()->first();
+        $patek = ProductCate::where('name','Patek Philippe')->with(['products' => function ($query) {
+                $query->where('display',1)->orderBy('id','DESC');
+            }])->get()->first();
+        $rolex = ProductCate::where('name','Rolex')->with(['products' => function ($query) {
+                $query->where('display',1)->orderBy('id','DESC');
+            }])->get()->first();
+        $hublot = ProductCate::where('name','Hublot')->with(['products' => function ($query) {
+                $query->where('display',1)->orderBy('id','DESC');
+            }])->get()->first();
+        $fm = ProductCate::where('name','Franck Muller')->with(['products' => function ($query) {
+                $query->where('display',1)->orderBy('id','DESC');
+            }])->get()->first();
+        $vertu = ProductCate::where('name','Vertu')->with(['products' => function ($query) {
+                $query->where('display',1)->orderBy('id','DESC');
+            }])->get()->first();
+        $trangsuc = ProductCate::where('name','Trang Sức')->with(['products' => function ($query) {
+                $query->where('display',1)->orderBy('id','DESC');
+            }])->get()->first();
         // return view('front-end.index',compact('system','menus','categories','products_hl','hct','hcn','cdt','hdb','blogs','slides','popup'));
-        return view('front-end.cart');
+        return view('front-end.index',compact('slides','patek','rolex','hublot','fm','vertu','trangsuc'));
 
     }
     public function findProductCateTranslate($cate,$locale){

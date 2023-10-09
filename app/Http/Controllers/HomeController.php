@@ -30,8 +30,11 @@ use App\Http\Middleware\CheckAdmin;
 use App\User;
 use App\Popup;
 use App\Page;
+use App\Payment;
 use App\BlogCate;
+use App\VideoCate;
 use App\Blog;
+use App\Video;
 use App\Service;
 use App\ServiceCate;
 use App\Product;
@@ -312,6 +315,103 @@ class HomeController extends Controller
     }
     // end blog
 
+    // Video
+    public function videoCategories(Request $request){
+        $categories = VideoCate::where('parent_id',null)->paginate(15);
+        return view('admin.videoCategories',['categories'=>$categories,'request'=>$request]);
+    }
+    public function addVideoCategorie(Request $request){
+        if(isset($request->video_cate_id)){
+            $categories = VideoCate::where('parent_id',null)->get();
+        }
+        else{
+            $categories = VideoCate::where('parent_id',null)->get();
+        }
+        return view('admin.addVideoCategorie',compact('categories','request'));
+    }
+    public function postAddVideoCategorie(Request $request){
+        $item = new VideoCate;
+        $item -> add($request);
+        return redirect()->route('videoCategories')->with(['flash_level'=>'success','flash_message'=>'Thêm thành công']); 
+    }
+    public function editVideoCategorie($id){
+        
+        $cate = VideoCate::where('id',$id)->get()->first();
+        $categories = VideoCate::where('id','!=',$id)->where('parent_id',null)->get();
+        if($cate->parent_id != ''){
+            $parent = VideoCate::where('id',$cate->parent_id)->get()->first();
+            return view('admin.editVideoCategorie',['cate'=>$cate, 'categories'=>$categories,'parent'=>$parent]);
+        }
+        else{
+            return view('admin.editVideoCategorie',['cate'=>$cate, 'categories'=>$categories]);
+        }
+        
+    }
+    public function postEditVideoCategorie(Request $request, $id){
+        $item = new VideoCate;
+        $item->edit($request,$id);
+        return redirect()->route('editVideoCategorie',$id)->with(['flash_level'=>'success','flash_message'=>'Sửa thành công']);
+    }
+    public function deleteVideoCategorie($id){
+        $item = VideoCate::where('id',$id)->get()->first();
+        $item->delete();
+        return redirect()->route('videoCategories')->with(['flash_level'=>'success','flash_message'=>'Xóa danh mục video thành công']); 
+    }
+    public function videos(Request $request){
+        $videos = Video::select()->paginate(15);
+        return view('admin.videos',['videos'=>$videos,'request'=>$request]);
+    }
+    public function addVideo(Request $request){
+        if(isset($request->blog_id)){
+            $categories = VideoCate::where('parent_id',null)->get();
+        }
+        else{
+            $categories = VideoCate::where('parent_id',null)->get();
+        }
+        return view('admin.addVideo',compact('categories','request'));
+    }
+    public function postAddVideo(Request $request){
+        $item = new Video;
+        $item -> add($request);
+        return redirect()->route('videos')->with(['flash_level'=>'success','flash_message'=>'Thêm thành công']); 
+        // dd($request->blog_id);
+    }
+    public function editVideo($id){
+        $video = Video::where('id',$id)->get()->first();
+        $categories = VideoCate::where('parent_id',null)->get();
+        return view('admin.editVideo',['video'=>$video,'categories'=>$categories]);
+    }
+    public function postEditVideo(Request $request, $id){
+        $item = new Video;
+        $item->edit($request,$id);
+        return redirect()->route('editVideo',$id)->with(['flash_level'=>'success','flash_message'=>'Sửa thành công']);
+    }
+    public function deleteVideo($id){
+        $item = Video::where('id',$id)->get()->first();
+        $item->delete();
+        return redirect()->route('videos')->with(['flash_level'=>'success','flash_message'=>'Xóa video thành công']); 
+    }
+    public function deleteVideos(Request $request){
+        if(Auth::user()->role == 1){
+            if(isset($request->videos_id)){
+                $str_ids = $request->videos_id;
+                $ids = array();
+                $ids = explode(",",$str_ids);
+                $count = count($ids);
+                for($j=0;$j<$count;$j++){
+                    $item = Video::where('id',$ids[$j])->get()->first();
+                    
+                    $item->delete();
+                }
+            }
+            return redirect()->back()->with(['flash_level'=>'success','flash_message'=>'Xóa thành công']);
+        }
+        else{
+            return redirect()->back()->with(['flash_level'=>'danger','flash_message'=>'Bạn không có quyền xóa sản phẩm']);
+        }
+    }
+    // End Video
+
     // yêu cầu bds
     public function yeucaus(Request $request){
         if(isset($request->keyword)){
@@ -427,6 +527,36 @@ class HomeController extends Controller
         $item->delete();
         return redirect()->route('pages')->with(['flash_level'=>'success','flash_message'=>'Xóa tin tức thành công']); 
     }
+
+    // Payment
+    public function payments(Request $request){
+        $payments = Payment::paginate(15);
+        return view('admin.payments',compact('payments','request'));
+    }
+    public function addPayment(Request $request){
+        return view('admin.addPayment',compact('request'));
+    }
+    public function postAddPayment(Request $request){
+        $item = new Payment;
+        $item -> add($request);
+        return redirect()->route('payments')->with(['flash_level'=>'success','flash_message'=>'Thêm thành công']); 
+        // dd($request->blog_id);
+    }
+    public function editPayment(Request $request, $id){
+        $payment = Payment::where('id',$id)->get()->first();
+        return view('admin.editPayment',compact('payment','request'));
+    }
+    public function postEditPayment(Request $request, $id){
+        $item = new Payment;
+        $item->edit($request,$id);
+        return redirect()->route('editPayment',$id)->with(['flash_level'=>'success','flash_message'=>'Sửa thành công']);
+    }
+    public function deletePayment($id){
+        $item = Payment::where('id',$id)->get()->first();
+        $item->delete();
+        return redirect()->route('payments')->with(['flash_level'=>'success','flash_message'=>'Xóa phương thức thanh toán thành công']); 
+    }
+    // End Payment
 
     //Popups
     public function popups(Request $request){

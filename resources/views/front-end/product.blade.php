@@ -1,7 +1,7 @@
 @extends('front-end.layout.default')
 
 @section('head')
-    <title>SẢN PHẨM</title>
+    <title>{{$product->title}}</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="google-site-verification" content="4GneTy3UPEfpKBItZcT4ob0uAKRPvzGRcTm84Qd076M" />
@@ -35,7 +35,7 @@
                                 <a itemprop="url" href="/" title="Trang chủ"><span itemprop="title">Trang chủ</span></a>
                             </li>
 
-                            <li  ><span><i class='fa fa-angle-right'></i> </span><span itemprop='title'><a itemprop='url' href='https://cuongluxury.vn/dong-ho' title='Đồng hồ'>Đồng hồ</a></span></li><li  ><span><i class='fa fa-angle-right'></i> </span><span itemprop='title'><a itemprop='url' href='https://cuongluxury.vn/hublot' title='Hublot'>Hublot</a></span></li> <li> <span><i class='fa fa-angle-right'></i> </span><strong itemprop='title'> Hublot Classic Fusion Titanium Racing Grey</strong></li>
+                            <li  ><span><i class='fa fa-angle-right'></i> </span><span itemprop='title'><a itemprop='url' href='https://cuongluxury.vn/dong-ho' title='Đồng hồ'>Đồng hồ</a></span></li><li  ><span><i class='fa fa-angle-right'></i> </span><span itemprop='title'><a itemprop='url' href='https://cuongluxury.vn/hublot' title='Hublot'>Hublot</a></span></li> <li> <span><i class='fa fa-angle-right'></i> </span><strong itemprop='title'> {{$product->title}}</strong></li>
                         </ul>
                     </div>
                 </div>
@@ -43,7 +43,10 @@
         </section>
 
         <div class="cates-images-ppp">
-            <img src='https://cuongluxury.vn/uploads/products/bg1/hublot-nen.jpg' alt='Hublot' />
+            @php
+                $c = $product->categories()->get()->first();
+            @endphp
+            <img src="{{asset('uploads/images/products/categories/'.$c->banner)}}" alt='Hublot' />
         </div>
         <div class=' hidden-xs'>
             
@@ -138,7 +141,7 @@
                                 <div class="col-xs-12 col-sm-6 col-lg-4 col-md-4">
                                     <div class="relative product-image-block ">
                                         <div class="large-image">
-                                            <a href='https://cuongluxury.vn/uploads/products/f2.png' data-rel='prettyPhoto[product-gallery]' class='large_image_url'><img id='zoom_01' class='' src='https://cuongluxury.vn/uploads/products/f2.png' alt='Hublot Classic Fusion Titanium Racing Grey'/></a>
+                                            <a href="{{asset('uploads/images/products/details/'.$product->avata)}}" data-rel='prettyPhoto[product-gallery]' class='large_image_url'><img id='zoom_01' class='' src="{{asset('uploads/images/products/details/'.$product->avata)}}" alt='Hublot Classic Fusion Titanium Racing Grey'/></a>
 
                                             <div class="hidden">
                                                 
@@ -147,25 +150,25 @@
 
                                         <div id="gallery_01" class="owl-carousel owl-theme thumbnail-product margin-top-15" data-lg-items="4" data-md-items="4" data-sm-items="4" data-xs-items="4" data-xss-items="3" data-margin="10" data-nav="true">
 
-                                            <div class='item'><a class='thumb-link' href='javascript:void(0);' data-image='https://cuongluxury.vn/uploads/products/f2.png' data-zoom-image='https://cuongluxury.vn/uploads/products/f2.png'><img src='https://cuongluxury.vn/uploads/products/f2.png' alt='https://cuongluxury.vn/uploads/products/f2.png' data-image='https://cuongluxury.vn/uploads/products/f2.png'></a></div>
+                                            <div class='item'><a class='thumb-link' href='javascript:void(0);' data-image="{{asset('uploads/images/products/details/'.$product->avata)}}" data-zoom-image="{{asset('uploads/images/products/details/'.$product->avata)}}"><img src="{{asset('uploads/images/products/details/'.$product->avata)}}" alt='' data-image="{{asset('uploads/images/products/details/'.$product->avata)}}"></a></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-lg-5 col-md-5 details-pro">
                                     <div class="product-top clearfix">
                                         <h1 class="title-head">
-                                            Hublot Classic Fusion Titanium Racing Grey
+                                            {{$product->name}}
                                         </h1>
                                     </div>
                                     <div class="products_key">
                                         Mã sản phẩm:
-                                        542.NX.7071.LR
+                                        {{$product->ma}}
                                     </div>
                                     <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
 
                                         <div class="price-box clearfix">
 
-                                            <span class='special-price'><span class='price product-price'>Giá bán: 155.000.000<span class='dvtt'>đ</span></span></span>
+                                            <span class='special-price'><span class='price product-price'>Giá bán: {!!number_format($product->price)!!}<span class='dvtt'>@if($product->tiente == 0) đ @else $ @endif</span></span></span>
                                         </div>
                                     </div>
                                     <div class="product-summary product_description margin-bottom-15 margin-top-15">
@@ -539,69 +542,8 @@
 
                                     <div id="tab-1" class="tab-content">
                                         <div id="contents-prs" class="rte details-cs">
-                                            <div>
-            Bộ sưu tập: Hublot Classic Fusion&nbsp;</div>
-        <div>
-            M&atilde; sản phẩm: 542.NX.7071.LR</div>
-        <div>
-            Size: 42mm</div>
-        <div>
-            Chất liệu: Titanium&nbsp;</div>
-        <div>
-            V&agrave;nh bezel: Titanium&nbsp;</div>
-        <div>
-            Mặt k&iacute;nh: Sapphire</div>
-        <div>
-            Mặt số: M&agrave;u x&aacute;m</div>
-        <div>
-            Cọc số: H&igrave;nh học</div>
-        <div>
-            D&acirc;y đeo: Cao su v&acirc;n da c&aacute; sấu m&agrave;u x&aacute;m</div>
-        <div>
-            Bộ m&aacute;y: HUB 1110</div>
-        <div>
-            Chức năng: Ng&agrave;y, giờ, ph&uacute;t v&agrave; gi&acirc;y&nbsp;</div>
-        <div>
-            Dự trữ năng lượng: 42 giờ</div>
-        <div>
-            Khả năng kh&aacute;ng nước: 50mm</div>
-        <div>
-            &nbsp;</div>
-        <div>
-            <div>
-                <em>Mạnh mẽ, c&aacute; t&iacute;nh v&agrave; quyết đo&aacute;n như đ&uacute;ng diện mạo v&agrave; c&aacute;i t&ecirc;n của n&oacute;, Hublot Classic Fusion Titanium Racing Gray nhanh ch&oacute;ng &ldquo;hạ gục&rdquo; c&aacute;c qu&yacute; &ocirc;ng kh&oacute; t&iacute;nh. C&ugrave;ng Cuongluxury.vn kh&aacute;m ph&aacute; chi tiết hơn si&ecirc;u phẩm n&agrave;y nh&eacute;!</em></div>
-            <h2>
-                Hublot Classic Fusion Titanium Racing Gray- Gương mặt v&agrave;ng của L&agrave;ng Đua Thế Giới</h2>
-            <div>
-                Cạnh tranh với những &ldquo;tay đua&rdquo; tầm cỡ kh&aacute;c, tưởng rằng Hublot Classic Fusion Titanium Racing Gray sẽ phải d&egrave; chừng. Nhưng kh&ocirc;ng, với ngoại h&igrave;nh &ldquo;ưa nh&igrave;n&rdquo; c&ugrave;ng một &ldquo;bộ n&atilde;o&rdquo; quyết đo&aacute;n, cỗ m&aacute;y n&agrave;y rất tự tin để d&agrave;nh ng&ocirc;i vua trong c&aacute;c cuộc chạy đua.</div>
-            <div>
-                &nbsp;</div>
-            <div>
-                Đầu ti&ecirc;n, ch&uacute;ng ta h&atilde;y b&agrave;n về bộ vỏ. Một bộ vỏ t&ocirc;ng m&agrave;u x&aacute;m hiện l&ecirc;n rất nghệ thuật v&agrave; nam t&iacute;nh. Bộ vỏ khung 42mm được l&agrave;m từ Titanium chải xước tinh tế v&agrave; kh&eacute;o l&eacute;o, kết hợp với n&uacute;m chỉnh giờ b&ecirc;n h&ocirc;ng gi&uacute;p cho cỗ m&aacute;y được bảo vệ tốt nhất. Th&ecirc;m v&agrave;o đ&oacute;, v&agrave;nh bezel c&ugrave;ng m&agrave;u cũng đ&atilde; phần n&agrave;o gi&uacute;p cho tổng thể được đồng bộ. B&ecirc;n trong, dưới mặt k&iacute;nh Sapphire ho&agrave;n hảo l&agrave; mặt số m&agrave;u x&aacute;m đậm, chải tia đồng t&acirc;m. Những tia s&aacute;ng được d&agrave;i v&agrave; đều đặn một c&aacute;ch kh&eacute;o l&eacute;o, gi&uacute;p tạo ra vẻ đẹp mang t&iacute;nh nghệ thuật đỉnh cao. Chẳng cần l&agrave; những người y&ecirc;u th&iacute;ch Hublot, ch&uacute;ng ta vẫn sẽ cảm nhận được sự t&agrave;i t&igrave;nh của thương hiệu trong một thiết kế hết sức độc đ&aacute;o như thế n&agrave;y.&nbsp;</div>
-            <div>
-                &nbsp;</div>
-            <div>
-                Nh&igrave;n chung, b&ecirc;n trong mặt số đồng hồ kh&ocirc;ng c&oacute; qu&aacute; nhiều chi tiết. V&igrave; thế, nổi bật tr&ecirc;n đ&oacute; l&agrave; 12 cọc chỉ giờ được đ&aacute;nh b&oacute;ng kỹ lưỡng theo h&igrave;nh d&aacute;ng b&uacute;t ch&igrave;. H&igrave;nh d&aacute;ng n&agrave;y gi&uacute;p cho chiếc đồng hồ th&ecirc;m phần mạnh mẽ v&agrave; c&aacute; t&iacute;nh. C&ugrave;ng với đ&oacute;, tại vị tr&iacute; 3h l&agrave; &ocirc; cửa sổ chỉ ng&agrave;y được l&agrave;m kh&aacute;c đi với gam m&agrave;u đen sang trọng. &Ocirc; cửa sổ chữ nhật tuy nhỏ nhưng đủ để ho&agrave; v&agrave;o d&ograve;ng chảy nghệ thuật của tổng thể. Ghi dấu ấn tr&ecirc;n đ&oacute; c&ograve;n l&agrave; d&ograve;ng chữ khắc ch&igrave;m mang logo thương hiệu của Hublot. Những d&ograve;ng chữ nhỏ nhắn, ngay ngắn lập tức gi&uacute;p <a href="https://cuongluxury.vn/hublot">Hublot</a> định vị thương hiệu v&agrave; n&acirc;ng tầm gi&aacute; trị của mẫu đồng hồ.&nbsp;</div>
-            <div>
-                &nbsp;</div>
-            <div>
-                Đi c&ugrave;ng Hublot Classic Fusion Titanium Racing Gray l&agrave; d&acirc;y đeo cao su v&acirc;n da c&aacute; sấu m&agrave;u x&aacute;m. Đ&acirc;y l&agrave; chất liệu d&acirc;y đeo được nhiều qu&yacute; &ocirc;ng y&ecirc;u th&iacute;ch nhờ v&agrave;o sự mềm mại, &ocirc;m tay.&nbsp;</div>
-            <div>
-                &nbsp;</div>
-            <div>
-                <span style="color: inherit; font-family: inherit; font-size: 30px;">B&ecirc;n trong Hublot Classic Fusion Titanium Racing Gray</span></div>
-            <div>
-                Bộ m&aacute;y HUB1110 ch&iacute;nh l&agrave; ẩn số đ&atilde; gi&uacute;p cho cỗ m&aacute;y n&agrave;y hoạt động trơn tru v&agrave; bền bỉ. Nhờ n&oacute;, người sử dụng sẽ lu&ocirc;n y&ecirc;n t&acirc;m khi đeo tr&ecirc;n tay chiếc Hublot Classic Fusion Titanium Racing Gray. B&ecirc;n cạnh đ&oacute;, chiếc đồng hồ c&ograve;n cho khả năng kh&aacute;ng nước ổn định ở độ s&acirc;u 50m. Do vậy, qu&yacute; &ocirc;ng ho&agrave;n to&agrave;n c&oacute; thể sử dụng đồng hồ khi đi dưới mưa, bơi lội nhẹ nh&agrave;ng hoặc rửa tay th&ocirc;ng thường. Ngo&agrave;i ra, Hublot Classic Fusion Titanium Racing Gray c&ograve;n c&oacute; khả năng dự trữ năng lượng trong v&ograve;ng 42h, tương tự như những cỗ m&aacute;y đỉnh cao kh&aacute;c của nh&agrave; Hublot.&nbsp;</div>
-            <div>
-                &nbsp;</div>
-            <div>
-                &nbsp;</div>
-            <div>
-                Sở hữu ưu điểm vượt trội về mọi mặt, Hublot Classic Fusion Titanium Racing Gray đ&atilde; nhanh ch&oacute;ng c&aacute;n đ&iacute;ch tr&ecirc;n đường đua chinh phục c&aacute;c qu&yacute; &ocirc;ng. Hiện tại, c&aacute;c cơ sở của <a href="https://cuongluxury.vn/">Cuongluxury.vn</a> đang c&oacute; sẵn phi&ecirc;n bản đẳng cấp n&agrave;y. Mời qu&yacute; kh&aacute;ch h&agrave;ng đến tham khảo, chi&ecirc;m ngưỡng v&agrave; cảm nhận. Cuongluxury.vn tin rằng, cỗ m&aacute;y nh&agrave; Hublot sẽ khiến c&aacute;c qu&yacute; &ocirc;ng phải &ldquo;tan chảy&rdquo; từ c&aacute;i nh&igrave;n đầu ti&ecirc;n. Đội ngũ của ch&uacute;ng t&ocirc;i sẽ lu&ocirc;n t&uacute;c trực để tư vấn, hỗ trợ bạn.&nbsp;</div>
-        </div>
-        <p>
-            &nbsp;</p>
-
+                                            
+                                            {!!$product->content!!}
                                         </div>
                                     </div>
 
@@ -739,125 +681,20 @@
                                     <h2><a>Sản phẩm cùng loại</a></h2>
                                 </div>
                                 <div class="section-tour-owl owl-carousel not-dqowl products-view-grid margin-top-10" data-md-items="4" data-sm-items="4" data-xs-items="2" data-margin="10">
-                                    
-                                            <div class="item">
-                                                <div class="prdboxsli-item">
-                                                    <div class="prdboxsli-thumb">
-                                                        <a href="/hublot-classic-fusion-titanium-blue" title="Hublot Classic Fusion Titanium Blue">
-                                                            <img src="https://cuongluxury.vn/uploads/products/f3.png?width=350&amp;height=350&amp;mode=crop" alt="Hublot Classic Fusion Titanium Blue"></a>
-                                                    </div>
-                                                    <div class="prdboxsli-ccname">Hublot</div>
-                                                    <div class="prdboxsli-key">MSP: 542.NX.7170.LR</div>
-                                                    <div class="prdboxsli-title"><a href="/hublot-classic-fusion-titanium-blue" title="Hublot Classic Fusion Titanium Blue">Hublot Classic Fusion Titanium Blue</a></div>
-                                                    <div class="prdboxsli-price">
-                                                        <div class="item-price">
-                                                            <span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>155.000.000<span class='dvtt'>đ</span></span></span></span></span><span class='old-price'><span class='price-container'><span class='price-wrapper'><span class='price'>150.000.000<span class='dvtt'>đ</span></span></span></span></span>
-                                                        </div>
+                                            @foreach($c->products as $item)
+                                                <div class='item'>
+                                                    <div class='prdboxsli-item'>
+                                                       <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
+                                                       <div class='prdboxsli-ccname'>{{$c->title}}</div>
+                                                       <div class='prdboxsli-key'>MSP: {{$item->ma}}</div>
+                                                       <div class='prdboxsli-title'><a href='/{{$item->url}}' title='Patek Philippe Complications 5905R-001 Like New 2020'>{{$item->name}}</a></div>
+                                                       <div class='prdboxsli-price'>
+                                                          <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>{!!number_format($item->price)!!}<span class='dvtt'>@if($item->tiente == 0) đ @else $ @endif </span></span></span></span></span></div>
+                                                       </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        
-                                            <div class="item">
-                                                <div class="prdboxsli-item">
-                                                    <div class="prdboxsli-thumb">
-                                                        <a href="/hublot-classic-fusion-titanium-black-42mm" title="Hublot Classic Fusion Titanium Black 42mm">
-                                                            <img src="https://cuongluxury.vn/uploads/products/hublot-classic-fusion-titanium.png?width=350&amp;height=350&amp;mode=crop" alt="Hublot Classic Fusion Titanium Black 42mm"></a>
-                                                    </div>
-                                                    <div class="prdboxsli-ccname">Hublot</div>
-                                                    <div class="prdboxsli-key">MSP: 542.NX.1171.LR</div>
-                                                    <div class="prdboxsli-title"><a href="/hublot-classic-fusion-titanium-black-42mm" title="Hublot Classic Fusion Titanium Black 42mm">Hublot Classic Fusion Titanium Black 42mm</a></div>
-                                                    <div class="prdboxsli-price">
-                                                        <div class="item-price">
-                                                            <span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>155.000.000<span class='dvtt'>đ</span></span></span></span></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        
-                                            <div class="item">
-                                                <div class="prdboxsli-item">
-                                                    <div class="prdboxsli-thumb">
-                                                        <a href="/hublot-big-bang-sang-bleu-i-steel-pave" title="Hublot Big Bang Sang Bleu I Steel Pavé">
-                                                            <img src="https://cuongluxury.vn/uploads/products/hublot-big-bang-sang-bleu-i-steel-pave.png?width=350&amp;height=350&amp;mode=crop" alt="Hublot Big Bang Sang Bleu I Steel Pavé"></a>
-                                                    </div>
-                                                    <div class="prdboxsli-ccname">Hublot</div>
-                                                    <div class="prdboxsli-key">MSP: 465.SS.1117.VR.1704</div>
-                                                    <div class="prdboxsli-title"><a href="/hublot-big-bang-sang-bleu-i-steel-pave" title="Hublot Big Bang Sang Bleu I Steel Pavé">Hublot Big Bang Sang Bleu I Steel Pavé</a></div>
-                                                    <div class="prdboxsli-price">
-                                                        <div class="item-price">
-                                                            <span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>375.000.000<span class='dvtt'>đ</span></span></span></span></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        
-                                            <div class="item">
-                                                <div class="prdboxsli-item">
-                                                    <div class="prdboxsli-thumb">
-                                                        <a href="/hublot-classic-fusion-orlinski-titanium" title="Hublot Classic Fusion Orlinski Titanium">
-                                                            <img src="https://cuongluxury.vn/uploads/products/hublot-classic-fusion-orlinski-titanium.png?width=350&amp;height=350&amp;mode=crop" alt="Hublot Classic Fusion Orlinski Titanium"></a>
-                                                    </div>
-                                                    <div class="prdboxsli-ccname">Hublot</div>
-                                                    <div class="prdboxsli-key">MSP: 550.NS.1800.RX.ORL19</div>
-                                                    <div class="prdboxsli-title"><a href="/hublot-classic-fusion-orlinski-titanium" title="Hublot Classic Fusion Orlinski Titanium">Hublot Classic Fusion Orlinski Titanium</a></div>
-                                                    <div class="prdboxsli-price">
-                                                        <div class="item-price">
-                                                            <span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>245.000.000<span class='dvtt'>đ</span></span></span></span></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        
-                                            <div class="item">
-                                                <div class="prdboxsli-item">
-                                                    <div class="prdboxsli-thumb">
-                                                        <a href="/hublot-classic-fusion-titanium-pave" title="Hublot Classic Fusion Titanium Pavé">
-                                                            <img src="https://cuongluxury.vn/uploads/products/52-hublot-classic-fusion-titanium-pave.png?width=350&amp;height=350&amp;mode=crop" alt="Hublot Classic Fusion Titanium Pavé"></a>
-                                                    </div>
-                                                    <div class="prdboxsli-ccname">Hublot</div>
-                                                    <div class="prdboxsli-key">MSP: 542.NX.1171.LR.1704</div>
-                                                    <div class="prdboxsli-title"><a href="/hublot-classic-fusion-titanium-pave" title="Hublot Classic Fusion Titanium Pavé">Hublot Classic Fusion Titanium Pavé</a></div>
-                                                    <div class="prdboxsli-price">
-                                                        <div class="item-price">
-                                                            <span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>150.000.000<span class='dvtt'>đ</span></span></span></span></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        
-                                            <div class="item">
-                                                <div class="prdboxsli-item">
-                                                    <div class="prdboxsli-thumb">
-                                                        <a href="/hublot-spirit-of-big-bang-titanium-black-diamond-39mm" title="Hublot Spirit Of Big Bang Titanium Black Diamond 39mm">
-                                                            <img src="https://cuongluxury.vn/uploads/products/hublot-spirit-of-big-bang-titanium-diamonds-39mm.png?width=350&amp;height=350&amp;mode=crop" alt="Hublot Spirit Of Big Bang Titanium Black Diamond 39mm"></a>
-                                                    </div>
-                                                    <div class="prdboxsli-ccname">Hublot</div>
-                                                    <div class="prdboxsli-key">MSP: 665.NX.1170.RX.1204</div>
-                                                    <div class="prdboxsli-title"><a href="/hublot-spirit-of-big-bang-titanium-black-diamond-39mm" title="Hublot Spirit Of Big Bang Titanium Black Diamond 39mm">Hublot Spirit Of Big Bang Titanium Black Diamond 39mm</a></div>
-                                                    <div class="prdboxsli-price">
-                                                        <div class="item-price">
-                                                            <span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>310.000.000<span class='dvtt'>đ</span></span></span></span></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        
-                                            <div class="item">
-                                                <div class="prdboxsli-item">
-                                                    <div class="prdboxsli-thumb">
-                                                        <a href="/hublot-big-bang-one-click-steel-white-diamond-33mm" title="Hublot Big Bang One Click Steel White Diamond 33mm">
-                                                            <img src="https://cuongluxury.vn/uploads/products/diamon.png?width=350&amp;height=350&amp;mode=crop" alt="Hublot Big Bang One Click Steel White Diamond 33mm"></a>
-                                                    </div>
-                                                    <div class="prdboxsli-ccname">Hublot</div>
-                                                    <div class="prdboxsli-key">MSP: 485.SE.2210.RW.1204</div>
-                                                    <div class="prdboxsli-title"><a href="/hublot-big-bang-one-click-steel-white-diamond-33mm" title="Hublot Big Bang One Click Steel White Diamond 33mm">Hublot Big Bang One Click Steel White Diamond 33mm</a></div>
-                                                    <div class="prdboxsli-price">
-                                                        <div class="item-price">
-                                                            <span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>270.000.000<span class='dvtt'>đ</span></span></span></span></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endforeach
+                                            
                                         
                                 </div>
                             </div>

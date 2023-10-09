@@ -186,9 +186,9 @@
             
                                             <label for="ma" class="control-label">Giá sale</label>
                                             @if(isset($request->product_id))
-                                                <input class="form-control" placeholder="giá sale" value="{{$pr->sale}}" oninput="replaceValue(this);" name="sale" type="text" required id="sale">
+                                                <input class="form-control" placeholder="giá sale" value="{{$pr->sale}}" oninput="replaceValue(this);" name="sale" type="text" id="sale">
                                             @else
-                                                <input class="form-control" placeholder="giá sale" oninput="replaceValue(this);" value="{{old('sale')}}" name="sale" type="text" required id="sale">
+                                                <input class="form-control" placeholder="giá sale" oninput="replaceValue(this);" value="{{old('sale')}}" name="sale" type="text" id="sale">
                                             @endif
                                         </div>
                                     </div>

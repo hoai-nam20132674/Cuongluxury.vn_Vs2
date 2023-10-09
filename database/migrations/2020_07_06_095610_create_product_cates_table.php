@@ -19,6 +19,7 @@ class CreateProductCatesTable extends Migration
             $table->string('name');
             $table->string('url');
             $table->string('title')->nullable();
+            $table->longText('content')->nullable();
             $table->longText('seo_description')->nullable();
             $table->string('seo_keyword')->nullable();
             $table->string('avata')->nullable();

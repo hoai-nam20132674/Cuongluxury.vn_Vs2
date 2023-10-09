@@ -24,6 +24,7 @@ class ProductCate extends Model
     public function add($request){
     	$this->name = $request->name;
     	$this->title = $request->title;
+        $this->content = $request->content;
     	$this->seo_keyword = $request->seo_keyword;
     	$this->seo_description = $request->seo_description;
     	$this->url = $request->url;
@@ -40,9 +41,7 @@ class ProductCate extends Model
             $this->lang='vi';
         }
     	$path = public_path('uploads/images/products/categories/' . $file_name);
-        Image::make($request->file('avata'))->resize(400, null, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save($path);
+        Image::make($request->file('avata'))->save($path);
         $path2 = public_path('uploads/images/products/categories/' . $file_name_banner);
         Image::make($request->file('banner'))->save($path2);
     	$this->save();
@@ -75,6 +74,7 @@ class ProductCate extends Model
     	$cate = $this::where('id',$id)->with('properties')->get()->first();
     	$cate->name = $request->name;
     	$cate->title = $request->title;
+        $cate->content = $request->content;
     	$cate->seo_keyword = $request->seo_keyword;
     	$cate->seo_description = $request->seo_description;
         $url = $request->url.'-pc'.$cate->id;
@@ -85,9 +85,7 @@ class ProductCate extends Model
             $file_name = $request->file('avata')->getClientOriginalName();
             $cate->avata = $file_name;
             $path = public_path('uploads/images/products/categories/' . $file_name);
-            Image::make($request->file('avata'))->resize(400, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($path);
+            Image::make($request->file('avata'))->save($path);
         }
         if($request->hasFile('banner')){ 
             $file_name = $request->file('banner')->getClientOriginalName();

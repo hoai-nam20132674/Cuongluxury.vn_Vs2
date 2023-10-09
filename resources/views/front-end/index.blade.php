@@ -41,72 +41,20 @@
           <div class='productscates-headding2'><span  style='color:#fff'>Patek Philippe</span></div>
           <div class='container pb-30'>
              <div class='productscates-boxslider owl-carousel'>
+               @foreach($patek->products as $item )
                 <div class='item'>
                    <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/patek-philippe-complications-5905r-001' title='Patek Philippe Complications 5905R-001 Like New 2020'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/5905r001.png?width=350&height=350&mode=crop' alt='Patek Philippe Complications 5905R-001 Like New 2020' /></a></div>
+                      <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
                       <div class='prdboxsli-ccname'>Patek Philippe</div>
-                      <div class='prdboxsli-key'>MSP: 5905R-001</div>
-                      <div class='prdboxsli-title'><a href='/patek-philippe-complications-5905r-001' title='Patek Philippe Complications 5905R-001 Like New 2020'>Patek Philippe Complications 5905R-001 Like New 2020</a></div>
+                      <div class='prdboxsli-key'>MSP: {{$item->ma}}</div>
+                      <div class='prdboxsli-title'><a href='/{{$item->url}}' title='Patek Philippe Complications 5905R-001 Like New 2020'>{{$item->name}}</a></div>
                       <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>1.720.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>{!!number_format($item->price)!!}<span class='dvtt'>@if($item->tiente == 0) đ @else $ @endif </span></span></span></span></span></div>
                       </div>
                    </div>
                 </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/patek-philippe-complications-5205r-011' title='Patek Philippe Complications 5205R-011 '><img loading='lazy' src='https://cuongluxury.vn/uploads/products/5205-011.png?width=350&height=350&mode=crop' alt='Patek Philippe Complications 5205R-011 ' /></a></div>
-                      <div class='prdboxsli-ccname'>Patek Philippe</div>
-                      <div class='prdboxsli-key'>MSP: 5205R-011 </div>
-                      <div class='prdboxsli-title'><a href='/patek-philippe-complications-5205r-011' title='Patek Philippe Complications 5205R-011 '>Patek Philippe Complications 5205R-011 </a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>1.580.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/patek-philippe-complications-5930g-010-like-new' title='Patek Philippe Complications 5930G-010 Like New'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/5930g-001.png?width=350&height=350&mode=crop' alt='Patek Philippe Complications 5930G-010 Like New' /></a></div>
-                      <div class='prdboxsli-ccname'>Patek Philippe</div>
-                      <div class='prdboxsli-key'>MSP: 5930G-010</div>
-                      <div class='prdboxsli-title'><a href='/patek-philippe-complications-5930g-010-like-new' title='Patek Philippe Complications 5930G-010 Like New'>Patek Philippe Complications 5930G-010 Like New</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>1.700.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/patek-philippe-complications-5930p-001' title='Patek Philippe Complications 5930P-001'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/5930p001.png?width=350&height=350&mode=crop' alt='Patek Philippe Complications 5930P-001' /></a></div>
-                      <div class='prdboxsli-ccname'>Patek Philippe</div>
-                      <div class='prdboxsli-key'>MSP: 5930P-001</div>
-                      <div class='prdboxsli-title'><a href='/patek-philippe-complications-5930p-001' title='Patek Philippe Complications 5930P-001'>Patek Philippe Complications 5930P-001</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>4.320.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/patek-philippe-aquanaut-5968g-001' title='Patek Philippe Aquanaut 5968G-001'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/5968g001.png?width=350&height=350&mode=crop' alt='Patek Philippe Aquanaut 5968G-001' /></a></div>
-                      <div class='prdboxsli-ccname'>Patek Philippe</div>
-                      <div class='prdboxsli-key'>MSP: 5968G-001</div>
-                      <div class='prdboxsli-title'><a href='/patek-philippe-aquanaut-5968g-001' title='Patek Philippe Aquanaut 5968G-001'>Patek Philippe Aquanaut 5968G-001</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>3.360.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/patek-philippe-complications-4948r-001' title='Patek Philippe Complications 4948R-001'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/4948r001.png?width=350&height=350&mode=crop' alt='Patek Philippe Complications 4948R-001' /></a></div>
-                      <div class='prdboxsli-ccname'>Patek Philippe</div>
-                      <div class='prdboxsli-key'>MSP: 4948R-001</div>
-                      <div class='prdboxsli-title'><a href='/patek-philippe-complications-4948r-001' title='Patek Philippe Complications 4948R-001'>Patek Philippe Complications 4948R-001</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>1.730.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
+               @endforeach
+                
              </div>
              <div class='comment_button '><a href='/patek-philippe'>Xem thêm</a></div>
           </div>
@@ -115,72 +63,20 @@
           <div class='productscates-headding2'><span  style='color:#fff'>Rolex</span></div>
           <div class='container pb-30'>
              <div class='productscates-boxslider owl-carousel'>
-                <div class='item'>
+               @foreach($rolex->products as $item)
+                  <div class='item'>
                    <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/rolex-submariner-date-steel-black-bezel-dial' title='Rolex Submariner Date Steel Black Bezel & Dial  '><img loading='lazy' src='https://cuongluxury.vn/uploads/products/rolex-steel-submariner-date-watch---black-bezel---black-dial---2020-release.png?width=350&height=350&mode=crop' alt='Rolex Submariner Date Steel Black Bezel & Dial  ' /></a></div>
+                      <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
                       <div class='prdboxsli-ccname'>Rolex</div>
-                      <div class='prdboxsli-key'>MSP: 126610LN</div>
-                      <div class='prdboxsli-title'><a href='/rolex-submariner-date-steel-black-bezel-dial' title='Rolex Submariner Date Steel Black Bezel & Dial  '>Rolex Submariner Date Steel Black Bezel & Dial  </a></div>
+                      <div class='prdboxsli-key'>MSP: {{$item->ma}}</div>
+                      <div class='prdboxsli-title'><a href='/{{$item->url}}' title='Patek Philippe Complications 5905R-001 Like New 2020'>{{$item->name}}</a></div>
                       <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>398.000.000<span class='dvtt'>đ</span></span></span></span></span><span class='old-price'><span class='price-container'><span class='price-wrapper'><span class='price'>405.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>{!!number_format($item->price)!!}<span class='dvtt'>@if($item->tiente == 0) đ @else $ @endif </span></span></span></span></span></div>
                       </div>
                    </div>
                 </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/rolex-datejust-rolesor-everose-gold-white-mother-of-pearl-diamond-dial' title='Rolex Datejust Rolesor Everose Gold White Mother Of Pearl Diamond Dial'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/rolex-steel-and-everose-rolesor-datejust-36-watch-fluted-bezel-white-mother-of-pearl-diamond-dial-jubilee-bracelet.png?width=350&height=350&mode=crop' alt='Rolex Datejust Rolesor Everose Gold White Mother Of Pearl Diamond Dial' /></a></div>
-                      <div class='prdboxsli-ccname'>Rolex</div>
-                      <div class='prdboxsli-key'>MSP: 126231</div>
-                      <div class='prdboxsli-title'><a href='/rolex-datejust-rolesor-everose-gold-white-mother-of-pearl-diamond-dial' title='Rolex Datejust Rolesor Everose Gold White Mother Of Pearl Diamond Dial'> Rolex Datejust Rolesor Everose Gold White Mother Of Pearl...</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>478.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/rolex-datejust-rolesor-white-gold-dark-rhodium-diamond-dial' title='Rolex Datejust Rolesor White Gold Dark Rhodium Diamond Dial'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/rolex-datejust-steel-and-white-gold-rolesor-bezel-dark-rhodium-diamond-dial.png?width=350&height=350&mode=crop' alt='Rolex Datejust Rolesor White Gold Dark Rhodium Diamond Dial' /></a></div>
-                      <div class='prdboxsli-ccname'>Rolex</div>
-                      <div class='prdboxsli-key'>MSP: 126334</div>
-                      <div class='prdboxsli-title'><a href='/rolex-datejust-rolesor-white-gold-dark-rhodium-diamond-dial' title='Rolex Datejust Rolesor White Gold Dark Rhodium Diamond Dial'>Rolex Datejust Rolesor White Gold Dark Rhodium Diamond Dial</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>395.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/rolex-datejust-everose-rolesor-mop-diamond-dial-31mm' title='Rolex Datejust Everose Rolesor MOP Diamond Dial 31mm'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/22.png?width=350&height=350&mode=crop' alt='Rolex Datejust Everose Rolesor MOP Diamond Dial 31mm' /></a></div>
-                      <div class='prdboxsli-ccname'>Rolex</div>
-                      <div class='prdboxsli-key'>MSP: 278271-0026</div>
-                      <div class='prdboxsli-title'><a href='/rolex-datejust-everose-rolesor-mop-diamond-dial-31mm' title='Rolex Datejust Everose Rolesor MOP Diamond Dial 31mm'>Rolex Datejust Everose Rolesor MOP Diamond Dial 31mm</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>450.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/rolex-datejust-everose-rolesor-salmon-diamond-dial-31mm' title='Rolex Datejust Everose Rolesor Salmon Diamond Dial 31mm'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/48-11.png?width=350&height=350&mode=crop' alt='Rolex Datejust Everose Rolesor Salmon Diamond Dial 31mm' /></a></div>
-                      <div class='prdboxsli-ccname'>Rolex</div>
-                      <div class='prdboxsli-key'>MSP: 278271-0016</div>
-                      <div class='prdboxsli-title'><a href='/rolex-datejust-everose-rolesor-salmon-diamond-dial-31mm' title='Rolex Datejust Everose Rolesor Salmon Diamond Dial 31mm'>Rolex Datejust Everose Rolesor Salmon Diamond Dial 31mm</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>375.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/rolex-datejust-everose-rolesor-chocolate-roman-diamond-dial-31mm' title='Rolex Datejust Everose Rolesor Chocolate Roman Diamond Dial 31mm'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/55.png?width=350&height=350&mode=crop' alt='Rolex Datejust Everose Rolesor Chocolate Roman Diamond Dial 31mm' /></a></div>
-                      <div class='prdboxsli-ccname'>Rolex</div>
-                      <div class='prdboxsli-key'>MSP: 278271-0004</div>
-                      <div class='prdboxsli-title'><a href='/rolex-datejust-everose-rolesor-chocolate-roman-diamond-dial-31mm' title='Rolex Datejust Everose Rolesor Chocolate Roman Diamond Dial 31mm'>Rolex Datejust Everose Rolesor Chocolate Roman Diamond Dial 31mm</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>368.000.000<span class='dvtt'>đ</span></span></span></span></span><span class='old-price'><span class='price-container'><span class='price-wrapper'><span class='price'>379.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
+               @endforeach
+                
              </div>
              <div class='comment_button '><a href='/rolex'>Xem thêm</a></div>
           </div>
@@ -189,72 +85,20 @@
           <div class='productscates-headding2'><span  style='color:#fff'>Hublot</span></div>
           <div class='container pb-30'>
              <div class='productscates-boxslider owl-carousel'>
-                <div class='item'>
+               @foreach($hublot->products as $item)
+                  <div class='item'>
                    <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/hublot-spirit-of-big-bang-titanium-moonphase' title='Hublot Spirit Of Big Bang Titanium Moonphase'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/a2.png?width=350&height=350&mode=crop' alt='Hublot Spirit Of Big Bang Titanium Moonphase' /></a></div>
+                      <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
                       <div class='prdboxsli-ccname'>Hublot</div>
-                      <div class='prdboxsli-key'>MSP: 647.NX.1137.RX</div>
-                      <div class='prdboxsli-title'><a href='/hublot-spirit-of-big-bang-titanium-moonphase' title='Hublot Spirit Of Big Bang Titanium Moonphase'>Hublot Spirit Of Big Bang Titanium Moonphase</a></div>
+                      <div class='prdboxsli-key'>MSP: {{$item->ma}}</div>
+                      <div class='prdboxsli-title'><a href='/{{$item->url}}' title='Patek Philippe Complications 5905R-001 Like New 2020'>{{$item->name}}</a></div>
                       <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>385.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>{!!number_format($item->price)!!}<span class='dvtt'>@if($item->tiente == 0) đ @else $ @endif </span></span></span></span></span></div>
                       </div>
                    </div>
                 </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/hublot-big-bang-one-click-king-gold-diamonds' title='Hublot Big Bang One Click King Gold Diamonds'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/hublot-big-bang-one-click-king-gold-diamonds.png?width=350&height=350&mode=crop' alt='Hublot Big Bang One Click King Gold Diamonds' /></a></div>
-                      <div class='prdboxsli-ccname'>Hublot</div>
-                      <div class='prdboxsli-key'>MSP: 465.OX.1180.RX.1204</div>
-                      <div class='prdboxsli-title'><a href='/hublot-big-bang-one-click-king-gold-diamonds' title='Hublot Big Bang One Click King Gold Diamonds'>Hublot Big Bang One Click King Gold Diamonds</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>545.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/hublot-big-bang-sang-bleu-i-steel-pave' title='Hublot Big Bang Sang Bleu I Steel Pavé'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/hublot-big-bang-sang-bleu-i-steel-pave.png?width=350&height=350&mode=crop' alt='Hublot Big Bang Sang Bleu I Steel Pavé' /></a></div>
-                      <div class='prdboxsli-ccname'>Hublot</div>
-                      <div class='prdboxsli-key'>MSP: 465.SS.1117.VR.1704</div>
-                      <div class='prdboxsli-title'><a href='/hublot-big-bang-sang-bleu-i-steel-pave' title='Hublot Big Bang Sang Bleu I Steel Pavé'>Hublot Big Bang Sang Bleu I Steel Pavé</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>450.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/hublot-spirit-of-big-bang-king-gold-blue-diamond' title='Hublot Spirit Of Big Bang King Gold Blue Diamond'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/a3.png?width=350&height=350&mode=crop' alt='Hublot Spirit Of Big Bang King Gold Blue Diamond' /></a></div>
-                      <div class='prdboxsli-ccname'>Hublot</div>
-                      <div class='prdboxsli-key'>MSP: 665.OX.7180.LR.1204</div>
-                      <div class='prdboxsli-title'><a href='/hublot-spirit-of-big-bang-king-gold-blue-diamond' title='Hublot Spirit Of Big Bang King Gold Blue Diamond'>Hublot Spirit Of Big Bang King Gold Blue Diamond</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>565.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/hublot-big-bang-one-click-steel-white-full-diamond' title='Hublot Big Bang One Click Steel White Full Diamond'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/full-diamon.png?width=350&height=350&mode=crop' alt='Hublot Big Bang One Click Steel White Full Diamond' /></a></div>
-                      <div class='prdboxsli-ccname'>Hublot</div>
-                      <div class='prdboxsli-key'>MSP: SKU01666</div>
-                      <div class='prdboxsli-title'><a href='/hublot-big-bang-one-click-steel-white-full-diamond' title='Hublot Big Bang One Click Steel White Full Diamond'>Hublot Big Bang One Click Steel White Full Diamond</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>370.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/hublot-spirit-of-big-bang-king-gold-black-diamond-39mm' title='Hublot Spirit Of Big Bang King Gold Black Diamond 39mm'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/hublot-spirit-of-big-bang-king-gold-diamonds-39mm.png?width=350&height=350&mode=crop' alt='Hublot Spirit Of Big Bang King Gold Black Diamond 39mm' /></a></div>
-                      <div class='prdboxsli-ccname'>Hublot</div>
-                      <div class='prdboxsli-key'>MSP: 665.OX.1180.RX.1204</div>
-                      <div class='prdboxsli-title'><a href='/hublot-spirit-of-big-bang-king-gold-black-diamond-39mm' title='Hublot Spirit Of Big Bang King Gold Black Diamond 39mm'>Hublot Spirit Of Big Bang King Gold Black Diamond 39mm</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>565.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
+               @endforeach
+                
              </div>
              <div class='comment_button '><a href='/hublot'>Xem thêm</a></div>
           </div>
@@ -263,72 +107,20 @@
           <div class='productscates-headding2'><span  style='color:#fff'>Franck Muller</span></div>
           <div class='container pb-30'>
              <div class='productscates-boxslider owl-carousel'>
-                <div class='item'>
+               @foreach($fm->products as $item)
+                  <div class='item'>
                    <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/franck-muller-vanguard-rose-gold-full-diamonds' title='Franck Muller Vanguard Rose Gold Full Diamonds'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/34-franck-muller-vanguard-rose-gold-full-diamonds.png?width=350&height=350&mode=crop' alt='Franck Muller Vanguard Rose Gold Full Diamonds' /></a></div>
+                      <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
                       <div class='prdboxsli-ccname'>Franck Muller</div>
-                      <div class='prdboxsli-key'>MSP: V41 Rose Gold</div>
-                      <div class='prdboxsli-title'><a href='/franck-muller-vanguard-rose-gold-full-diamonds' title='Franck Muller Vanguard Rose Gold Full Diamonds'>Franck Muller Vanguard Rose Gold Full Diamonds</a></div>
+                      <div class='prdboxsli-key'>MSP: {{$item->ma}}</div>
+                      <div class='prdboxsli-title'><a href='/{{$item->url}}' title='Patek Philippe Complications 5905R-001 Like New 2020'>{{$item->name}}</a></div>
                       <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>273.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>{!!number_format($item->price)!!}<span class='dvtt'>@if($item->tiente == 0) đ @else $ @endif </span></span></span></span></span></div>
                       </div>
                    </div>
                 </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/franck-muller-vanguard-yachting-rose-gold-full-diamonds' title='Franck Muller Vanguard Yachting Rose Gold Full Diamonds'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/41-franck-muller-vanguard-yachting-rose-gold-full-diamonds.png?width=350&height=350&mode=crop' alt='Franck Muller Vanguard Yachting Rose Gold Full Diamonds' /></a></div>
-                      <div class='prdboxsli-ccname'>Franck Muller</div>
-                      <div class='prdboxsli-key'>MSP: V41 Yachting Gold</div>
-                      <div class='prdboxsli-title'><a href='/franck-muller-vanguard-yachting-rose-gold-full-diamonds' title='Franck Muller Vanguard Yachting Rose Gold Full Diamonds'>Franck Muller Vanguard Yachting Rose Gold Full Diamonds</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>284.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/franck-muller-vanguard-steel-full-diamonds' title='Franck Muller Vanguard Steel Full Diamonds'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/franck-muller-vanguard-steel-full-diamonds.png?width=350&height=350&mode=crop' alt='Franck Muller Vanguard Steel Full Diamonds' /></a></div>
-                      <div class='prdboxsli-ccname'>Franck Muller</div>
-                      <div class='prdboxsli-key'>MSP: V41 Steel Black</div>
-                      <div class='prdboxsli-title'><a href='/franck-muller-vanguard-steel-full-diamonds' title='Franck Muller Vanguard Steel Full Diamonds'>Franck Muller Vanguard Steel Full Diamonds</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>170.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/franck-muller-double-mystery-blue' title='Franck Muller Double Mystery Blue'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/fm-dm-b.png?width=350&height=350&mode=crop' alt='Franck Muller Double Mystery Blue' /></a></div>
-                      <div class='prdboxsli-ccname'>Franck Muller</div>
-                      <div class='prdboxsli-key'>MSP: DM42D1RCD (OG)-BLUE</div>
-                      <div class='prdboxsli-title'><a href='/franck-muller-double-mystery-blue' title='Franck Muller Double Mystery Blue'>Franck Muller Double Mystery Blue</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>965.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/franck-muller-vanguard-yachting-steel-full-diamonds' title='Franck Muller Vanguard Yachting Steel Full Diamonds'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/3-franck-muller-vanguard-yachting-steel-full-diamonds.png?width=350&height=350&mode=crop' alt='Franck Muller Vanguard Yachting Steel Full Diamonds' /></a></div>
-                      <div class='prdboxsli-ccname'>Franck Muller</div>
-                      <div class='prdboxsli-key'>MSP: V41 Yachting Steel</div>
-                      <div class='prdboxsli-title'><a href='/franck-muller-vanguard-yachting-steel-full-diamonds' title='Franck Muller Vanguard Yachting Steel Full Diamonds'>Franck Muller Vanguard Yachting Steel Full Diamonds</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>138.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
-                <div class='item'>
-                   <div class='prdboxsli-item'>
-                      <div class='prdboxsli-thumb'><a href='/franck-muller-vanguard-yachting-rose-gold' title='Franck Muller Vanguard Yachting Rose Gold'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/52-franck-muller-vanguard-yachting-rose-gold.png?width=350&height=350&mode=crop' alt='Franck Muller Vanguard Yachting Rose Gold' /></a></div>
-                      <div class='prdboxsli-ccname'>Franck Muller</div>
-                      <div class='prdboxsli-key'>MSP: V41 Yachting Gold</div>
-                      <div class='prdboxsli-title'><a href='/franck-muller-vanguard-yachting-rose-gold' title='Franck Muller Vanguard Yachting Rose Gold'>Franck Muller Vanguard Yachting Rose Gold</a></div>
-                      <div class='prdboxsli-price'>
-                         <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>225.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                      </div>
-                   </div>
-                </div>
+               @endforeach
+                
              </div>
              <div class='comment_button '><a href='/franck-muller'>Xem thêm</a></div>
           </div>
@@ -338,72 +130,20 @@
        <div class='productscates-headding'><span style='color:#ba8562'>Vertu</span><img src='https://cuongluxury.vn/uploads/products/cates/line-11.png' alt='Vertu' /></div>
        <div class='container pb-30'>
           <div class='productscates-boxslider owl-carousel'>
-             <div class='item'>
+            @foreach($vertu->products as $item)
+               <div class='item'>
                 <div class='prdboxsli-item'>
-                   <div class='prdboxsli-thumb'><a href='/vertu-signature-s-pure-black-mix-gold' title='Vertu Signature S Pure Black Mix Gold'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/vertu-signature-s-pure-black-mix-gold.png?width=350&height=350&mode=crop' alt='Vertu Signature S Pure Black Mix Gold' /></a></div>
+                   <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
                    <div class='prdboxsli-ccname'>Vertu</div>
-                   <div class='prdboxsli-key'>MSP: SKU01500</div>
-                   <div class='prdboxsli-title'><a href='/vertu-signature-s-pure-black-mix-gold' title='Vertu Signature S Pure Black Mix Gold'>Vertu Signature S Pure Black Mix Gold</a></div>
+                   <div class='prdboxsli-key'>MSP: {{$item->ma}}</div>
+                   <div class='prdboxsli-title'><a href='/{{$item->url}}' title='Patek Philippe Complications 5905R-001 Like New 2020'>{{$item->name}}</a></div>
                    <div class='prdboxsli-price'>
-                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>125.000.000<span class='dvtt'>đ</span></span></span></span></span><span class='old-price'><span class='price-container'><span class='price-wrapper'><span class='price'>150.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>{!!number_format($item->price)!!}<span class='dvtt'>@if($item->tiente == 0) đ @else $ @endif </span></span></span></span></span></div>
                    </div>
                 </div>
              </div>
-             <div class='item'>
-                <div class='prdboxsli-item'>
-                   <div class='prdboxsli-thumb'><a href='/vertu-signature-s-rose-gold-diamonds' title='Vertu Signature S Rose Gold Diamonds'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/s2.png?width=350&height=350&mode=crop' alt='Vertu Signature S Rose Gold Diamonds' /></a></div>
-                   <div class='prdboxsli-ccname'>Vertu</div>
-                   <div class='prdboxsli-key'>MSP: SKU01491</div>
-                   <div class='prdboxsli-title'><a href='/vertu-signature-s-rose-gold-diamonds' title='Vertu Signature S Rose Gold Diamonds'>Vertu Signature S Rose Gold Diamonds</a></div>
-                   <div class='prdboxsli-price'>
-                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>235.000.000<span class='dvtt'>đ</span></span></span></span></span><span class='old-price'><span class='price-container'><span class='price-wrapper'><span class='price'>295.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                   </div>
-                </div>
-             </div>
-             <div class='item'>
-                <div class='prdboxsli-item'>
-                   <div class='prdboxsli-thumb'><a href='/vertu-signature-s-navy-alligator-stainless-steel-2017' title='Vertu Signature S Navy Alligator Stainless Steel 2017'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/vertu-signature-s-navy-alligator-stainless-steel.png?width=350&height=350&mode=crop' alt='Vertu Signature S Navy Alligator Stainless Steel 2017' /></a></div>
-                   <div class='prdboxsli-ccname'>Vertu</div>
-                   <div class='prdboxsli-key'>MSP: SKU01458</div>
-                   <div class='prdboxsli-title'><a href='/vertu-signature-s-navy-alligator-stainless-steel-2017' title='Vertu Signature S Navy Alligator Stainless Steel 2017'>Vertu Signature S Navy Alligator Stainless Steel 2017</a></div>
-                   <div class='prdboxsli-price'>
-                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>140.000.000<span class='dvtt'>đ</span></span></span></span></span><span class='old-price'><span class='price-container'><span class='price-wrapper'><span class='price'>190.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                   </div>
-                </div>
-             </div>
-             <div class='item'>
-                <div class='prdboxsli-item'>
-                   <div class='prdboxsli-thumb'><a href='/vertu-signature-s-clous-de-paris-rose-gold' title='Vertu Signature S Clous De Paris Rose Gold'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/vertu-signature-s-clous-de-paris-red-gold-2--2016.png?width=350&height=350&mode=crop' alt='Vertu Signature S Clous De Paris Rose Gold' /></a></div>
-                   <div class='prdboxsli-ccname'>Vertu</div>
-                   <div class='prdboxsli-key'>MSP: SKU01451</div>
-                   <div class='prdboxsli-title'><a href='/vertu-signature-s-clous-de-paris-rose-gold' title='Vertu Signature S Clous De Paris Rose Gold'>Vertu Signature S Clous De Paris Rose Gold</a></div>
-                   <div class='prdboxsli-price'>
-                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>290.000.000<span class='dvtt'>đ</span></span></span></span></span><span class='old-price'><span class='price-container'><span class='price-wrapper'><span class='price'>330.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                   </div>
-                </div>
-             </div>
-             <div class='item'>
-                <div class='prdboxsli-item'>
-                   <div class='prdboxsli-thumb'><a href='/vertu-signature-s-centurion-rose-gold-diamonds-bespoke' title='Vertu Signature S Centurion Rose Gold Diamonds Bespoke'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/s1.png?width=350&height=350&mode=crop' alt='Vertu Signature S Centurion Rose Gold Diamonds Bespoke' /></a></div>
-                   <div class='prdboxsli-ccname'>Vertu</div>
-                   <div class='prdboxsli-key'>MSP: SKU01498</div>
-                   <div class='prdboxsli-title'><a href='/vertu-signature-s-centurion-rose-gold-diamonds-bespoke' title='Vertu Signature S Centurion Rose Gold Diamonds Bespoke'>Vertu Signature S Centurion Rose Gold Diamonds Bespoke</a></div>
-                   <div class='prdboxsli-price'>
-                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>295.000.000<span class='dvtt'>đ</span></span></span></span></span><span class='old-price'><span class='price-container'><span class='price-wrapper'><span class='price'>375.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                   </div>
-                </div>
-             </div>
-             <div class='item'>
-                <div class='prdboxsli-item'>
-                   <div class='prdboxsli-thumb'><a href='/vertu-signature-s-ultimate-black' title='Vertu Signature S Ultimate Black'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/vertu-signature-s-u-ltimate-black.png?width=350&height=350&mode=crop' alt='Vertu Signature S Ultimate Black' /></a></div>
-                   <div class='prdboxsli-ccname'>Vertu</div>
-                   <div class='prdboxsli-key'>MSP: SKU01495</div>
-                   <div class='prdboxsli-title'><a href='/vertu-signature-s-ultimate-black' title='Vertu Signature S Ultimate Black'>Vertu Signature S Ultimate Black</a></div>
-                   <div class='prdboxsli-price'>
-                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>189.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                   </div>
-                </div>
-             </div>
+            @endforeach
+             
           </div>
           <div class='comment_button '><a href='/vertu'>Xem thêm</a></div>
        </div>
@@ -426,72 +166,20 @@
        <div class='productscates-headding'><span style='color:#ba8562'>Trang sức</span><img src='https://cuongluxury.vn/uploads/products/cates/26-line-11.png' alt='Trang sức' /></div>
        <div class='container pb-30'>
           <div class='productscates-boxslider owl-carousel'>
-             <div class='item'>
+            @foreach($trangsuc->products as $item)
+               <div class='item'>
                 <div class='prdboxsli-item'>
-                   <div class='prdboxsli-thumb'><a href='/cartier-love-ring-white-gold-diamonds-serrated-motifs' title='Cartier Love Ring White Gold Diamonds Serrated Motifs'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/cartier-love-ring-white-gold-diamonds-serrated-motifs.png?width=350&height=350&mode=crop' alt='Cartier Love Ring White Gold Diamonds Serrated Motifs' /></a></div>
+                   <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
                    <div class='prdboxsli-ccname'>Trang sức</div>
-                   <div class='prdboxsli-key'>MSP: SKU01538</div>
-                   <div class='prdboxsli-title'><a href='/cartier-love-ring-white-gold-diamonds-serrated-motifs' title='Cartier Love Ring White Gold Diamonds Serrated Motifs'>Cartier Love Ring White Gold Diamonds Serrated Motifs</a></div>
+                   <div class='prdboxsli-key'>MSP: {{$item->ma}}</div>
+                   <div class='prdboxsli-title'><a href='/{{$item->url}}' title='Patek Philippe Complications 5905R-001 Like New 2020'>{{$item->name}}</a></div>
                    <div class='prdboxsli-price'>
-                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>65.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
+                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>{!!number_format($item->price)!!}<span class='dvtt'>@if($item->tiente == 0) đ @else $ @endif </span></span></span></span></span></div>
                    </div>
                 </div>
              </div>
-             <div class='item'>
-                <div class='prdboxsli-item'>
-                   <div class='prdboxsli-thumb'><a href='/van-cleef-arples-magic-alhambra-ring-rose-gold-full-pave' title='Van Cleef & Arples Magic Alhambra Ring Rose Gold Full Pavé'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/van-cleef--arples-magic-alhambra-ring-rose-gold-full-pave.png?width=350&height=350&mode=crop' alt='Van Cleef & Arples Magic Alhambra Ring Rose Gold Full Pavé' /></a></div>
-                   <div class='prdboxsli-ccname'>Trang sức</div>
-                   <div class='prdboxsli-key'>MSP: SKU01525</div>
-                   <div class='prdboxsli-title'><a href='/van-cleef-arples-magic-alhambra-ring-rose-gold-full-pave' title='Van Cleef & Arples Magic Alhambra Ring Rose Gold Full Pavé'>Van Cleef & Arples Magic Alhambra Ring Rose Gold Full Pavé</a></div>
-                   <div class='prdboxsli-price'>
-                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>60.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                   </div>
-                </div>
-             </div>
-             <div class='item'>
-                <div class='prdboxsli-item'>
-                   <div class='prdboxsli-thumb'><a href='/graff-princess-butterfly-with-pave-diamonds-earring' title='Graff Princess Butterfly With Pavé Diamonds Earring'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/1a.png?width=350&height=350&mode=crop' alt='Graff Princess Butterfly With Pavé Diamonds Earring' /></a></div>
-                   <div class='prdboxsli-ccname'>Trang sức</div>
-                   <div class='prdboxsli-key'>MSP: SKU01523</div>
-                   <div class='prdboxsli-title'><a href='/graff-princess-butterfly-with-pave-diamonds-earring' title='Graff Princess Butterfly With Pavé Diamonds Earring'>Graff Princess Butterfly With Pavé Diamonds Earring</a></div>
-                   <div class='prdboxsli-price'>
-                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>84.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                   </div>
-                </div>
-             </div>
-             <div class='item'>
-                <div class='prdboxsli-item'>
-                   <div class='prdboxsli-thumb'><a href='/graff-princess-butterfly-with-pave-diamonds-ring' title='Graff Princess Butterfly With Pavé Diamonds Ring'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/6qq.png?width=350&height=350&mode=crop' alt='Graff Princess Butterfly With Pavé Diamonds Ring' /></a></div>
-                   <div class='prdboxsli-ccname'>Trang sức</div>
-                   <div class='prdboxsli-key'>MSP: SKU01522</div>
-                   <div class='prdboxsli-title'><a href='/graff-princess-butterfly-with-pave-diamonds-ring' title='Graff Princess Butterfly With Pavé Diamonds Ring'>Graff Princess Butterfly With Pavé Diamonds Ring</a></div>
-                   <div class='prdboxsli-price'>
-                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>56.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                   </div>
-                </div>
-             </div>
-             <div class='item'>
-                <div class='prdboxsli-item'>
-                   <div class='prdboxsli-thumb'><a href='/bulgari-serpenti-viper-ring-white-gold-full-pave' title='Bulgari Serpenti Viper Ring White Gold Full Pavé'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/14qq.png?width=350&height=350&mode=crop' alt='Bulgari Serpenti Viper Ring White Gold Full Pavé' /></a></div>
-                   <div class='prdboxsli-ccname'>Trang sức</div>
-                   <div class='prdboxsli-key'>MSP: SKU01521</div>
-                   <div class='prdboxsli-title'><a href='/bulgari-serpenti-viper-ring-white-gold-full-pave' title='Bulgari Serpenti Viper Ring White Gold Full Pavé'>Bulgari Serpenti Viper Ring White Gold Full Pavé</a></div>
-                   <div class='prdboxsli-price'>
-                      <div class='item-price'><span class='special-price-contact'><span class='price-container'><span class='price-wrapper'><span class='price'>Liên hệ: 0987.56.56.56 </span></span></span></span></div>
-                   </div>
-                </div>
-             </div>
-             <div class='item'>
-                <div class='prdboxsli-item'>
-                   <div class='prdboxsli-thumb'><a href='/tiffany-co-white-gold-baguette-diamonds-ring' title='Tiffany & Co White Gold Baguette Diamonds Ring'><img loading='lazy' src='https://cuongluxury.vn/uploads/products/tiffany--co-white-gold-baguette-diamonds-ring.png?width=350&height=350&mode=crop' alt='Tiffany & Co White Gold Baguette Diamonds Ring' /></a></div>
-                   <div class='prdboxsli-ccname'>Trang sức</div>
-                   <div class='prdboxsli-key'>MSP: SKU01518</div>
-                   <div class='prdboxsli-title'><a href='/tiffany-co-white-gold-baguette-diamonds-ring' title='Tiffany & Co White Gold Baguette Diamonds Ring'>Tiffany & Co White Gold Baguette Diamonds Ring</a></div>
-                   <div class='prdboxsli-price'>
-                      <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>74.000.000<span class='dvtt'>đ</span></span></span></span></span></div>
-                   </div>
-                </div>
-             </div>
+            @endforeach
+             
           </div>
           <div class='comment_button '><a href='/trang-suc'>Xem thêm</a></div>
        </div>

@@ -128,10 +128,24 @@ class Product extends Model
                             $file_name = substr($file_name,0,170);
                         }
                         $file_type = $file->getClientOriginalExtension();
-                        if($file_type == 'jpg' || $file_type == 'png' || $file_type == 'jpeg' || $file_type == 'gif'){
+                        if($file_type == 'jpg' || $file_type == 'jpeg' || $file_type == 'gif'){
                             $random = Str::random(9);
                             $image = new ProductImage;
                             $image->url = $file_name.$random.'.jpg';
+                            $image->role = 0;
+                            $image->product_id = $this->id;
+                            $image->save();
+                            $path = public_path('uploads/images/products/details/' . $file_name . $random .'.jpg');
+                            // Image::make($file)->save($path, 90);
+                            ini_set('memory_limit','512M');
+                            Image::make($file)->resize(1000, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                            })->save($path,100)->destroy();
+                        }
+                        else if($file_type == 'png'){
+                            $random = Str::random(9);
+                            $image = new ProductImage;
+                            $image->url = $file_name.$random.'.png';
                             $image->role = 0;
                             $image->product_id = $this->id;
                             $image->save();
@@ -151,20 +165,17 @@ class Product extends Model
             if($request->hasFile('avata')){
                 $file = $request->file('avata');
                 $file_name = $file->getClientOriginalName();
-                if(strlen($file_name) >= 180){
-                    $file_name = substr($file_name,0,170);
-                }
                 $file_type = $file->getClientOriginalExtension();
                 if($file_type == 'jpg' || $file_type == 'png' || $file_type == 'jpeg' || $file_type == 'gif'){
                     $random = Str::random(9);
                     $image = new ProductImage;
-                    $image->url = $file_name.$random.'.jpg';
+                    $image->url = $file_name;
                     $image->role = 1;
                     $image->product_id = $this->id;
                     $image->save();
-                    $this->avata = $file_name.$random.'.jpg';
+                    $this->avata = $file_name;
                     $this->save();
-                    $path = public_path('uploads/images/products/details/' . $file_name . $random.'.jpg');
+                    $path = public_path('uploads/images/products/details/' . $file_name);
                     // Image::make($file)->save($path, 90);
                     ini_set('memory_limit','512M');
                     Image::make($file)->resize(1000, null, function ($constraint) {
@@ -289,19 +300,16 @@ class Product extends Model
             if($request->hasFile('avata')){
                 $file = $request->file('avata');
                 $file_name = $file->getClientOriginalName();
-                if(strlen($file_name) >= 180){
-                    $file_name = substr($file_name,0,170);
-                }
                 $file_type = $file->getClientOriginalExtension();
                 if($file_type == 'jpg' || $file_type == 'png' || $file_type == 'jpeg' || $file_type == 'gif'){
                     $avata = ProductImage::where('product_id',$product->id)->where('role',1)->get()->first();
                     $random = Str::random(9);
                     if(isset($avata)){
-                        $avata->url = $file_name.$random.'.jpg';
+                        $avata->url = $file_name;
                         $avata->save();
-                        $product->avata = $file_name.$random.'.jpg';
+                        $product->avata = $file_name;
                         $product->save();
-                        $path = public_path('uploads/images/products/details/' . $file_name . $random.'.jpg');
+                        $path = public_path('uploads/images/products/details/' . $file_name);
                         // Image::make($file)->save($path, 90);
                         ini_set('memory_limit','512M');
                         Image::make($file)->resize(1000, null, function ($constraint) {
@@ -310,10 +318,10 @@ class Product extends Model
                         if(isset($pr_langs)){
                             foreach($pr_langs as $pr_lang){
                                 $avata = ProductImage::where('product_id',$pr_lang->product_lang_id)->where('role',1)->get()->first();
-                                $avata->url = $file_name.$random.'.jpg';
+                                $avata->url = $file_name;
                                 $avata->save();
                                 $product_lang = Product::where('id',$pr_lang->product_lang_id)->get()->first();
-                                $product_lang->avata = $file_name.$random.'.jpg';
+                                $product_lang->avata = $file_name;
                                 $product_lang->save();
                             }
                             
@@ -321,13 +329,13 @@ class Product extends Model
                     }
                     else{
                         $avata = new ProductImage;
-                        $avata->url = $file_name.$random.'.jpg';
+                        $avata->url = $file_name;
                         $avata->role = 1;
                         $avata->product_id = $product->id;
                         $avata->save();
-                        $product->avata = $file_name.$random.'.jpg';
+                        $product->avata = $file_name;
                         $product->save();
-                        $path = public_path('uploads/images/products/details/' . $file_name . $random.'.jpg');
+                        $path = public_path('uploads/images/products/details/' . $file_name);
                         // Image::make($file)->save($path, 90);
                         ini_set('memory_limit','512M');
                         Image::make($file)->resize(1000, null, function ($constraint) {
@@ -336,12 +344,12 @@ class Product extends Model
                         if(isset($pr_langs)){
                             foreach($pr_langs as $pr_lang){
                                 $avata = new ProductImage;
-                                $avata->url = $file_name.$random.'.jpg';
+                                $avata->url = $file_name;
                                 $avata->role = 1;
                                 $avata->product_id = $pr_lang->product_lang_id;
                                 $avata->save();
                                 $product_lang = Product::where('id',$pr_lang->product_lang_id)->get()->first();
-                                $product_lang->avata = $file_name.$random.'.jpg';
+                                $product_lang->avata = $file_name;
                                 $product_lang->save();
                             }
                         }
