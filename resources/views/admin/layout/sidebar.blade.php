@@ -155,7 +155,7 @@
                             <li class="nav-item " id="cms-core-menu">
                                 <a href="{{URL::route('adss')}}" class="nav-link">
                                     <i class="fa fa-id-card"></i>
-                                    Banner quảng cáo
+                                    Quảng cáo
                                 </a>
                             </li>
                             <li class="nav-item " id="cms-core-appearance-custom-css">

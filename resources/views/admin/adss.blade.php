@@ -65,16 +65,16 @@
                                         </li>
                                         
                                         <li>
-                                            <a href="?type=0" class="" data-class-item="">Quảng cáo đầu trang</a>
+                                            <a href="?type=0" class="" data-class-item="">Cam kết</a>
                                         </li>
                                         <li>
-                                            <a href="?type=1" class="" data-class-item="">Quảng cáo giữa trang</a>
+                                            <a href="?type=1" class="" data-class-item="">Danh mục sản phẩm</a>
                                         </li>
                                         <li>
-                                            <a href="?type=2" class="" data-class-item="">Quảng cáo cuối trang</a>
+                                            <a href="?type=2" class="" data-class-item="">Banner cuối trang</a>
                                         </li>
                                         <li>
-                                            <a href="?type=3" class="" data-class-item="">Quảng cáo đầu danh mục</a>
+                                            <a href="?type=3" class="" data-class-item="">Chính sách mua hàng</a>
                                         </li>
                                     </ul>
                             	</div>
@@ -99,12 +99,12 @@
 											<th  width="10px" class="text-left no-sort" title="&lt;input class=&quot;table-check-all&quot; data-set=&quot;.dataTable .checkboxes&quot; type=&quot;checkbox&quot;&gt;">
 												<input class="table-check-all" data-set=".dataTable .checkboxes" type="checkbox">
 											</th>
-											<th  title="ID" width="20px" class=" column-key-id">ID</th>
-											<th  title="Hình ảnh" width="300px" class=" column-key-image">Hình ảnh</th>
+											<th  title="ID" width="10px" class=" column-key-id">ID</th>
+											<th  title="Hình ảnh" width="20px" class=" column-key-image">Hình ảnh</th>
 											
-											<th  title="Vị trí" width="50px" class="no-sort column-key-stt">Vị trí</th>
+											<th  title="Tiêu đề" width="100px" class="no-sort column-key-stt">Tiêu đề</th>
 											
-											<th  title="Mục tiêu" width="100px" class=" column-key-target">Mục tiêu</th>
+											<th  title="Loại QC" width="100px" class=" column-key-target">Loại QC</th>
 											<th  title="Trạng thái" width="100px" class=" column-key-status">Trạng thái</th>
 											<th  title="Tác vụ" width="134px" class="text-center">Tác vụ</th>
 										</tr>
@@ -131,13 +131,17 @@
 													<td class="  column-key-image">
 														<img src="{{asset('uploads/images/adss/'.$ads->url)}}" width="100%">
 													</td>
-													<td class=" no-sort column-key-stt">{{$ads->stt}}</td>
+													<td class=" no-sort column-key-stt">{{$ads->title}}</td>
 													
 													<td class="  column-key-target">
-														@if($ads->target == '_blank')
-															<a href="#" class="btn btn-danger">Mở trong tab mới</a>
-														@else
-															<a href="#" class="btn btn-success">Mở trong tab hiện tại</a>
+														@if($ads->type == 0)
+															<a href="#" class="badge badge-danger">Cam kết</a>
+														@elseif($ads->type == 1)
+															<a href="#" class="badge badge-warning">Danh mục sản phẩm</a>
+														@elseif($ads->type == 2)
+															<a href="#" class="badge badge-success">Banner cuối trang</a>
+														@elseif($ads->type == 3)
+															<a href="#" class="badge badge-primary">Chính sách mua hàng</a>
 														@endif
 													</td>
 													@if($ads->display ==1 )

@@ -32,7 +32,7 @@
     <!-- End cam kết -->
 
     <!-- Banner quảng cáo đầu trang -->
-    @include('front-end.layout.section_adsHeader')
+    @include('front-end.layout.section_adsCates')
     <!-- End banner quảng cáo đầu trang -->
 
     <section>

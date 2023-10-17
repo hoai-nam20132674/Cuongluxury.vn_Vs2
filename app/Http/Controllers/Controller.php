@@ -71,27 +71,7 @@ class Controller extends BaseController
         }
         $system = System::where('id',1)->get()->first();
         $menus = Menu::whereNull('parent_id')->orderBy('stt','ASC')->get();
-        $products_hl = Product::where('highlight',1)->where('display',1)->where('lang',$locale)->with('categories')->orderBy('id','DESC')->take(8)->get();
-        $hct = ProductCate::where('name','Sản Phẩm Cho Thuê')->with(['products' => function ($query) {
-                $query->where('display',1)->orderBy('id','DESC');
-            }])->get()->first();
-        $hct = $this->findProductCateTranslate($hct,$locale);
-
-        $hcn = ProductCate::where('name','Sản Phẩm Chuyển Nhượng')->with(['products' => function ($query) {
-                $query->where('display',1)->orderBy('id','DESC');
-            }])->get()->first();
-        $hcn = $this->findProductCateTranslate($hcn,$locale);
-        $hdb = ProductCate::where('name','Sản Phẩm Đặc Biệt')->with(['products' => function ($query) {
-                $query->where('display',1)->orderBy('id','DESC');
-            }])->get()->first();
-        $hdb = $this->findProductCateTranslate($hdb,$locale);
-        $cdt = BlogCate::where('name','Chủ Đầu Tư')->with(['blogs' => function ($query) {
-                $query->where('display',1)->orderBy('id','DESC');
-            }])->get()->first();
-        $cdt = $this->findBlogCateTranslate($cdt,$locale);
-        // $products = Product::where('display',1)->where('lang',$locale)->with('categories')->orderBy('id','DESC')->get();
-        $categories = ProductCate::where('display',1)->where('lang',$locale)->whereNull('parent_id')->get();
-        $blogs = Blog::where('display',1)->where('lang',$locale)->orderBy('id','DESC')->get();
+        
         //------------
         $slides = Slider::where('display',1)->orderBy('stt','ASC')->get();
         $patek = ProductCate::where('name','Patek Philippe')->with(['products' => function ($query) {
@@ -112,8 +92,10 @@ class Controller extends BaseController
         $trangsuc = ProductCate::where('name','Trang Sức')->with(['products' => function ($query) {
                 $query->where('display',1)->orderBy('id','DESC');
             }])->get()->first();
+        $pledges = Ads::where('type',0)->where('display',1)->get();
+        $adsCates = Ads::where('type',1)->where('display',1)->get();
         // return view('front-end.index',compact('system','menus','categories','products_hl','hct','hcn','cdt','hdb','blogs','slides','popup'));
-        return view('front-end.index',compact('slides','patek','rolex','hublot','fm','vertu','trangsuc'));
+        return view('front-end.index',compact('slides','patek','rolex','hublot','fm','vertu','trangsuc','pledges','adsCates'));
 
     }
     public function findProductCateTranslate($cate,$locale){

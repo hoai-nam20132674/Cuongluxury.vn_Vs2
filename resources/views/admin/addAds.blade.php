@@ -34,30 +34,32 @@
 			<div class="row">
 				<div class="col-md-9">
 					
-
-					<div class="widget meta-boxes">
-						<div class="widget-title">
-							<h4><label for="images" class="control-label">Hình ảnh</label></h4>
-						</div>
-						<div class="widget-body">
-							<div class="image-box" style="border: 1px solid #e2e2e2;">
-								<div class="file-upload">   
-									<div class="file-upload-content file-upload-content100" style="position: relative;">
-										<img width="100%" class="file-upload-image file-upload-image100" src="{{asset('uploads/images/click-here.gif')}}" alt="your image" />
-										<div class="image-title-wrap image-title-wrap100" style="position: absolute;top: 0px; right: 0px;">
-											<button type="button" onclick="removeUploadTest(100)" class="remove-image">choose file to upload</button>
-										</div>
-										<input required style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input100" type='file' required name="images" onchange="readURLTest(this,100);" accept="image/*" />
-									</div>
-								</div>
-
-							</div>
-
-
-
-
-						</div>
-					</div>
+                    <div class="widget meta-boxes">
+	                    <div class="widget-title"><h4><span>Thông tin chi tiết</span></h4></div>
+	                    <div class="widget-body">
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <div class="form-group"  >
+    
+				                        <label for="title" class="control-label required">Tiêu đề</label>
+				                        <input class="form-control" placeholder="Nhập tiêu đề" data-counter="120" name="title" value="{{old('title')}}" type="text" id="title">
+				                    </div>
+				                    <div class="form-group"  >
+    
+				                        <label for="href" class="control-label required">Trang đích</label>
+				                        <input class="form-control" placeholder="Nhập trang đích" data-counter="190" name="href" value="#" type="text" id="href">
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="description" class="control-label">Mô tả</label>
+				                        <textarea class="form-control" rows="6" placeholder="Mô tả ngắn" data-counter="400" name="description" cols="50" id="description">{{old('description')}}</textarea>
+				                    </div>
+	                            </div>
+	                            
+	                            
+	                        </div>
+	                    </div>
+	                </div>
+					
 
 
 
@@ -86,8 +88,8 @@
 						<ol class="breadcrumb">
 
 							<li class="breadcrumb-item"><a href="{{URL::route('home')}}">Bảng điều khiển</a></li>
-							<li class="breadcrumb-item"><a href="{{URL::route('adss')}}">Danh sách banner</a></li>
-							<li class="breadcrumb-item active">Thêm banner mới</li>
+							<li class="breadcrumb-item"><a href="{{URL::route('adss')}}">Danh sách quảng cáo</a></li>
+							<li class="breadcrumb-item active">Thêm quảng cáo mới</li>
 						</ol>
 
 
@@ -104,15 +106,15 @@
 
 					<div class="widget meta-boxes">
 						<div class="widget-title">
-							<h4><label for="status" class="control-label required">Loại banner quảng cáo</label></h4>
+							<h4><label for="status" class="control-label required">Loại quảng cáo</label></h4>
 						</div>
 						<div class="widget-body">
 							<div class="ui-select-wrapper">
 								<select class="form-control ui-select ui-select" id="type" name="type">
-									<option value="0">Quảng cáo đầu trang</option>
-									<option value="1">Quảng cáo thân trang</option>
-									<option value="2">Quảng cáo cuối trang</option>
-									<option value="3">Quảng cáo sidebar</option>
+									<option value="0">Cam kết</option>
+									<option value="1">Danh mục sản phẩm</option>
+									<option value="2">Banner cuối trang</option>
+									<option value="3">Chính sách mua hàng</option>
 								</select>
 								<svg class="svg-next-icon svg-next-icon-size-16">
 									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
@@ -135,28 +137,6 @@
 								<svg class="svg-next-icon svg-next-icon-size-16">
 									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
 								</svg>
-							</div>
-						</div>
-					</div>
-
-					<div class="widget meta-boxes">
-						<div class="widget-title">
-							<h4><label for="" class="control-label" aria-required="true">Trang đích</label></h4>
-						</div>
-						<div class="widget-body">
-							<div class="main-form" style="margin-bottom: 0px">
-								<div class="form-body">
-									<div class="form-group" style="margin-bottom: 0px" >
-										<input class="form-control" placeholder="Link trang đích" value="{{old('href')}}" name="href" type="text" id="href">
-									</div>
-
-
-									<input type="hidden" name="model" value="">
-
-
-
-									<div class="clearfix"></div>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -197,6 +177,29 @@
 									<div class="clearfix"></div>
 								</div>
 							</div>
+						</div>
+					</div>
+					<div class="widget meta-boxes">
+						<div class="widget-title">
+							<h4><label for="images" class="control-label">Hình ảnh</label></h4>
+						</div>
+						<div class="widget-body">
+							<div class="image-box" style="border: 1px solid #e2e2e2;">
+								<div class="file-upload">   
+									<div class="file-upload-content file-upload-content100" style="position: relative;">
+										<img width="100%" class="file-upload-image file-upload-image100" src="{{asset('uploads/images/icone-d-image-rouge.png')}}" alt="your image" />
+										<!-- <div class="image-title-wrap image-title-wrap100" style="position: absolute;top: 0px; right: 0px;">
+											<button type="button" onclick="removeUploadTest(100)" class="remove-image">choose file to upload</button>
+										</div> -->
+										<input required style="z-index: 100; position: absolute; top: 0px; left: 0px;" class="file-upload-input file-upload-input100" type='file' required name="images" onchange="readURLTest(this,100);" accept="image/*" />
+									</div>
+								</div>
+
+							</div>
+
+
+
+
 						</div>
 					</div>
 					

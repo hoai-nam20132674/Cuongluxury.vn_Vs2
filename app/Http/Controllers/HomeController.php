@@ -1108,10 +1108,10 @@ class HomeController extends Controller
     //Ads
     public function adss(Request $request){
         if(isset($request->type)){
-            $adss = Ads::where('type',$request->type)->paginate(10);
+            $adss = Ads::where('type',$request->type)->paginate(20);
         }
         else{
-            $adss = Ads::select()->paginate(10);
+            $adss = Ads::select()->paginate(20);
         }
         
         return view('admin.adss',['adss'=>$adss,'request'=>$request]);
