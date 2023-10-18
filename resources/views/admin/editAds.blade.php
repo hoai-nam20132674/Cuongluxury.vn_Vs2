@@ -130,6 +130,7 @@
 									<option @if($ads->type == 1) selected @endif value="1">Danh mục sản phẩm</option>
 									<option @if($ads->type == 2) selected @endif value="2">Banner cuối trang</option>
 									<option @if($ads->type == 3) selected @endif value="3">Chính sách mua hàng</option>
+									<option @if($ads->type == 4) selected @endif value="4">Liên hệ</option>
 									
 								</select>
 								<svg class="svg-next-icon svg-next-icon-size-16">

@@ -17,7 +17,7 @@ class Slider extends Model
     	$this->target = $request->target;
     	$this->stt = $request->stt;
     	$file_name = $request->file('images')->getClientOriginalName();
-    	$random = Str::random(9);
+    	$random = Str::random(2);
 		$this->url = $random.$file_name;
     	$path = public_path('uploads/images/sliders/' .$random. $file_name);
     	ini_set('memory_limit','512M');
@@ -33,7 +33,7 @@ class Slider extends Model
     	$slider->target = $request->target;
     	$slider->stt = $request->stt;
     	if($request->hasFile('images')){
-    		$random = Str::random(9); 
+    		$random = Str::random(2); 
 	    	$file_name = $request->file('images')->getClientOriginalName();
 			$slider->url = $random.$file_name;
 	    	$path = public_path('uploads/images/sliders/' .$random. $file_name);

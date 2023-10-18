@@ -142,6 +142,8 @@
 															<a href="#" class="badge badge-success">Banner cuối trang</a>
 														@elseif($ads->type == 3)
 															<a href="#" class="badge badge-primary">Chính sách mua hàng</a>
+														@elseif($ads->type == 4)
+															<a href="#" class="badge badge-dark">Liên hệ</a>
 														@endif
 													</td>
 													@if($ads->display ==1 )

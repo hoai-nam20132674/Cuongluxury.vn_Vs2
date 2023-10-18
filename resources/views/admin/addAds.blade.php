@@ -115,6 +115,7 @@
 									<option value="1">Danh mục sản phẩm</option>
 									<option value="2">Banner cuối trang</option>
 									<option value="3">Chính sách mua hàng</option>
+									<option value="4">Liên hệ</option>
 								</select>
 								<svg class="svg-next-icon svg-next-icon-size-16">
 									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>

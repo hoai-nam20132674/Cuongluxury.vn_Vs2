@@ -79,7 +79,7 @@
 												<input class="table-check-all" data-set=".dataTable .checkboxes" type="checkbox">
 											</th>
 											<th  title="ID" width="20px" class=" column-key-id">ID</th>
-											<th  title="Hình ảnh" width="300px" class=" column-key-image">Hình ảnh</th>
+											<th  title="Hình ảnh" width="100px" class=" column-key-image">Hình ảnh</th>
 											
 											<th  title="Vị trí" width="50px" class="no-sort column-key-stt">Vị trí</th>
 											

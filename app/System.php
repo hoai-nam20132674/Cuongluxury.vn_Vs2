@@ -23,7 +23,6 @@ class System extends Model
         $system->address = $request->address;
         $system->email = $request->email;
         $system->phone = $request->phone;
-        $system->blog_naver = $request->blog_naver;
         $system->mst = $request->mst;
         $system->css = $request->css;
         $system->script = $request->script;

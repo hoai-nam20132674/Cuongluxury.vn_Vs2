@@ -35,6 +35,7 @@ class CreateSystemsTable extends Migration
             $table->string('email')->nullable();
             $table->longText('css')->nullable();
             $table->longText('script')->nullable();
+            $table->longText('script_body')->nullable();
             $table->timestamps();
         });
     }
