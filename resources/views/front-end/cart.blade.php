@@ -69,71 +69,51 @@
                         <td width='12%'><b>Thành tiền</b></td>
                         <td width='8%'></td>
                     </tr>
-            
-                <tr>
-                    <td align="center"><a href="https://cuongluxury.vn/hublot-spirit-of-big-bang-king-gold-blue-diamond" title="Hublot Spirit Of Big Bang King Gold Blue Diamond">
-                        <img style="height: 80px" class="imgprd-cart" src="https://cuongluxury.vn/uploads/products/a3.png" alt="Hublot Spirit Of Big Bang King Gold Blue Diamond" /></a></td>
+                @foreach($items_cart as $item)
+                <tr class="item-cart" rowId='{{$item->rowId}}'>
+                    <td align="center"><a href="{{$item->options->url}}" title="{{$item->name}}">
+                        <img style="height: 80px" class="imgprd-cart" src="{{asset('uploads/images/products/details/'.$item->options->img)}}" alt="{{$item->name}}" /></a></td>
                     
-                    <td class="hidden-xs" valign="top"><a href="https://cuongluxury.vn/hublot-spirit-of-big-bang-king-gold-blue-diamond" title="Hublot Spirit Of Big Bang King Gold Blue Diamond">
-                        Hublot Spirit Of Big Bang King Gold Blue Diamond  <br> 
+                    <td class="hidden-xs" valign="top"><a href="{{$item->options->url}}" title="{{$item->name}}">
+                        {{$item->name}}<br> 
                         <p>Mã sản phẩm: 665.OX.7180.LR.1204</p>
                     </a>
 
                     </td>
                     <td align="center">
                         <input type="number" class="txtnumc" min="1"  name='5819' id='sl1'
-                            value='1' size="1">
+                            value='{{$item->qty}}' size="1">
                          <input type="hidden" class="pr1" value="565000000" />
                     </td>
-                    <td><span class='pri'>565.000.000</span><span class="hidden prci">565000000</span></td>
+                    <td><span class='pri'>{!!number_format($item->price)!!}</span><span class="hidden prci">{!!number_format($item->price)!!}</span></td>
                     <td>
-                            <span class="thanhtien1">565.000.000</span>
+                        @php
+                            $tt = $item->qty * $item->price;
+                        @endphp
+                        <span class="thanhtien1">{!!number_format($tt)!!}</span>
                     </td>
                     <td>
-                        <a onclick="return confirm(&#39;Bạn có muốn xóa không?&#39;);" id="LinkButton2" class="lnkdel" href="javascript:__doPostBack(&#39;ctl19$ctl00$ctl00$ctl00$rpcart$ctl01$LinkButton2&#39;,&#39;&#39;)">Xóa</a>
+                        <a id="removeItemCart" class="removeItemCart" href=" javascript:void(0)" rowId='{{$item->rowId}}' data-href="{{URL::route('removeItemCart',$item->rowId)}}">Xóa</a>
                     </td>
                 </tr>
-            
-                <tr>
-                    <td align="center"><a href="https://cuongluxury.vn/hublot-classic-fusion-titanium-black-42mm" title="Hublot Classic Fusion Titanium Black 42mm">
-                        <img style="height: 80px" class="imgprd-cart" src="https://cuongluxury.vn/uploads/products/hublot-classic-fusion-titanium.png" alt="Hublot Classic Fusion Titanium Black 42mm" /></a></td>
-                    
-                    <td class="hidden-xs" valign="top"><a href="https://cuongluxury.vn/hublot-classic-fusion-titanium-black-42mm" title="Hublot Classic Fusion Titanium Black 42mm">
-                        Hublot Classic Fusion Titanium Black 42mm  <br> 38
-                        <p>Mã sản phẩm: 542.NX.1171.LR</p>
-                    </a>
-
-                    </td>
-                    <td align="center">
-                        <input type="number" class="txtnumc" min="1"  name='5794' id='sl2'
-                            value='3' size="1">
-                         <input type="hidden" class="pr2" value="135000000" />
-                    </td>
-                    <td><span class='pri'>135.000.000</span><span class="hidden prci">135000000</span></td>
-                    <td>
-                            <span class="thanhtien2">465.000.000</span>
-                    </td>
-                    <td>
-                        <a onclick="return confirm(&#39;Bạn có muốn xóa không?&#39;);" id="LinkButton2" class="lnkdel" href="javascript:__doPostBack(&#39;ctl19$ctl00$ctl00$ctl00$rpcart$ctl02$LinkButton2&#39;,&#39;&#39;)">Xóa</a>
-                    </td>
-                </tr>
+                @endforeach
+                
             
                 </table>
             
         <p style="text-align: right; padding-top: 10px; margin-right: 20px;">
             Tổng tiền: <b class="tto">
-                <span class="totals_price"><span class='prnum'>1.030.000.000 </span><span class='s_unit'>đ</span></span></b>
+                <span class="totals_price"><span class='prnum'>{{Cart::subtotal()}}</span><span class='s_unit'>đ</span></span></b>
         </p>
         <p class='tool_cart'>
-            <input type="submit" name="ctl19$ctl00$ctl00$ctl00$btncontinue" value="Tiếp tục mua" id="btncontinue" class="btnbuycontinue btn" />
-            <input type="submit" name="ctl19$ctl00$ctl00$ctl00$btnbuys" value="Đặt hàng" id="btnbuys" class="btn" />
-            <input type="submit" name="ctl19$ctl00$ctl00$ctl00$btncancel" value="Hủy đơn hàng" id="btncancel" class="btncancelorder btn" />
-              <input type="hidden" value="2" name="numitemincart" id="numitemincart" />
+            <input type="button" name="btncontinue" value="Tiếp tục mua" id="btncontinue" class="btncontinue btn" />
+            <input type="button" name="btnbuys" value="Đặt hàng" id="btnbuys" class="btnbuys btn" />
+            <input type="button" name="btncancel" value="Hủy đơn hàng" id="btncancel" class="btncancel btn" />
         </p>
     
 </div>
 
-<div class="row">
+<div class="row infoOrder hidden">
     <div class="customer-frm col-md-6">
         <div class="buy-form">
             <h3 class="legend">2. Thông tin Khách Hàng</h3>
@@ -145,7 +125,7 @@
                 <li class="filter-username">
                     <div class="group-radio hidden">
                         <div class="radio-1">
-                            <input id="rdmale" type="radio" name="ctl19$ctl00$ctl00$ctl00$gdsex" value="rdmale" checked="checked" />
+                            <input id="rdmale" type="radio" name="name" value="rdmale" checked="checked" />
                             <label for="gender-male">Anh</label>
 
 
@@ -206,6 +186,8 @@
     <div class="popup-buyform ipayment col-md-6" style="height:auto">
         <div class="info-payment">
             <label class="toglAddress"><i class="fa fa-money"></i> Hình thức thanh toán</label>
+            @foreach($payments as $item)
+            @endforeach
              <div class="p-row  active"  style='display:block' >
                 <input id="rdtructiep" type="radio" name="ctl19$ctl00$ctl00$ctl00$pm" value="rdtructiep" checked="checked" />
 
@@ -461,17 +443,12 @@ Thanh to&aacute;n khi kh&aacute;ch h&agrave;ng nhận được h&agrave;ng</p>
         </div>
 
     </div>
+    <br>
+    <div class="col-md-12" style="margin: 20px 0px;">
+        <input type="button" name="addOrder" value="Đặt hàng" id="btnbuys" class="addOrder btn" />
+    </div>
+    <br>
 </div>
-
-<div class='d_buyinfo'>
-</div>
-<div class="clear"></div>
-<p class='tool_cart'>
-    <input type="submit" name="ctl19$ctl00$ctl00$ctl00$btneditcart" value="Sửa đơn hàng" id="btneditcart" class="btneditorder btn" />
-    <input type="submit" name="ctl19$ctl00$ctl00$ctl00$btnorder" value="Đặt hàng" id="btnorder" class="btnpayment btn" />
-    <input type="submit" name="ctl19$ctl00$ctl00$ctl00$btncancelorder" value="Hủy đơn hàng" id="btncancelorder" class="btncancelorder btn" />
-    
-</p>
     
     
 
@@ -599,6 +576,32 @@ Thanh to&aacute;n khi kh&aacute;ch h&agrave;ng nhận được h&agrave;ng</p>
 .btn{max-width:180px;font-size:17px;}
 #btncancel{display:inline-block}
 </style>
+<script type="text/javascript">
+    $(document).on('click', '.btnbuys', function(event) {
+        $('.infoOrder').removeClass('hidden');
+        $('.tool_cart').hide();
+        
+    });
+    $(document).on('click', '.removeItemCart', function(event) {
+        var href = $(this).attr('data-href');
+        var rowId = $(this).attr('rowId');
+        
+        $.ajax({
+            type: 'GET',
+            url: href,
+            dataType: 'json',
+            success: function(data) {
+                toastr.success('Đã xóa khỏi giỏ hàng');
+                var item_selected = $('.item-cart[rowId='+rowId+']');
+                item_selected.hide();
+                $('.prnum').text(data[1]);
+                // console.log(item_id);
+
+            }
+        });
+        // console.log(rowId);
+    });
+</script>
 <script>
     $('input[name="ctl17$ctl00$ctl00$ctl00$pm"]').bind('click', function () {
         $('.p-row').removeClass('active');

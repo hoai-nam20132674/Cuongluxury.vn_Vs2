@@ -711,8 +711,8 @@ class HomeController extends Controller
         else{
             $products = Product::orderBy('id','DESC')->where('lang','vi')->with('user','categories','langs')->paginate(50);
         }
-        
-        return view('admin.products',['products'=>$products,'request'=>$request]);
+        $categories = ProductCate::select()->get();
+        return view('admin.products',compact('products','request','categories'));
     }
 
     public function productsCate(Request $request,$id){
@@ -726,8 +726,8 @@ class HomeController extends Controller
         else{
             $products = $categorie->products()->orderBy('id','DESC')->paginate(50);
         }
-        
-        return view('admin.productsCate',compact('products','request','categorie'));
+        $categories = ProductCate::select()->get();
+        return view('admin.productsCate',compact('products','request','categorie','categories'));
     }
 
     public function addProduct(Request $request){

@@ -57,7 +57,29 @@
                                         </li>
                                     </ul>
                             	</div>
-                                <button class="btn btn-primary btn-show-table-options">Lọc dữ liệu</button>
+                                <div class="btn-group">
+                                	<a class="btn btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Lọc dữ liệu</a>
+                                	<ul class="dropdown-menu">
+                                		<li>
+                                            <a href="{{URL::route('products')}}">Tất cả</a>
+                                        </li>
+                                        @foreach($categories as $cate)
+	                                        @if($cate->parent_id == null)
+	                                        <li>
+	                                            <a href="{{URL::route('productsCate',$cate->id)}}">{{$cate->name}}</a>
+	                                        </li>
+	                                        	@foreach($categories as $cate2)
+	                                        		@if($cate2->parent_id == $cate->id)
+	                                        			<li style="">
+	                                        				
+				                                            <a href="{{URL::route('productsCate',$cate2->id)}}"><i class="bx bx-subdirectory-right"></i>{{$cate2->name}}</a>
+				                                        </li>
+	                                        		@endif
+	                                        	@endforeach
+	                                        @endif
+                                        @endforeach
+                                    </ul>
+                            	</div>
                             </div>
                 		</div>
             		</div>
@@ -81,20 +103,17 @@
 												<input class="table-check-all" data-set=".dataTable .checkboxes" type="checkbox">
 											</th>
 											<th  title="ID" width="20px" class=" column-key-id">STT</th>
-											<th  title="ID" width="20px" class=" column-key-id">Mã căn</th>
-											<th  title="Hình ảnh" width="70px" class=" column-key-image">Hình ảnh</th>
-											<th  title="Tên" class="text-left column-key-name">Tên</th>
-											<th  title="Tên gian hàng" class="text-left column-key-name-shop">Người đăng</th>
-											<th  title="Categories" width="300px" class="no-sort column-key-updated_at">Danh mục</th>
-											<th title="Loại bất động sản" width="100px">Loại BĐS</th>
-											<th  title="Ngày tạo" width="100px" class=" column-key-created_at">Ngày tạo</th>
-											<th  title="Trạng thái" width="100px" class=" column-key-status">Trạng thái</th>
-											<th title="Ngôn ngữ" width="200px" class="text-center">
+											<th  title="ID" width="20px" class=" column-key-id">SKU</th>
+											<th  title="Hình ảnh" width="100px" class=" column-key-image">Hình ảnh</th>
+											<th  title="Tên" width="300px" class="text-left column-key-name">Tên</th>
+											<th  title="Tên gian hàng" width="200px" class="text-left column-key-name-shop">Người đăng</th>
+											<th  title="Categories" width="200px" class="no-sort column-key-updated_at">Danh mục</th>
+											<th  title="Ngày tạo" width="200px" class=" column-key-created_at">Ngày tạo</th>
+											<th  title="Trạng thái" width="150px" class=" column-key-status">Trạng thái</th>
+											<th title="Ngôn ngữ" width="50px" class="text-center">
 												
 												<img src="https://cms.botble.com/vendor/core/core/base/images/flags/vn.svg" title="Tiếng Việt" width="16" alt="Tiếng Việt">
-												<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/225px-Flag_of_South_Korea.svg.png" title="Korean" width="16" alt="Korean">
-												<img src="https://cms.botble.com/vendor/core/core/base/images/flags/us.svg" title="English" width="16" alt="English">
-												<img style="border: 1px solid #ececec;" src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Japan.svg" title="Japan" width="16" alt="Japan">
+												
 											</th>
 											<th  title="Tác vụ" width="134px" class="text-center">Tác vụ</th>
 										</tr>
@@ -133,7 +152,6 @@
 															
 														@endforeach
 													</td>
-													<td>@if($product->lbds == 0) Đang bán @else Cho thuê @endif</td>
 													<td class="  column-key-created_at">{{$product->created_at}}</td>
 													@if($product->display ==1 )
 														<td class="  column-key-status"><span class="label-success status-label">Xuất bản</span></td>
@@ -144,33 +162,7 @@
 													<td class=" text-center language-header no-sort">
 														<div class="text-center language-column">
 															<a href="#" class="tip" title=""><i class="fa fa-check text-success"></i></a>
-															@if(count($product->langs) == 0)
-																<a href="{{URL::route('addProduct')}}?product_id={{$product->id}}&lang=ko" class="tip" title="Tạo bản dịch"><i class="fa fa-plus"></i></a>
-																<a href="{{URL::route('addProduct')}}?product_id={{$product->id}}&lang=en" class="tip" title="Tạo bản dịch"><i class="fa fa-plus"></i></a>
-																<a href="{{URL::route('addProduct')}}?product_id={{$product->id}}&lang=ja" class="tip" title="Tạo bản dịch"><i class="fa fa-plus"></i></a>
-
-															@else
-																@php
-																	$ko = $product->langs()->where('lang','ko')->first();
-																	$en = $product->langs()->where('lang','en')->first();
-																	$ja = $product->langs()->where('lang','ja')->first();
-																@endphp
-																@if(isset($ko))
-																	<a href="{{URL::route('editProduct',$ko->product_lang_id)}}" class="tip" title="Sửa bản dịch"><i class="fa fa-edit"></i></a>
-																@else
-																	<a href="{{URL::route('addProduct')}}?product_id={{$product->id}}&lang=ko" class="tip" title="Tạo bản dịch"><i class="fa fa-plus"></i></a>
-																@endif
-																@if(isset($en))
-																	<a href="{{URL::route('editProduct',$en->product_lang_id)}}" class="tip" title="Sửa bản dịch"><i class="fa fa-edit"></i></a>
-																@else
-																	<a href="{{URL::route('addProduct')}}?product_id={{$product->id}}&lang=en" class="tip" title="Tạo bản dịch"><i class="fa fa-plus"></i></a>
-																@endif
-																@if(isset($ja))
-																	<a href="{{URL::route('editProduct',$ja->product_lang_id)}}" class="tip" title="Sửa bản dịch"><i class="fa fa-edit"></i></a>
-																@else
-																	<a href="{{URL::route('addProduct')}}?product_id={{$product->id}}&lang=ja" class="tip" title="Tạo bản dịch"><i class="fa fa-plus"></i></a>
-																@endif
-															@endif
+															
 														</div>
 													</td>
 													<td class=" text-center">

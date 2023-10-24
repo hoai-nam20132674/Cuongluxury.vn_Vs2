@@ -40,6 +40,10 @@ use App\Ads;
 use App\OrderDetail;
 use App\Feedback;
 use App\Popup;
+use App\Payment;
+use App\Properties;
+use App\PropertiesValue;
+use App\ProductVariationsPropertiesValue;
 use Cart;
 use App\Notification;
 use Carbon\Carbon;
@@ -122,6 +126,26 @@ class Controller extends BaseController
         }
         
     }
+    public function findProductVariation(Request $request,$id){
+        $product = Product::where('id',$id)->get()->first();
+        $products_variation = $product->products_variation;
+        $properties = $product->properties;
+        $str_ids = $request->properties_value_id;
+        $ids = array();
+        $ids = explode(",",$str_ids);
+        $ids = array_filter($ids);
+        foreach($products_variation as $product_var){
+            $pro_var_pro_val = ProductVariationsPropertiesValue::where('pro_var_id',$product_var->id)->whereIn('propertie_value_id',$ids)->get();
+            if(count($pro_var_pro_val) == count($properties)){
+                return $product_var;
+                break;
+            }
+            else{
+                return 0;
+            }
+        }
+        // return $product->products_variation()->first();
+    }
     public function findBlogCateTranslate($cate,$locale){
         if($locale == 'vi'){
             return $cate;
@@ -198,13 +222,13 @@ class Controller extends BaseController
         $key = substr($url,0,2);
         $id = substr($url,2);
         
-        $categories = ProductCate::where('display',1)->where('lang',$locale)->with('products')->get();
+        // $categories = ProductCate::where('display',1)->where('lang',$locale)->with('products')->get();
         $menus = Menu::whereNull('parent_id')->orderBy('stt','ASC')->get();
         $system = System::where('id',1)->get()->first();
-        $adss = Ads::where('display',1)->get();
+        // $adss = Ads::where('display',1)->get();
 
     	if($key=='pi'){
-            $adss = Ads::where('display',1)->where('type',1)->get();
+            // $adss = Ads::where('display',1)->where('type',1)->get();
             $product = Product::where('id',$id)->with('categories','images')->get()->first();
             $locale = $product->lang;
             config(['app.locale' => $locale]);
@@ -212,7 +236,47 @@ class Controller extends BaseController
             if($product->lang == $locale){
                 $products = Product::where('id','!=',$product->id)->where('display',1)->where('lang',$locale)->orderBy('id','DESC')->with('categories')->get()->take(5);
                 $images = $product->images()->where('role',0)->get();
-                return view('front-end.product',compact('categories','menus','product','images','system','products','adss'));
+                $policys = Ads::where('display',1)->where('type',3)->get();
+                $contacts = Ads::where('display',1)->where('type',4)->get();
+
+
+                // --------------
+                $array_properties_value_id = array();
+                $array_properties_id = array();
+                $i=0;
+                $j=0;
+                $products_variation = $product->products_variation;
+                if(count($products_variation)){
+                    foreach($products_variation as $product_var){
+                        $properties_value = $product_var->properties_value;
+                        foreach($properties_value as $propertie_val){
+                            if(in_array($propertie_val->id, $array_properties_value_id)){
+
+                            }
+                            else{
+                                $array_properties_value_id[$i] = $propertie_val->id;
+                                $i++;
+                            }
+                            if(in_array($propertie_val->properties_id, $array_properties_id)){
+
+                            }
+                            else{
+                                $array_properties_id[$j] = $propertie_val->properties_id;
+                                $j++;
+                            }
+                        }
+                    }
+                    $properties = Properties::whereIn('id',$array_properties_id)->get();
+                    $properties_value = PropertiesValue::whereIn('id',$array_properties_value_id)->get();
+                    return view('front-end.product',compact('menus','product','images','system','products','policys','contacts','properties','properties_value'));
+                }
+                else{
+                    return view('front-end.product',compact('menus','product','images','system','products','policys','contacts'));
+                }
+                
+                // --------------
+                
+                
             }
             else{
                 if($product->lang == 'vi'){
@@ -600,8 +664,9 @@ class Controller extends BaseController
         $system = System::where('id',1)->get()->first();
         $categories = ProductCate::where('display',1)->whereNull('parent_id')->get();
         $menus = Menu::whereNull('parent_id')->orderBy('stt','ASC')->get();
+        $payments = Payment::where('status',1)->get();
         $items_cart = Cart::content();
-        return view('front-end.cart',compact('system','categories','menus','items_cart'));
+        return view('front-end.cart',compact('system','categories','menus','items_cart','payments'));
         // $items_cart = Cart::search(function($cartItem, $rowId) {
         //     return $cartItem->options->shop_name == 'ĐỒ NGỦ SEXY CZADI';
         // });
@@ -609,7 +674,7 @@ class Controller extends BaseController
 
         
     }
-    public function addToCart($id,$qty){
+    public function addToCart($id,$qty, Request $request){
         $product = Product::where('id',$id)->get()->first();
         $shop = User::where('id',$product->user_id)->get()->first();
         $item_cart = Cart::content();
@@ -626,11 +691,11 @@ class Controller extends BaseController
             Cart::update($check_item->rowId,$check_item->qty+$qty);
         }
         else{
-            if($product->sale == ''){
-                Cart::add($product->id, $product->name, $qty, $product->price, 0, ['img'=>$product->avata,'url'=>$product->url,'shop_name'=>$shop->name_s,'shop_id'=>$shop->id,'oldprice'=>$product->price,'shop_avatar'=>$shop->avatar]);
+            if($product->sale == null){
+                Cart::add($product->id, $product->name, $qty, $product->price, 0, ['img'=>$product->avata,'url'=>$product->url,'oldprice'=>$product->price,'variation_id'=>$request->variation_id]);
             }
             else{
-                Cart::add($product->id, $product->name, $qty, $product->sale, 0, ['img'=>$product->avata,'url'=>$product->url,'shop_name'=>$shop->name_s,'shop_id'=>$shop->id,'oldprice'=>$product->price,'shop_avatar'=>$shop->avatar]);
+                Cart::add($product->id, $product->name, $qty, $product->sale, 0, ['img'=>$product->avata,'url'=>$product->url,'oldprice'=>$product->price,'variation_id'=>$request->variation_id]);
             }
         }
         
@@ -638,7 +703,8 @@ class Controller extends BaseController
         $array = array();
         $array[0]=Cart::count();
         $array[1]=Cart::subtotal();
-        return $array;
+        // return $array;
+        return redirect()->route('cart');
     }
     public function removeItemCart($id){
         Cart::remove($id);

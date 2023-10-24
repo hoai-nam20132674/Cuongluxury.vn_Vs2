@@ -132,7 +132,7 @@
             </div>
         </section>
         </div>
-        <section class="product products-details" itemscope itemtype="http://schema.org/Product">
+        <section class="product products-details" product-id='{{$product->id}}' itemscope itemtype="http://schema.org/Product">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 details-product">
@@ -173,41 +173,28 @@
                                     </div>
                                     <div class="product-summary product_description margin-bottom-15 margin-top-15">
                                         <div class="rte description">
-                                            <div id="pnsize">
-            
-                                                <span class="inventory">Size</span>
-                                                <ul class="ttp">
-                                                    
-                                                            <li class="ttc tttxt" data-vl="33">
-                                                                <span class="tttt">
-                                                                    33
-                                                                </span>
-                                                            </li>
-                                                        
-                                                            <li class="ttc tttxt" data-vl="38">
-                                                                <span class="tttt">
-                                                                    38
-                                                                </span>
-                                                            </li>
-                                                        
-                                                            <li class="ttc tttxt" data-vl="42">
-                                                                <span class="tttt">
-                                                                    42
-                                                                </span>
-                                                            </li>
-                                                        
-                                                            <li class="ttc tttxt" data-vl="45">
-                                                                <span class="tttt">
-                                                                    45
-                                                                </span>
-                                                            </li>
-                                                        
-                                                    
-                                                </ul>
+                                            @if(count($product->products_variation))
+                                                @foreach($properties as $propertie)
+                                                    <div propertie-id='{{$propertie->id}}' id="propertie-item">
+                                                        <span class="inventory">{{$propertie->name}}</span>
+                                                        <ul class="ttp">
+                                                            @foreach($properties_value as $propertie_val)
+                                                                @if($propertie_val->properties_id == $propertie->id)
+                                                                    <li propertie-id='{{$propertie->id}}' class="propertie-value-item tttxt" data-vl="{{$propertie_val->id}}">
+                                                                        <span class="tttt">
+                                                                            {{$propertie_val->value}}
+                                                                        </span>
+                                                                    </li>
+                                                                @endif
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @endforeach
                                             
-        </div>
+                                            @endif
+
                                         </div>
-        <p style='color:#d0d0d0'><i>Giá trên Website mang tính chất tham khảo có thể thay đổi tùy thời điểm, vui lòng liên hệ Hotline 0987 56 56 56 để được báo giá tốt nhất</i></p>
+                                        <p style='color:#d0d0d0'><i>Giá trên Website mang tính chất tham khảo có thể thay đổi tùy thời điểm, vui lòng liên hệ Hotline 0987 56 56 56 để được báo giá tốt nhất</i></p>
                                         <p class="inventory">
                                             <span>Tình trạng:</span>
                                             <span class="inventory-quantity">
@@ -268,62 +255,13 @@
                                                 </div>
                                                 <div class="btn-mua">
 
-        <input type="submit" name="ctl19$ctl00$ctl00$ctl00$btnbuy" value="Mua ngay" id="btnbuy" class="btn-add-cart btn " />
+        <!-- <input type="submit" name="ctl19$ctl00$ctl00$ctl00$btnbuy" value="Mua ngay" id="btnbuy" class="btn-add-cart btn " /> -->
 
-                                                    <a class="btn btn-primary hidden" data-target="#popup-cart">
+                                                    <a class="btn btn-primary" href="{{URL::route('addToCart',[$product->id,1])}}" data-target="#popup-cart">
                                                         <span class="txt-main">Mua ngay</span>
                                                     </a>
 
-                                                    <script>
-
-                                                        $(document).on("click", ".ttc", function (event) {
-
-                                                            $(".ttc").removeClass("selected");
-                                                            var listpb = $(this).attr("data-vl");
-                                                            $(this).addClass("selected");
-                                                            $(".size_form").html("Size: " + listpb);
-                                                            $(".size_form").attr("data-value",listpb);
-                                                            var listpri = $(this).attr("data-vl");
-         $("#hdsize").val(listpri);
-                                                            var idS = 5807;
-                                                            updateprices(listpri,idS);
-                                                        });
-                                                        $(document).on("click", ".btn-primary", function (event) {
-                                                            var listpri = $(".size_form").attr("data-value");
-                                                            var idS = 5807;
-
-                                                            if ($('ul.ttp').children('li').length) {
-
-                                                                var value = $(".size_form").attr("data-value")
-                                                                if (value == "") {
-                                                                    alert("Vui lòng chọn size ");
-                                                                    return;
-                                                                }
-                                                                else {
-
-                                                                    updateprices(listpri,idS);
-                                                                    $("#popup-cart").show();
-                                                                    $("#popup-cart").css("opacity", "1");
-                                                                    $(".btn-primary").attr("data-toggle", "modal");
-
-                                                                }
-                                                            }
-                                                            else {
-
-                                                                updateprices(listpri,idS);
-                                                                $("#popup-cart").show();
-                                                                $("#popup-cart").css("opacity", "1");
-                                                                $(".btn-primary").attr("data-toggle", "modal");
-
-                                                            }
-                                                        });
-
-                                                        $(document).on("click", ".quickview-close", function (event) {
-
-                                                            $("#popup-cart").hide();
-                                                            $("#popup-cart").css("opacity", "0");
-                                                        });
-                                                    </script>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -454,69 +392,32 @@
 
             <div class="sidebar-block service-block">
                 <div class="sidebar-content">
+                        @foreach($policys as $item)
+                            <div class="service-item service-item-two">
+                                <div class="item-top">
+                                    <span class="img">
+                                        <img src="{{asset('uploads/images/adss/'.$item->url)}}" alt="{{$item->title}}">
+                                    </span>
+                                    <span class="title">
+                                        {{$item->title}}
+                                    </span>
+                                </div>
+                            </div>
+                        @endforeach
+                            
+                    @foreach($contacts as $item)
+                        <div class="service-item service-item-two" style="border-bottom:0px">
+                            <div class="item-top">
+                                <span class="img">
+                                    <img src="{{asset('uploads/images/adss/'.$item->url)}}" alt="{{$item->title}}">
+                                </span>
+                                <span class="title">
+                                    {{$item->title}}
+                                </span>
+                            </div>
+                        </div>
+                    @endforeach
                     
-                            <div class="service-item service-item-two">
-                                <div class="item-top">
-                                    <span class="img">
-                                        <img src="https://cuongluxury.vn/uploads/qc/19-icon-sua-chua-bao-hanh-03.png?width=50&mode=crop" alt="Bảo hành lên tới 5 năm">
-                                    </span>
-                                    <span class="title">
-                                        Bảo hành lên tới 5 năm
-                                    </span>
-                                </div>
-                                <p class="caption">
-                                    
-                                </p>
-                            </div>
-                        
-                            <div class="service-item service-item-two">
-                                <div class="item-top">
-                                    <span class="img">
-                                        <img src="https://cuongluxury.vn/uploads/qc/36-icon-sua-chua-bao-hanh-04.png?width=50&mode=crop" alt="1 đổi 1 trong vòng 10 ngày nếu lỗi là do nhà sản xuất">
-                                    </span>
-                                    <span class="title">
-                                        1 đổi 1 trong vòng 10 ngày nếu lỗi là do nhà sản xuất
-                                    </span>
-                                </div>
-                                <p class="caption">
-                                    
-                                </p>
-                            </div>
-                        
-                            <div class="service-item service-item-two">
-                                <div class="item-top">
-                                    <span class="img">
-                                        <img src="https://cuongluxury.vn/uploads/qc/42-icon-sua-chua-bao-hanh-05.png?width=50&mode=crop" alt="Hoàn tiến nếu phát hiện hàng  fake">
-                                    </span>
-                                    <span class="title">
-                                        Hoàn tiến nếu phát hiện hàng  fake
-                                    </span>
-                                </div>
-                                <p class="caption">
-                                    
-                                </p>
-                            </div>
-                        
-                            <div class="service-item service-item-two">
-                                <div class="item-top">
-                                    <span class="img">
-                                        <img src="https://cuongluxury.vn/uploads/qc/48-icon-sua-chua-bao-hanh-06.png?width=50&mode=crop" alt="FREE ship toàn quốc">
-                                    </span>
-                                    <span class="title">
-                                        FREE ship toàn quốc
-                                    </span>
-                                </div>
-                                <p class="caption">
-                                    
-                                </p>
-                            </div>
-                        
-                    <div class="phone-others">
-                        0987.56.56.56
-                    </div>
-                    <div class="support-others">
-                        hotro@cuong.vn
-                    </div>
                 </div>
             </div>
         </div>
@@ -786,6 +687,54 @@
                     quantity = 100;
                 }
                 $('.product-quantity input.qty').val(quantity)
+            });
+        </script>
+        <script type="text/javascript">
+            function addCommas(nStr)
+            {
+                nStr += '';
+                x = nStr.split('.');
+                x1 = x[0];
+                x2 = x.length > 1 ? '.' + x[1] : '';
+                var rgx = /(\d+)(\d{3})/;
+                while (rgx.test(x1)) {
+                    x1 = x1.replace(rgx, '$1' + ',' + '$2');
+                }
+                return x1 + x2;
+            }
+            $(document).on("click", ".propertie-value-item", function (event) {
+                var propertie_id = $(this).attr('propertie-id')
+                $('.propertie-value-item[propertie-id='+propertie_id+']').each(function(){
+                    $(this).removeClass('selected');
+                });
+                $(this).addClass("selected");
+                var str_ids = '';
+                var product_id = $('.products-details').attr('product-id');
+                $('.propertie-value-item').each(function(){
+                    if($(this).hasClass('selected')){
+                        str_ids = $(this).attr('data-vl')+','+str_ids;
+                    }
+                });
+                var url = 'findProductVariation/'+product_id+'?properties_value_id='+str_ids;
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    dataType: 'json',
+                    success: function(data) {
+                        if(!data){
+                            $('.products_key').text('Không có sản phẩm phù hợp.Vui lòng chọn thêm hoặc thay đổi thuộc tính sản phẩm');
+                        }
+                        else{
+                            $('.products_key').text('Mã sản phẩm: '+data.sku);
+                            $('.product-price').text('Giá bán: '+addCommas(data.price)+' đ');
+                        }
+                        
+                        console.log(data);
+
+                    }
+                });
+                console.log(url);
+                
             });
         </script>
 

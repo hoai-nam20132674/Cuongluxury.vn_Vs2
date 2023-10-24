@@ -251,7 +251,7 @@ Route::get('/clear', function() {
 
 });
 // add to cart
-
+Route::get('/findProductVariation/{id}', 'Controller@findProductVariation')->name('findProductVariation');
 Route::get('/gio-hang', 'Controller@cart')->name('cart');
 Route::get('/dat-hang', 'Controller@order')->name('order');
 Route::post('/dat-hang', 'Controller@postAddOrder')->name('postAddOrder');

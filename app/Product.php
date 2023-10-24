@@ -254,6 +254,30 @@ class Product extends Model
                 
             }
         }
+        $properties_filter = $request->properties_filter;
+        if(empty($properties_filter)){
+            $itemDeletes = ProductPropertiesValueFilter::where('product_id',$id)->get();
+            foreach($itemDeletes as $itemDelete){
+                $itemDelete->delete();
+            }
+        }
+        if(isset($properties_filter)){
+            $itemDeletes = ProductPropertiesValueFilter::where('product_id',$id)->whereNotIn('propertie_value_id',$properties_filter)->get();
+            foreach($itemDeletes as $itemDelete){
+                $itemDelete->delete();
+            }
+            $count = count($properties_filter);
+            for($j=0;$j<$count;$j++){
+                $item = ProductPropertiesValueFilter::where('propertie_value_id',$properties_filter[$j])->where('product_id',$id)->get();
+                if(count($item)==0){
+                    $scid = new ProductPropertiesValueFilter;
+                    $scid->product_id = $id;
+                    $scid->propertie_value_id = $properties_filter[$j];
+                    $scid->save();
+                }
+                
+            }
+        }
         if($product->lang == 'vi'){
             $pr_langs = $product->langs;
             if($request->hasFile('images')){ 

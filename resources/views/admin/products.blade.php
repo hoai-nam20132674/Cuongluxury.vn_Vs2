@@ -58,7 +58,30 @@
                                         </li>
                                     </ul>
                             	</div>
-                                <button class="btn btn-primary btn-show-table-options">Lọc dữ liệu</button>
+                            	<div class="btn-group">
+                                	<a class="btn btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Lọc dữ liệu</a>
+                                	<ul class="dropdown-menu">
+                                		<li>
+                                            <a href="{{URL::route('products')}}">Tất cả</a>
+                                        </li>
+                                        @foreach($categories as $cate)
+	                                        @if($cate->parent_id == null)
+	                                        <li>
+	                                            <a href="{{URL::route('productsCate',$cate->id)}}">{{$cate->name}}</a>
+	                                        </li>
+	                                        	@foreach($categories as $cate2)
+	                                        		@if($cate2->parent_id == $cate->id)
+	                                        			<li style="">
+	                                        				
+				                                            <a href="{{URL::route('productsCate',$cate2->id)}}"><i class="bx bx-subdirectory-right"></i>{{$cate2->name}}</a>
+				                                        </li>
+	                                        		@endif
+	                                        	@endforeach
+	                                        @endif
+                                        @endforeach
+                                    </ul>
+                            	</div>
+                                <!-- <button class="btn btn-primary btn-show-table-options">Lọc dữ liệu</button> -->
                             </div>
                 		</div>
             		</div>
