@@ -19,6 +19,14 @@
     <meta property="og:image:alt" name="og:image:alt" content="Cuong Luxury" />
     <meta property="og:sitename" content="https://cuongluxury.vn/" />
     <link rel="canonical" href="https://cuongluxury.vn/" />
+    <style type="text/css">
+        #btncontinue:hover {
+            color: #000;
+            background: #fff;
+            border: 1px solid #000;
+            text-transform: uppercase;
+        }
+    </style>
 
 @endsection
 
@@ -52,7 +60,8 @@
             <div class="page-wrap">
 
                 
-    <script src="/templates/home/js/numeral.min.js" type='text/javascript'></script>
+<form method="POST" enctype="multipart/form-data" action="{{URL::route('postAddOrder')}}" id="addOrder">
+@csrf 
 <div class='cart_detail'>
 
     <div id="pncartdetail">
@@ -76,7 +85,7 @@
                     
                     <td class="hidden-xs" valign="top"><a href="{{$item->options->url}}" title="{{$item->name}}">
                         {{$item->name}}<br> 
-                        <p>Mã sản phẩm: 665.OX.7180.LR.1204</p>
+                        <p>Mã sản phẩm: {{$item->options->sku}}</p>
                     </a>
 
                     </td>
@@ -108,351 +117,106 @@
         <p class='tool_cart'>
             <input type="button" name="btncontinue" value="Tiếp tục mua" id="btncontinue" class="btncontinue btn" />
             <input type="button" name="btnbuys" value="Đặt hàng" id="btnbuys" class="btnbuys btn" />
-            <input type="button" name="btncancel" value="Hủy đơn hàng" id="btncancel" class="btncancel btn" />
+            <!-- <input type="button" name="btncancel" value="Hủy đơn hàng" id="btncancel" class="btncancel btn" /> -->
         </p>
     
 </div>
 
-<div class="row infoOrder hidden">
-    <div class="customer-frm col-md-6">
-        <div class="buy-form">
-            <h3 class="legend">2. Thông tin Khách Hàng</h3>
-            <p>
-                <span class="msg_error">
-                    </span>
-            </p>
-            <ul class="filter-list">
-                <li class="filter-username">
-                    <div class="group-radio hidden">
-                        <div class="radio-1">
-                            <input id="rdmale" type="radio" name="name" value="rdmale" checked="checked" />
-                            <label for="gender-male">Anh</label>
 
-
-                        </div>
-                        <div class="radio-1">
-                            <input id="rdfemale" type="radio" name="ctl19$ctl00$ctl00$ctl00$gdsex" value="rdfemale" />
-                            <label for="gender-male">Chị</label>
-
-                        </div>
-                    </div>
-                    <label>Họ tên</label>
-                    <input name="ctl19$ctl00$ctl00$ctl00$txtname" type="text" id="txtname" class="fullname mipt" placeholder="Nhập họ và tên của bạn..." />
-                </li>
-                <li  class="filter-username">
-                     <label>Số điện thoại</label>
-                    <input name="ctl19$ctl00$ctl00$ctl00$txtphone" type="text" id="txtphone" class="phone mipt" placeholder="Nhập số điện thoại của bạn..." />
-
-                </li>
-                <li  class="filter-username">
-                     <label>Email</label>
-                    <input name="ctl19$ctl00$ctl00$ctl00$txtemail" type="text" id="txtemail" class="email mipt" placeholder="Email (cần nhập email để nhận được thông tin đơn hàng)" />
-
-                </li>
-
-
-
-                <li >
-                    <label class="toglAddress"><i class="fa fa-location-arrow"></i> Địa chỉ, thời gian GIAO HÀNG NHANH</label>
-                    <li class="info-add  filter-username hidden">
-                        <label>Tỉnh thành</label>
-                            
-                       </li>
-                   <li class="info-add  filter-username hidden">
-                         <label>Quận / huyện</label>
-
-                            
-                       </li>
-                       <li class="info-add hidden filter-username hidden">
-                              <label>Phường / Xã</label>
-                            
-                        </li>
-                  
+    <div class="row infoOrder hidden">
+        
+        
+        <div class="customer-frm col-md-6">
+            <div class="buy-form">
+                <h3 class="legend">2. Thông tin Khách Hàng</h3>
+                <p>
+                    <span class="msg_error">
+                        </span>
+                </p>
+                <ul class="filter-list">
                     <li class="filter-username">
-                          <label>Địa chỉ</label>
-                        <input name="ctl19$ctl00$ctl00$ctl00$txtaddress" type="text" id="txtaddress" class="address mipt" placeholder="Số nhà - Tên đường" />
+                        
+                        <label>Họ tên</label>
+                        <input name="order_name" type="text" id="order_name" required class="fullname mipt" placeholder="Nhập họ và tên của bạn..." />
+                    </li>
+                    <li  class="filter-username">
+                         <label>Số điện thoại</label>
+                        <input name="order_phone" type="text" id="order_phone" required class="phone mipt" placeholder="Nhập số điện thoại của bạn..." />
 
                     </li>
                     <li  class="filter-username">
-                          <label>Ghi chú</label>
-                        <textarea name="ctl19$ctl00$ctl00$ctl00$txtcontent" rows="6" cols="46" id="txtcontent" class="mtxt comment" placeholder="Ghi chú khi giao hàng (vd: ngày, giờ giao hàng)">
-</textarea>
+                         <label>Email</label>
+                        <input name="order_email" type="text" id="order_email" class="email mipt" placeholder="Email (cần nhập email để nhận được thông tin đơn hàng)" />
 
                     </li>
-                </li>
-            </ul>
+
+
+
+                    <li >
+                        <label class="toglAddress"><i class="fa fa-location-arrow"></i> Địa chỉ, thời gian GIAO HÀNG NHANH</label>
+                        <li class="filter-username">
+                              <label>Địa chỉ</label>
+                            <input name="order_address" type="text" id="order_address" class="address mipt" placeholder="Số nhà - Tên đường" />
+
+                        </li>
+                        <li  class="filter-username">
+                              <label>Ghi chú</label>
+                            <textarea name="order_messages" rows="6" cols="46" id="order_messages" class="mtxt comment" placeholder="Ghi chú khi giao hàng (vd: ngày, giờ giao hàng)">
+    </textarea>
+
+                        </li>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="popup-buyform ipayment col-md-6" style="height:auto">
-        <div class="info-payment">
-            <label class="toglAddress"><i class="fa fa-money"></i> Hình thức thanh toán</label>
-            @foreach($payments as $item)
-            @endforeach
-             <div class="p-row  active"  style='display:block' >
-                <input id="rdtructiep" type="radio" name="ctl19$ctl00$ctl00$ctl00$pm" value="rdtructiep" checked="checked" />
+        <div class="popup-buyform ipayment col-md-6" style="height:auto">
+            <div class="info-payment">
+                <label class="toglAddress"><i class="fa fa-money"></i> Hình thức thanh toán</label>
+                @php
+                    $tg = 1;
+                @endphp
+                @foreach($payments as $item)
+                    @if($tg)
+                        <div class="p-row "  style='display:block' >
+                            <input id="pt-{{$item->id}}" type="radio" name="order_payment" value="{{$item->title}}" checked="checked" />
 
-                <label for="bank_transfer" class="lbl-rado">Thanh toán trực tiếp</label>
-                <div class="redirect_box boxContent">
-                    <div>
-Thanh to&aacute;n trực tiếp tại Showroom:</div>
-<div>
-- CS1: 39 Quang Trung, Ho&agrave;n Kiếm, H&agrave; Nội</div>
-<div>
-- CS2: 39 V&otilde; Văn Dũng, Đống Đa, H&agrave; Nội</div>
+                            <label for="pt-{{$item->id}}" class="lbl-rado">{{$item->title}}</label>
+                            <div class="redirect_box boxContent" style="display: block;">
+                                {!!$item->content!!}
 
-                </div>
+                            </div>
+                        </div>
+                        @php
+                            $tg = 0;
+                        @endphp
+                    @else
+                        <div class="p-row " style='display:block'>
+                            <input id="pt-{{$item->id}}" type="radio" name="order_payment" value="{{$item->title}}" />
+
+                            <label for="pt-{{$item->id}}" class="lbl-rado">{{$item->title}}</label>
+                            <div class="redirect_box boxContent">
+                                {!!$item->content!!}
+
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+                
+
+
             </div>
-            <div class="p-row "  style='display:block' >
-                <input id="bank_transfer" type="radio" name="ctl19$ctl00$ctl00$ctl00$pm" value="bank_transfer" />
-
-                <label for="bank_transfer" class="lbl-rado">Thanh toán qua ngân hàng</label>
-                <div class="bank_transfer_box boxContent" style="display: none;">
-                    <div>
-Thanh to&aacute;n chuyển khoản qua ng&acirc;n h&agrave;ng</div>
-<div>
-&nbsp;</div>
-<div>
-<strong>1. Ng&acirc;n h&agrave;ng TMCP VietComBank</strong></div>
-<div>
-Số t&agrave;i khoản: 1017885586</div>
-<div>
-Chủ t&agrave;i khoản: L&ecirc; Thị Th&uacute;y Lan</div>
-<div>
-&nbsp;</div>
-<div>
-<strong>2. Ng&acirc;n h&agrave;ng TMCP TechComBank</strong></div>
-<div>
-Số t&agrave;i khoản: 19025943874021</div>
-<div>
-Chủ t&agrave;i khoản: L&ecirc; Thị Th&uacute;y Lan</div>
-<div>
-&nbsp;</div>
-
-                </div>
-            </div>
-            <div class="p-row  "  style='display:block' >
-                <input id="cod_payment" type="radio" name="ctl19$ctl00$ctl00$ctl00$pm" value="cod_payment" />
-                <label for="cod_payment" class="lbl-rado">Thanh toán tại nhà (COD)</label>
-                <div class="cod_payment_box boxContent" style="display: none;">
-                    <p>
-Thanh to&aacute;n khi kh&aacute;ch h&agrave;ng nhận được h&agrave;ng</p>
-
-                </div>
-            </div>
-
-            <div class="p-row cod-row" style="display: none;">
-                <input id="ATM_ONLINE" type="radio" name="ctl19$ctl00$ctl00$ctl00$pm" value="ATM_ONLINE" />
-                <label>Thanh toán online bằng thẻ ngân hàng nội địa</label>
-
-                <div class="boxContent">
-                    <p>
-                        <i>
-                            <span style="color: #ff5a00; font-weight: bold; text-decoration: underline;">Lưu ý</span>: Bạn cần đăng ký Internet-Banking hoặc dịch vụ thanh toán trực tuyến tại ngân hàng trước khi thực hiện.</i>
-                    </p>
-
-                    <ul class="cardList clearfix">
-
-                        <li class="bank-online-methods ">
-                            <label for="vcb_ck_on">
-                                <i class="VCB" title="Ngân hàng TMCP Ngoại Thương Việt Nam"></i>
-                                <input id="VCB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="VCB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="vnbc_ck_on">
-                                <i class="DAB" title="Ngân hàng Đông Á"></i>
-                                <input id="DAB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="DAB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="tcb_ck_on">
-                                <i class="TCB" title="Ngân hàng Kỹ Thương"></i>
-                                <input id="TCB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="TCB" />
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="sml_atm_mb_ck_on">
-                                <i class="MB" title="Ngân hàng Quân Đội"></i>
-                                <input id="MB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="MB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="shb_ck_on">
-                                <i class="SHB" title="Ngân hàng Sài Gòn - Hà Nội"></i>
-                                <input id="SHB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="SHB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="sml_atm_vib_ck_on">
-                                <i class="VIB" title="Ngân hàng Quốc tế"></i>
-                                <input id="VIB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="VIB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="sml_atm_vtb_ck_on">
-                                <i class="ICB" title="Ngân hàng Công Thương Việt Nam"></i>
-                                <input id="ICB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="ICB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="sml_atm_exb_ck_on">
-                                <i class="EXB" title="Ngân hàng Xuất Nhập Khẩu"></i>
-                                <input id="EXB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="EXB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="sml_atm_acb_ck_on">
-                                <i class="ACB" title="Ngân hàng Á Châu"></i>
-                                <input id="ACB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="ACB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="sml_atm_hdb_ck_on">
-                                <i class="HDB" title="Ngân hàng Phát triển Nhà TPHCM"></i>
-                                <input id="HDB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="HDB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="sml_atm_msb_ck_on">
-                                <i class="MSB" title="Ngân hàng Hàng Hải"></i>
-                                <input id="MSB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="MSB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="sml_atm_nvb_ck_on">
-                                <i class="NVB" title="Ngân hàng Nam Việt"></i>
-                                <input id="NVB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="NVB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="sml_atm_vab_ck_on">
-                                <i class="VAB" title="Ngân hàng Việt Á"></i>
-                                <input id="VAB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="VAB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="sml_atm_vpb_ck_on">
-                                <i class="VPB" title="Ngân Hàng Việt Nam Thịnh Vượng"></i>
-                                <input id="VPB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="VPB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="sml_atm_scb_ck_on">
-                                <i class="SCB" title="Ngân hàng Sài Gòn Thương tín"></i>
-                                <input id="SCB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="SCB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="ojb_ck_on">
-                                <i class="OJB" title="Ngân hàng Đại Dương"></i>
-                                <input id="OJB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="OJB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="bnt_atm_pgb_ck_on">
-                                <i class="PGB" title="Ngân hàng Xăng dầu Petrolimex"></i>
-                                <input id="PGB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="PGB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="bnt_atm_gpb_ck_on">
-                                <i class="GPB" title="Ngân hàng TMCP Dầu khí Toàn Cầu"></i>
-                                <input id="GPB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="GPB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="bnt_atm_agb_ck_on">
-                                <i class="AGB" title="Ngân hàng Nông nghiệp &amp; Phát triển nông thôn"></i>
-                                <input id="AGB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="AGB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="bnt_atm_sgb_ck_on">
-                                <i class="SGB" title="Ngân hàng Sài Gòn Công Thương"></i>
-                                <input id="SGB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="SGB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="bnt_atm_nab_ck_on">
-                                <i class="NAB" title="Ngân hàng Nam Á"></i>
-                                <input id="NAB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="NAB" />
-
-                            </label>
-                        </li>
-
-                        <li class="bank-online-methods ">
-                            <label for="sml_atm_bab_ck_on">
-                                <i class="BAB" title="Ngân hàng Bắc Á"></i>
-                                <input id="BAB" type="radio" name="ctl19$ctl00$ctl00$ctl00$bankcode" value="BAB" />
-
-                            </label>
-                        </li>
-
-                    </ul>
-
-                </div>
-            </div>
-            <div class="p-row cod-row" style="display: none;">
-                <label>
-                    <input id="VISA" type="radio" name="ctl19$ctl00$ctl00$ctl00$pm" value="VISA" />
-                    Thanh toán bằng thẻ Visa hoặc MasterCard</label>
-                <div class="boxContent">
-                </div>
-            </div>
-
 
         </div>
+        <div class="col-md-12" style="margin: 20px 0px;">
+            <input type="button" name="addOrder" value="Đặt hàng" id="btnbuys" class="addOrder btn" />
+        </div>
+    </div>
 
-    </div>
-    <br>
-    <div class="col-md-12" style="margin: 20px 0px;">
-        <input type="button" name="addOrder" value="Đặt hàng" id="btnbuys" class="addOrder btn" />
-    </div>
-    <br>
-</div>
     
     
 
 </div>
+</form>
 <style>
        ul.bankList {
                 clear: both;
@@ -601,6 +365,26 @@ Thanh to&aacute;n khi kh&aacute;ch h&agrave;ng nhận được h&agrave;ng</p>
         });
         // console.log(rowId);
     });
+    $(document).on('click', '.addOrder', function(event) {
+        $(this).parents('form').submit();
+        // var data = $('form#addOrder').serialize();
+        // console.log(data);
+        // $.ajax({
+        //     url: 'dat-hang',
+        //     type: "POST",
+        //     data: data,
+        //     contentType: false,
+        //     processData: false,
+        //     headers: { "X-CSRF-Token": $("input[name='_token']").attr("value") },
+        //     success: function(d) {
+        //        if(d){
+        //             toastr.success('đặt hàng thành công');
+        //        }
+
+        //     }
+        // });
+    });
+    
 </script>
 <script>
     $('input[name="ctl17$ctl00$ctl00$ctl00$pm"]').bind('click', function () {

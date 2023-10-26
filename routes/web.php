@@ -40,6 +40,7 @@ Route::get('admin/chat/deleteGroup', 'HomeController@deleteGroup')->name('delete
 
 // blog route
 Route::get('admin/blogs', 'HomeController@blogs')->name('blogs');
+Route::get('admin/blogs/{id}', 'HomeController@blogsCate')->name('blogsCate');
 Route::get('admin/blog/add', 'HomeController@addBlog')->name('addBlog');
 Route::post('admin/blog/add', 'HomeController@postAddBlog')->name('postAddBlog');
 Route::get('admin/blog/edit/{id}', 'HomeController@editBlog')->name('editBlog');
@@ -203,6 +204,14 @@ Route::post('admin/properties/edit/{id}', 'HomeController@postEditProperties')->
 Route::get('admin/properties-value/delete/{id}', 'HomeController@deletePropertiesValue')->name('deletePropertiesValue');
 //end properties
 
+//order
+Route::get('admin/orders', 'HomeController@orders')->name('orders');
+Route::get('admin/order/{id}', 'HomeController@orderDetail')->name('orderDetail');
+Route::post('admin/order/edit/{id}', 'HomeController@editOrder')->name('editOrder');
+Route::get('admin/order/deleteOrder', 'HomeController@deleteOrder')->name('deleteOrder');
+Route::get('admin/order/deleteOrders', 'HomeController@deleteOrders')->name('deleteOrders');
+//end order
+
 Route::get('admin/test', 'HomeController@test')->name('test');
 
 //Merchant route
@@ -253,7 +262,6 @@ Route::get('/clear', function() {
 // add to cart
 Route::get('/findProductVariation/{id}', 'Controller@findProductVariation')->name('findProductVariation');
 Route::get('/gio-hang', 'Controller@cart')->name('cart');
-Route::get('/dat-hang', 'Controller@order')->name('order');
 Route::post('/dat-hang', 'Controller@postAddOrder')->name('postAddOrder');
 Route::get('/add-to-cart/{id}-{qty}', 'Controller@addToCart')->name('addToCart');
 Route::get('/remove-item-cart/{id}', 'Controller@removeItemCart')->name('removeItemCart');
@@ -278,6 +286,7 @@ Route::get('/resizes/{size}/{imagePath}', 'Controller@flyResize')->where('imageP
 Route::group(['middleware' => 'locale'], function() {
    Route::get('/san-pham-noi-bat', 'Controller@productsHot')->name('productsHot');
    Route::post('/addContact', 'Controller@addContact')->name('addContact');
+   Route::get('/addContact2', 'Controller@addContact2')->name('addContact2');
    Route::get('/lien-he', 'Controller@contact')->name('contact');
    Route::get('/ky-gui-bat-dong-san', 'Controller@exchange')->name('exchange');
    Route::post('addKygui', 'Controller@addKygui')->name('addKygui');

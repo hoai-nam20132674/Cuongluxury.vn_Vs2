@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\BlogCate;
 use App\ProductCate;
 use App\ServiceCate;
+use App\Page;
 
 class Menu extends Model
 {
@@ -31,6 +32,11 @@ class Menu extends Model
     		$url = $cate->url;
 
     	}
+        else if($type == 'page'){
+            $page = Page::where('id',$type_id)->get()->first();
+            $url = $page->url;
+
+        }
     	// else if($type == 'serviceCategory'){
     	// 	$cate = ServiceCate::where('id',$type_id)->get()->first();
     	// 	$url = $cate->url;

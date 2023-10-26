@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="vi-vn" lang="vi-vn">
 <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="vi" />
+    <meta name="copyright" content="Copyright" />
+    <meta name="geo.placename" content="39 Quang Trung, Hoàn Kiếm" />
     @yield('head')
     <link href="{{asset('css/Roboto.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}" />
@@ -75,7 +80,7 @@ return true;
 </head>
 <body class="">
 
-<form method="post" action="./" id="fwrp">
+
 <div class="aspNetHidden">
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTMxOTM5NzI4MGRkyo/NfuWFUgAhZm1AcQzeE1rOBmg=" />
 </div>
@@ -509,7 +514,7 @@ function setCookie(cname, cvalue, exdays) {
 
         
         
-    </form>
+    
     <script src="{{asset('js/jquery.fancybox.min.js')}}"></script>
     <script src="{{asset('js/owl.carousel.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>

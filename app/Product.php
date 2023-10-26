@@ -21,6 +21,9 @@ class Product extends Model
 {
     //
     protected $table = 'products';
+    public function orders(){
+        return $this->belongsToMany('App\Order','order_details','products_id','orders_id');
+    }
     public function categories(){
         return $this->belongsToMany('App\ProductCate','pcids','product_id','cate_id');
     }

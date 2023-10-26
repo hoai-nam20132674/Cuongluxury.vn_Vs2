@@ -9,11 +9,16 @@ use App\OrderDetail;
 class Order extends Model
 {
     //
+    protected $table = 'orders';
+    public function products(){
+        return $this->belongsToMany('App\Product','order_details','orders_id','products_id');
+    }
     public function add($request,$items){
-    	$this->name = $request->name;
-    	$this->phone = $request->phone;
-    	$this->address = $request->address;
-    	$this->messages = $request->messages;
+    	$this->name = $request->order_name;
+    	$this->phone = $request->order_phone;
+        $this->email = $request->order_email;
+    	$this->address = $request->order_address;
+    	$this->messages = $request->order_messages;
     	$this->status = 0;
     	$this->save();
     	foreach($items as $item){

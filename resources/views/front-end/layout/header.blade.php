@@ -58,7 +58,51 @@
             <div class="col-md-8 hidden-sm hidden-xs no-padding-pc">
                 <nav class="hidden-sm hidden-xs">
                     <ul id="nav" class="nav">
-                        <li  class='nav-item'><a title='Trang chủ' class='nav-link' href='/'>Trang chủ</a></li><li  class='nav-item f-right'><a title='Về chúng tôi' class='nav-link' href='/gioi-thieu'>Về chúng tôi</a></li><li  class='nav-item f-right'><a title='Tải APP' class='nav-link' href='/'>Tải APP</a></li><li  class='nav-item has-mega f-right'><a title='Chính sách' class='nav-link' href='/'>Chính sách <i class='fa fa-angle-right' data-toggle='dropdown'></i></a><ul class='dropdown-menu'><li  class='nav-item-lv2'><a title='Chính sách bảo hành' class='nav-link' href='/chinh-sach-bao-hanh'>Chính sách bảo hành</a></li><li  class='nav-item-lv2'><a title='Chính sách trả góp' class='nav-link' href='/chinh-sach-tra-gop-0'>Chính sách trả góp</a></li><li  class='nav-item-lv2'><a title='Chính sách đổi trả' class='nav-link' href='/chinh-sach-doi-tra'>Chính sách đổi trả</a></li><li  class='nav-item-lv2'><a title='Chính sách thanh toán' class='nav-link' href='/chinh-sach-thanh-toan'>Chính sách thanh toán</a></li><li  class='nav-item-lv2'><a title='Chính sách vận chuyển' class='nav-link' href='/chinh-sach-van-chuyen'>Chính sách vận chuyển</a></li></ul></li><li  class='nav-item f-right'><a title='Tin tức' class='nav-link' href='https://cuongluxury.vn/chuyen-muc-tin-tuc'>Tin tức</a></li><li  class='nav-item has-mega '><a title='Đồng hồ' class='nav-link' href='/dong-ho'>Đồng hồ <i class='fa fa-angle-right' data-toggle='dropdown'></i></a><ul class='dropdown-menu'><li  class='nav-item-lv2'><a title='Hublot' class='nav-link' href='/hublot'>Hublot</a></li><li  class='nav-item-lv2'><a title='Franck Muller' class='nav-link' href='/franck-muller'>Franck Muller</a></li><li  class='nav-item-lv2'><a title='Rolex' class='nav-link' href='/rolex'>Rolex</a></li><li  class='nav-item-lv2'><a title='Patek Philippe' class='nav-link' href='/patek-philippe'>Patek Philippe</a></li><li  class='nav-item-lv2'><a title='Richard Mille' class='nav-link' href='/richard-mille'>Richard Mille</a></li></ul></li><li  class='nav-item'><a title='Vertu' class='nav-link' href='/vertu'>Vertu</a></li><li  class='nav-item'><a title='Trang sức' class='nav-link' href='/trang-suc'>Trang sức</a></li>
+
+                        @php
+                            $i=0;
+                        @endphp
+                        @foreach($menus as $item)
+                            @if($i<=3)
+                                @php
+                                    $childs = App\Menu::where('parent_id',$item->id)->get();
+                                @endphp
+                                @if(count($childs))
+                                    <li  class='nav-item has-mega'><a title='{{$item->title}}' class='nav-link' href='{{$item->url}}'>{{$item->title}} <i class='fa fa-angle-right' data-toggle='dropdown'></i></a>
+                                        <ul class='dropdown-menu'>
+                                            @foreach($childs as $child)
+                                                <li  class='nav-item-lv2'><a title='{{$child->title}}' class='nav-link' href='{{$child->url}}'>{{$child->title}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @else
+                                    <li  class='nav-item '><a title='{{$item->title}}' class='nav-link' href='{{$item->url}}'>{{$item->title}}</a>
+                                        
+                                    </li>
+                                @endif
+                                @php
+                                    $i++;
+                                @endphp
+                            @else
+                                @php
+                                    $childs = App\Menu::where('parent_id',$item->id)->get();
+                                @endphp
+                                @if(count($childs))
+                                    <li  class='nav-item f-right has-mega'><a title='{{$item->title}}' class='nav-link' href='{{$item->url}}'>{{$item->title}} <i class='fa fa-angle-right' data-toggle='dropdown'></i></a>
+                                        <ul class='dropdown-menu'>
+                                            @foreach($childs as $child)
+                                                <li  class='nav-item-lv2'><a title='{{$child->title}}' class='nav-link' href='{{$child->url}}'>{{$child->title}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @else
+                                    <li  class='nav-item f-right'><a title='{{$item->title}}' class='nav-link' href='{{$item->url}}'>{{$item->title}}</a>
+                                        
+                                    </li>
+                                @endif
+                            @endif
+                        @endforeach
+                        
                         <li class="logo-pcs">
                             <a class='logo-wrapper'  href='/'><img  src='https://cuongluxury.vn/uploads/banners/logo-w.png'  alt='Cuong Luxury'/></a>
                         </li>

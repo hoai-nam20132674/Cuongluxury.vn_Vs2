@@ -88,9 +88,7 @@
 											<th title="Ngôn ngữ" width="200px" class="text-center">
 												
 												<img src="https://cms.botble.com/vendor/core/core/base/images/flags/vn.svg" title="Tiếng Việt" width="16" alt="Tiếng Việt">
-												<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/225px-Flag_of_South_Korea.svg.png" title="Korean" width="16" alt="Korean">
-												<img src="https://cms.botble.com/vendor/core/core/base/images/flags/us.svg" title="English" width="16" alt="English">
-												<img style="border: 1px solid #ececec;" src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Japan.svg" title="Japan" width="16" alt="Japan">
+												
 											</th>
 											<th  title="Tác vụ" width="134px" class="text-center">Tác vụ</th>
 										</tr>
@@ -126,32 +124,7 @@
 													<td class=" text-center language-header no-sort">
 														<div class="text-center language-column">
 															<a href="#" class="tip" title=""><i class="fa fa-check text-success"></i></a>
-															@if(count($page->langs) == 0)
-																<a href="{{URL::route('addPage')}}?page_id={{$page->id}}&lang=ko" class="tip" title="Tạo bản dịch"><i class="fa fa-plus"></i></a>
-																<a href="{{URL::route('addPage')}}?page_id={{$page->id}}&lang=en" class="tip" title="Tạo bản dịch"><i class="fa fa-plus"></i></a>
-																<a href="{{URL::route('addPage')}}?page_id={{$page->id}}&lang=ja" class="tip" title="Tạo bản dịch"><i class="fa fa-plus"></i></a>
-															@else
-																@php
-																	$ko = $page->langs()->where('lang','ko')->first();
-																	$en = $page->langs()->where('lang','en')->first();
-																	$ja = $page->langs()->where('lang','ja')->first();
-																@endphp
-																@if(isset($ko))
-																	<a href="{{URL::route('editPage',$ko->page_lang_id)}}" class="tip" title="Sửa bản dịch"><i class="fa fa-edit"></i></a>
-																@else
-																	<a href="{{URL::route('addPage')}}?page_id={{$page->id}}&lang=ko" class="tip" title="Tạo bản dịch"><i class="fa fa-plus"></i></a>
-																@endif
-																@if(isset($en))
-																	<a href="{{URL::route('editPage',$en->page_lang_id)}}" class="tip" title="Sửa bản dịch"><i class="fa fa-edit"></i></a>
-																@else
-																	<a href="{{URL::route('addPage')}}?page_id={{$page->id}}&lang=en" class="tip" title="Tạo bản dịch"><i class="fa fa-plus"></i></a>
-																@endif
-																@if(isset($ja))
-																	<a href="{{URL::route('editPage',$ja->page_lang_id)}}" class="tip" title="Sửa bản dịch"><i class="fa fa-edit"></i></a>
-																@else
-																	<a href="{{URL::route('addPage')}}?page_id={{$page->id}}&lang=ja" class="tip" title="Tạo bản dịch"><i class="fa fa-plus"></i></a>
-																@endif
-															@endif
+															
 														</div>
 													</td>
 													<td class=" text-center">

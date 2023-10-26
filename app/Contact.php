@@ -18,13 +18,13 @@ class Contact extends Model
             $this->da = $request->da;
         }
     	$this->save();
-        Mail::send('mailfb', array('name'=>$request["name"],'email'=>$request["email"], 'phone'=>$request['phone']), function($message){
-            $message->to('kkumhouse.mkt@gmail.com', 'kkumhouse')->subject('Có yêu cầu hỗ trợ tư vấn mới');
-        });
-        $email = $request->email;
-        Mail::send('mailcf', array('name'=>$request["name"]), function($message) use ($email){
-            $message->to($email, 'kkumhouse')->subject('Cảm ơn quý khách');
-        });
+        // Mail::send('mailfb', array('name'=>$request["name"],'email'=>$request["email"], 'phone'=>$request['phone']), function($message){
+        //     $message->to('kkumhouse.mkt@gmail.com', 'kkumhouse')->subject('Có yêu cầu hỗ trợ tư vấn mới');
+        // });
+        // $email = $request->email;
+        // Mail::send('mailcf', array('name'=>$request["name"]), function($message) use ($email){
+        //     $message->to($email, 'kkumhouse')->subject('Cảm ơn quý khách');
+        // });
     }
     
 }

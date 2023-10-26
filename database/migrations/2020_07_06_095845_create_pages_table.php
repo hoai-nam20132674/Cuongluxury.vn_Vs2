@@ -17,10 +17,12 @@ class CreatePagesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('title')->nullable();
-            $table->longText('content');
-            $table->longText('seo_description');
-            $table->string('seo_keyword');
+            $table->longText('content')->nullable();
+            $table->longText('seo_description')->nullable();
+            $table->string('seo_keyword')->nullable();
             $table->string('url');
+            $table->string('lang')->nullable();
+            $table->string('avata')->nullable();
             $table->boolean('display');
             $table->timestamps();
         });

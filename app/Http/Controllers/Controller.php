@@ -99,7 +99,7 @@ class Controller extends BaseController
         $pledges = Ads::where('type',0)->where('display',1)->get();
         $adsCates = Ads::where('type',1)->where('display',1)->get();
         // return view('front-end.index',compact('system','menus','categories','products_hl','hct','hcn','cdt','hdb','blogs','slides','popup'));
-        return view('front-end.index',compact('slides','patek','rolex','hublot','fm','vertu','trangsuc','pledges','adsCates'));
+        return view('front-end.index',compact('slides','patek','rolex','hublot','fm','vertu','trangsuc','pledges','adsCates','menus'));
 
     }
     public function findProductCateTranslate($cate,$locale){
@@ -222,7 +222,7 @@ class Controller extends BaseController
         $key = substr($url,0,2);
         $id = substr($url,2);
         
-        // $categories = ProductCate::where('display',1)->where('lang',$locale)->with('products')->get();
+        $categories = ProductCate::where('display',1)->where('lang',$locale)->with('products')->get();
         $menus = Menu::whereNull('parent_id')->orderBy('stt','ASC')->get();
         $system = System::where('id',1)->get()->first();
         // $adss = Ads::where('display',1)->get();
@@ -234,7 +234,17 @@ class Controller extends BaseController
             config(['app.locale' => $locale]);
             \Session::put('website_language', $locale);
             if($product->lang == $locale){
-                $products = Product::where('id','!=',$product->id)->where('display',1)->where('lang',$locale)->orderBy('id','DESC')->with('categories')->get()->take(5);
+                $cate_pr = $product->categories;
+                if(count($cate_pr) == 1){
+                    $cate_pr = $product->categories()->first();
+                    $products = $cate_pr->products()->where('display',1)->where('lang',$locale)->orderBy('id','DESC')->get()->take(5);
+                }
+                else{
+                    $cate_pr = $product->categories()->where('parent_id','!=',null)->first();
+                    $products = $cate_pr->products()->where('display',1)->where('lang',$locale)->orderBy('id','DESC')->get()->take(5);
+                }
+
+                // $products = Product::where('id','!=',$product->id)->where('display',1)->where('lang',$locale)->orderBy('id','DESC')->with('categories')->get()->take(5);
                 $images = $product->images()->where('role',0)->get();
                 $policys = Ads::where('display',1)->where('type',3)->get();
                 $contacts = Ads::where('display',1)->where('type',4)->get();
@@ -272,6 +282,8 @@ class Controller extends BaseController
                 }
                 else{
                     return view('front-end.product',compact('menus','product','images','system','products','policys','contacts'));
+                    // dd($cate_pr->products);
+
                 }
                 
                 // --------------
@@ -329,7 +341,7 @@ class Controller extends BaseController
             // \Session::put('website_language', $locale);
             
             if($categorie->lang == $locale){
-                return view('front-end.products',compact('categories','menus','categorie','request','system','adss'));
+                return view('front-end.products',compact('categories','menus','categorie','request','system'));
             }
             else{
                 if($categorie->lang == 'vi'){
@@ -374,12 +386,8 @@ class Controller extends BaseController
             // config(['app.locale' => $locale]);
             // \Session::put('website_language', $locale);
             if($categorie->lang == $locale){
-                $categories = BlogCate::where('display',1)->where('lang',$locale)->get();
-                $bcids = BCID::where('cate_id',$id)->get();
-                $bids = $this->arrayColumn($bcids,$col='blog_id');
-                $blogs = Blog::where('display',1)->whereIn('id',$bids)->where('lang',$locale)->orderBy('id','DESC')->paginate(30);
-                $blogNews = Blog::where('display',1)->where('lang',$locale)->orderBy('id','DESC')->take(5)->get();
-                return view('front-end.blogs',compact('categories','menus','blogs','categorie','request','system','blogNews','adss'));
+                $blogs = $categorie->blogs()->where('display',1)->where('lang',$locale)->orderBy('id','DESC')->paginate(12);
+                return view('front-end.blogs',compact('menus','blogs','categorie','request','system'));
             }
             else{
                 if($categorie->lang == 'vi'){
@@ -417,20 +425,17 @@ class Controller extends BaseController
             
         }
         else if($key=='bi'){
-            $adss = Ads::where('display',1)->where('type',3)->get();
             $blog = Blog::where('id',$id)->get()->first();
             $locale = $blog->lang;
             config(['app.locale' => $locale]);
             \Session::put('website_language', $locale);
-            $blogNews = Blog::where('display',1)->where('lang',$locale)->orderBy('id','DESC')->take(5)->get();
+            $blogNews = Blog::where('display',1)->where('lang',$locale)->orderBy('id','DESC')->take(6)->get();
             if($blog->lang == $locale){
-                $categorie = BCID::where('blog_id',$blog->id)->get();
-                $blog_cate_id = $this->arrayColumn($categorie,$col='cate_id');
-                $categories = BlogCate::where('display',1)->where('lang',$locale)->get();
-                $bcids = BCID::whereIn('cate_id',$blog_cate_id)->get();
-                $bids = $this->arrayColumn($bcids,$col='blog_id');
-                $blogs = Blog::where('display',1)->whereIn('id',$bids)->where('lang',$locale)->take(6);
-                return view('front-end.blog',compact('categories','menus','blogs','blog','request','system','blogNews','adss'));
+                $product_cates = ProductCate::where('display',1)->where('parent_id',null)->get();
+                $blog_cates = BlogCate::where('display',1)->where('parent_id',null)->get();
+                $cate = $blog->categories()->first();
+                $blogs = $cate->blogs()->where('display',1)->orderBy('id','DESC')->take(6)->get();
+                return view('front-end.blog',compact('menus','blogs','blog','request','system','blogNews','product_cates','blog_cates'));
             }
             else{
                 if($blog->lang == 'vi'){
@@ -470,15 +475,17 @@ class Controller extends BaseController
             
         }
         else if($key=='pa'){
-            $adss = Ads::where('display',1)->where('type',1)->get();
             $page = Page::where('id',$id)->get()->first();
             // $locale = $page->lang;
             // config(['app.locale' => $locale]);
             // \Session::put('website_language', $locale);
-            $products = Product::where('display',1)->where('lang',$locale)->orderBy('id','DESC')->take(5)->get();
+            $product_cates = ProductCate::where('display',1)->where('parent_id',null)->get();
+            $blog_cates = BlogCate::where('display',1)->where('parent_id',null)->get();
+            $blogNews = Blog::where('display',1)->where('lang',$locale)->orderBy('id','DESC')->take(6)->get();
+            $blogs = $blogNews;
             if($page->lang == $locale){
                 
-                return view('front-end.page',compact('menus','page','request','system','products','adss'));
+                return view('front-end.page',compact('menus','page','request','system','product_cates','blog_cates','blogNews','blogs'));
             }
             else{
                 if($page->lang == 'vi'){
@@ -653,6 +660,12 @@ class Controller extends BaseController
         return redirect()->back()->with(['flash_level'=>'success','flash_message'=>'gửi yêu cầu thành công']);
 
     }
+    public function addContact2(Request $request){
+        $item = new Contact;
+        $item->add($request);
+        return 1;
+
+    }
     public function contact(){
         $menus = Menu::whereNull('parent_id')->orderBy('stt','ASC')->get();
         $system = System::where('id',1)->get()->first();
@@ -667,16 +680,12 @@ class Controller extends BaseController
         $payments = Payment::where('status',1)->get();
         $items_cart = Cart::content();
         return view('front-end.cart',compact('system','categories','menus','items_cart','payments'));
-        // $items_cart = Cart::search(function($cartItem, $rowId) {
-        //     return $cartItem->options->shop_name == 'ĐỒ NGỦ SEXY CZADI';
-        // });
-        // dd($items_cart);
+        
 
         
     }
     public function addToCart($id,$qty, Request $request){
         $product = Product::where('id',$id)->get()->first();
-        $shop = User::where('id',$product->user_id)->get()->first();
         $item_cart = Cart::content();
         $check_item = array();
         if(Cart::count()){
@@ -692,10 +701,10 @@ class Controller extends BaseController
         }
         else{
             if($product->sale == null){
-                Cart::add($product->id, $product->name, $qty, $product->price, 0, ['img'=>$product->avata,'url'=>$product->url,'oldprice'=>$product->price,'variation_id'=>$request->variation_id]);
+                Cart::add($product->id, $product->name, $qty, $product->price, 0, ['img'=>$product->avata,'url'=>$product->url,'oldprice'=>$product->price,'variation_id'=>$request->variation_id,'sku'=>$product->ma]);
             }
             else{
-                Cart::add($product->id, $product->name, $qty, $product->sale, 0, ['img'=>$product->avata,'url'=>$product->url,'oldprice'=>$product->price,'variation_id'=>$request->variation_id]);
+                Cart::add($product->id, $product->name, $qty, $product->sale, 0, ['img'=>$product->avata,'url'=>$product->url,'oldprice'=>$product->price,'variation_id'=>$request->variation_id,'sku'=>$product->ma]);
             }
         }
         
@@ -722,31 +731,10 @@ class Controller extends BaseController
     }
     public function postAddOrder(Request $request){
         $items = Cart::content();
-        $shop_id = array();
-        $i = 0;
-        foreach($items as $item){
-            $shop_id[$i] = $item->options->shop_id;
-            $i++;
-        }
-        $shops = User::whereIn('id',$shop_id)->get();
-        foreach($shops as $shop){
-            $id = $shop->id;
-            $items = Cart::search(function($cartItem, $rowId) use($id) {
-                return $cartItem->options->shop_id == $id;
-            });
-            $order = new Order;
-            $order->add($request,$items);
-            $note = Notification::where('user_id',$id)->get()->first();
-            $now = Carbon::now()->toDateTimeString();
-            $content = '<div id="'.$note->count.'" check="0" class="nofifition-drop-item unread"><a href="/don-hang-ban"><div class="notification-image ng-scope" style="background-image: url(/images/money-plus.png)"></div><div class="notification-content-description"><h1 class="title ng-binding ng-scope">BẠN CÓ MỘT ĐƠN HÀNG MỚI</h1><div class="summary ng-binding ng-scope">Hãy kiểm tra và xác thực đơn hàng để nhận thêm điểm thưởng</div><div class="date-submit ng-scope"><i class="far fa-clock"></i><span class="ng-binding">'.$now.'</span></div></div></a></div>'.$note->content;
-            $note->content = $content;
-            $note->count = $note->count+1;
-            $note->save();
-            
-            
-        }
+        $order = new Order;
+        $order->add($request,$items);
         Cart::destroy();
-        return redirect()->route('cart')->with(['flash_level'=>'success','flash_message'=>'Đặt hàng thành công']);
+        return redirect()->back()->with(['flash_level'=>'success','flash_message'=>'Đặt hàng thành công']);
         
     }
     // end add to cart

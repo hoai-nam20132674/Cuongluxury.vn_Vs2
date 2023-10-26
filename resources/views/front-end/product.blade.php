@@ -2,23 +2,17 @@
 
 @section('head')
     <title>{{$product->title}}</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="google-site-verification" content="4GneTy3UPEfpKBItZcT4ob0uAKRPvzGRcTm84Qd076M" />
-    <meta http-equiv="Content-Language" content="vi" />
-    <meta name="copyright" content="Copyright" />
-    <meta name="description" content="Cuong Luxury là đơn vị uy tín với hơn 10 năm kinh nghiệm trong lĩnh vực mua bán, trao đổi, ký gửi các thương hiệu đồng hồ hiệu chính hãng hàng đầu tại Việt Nam như Hublot, Rolex, Patek Philippe, Franck Muller, ..." />
-    <meta name="keywords" content="Cuong Luxury, đồng hồ cao cấp chính hãng, Hublot, Rolex, Patek Philippe, Franck Muller, Vertu, Richard Mille..." />
-    <meta name="geo.placename" content="39 Quang Trung, Hoàn Kiếm" />
+    <meta name="description" content="{{$product->seo_description}}" />
+    <meta name="keywords" content="{{$product->seo_keyword}}" />
     <meta name="DC.title" content="CuongLuxury" />
     <meta property="og:type" name="ogtype" content="Website" />
-    <meta property="og:title" name="ogtitle" content="Cuong Luxury" />
-    <meta property="og:description" name="ogdescription" content="Cuong Luxury là đơn vị uy tín với hơn 10 năm kinh nghiệm trong lĩnh vực mua bán, trao đổi, ký gửi các thương hiệu đồng hồ hiệu chính hãng hàng đầu tại Việt Nam như Hublot, Rolex, Patek Philippe, Franck Muller, ..." />
-    <meta property="og:url" name="ogurl" content="https://cuongluxury.vn/" />
-    <meta property="og:image" name="ogimage" content="https://cuongluxury.vn/templates/home/images/banner-zalo-e.png" />
+    <meta property="og:title" name="ogtitle" content="{{$product->title}}" />
+    <meta property="og:description" name="ogdescription" content="{{$product->seo_description}}" />
+    <meta property="og:url" name="ogurl" content="https://cuongluxury.vn/{{$product->url}}" />
+    <meta property="og:image" name="ogimage" content="{{asset('uploads/images/products/'.$product->avata)}}" />
     <meta property="og:image:alt" name="og:image:alt" content="Cuong Luxury" />
     <meta property="og:sitename" content="https://cuongluxury.vn/" />
-    <link rel="canonical" href="https://cuongluxury.vn/" />
+    <link rel="canonical" href="https://cuongluxury.vn/{{$product->url}}" />
 @endsection
 
 
@@ -234,30 +228,12 @@
                                     <div class="form-product">
                                         <div class="form-inline">
                                             <div class="form-group ">
-                                                <div class="clearfix">
-                                                    <div class="custom custom-btn-number form-control hidden">
-                                                        <div class="group-label">
-                                                            Số lượng
-                                                        </div>
-                                                        <div class="clearfix quantity product_quantity product-quantity  m-t-10 m-b-20 ">
-                                                            <button type="button" value="-" class="button btn_minus minus btn-minus btn-cts">-</button>
-                                                            <input type="text" min="1" name="quantity" value="1" title="Qty" class="qty input-text" size="4" />
-                                                            <button type="button" value="+" class=" button btn_plus plus btn-plus btn-cts">+</button>
-                                                        </div>
-                                                        <input type="hidden" id="type-id" value="5807" />
-         <input type="hidden" id="hdsize" name="hdsize" value="" />
-                                                        <input type="hidden" id="type-prd" value="hublot-classic-fusion-titanium-racing-grey" />
-                                                        <input type="hidden" id="type-key" value="542.NX.7071.LR" />
-                                                        <input type="hidden" id="type-name" value="Hublot Classic Fusion Titanium Racing Grey" />
-                                                        <input type="hidden" id="type-img" value="f2.png" />
-                                                        <input type="hidden"  name="type-price" id="type-price" value="155000000" />
-                                                    </div>
-                                                </div>
+                                                
                                                 <div class="btn-mua">
 
         <!-- <input type="submit" name="ctl19$ctl00$ctl00$ctl00$btnbuy" value="Mua ngay" id="btnbuy" class="btn-add-cart btn " /> -->
 
-                                                    <a class="btn btn-primary" href="{{URL::route('addToCart',[$product->id,1])}}" data-target="#popup-cart">
+                                                    <a class="btn btn-primary muangay" href="{{URL::route('addToCart',[$product->id,1])}}" data-target="#popup-cart">
                                                         <span class="txt-main">Mua ngay</span>
                                                     </a>
 
@@ -273,102 +249,8 @@
                                         <div id="widget-subscribe-form-result" class="">
                                         </div>
                                         <input id="signup_email" placeholder="Để lại số điện thoại..." />
-                                        <a onclick="sendemailservices()" class="send-em">Gửi</a>
-                                        <script>
-                                            function sendemailservices() {
-
-                                                var email = $('#signup_email').val();
-
-                                                var regphone = /^0(1\d{9}|9\d{8})$/;
-
-                                                if (email.length < 10) {
-                                                    $("#widget-subscribe-form-result").html("Xin mới nhập đúng định số điện thoại");
-                                                    return (false);
-                                                }
-                                                else if (!regphone.test(email)) {
-
-                                                    $("#widget-subscribe-form-result-study").html("Xin  mời nhập đúng định dạng điện thoại");
-                                                    return (false);
-                                                }
-
-                                                    //var address = document.getElementById[email].value;
-                                                    //if (!reg.test(email)) {
-                                                    //    $("#widget-subscribe-form-result").html("Xin mới nhập đúng định dạng email");
-                                                    //    return (false);
-                                                    //}
-
-                                                else {
-                                                    $.ajax({
-                                                        type: "POST",
-                                                        url: "webservices/SearchAirport.asmx/signupephone",
-                                                        data: "{  email1: '" + email + "'}",
-                                                        contentType: "application/json; charset=utf-8",
-                                                        dataType: "json",
-                                                        success: function (data) {
-                                                            if (data.d == "1") {
-                                                                $("#widget-subscribe-form-result").html("<p class='sucess-email'>Đăng ký tư vấn thành công</p>");
-                                                            }
-                                                            else {
-                                                                $("#widget-subscribe-form-result").html("<p style='no-sucess-email'>Đăng ký tư vấn không thành công</p>");
-                                                            }
-                                                        },
-                                                        error: function (data) {
-                                                        }
-                                                    });
-                                                }
-                                            }
-                                            function buypro() {
-                                                var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-                                                var name = $('#form_name').val();
-                                                var phone = $('#form_phone').val();
-                                                var email = $('#form_email').val();
-                                                var link = $('#form_link').val();
-                                                var size = $(".size_form").attr("data-value");
-                                                if(size =="" || size ==null){
-                                                    size ="";
-                                                }
-                                                var idS = 5807;
-                                                var tt = $('input[type="radio"]:checked').next().text();
-                                                var content = $('input[type="radio"]:checked').next().next().text();
-                                                if (name.length == 0) {
-                                                    alert("vui lòng nhập họ tên");
-                                                    $('#form_name').focus();
-                                                    return;
-                                                }
-                                                else if (!vnf_regex.test(phone)) {
-                                                    alert("vui lòng nhập đúng số điện thoại và có đủ 10 số");
-                                                    $('#form_phone').focus();
-                                                    return;
-                                                }
-                                                else if (validateEmail(email) == false) {
-                                                    alert("vui lòng nhập đúng địa chỉ email");
-                                                    $('#form_email').focus();
-                                                }
-                                                $.ajax({
-                                                    type: "POST",
-                                                    url: "webservices/SearchAirport.asmx/sendemailprodetails",
-                                                    data: "{name1:'" + name + "',email1: '" + email + "',phone1:'" + phone + "',link1:'" + link + "',size1:'" + size + "',tt1:'" + tt + "',content1:'" + content + "',pkid:'" + idS + "',pkv:'" + size + "'}",
-                                                    contentType: "application/json; charset=utf-8",
-                                                    dataType: "json",
-                                                    success: function (data) {
-                                                        if (data.d == "1") {
-                                                            window.location.href = "/success";
-                                                            //alert("Đăng ký mua hàng thành công");
-                                                        }
-                                                        else {
-                                                            $("#widget-subscribe-form-result1").html("Vui lòng nhập đầy đủ thông tin");
-                                                        }
-                                                    },
-                                                    error: function (data) {
-                                                    }
-                                                })
-                                            }
-
-                                            function validateEmail(email) {
-                                                var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                                                return re.test(email);
-                                            }
-                                        </script>
+                                        <a onclick="addContact()" class="send-em">Gửi</a>
+                                        
                                     </div>
                                     <div class="social-icons">
                                         <ul>
@@ -582,7 +464,7 @@
                                     <h2><a>Sản phẩm cùng loại</a></h2>
                                 </div>
                                 <div class="section-tour-owl owl-carousel not-dqowl products-view-grid margin-top-10" data-md-items="4" data-sm-items="4" data-xs-items="2" data-margin="10">
-                                            @foreach($c->products as $item)
+                                            @foreach($products as $item)
                                                 <div class='item'>
                                                     <div class='prdboxsli-item'>
                                                        <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
@@ -727,15 +609,36 @@
                         else{
                             $('.products_key').text('Mã sản phẩm: '+data.sku);
                             $('.product-price').text('Giá bán: '+addCommas(data.price)+' đ');
+                            var url = $('.muangay').attr('href');
+                            url = url+'?variation_id='+data.id;
+                            $('.muangay').attr('href',url);
                         }
                         
-                        console.log(data);
 
                     }
                 });
-                console.log(url);
                 
             });
+            function addContact(){
+                var phone = $('input#signup_email').val();
+                var url = 'addContact2?phone='+phone;
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    dataType: 'json',
+                    success: function(data) {
+                        if(data){
+                            toastr.success('Gửi yêu cầu thành công');
+                        }
+                        else{
+                            toastr.warning('Gửi không thành công');
+                        }
+                        
+
+                    }
+                });
+                console.log(phone);
+            }
         </script>
 
 @endsection

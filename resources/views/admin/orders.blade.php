@@ -22,9 +22,7 @@
         <ol class="breadcrumb">
 
             <li class="breadcrumb-item"><a href="{{URL::route('home')}}">Bảng điều khiển</a></li>
-
-
-            <li class="breadcrumb-item active">Dang sách bài viết</li>
+            <li class="breadcrumb-item active">Đơn hàng</li>
         
         </ol>
 
@@ -56,33 +54,20 @@
                                 	<ul class="dropdown-menu">
                                         
                                         <li>
-                                            <a href="#" data-href="{{URL::route('deleteBlogs')}}" class="deletes" data-class-item="">Xoá</a>
+                                            <a href="#" data-href="{{URL::route('deleteOrders')}}" class="deletes" data-class-item="">Xoá</a>
                                         </li>
                                     </ul>
                             	</div>
-                                <div class="btn-group">
+                            	<div class="btn-group">
                                 	<a class="btn btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Lọc dữ liệu</a>
                                 	<ul class="dropdown-menu">
                                 		<li>
-                                            <a href="{{URL::route('blogs')}}">Tất cả</a>
+                                            <a href="{{URL::route('orders')}}">Tất cả</a>
                                         </li>
-                                        @foreach($categories as $cate)
-	                                        @if($cate->parent_id == null)
-	                                        <li>
-	                                            <a href="{{URL::route('blogsCate',$cate->id)}}">{{$cate->name}}</a>
-	                                        </li>
-	                                        	@foreach($categories as $cate2)
-	                                        		@if($cate2->parent_id == $cate->id)
-	                                        			<li style="">
-	                                        				
-				                                            <a href="{{URL::route('productsCate',$cate2->id)}}"><i class="bx bx-subdirectory-right"></i>{{$cate2->name}}</a>
-				                                        </li>
-	                                        		@endif
-	                                        	@endforeach
-	                                        @endif
-                                        @endforeach
+                                        
                                     </ul>
                             	</div>
+                                <!-- <button class="btn btn-primary btn-show-table-options">Lọc dữ liệu</button> -->
                             </div>
                 		</div>
             		</div>
@@ -90,10 +75,12 @@
 		                <div class="table-responsive  table-has-actions   table-has-filter ">
                             <div id="table-categories_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer" style="width: 100%;">
                             	<div id="table-categories_filter" class="dataTables_filter">
-                            		<label><input type="search" class="form-control form-control-sm" placeholder="Search..." aria-controls="table-categories"></label>
+                            		<form action="{{URL::route('products')}}">
+                            		<label><input type="search" class="form-control form-control-sm" name="name" placeholder="Tên/mã sp..." aria-controls="table-categories"></label>
+                            		</form>
                             	</div>
                             	<div class="dt-buttons btn-group"> 
-                            		<button class="btn btn-secondary action-item" tabindex="0" aria-controls="table-categories"><span><span data-action="create" data-href="{{URL::route('addBlog')}}"><i class="fa fa-plus"></i> Tạo mới</span></span></button> 
+                            		<button class="btn btn-secondary action-item" tabindex="0" aria-controls="table-categories"><span><span data-action="create" data-href="{{URL::route('addProduct')}}"><i class="fa fa-plus"></i> Tạo mới</span></span></button> 
                             		<button class="btn btn-secondary buttons-reload" tabindex="0" aria-controls="table-categories"><span><i class="fas fa-sync"></i> Tải lại</span></button> 
                             	</div>
                             	<div id="table-categories_processing" class="dataTables_processing card" style="display: none;"></div>
@@ -104,13 +91,13 @@
 												<input class="table-check-all" data-set=".dataTable .checkboxes" type="checkbox">
 											</th>
 											<th  title="ID" width="20px" class=" column-key-id">STT</th>
-											<th  title="Hình ảnh" width="70px" class=" column-key-image">Hình ảnh</th>
-											<th  title="Tên" class="text-left column-key-name">Tên</th>
-											<th  title="Categories" width="300px" class="no-sort column-key-updated_at">Danh mục</th>
-											<th  title="Tác giả" width="150px" class="no-sort column-key-author_id">Tác giả</th>
-											<th  title="Ngày tạo" width="100px" class=" column-key-created_at">Ngày tạo</th>
-											<th  title="Trạng thái" width="100px" class=" column-key-status">Trạng thái</th>
-											<th title="Ngôn ngữ" width="200px" class="text-center">
+											<th  title="Tên" width="300px" class="text-left column-key-name">Tên</th>
+											<th  title="SĐT" width="200px" class="text-left column-key-name-shop">SĐT</th>
+											<th  title="Email" width="200px" class="no-sort column-key-updated_at">Email</th>
+											<th  title="Address" width="200px" class="no-sort column-key-updated_at">Địa chỉ</th>
+											<th  title="Ngày tạo" width="200px" class=" column-key-created_at">Ngày đặt hàng</th>
+											<th  title="Trạng thái" width="150px" class=" column-key-status">Trạng thái</th>
+											<th title="Ngôn ngữ" width="50px" class="text-center">
 												
 												<img src="https://cms.botble.com/vendor/core/core/base/images/flags/vn.svg" title="Tiếng Việt" width="16" alt="Tiếng Việt">
 												
@@ -121,9 +108,9 @@
 									<tbody>
 										@php
 											$i=1;
-											$items = $blogs;
+											$items = $orders;
 										@endphp
-										@foreach($blogs as $blog)
+										@foreach($orders as $order)
 											@if($i%2 ==1 )
 												<tr role="row" class="odd">
 											@else
@@ -132,34 +119,27 @@
 													<td class=" text-left no-sort">
 														<div class="text-left">
 														    <div class="checkbox checkbox-primary table-checkbox">
-														        <input type="checkbox" class="checkboxes" name="id[]" value="{{$blog->id}}">
+														        <input type="checkbox" class="checkboxes" name="id[]" value="{{$order->id}}">
 														    </div>
 														</div>
 													</td>
-													<td class="column-key-id sorting_{{$i}}">{{$i++}}</td>
-													<td class="  column-key-image">
-														<img src="{{asset('uploads/images/blogs/'.$blog->avata)}}" width="50" alt="{{$blog->name}}">
-													</td>
-													<td class=" text-left column-key-name"><a href="">{{$blog->name}}</a></td>
-													@php
-														$bcids = App\BCID::where('blog_id',$blog->id)->get();
-														$user = App\User::where('id',$blog->user_id)->get()->first();
-													@endphp
+													<td class="  column-key-id">{{$i++}}</td>
+													
+													<td class=" text-left column-key-name">{{$order->name}}</td>
+													
+													<td class=" text-left column-key-name">{{$order->phone}}</td>
+													
 													<td class=" no-sort column-key-updated_at">
-														@foreach($bcids as $bcid)
-															@php
-																$c = App\BlogCate::where('id',$bcid->cate_id)->get()->first();
-															@endphp
-															<a class="badge badge-warning">{{$c->name}}</a>
-															
-														@endforeach
+														{{$order->email}}
 													</td>
-													<td class=" no-sort column-key-author_id">{{$user->name}}</td>
-													<td class="  column-key-created_at">{{$blog->created_at}}</td>
-													@if($blog->display ==1 )
-														<td class="  column-key-status"><span class="label-success status-label">Xuất bản</span></td>
+													<td class=" no-sort column-key-updated_at">
+														{{$order->address}}
+													</td>
+													<td class="  column-key-created_at">{{$order->created_at}}</td>
+													@if($order->status ==1 )
+														<td class="  column-key-status"><span class="label-success status-label">Đơn đã xem</span></td>
 													@else
-														<td class="  column-key-status"><span class="label-danger status-label">Bản nháp</span></td>
+														<td class="  column-key-status"><span class="label-danger status-label">Đơn mới</span></td>
 
 													@endif
 													<td class=" text-center language-header no-sort">
@@ -171,11 +151,11 @@
 													<td class=" text-center">
 														<div class="table-actions">
 
-										                    <a href="{{URL::route('editBlog',$blog->id)}}" class="btn btn-icon btn-sm btn-primary" data-toggle="tooltip" data-original-title="Sửa">
-										                    	<i class="fa fa-edit"></i>
+										                    <a href="{{URL::route('orderDetail',$order->id)}}" class="btn btn-icon btn-sm btn-primary" data-toggle="tooltip" data-original-title="Xem">
+										                    	<i class="fa fa-eye"></i>
 										                    </a>
 										        
-										                    <a href="#" class="btn btn-icon btn-sm btn-danger deleteDialog delete" data-toggle="tooltip" data-section="{{URL::route('deleteBlog',$blog->id)}}" role="button" data-original-title="Xóa bản ghi">
+										                    <a href="#" class="btn btn-icon btn-sm btn-danger deleteDialog delete" data-toggle="tooltip" data-section="{{URL::route('deleteOrder',$order->id)}}" role="button" data-original-title="Xóa bản ghi">
 										                    	<i class="fa fa-trash"></i>
 										                    </a>
 										                </div>
@@ -304,7 +284,7 @@
             }
             else{
             	str_ids = str_ids.substring(0, str_ids.length - 1);
-            	url = url+'?blogs_id='+str_ids;
+            	url = url+'?products_id='+str_ids;
             	location.href = url;
             	// console.log(url);
             }

@@ -131,6 +131,46 @@
                     </div>
                 </div>
                 
+                <div class="widget meta-boxes">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse_page">
+                        <h4 class="widget-title" style="margin-top: 0">
+                            <span>Trang nội dung</span>
+                            <i class="fa fa-angle-down narrow-icon"></i>
+                        </h4>
+                    </a>
+                    <div id="collapse_page" class="panel-collapse collapse">
+                        <div class="widget-body">
+                            <div class="box-links-for-menu">
+                                <div class="the-box">
+                                    <ul class="list-item">
+                                        <ul  class="list-item">
+                                            @foreach($pages as $page)
+                                            <li>
+                                                <label for="" data-title="{{$page->name}}" data-reference-id="{{$page->id}}"
+                                                       data-reference-type="page">
+                                                    <input id="{{$page->id}}" name="menu_id" type="checkbox" value="{{$page->id}}">
+                                                    {{$page->name}}
+                                                </label>
+
+                                                                
+                                            </li>
+                                            @endforeach
+                                            
+                                        </ul>
+
+                                    </ul>
+                                    <div class="text-right">
+                                        <div class="btn-group btn-group-devided">
+                                            <a href="#" class="btn-add-to-menu btn btn-primary">
+                                                <span class="text"><i class="fa fa-plus"></i> Thêm vào trình đơn</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="widget meta-boxes">
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapseCustomLink">

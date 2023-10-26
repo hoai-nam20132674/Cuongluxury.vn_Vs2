@@ -34,6 +34,7 @@ use App\Payment;
 use App\BlogCate;
 use App\VideoCate;
 use App\Blog;
+use App\Order;
 use App\Video;
 use App\Service;
 use App\ServiceCate;
@@ -258,8 +259,15 @@ class HomeController extends Controller
         return redirect()->route('blogCategories')->with(['flash_level'=>'success','flash_message'=>'Xóa tin tức thành công']); 
     }
     public function blogs(Request $request){
+        $categories = BlogCate::select()->get();
         $blogs = Blog::where('lang','vi')->with('langs')->paginate(15);
-        return view('admin.blogs',['blogs'=>$blogs,'request'=>$request]);
+        return view('admin.blogs',compact('blogs','request','categories'));
+    }
+    public function blogsCate(Request $request, $id){
+        $cate = BlogCate::where('id',$id)->get()->first();
+        $categories = BlogCate::select()->get();
+        $blogs = $cate->blogs()->paginate(15);
+        return view('admin.blogs',compact('blogs','request','categories'));
     }
     public function addBlog(Request $request){
         if(isset($request->blog_id)){
@@ -947,6 +955,20 @@ class HomeController extends Controller
 
     
     // end product
+
+    // Order
+
+    // End order
+    public function orders(Request $request){
+        $orders = Order::orderBy('created_at','DESC')->paginate(500);
+        // dd($properties);
+        return view('admin.orders',compact('orders','request'));
+    }
+    public function orderDetail(Request $request, $id){
+        $order = Order::where('id',$id)->get()->first();
+        // dd($properties);
+        return view('admin.order',compact('order','request'));
+    }
     // properties
 
     public function properties(Request $request){
@@ -1063,7 +1085,8 @@ class HomeController extends Controller
         $menus = Menu::where('parent_id',null)->orderBy('stt','ASC')->get();
         $productCategories = ProductCate::where('display',1)->get();
         $blogCategories = BlogCate::where('display',1)->get();
-        return view('admin.menu',['productCategories'=>$productCategories,'blogCategories'=>$blogCategories,'menus'=>$menus]);
+        $pages = Page::where('display',1)->get();
+        return view('admin.menu',compact('productCategories','blogCategories','menus','pages'));
     }
     public function updateMenu(Request $request){
         $item = new Menu;
