@@ -19,6 +19,7 @@ class Order extends Model
         $this->email = $request->order_email;
     	$this->address = $request->order_address;
     	$this->messages = $request->order_messages;
+        $this->payment = $request->order_payment;
     	$this->status = 0;
     	$this->save();
     	foreach($items as $item){

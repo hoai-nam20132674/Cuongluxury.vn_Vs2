@@ -32,6 +32,11 @@
 
 
 @section('content')
+@if( Session::has('flash_message'))
+    <div messages="{{ Session::get('flash_message')}}" class="note hidden note-animation note-{{ Session::get('flash_level')}}">
+        <!-- <p>{{ Session::get('flash_message')}}</p> -->
+    </div>
+@endif
 <link href="{{asset('css/base.scss.css')}}" rel="stylesheet" type="text/css" />
     <section class="bread-crumb margin-bottom-10 a-center">
     <div class="container">
@@ -79,7 +84,7 @@
                         <td width='8%'></td>
                     </tr>
                 @foreach($items_cart as $item)
-                <tr class="item-cart" rowId='{{$item->rowId}}'>
+                <tr class="item-cart" rowId='{{$item->rowId}}' product-id="{{$item->id}}">
                     <td align="center"><a href="{{$item->options->url}}" title="{{$item->name}}">
                         <img style="height: 80px" class="imgprd-cart" src="{{asset('uploads/images/products/details/'.$item->options->img)}}" alt="{{$item->name}}" /></a></td>
                     
@@ -90,16 +95,14 @@
 
                     </td>
                     <td align="center">
-                        <input type="number" class="txtnumc" min="1"  name='5819' id='sl1'
-                            value='{{$item->qty}}' size="1">
-                         <input type="hidden" class="pr1" value="565000000" />
+                        <input type="number" onchange="updateCart(this,'{{$item->id}}','{{$item->rowId}}')" rowId='{{$item->rowId}}' min="1"  name='qty' value='{{$item->qty}}' size="1">
                     </td>
                     <td><span class='pri'>{!!number_format($item->price)!!}</span><span class="hidden prci">{!!number_format($item->price)!!}</span></td>
                     <td>
                         @php
                             $tt = $item->qty * $item->price;
                         @endphp
-                        <span class="thanhtien1">{!!number_format($tt)!!}</span>
+                        <span class="thanhtien1" rowId='{{$item->rowId}}'>{!!number_format($tt)!!}</span>
                     </td>
                     <td>
                         <a id="removeItemCart" class="removeItemCart" href=" javascript:void(0)" rowId='{{$item->rowId}}' data-href="{{URL::route('removeItemCart',$item->rowId)}}">Xóa</a>
@@ -113,6 +116,9 @@
         <p style="text-align: right; padding-top: 10px; margin-right: 20px;">
             Tổng tiền: <b class="tto">
                 <span class="totals_price"><span class='prnum'>{{Cart::subtotal()}}</span><span class='s_unit'>đ</span></span></b>
+        </p>
+        <p class="cart-empty hidden" style="text-align: center; font-size: 20px;">
+            Giỏ hàng trống
         </p>
         <p class='tool_cart'>
             <input type="button" name="btncontinue" value="Tiếp tục mua" id="btncontinue" class="btncontinue btn" />
@@ -341,10 +347,26 @@
 #btncancel{display:inline-block}
 </style>
 <script type="text/javascript">
+    $(document).ready(function(){
+        var elm = $('.note-animation');
+        if(elm.length){
+            toastr.success(elm.attr('messages'));
+            
+        }
+        var cartItem = $('tr.item-cart');
+        if(!cartItem.length){
+            $('.btnbuys').addClass('hidden');
+            $('.cart-empty').removeClass('hidden');
+        }
+        console.log(elm.attr('messages'));
+    });
     $(document).on('click', '.btnbuys', function(event) {
         $('.infoOrder').removeClass('hidden');
         $('.tool_cart').hide();
         
+    });
+    $(document).on('click', '.btncontinue', function(event) {
+        window.location.href = '/';
     });
     $(document).on('click', '.removeItemCart', function(event) {
         var href = $(this).attr('data-href');
@@ -384,62 +406,39 @@
         //     }
         // });
     });
+    function addCommas(nStr)
+    {
+        nStr += '';
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
+    }
+    function updateCart(e,id,rowId){
+        var value = e.value;
+        var url = 'updateCart/'+id+'-'+value;
+        $.ajax({
+            type: 'GET',
+            url: url,
+            dataType: 'json',
+            success: function(data) {
+                toastr.success('Cập nhật giỏ hàng thành công');
+                $('.prnum').text(data[1]);
+                var tt = $('.thanhtien1[rowId='+rowId+']');
+                tt.text(addCommas(data[2]));
+                // console.log(item_id);
+
+            }
+        });
+        // console.log(value);
+    }
     
 </script>
-<script>
-    $('input[name="ctl17$ctl00$ctl00$ctl00$pm"]').bind('click', function () {
-        $('.p-row').removeClass('active');
-        $(this).parent('div.p-row').addClass('active');
-    });
-    $(document).on("change", '.txtnumc', function () {
-        var numitemincart = parseInt($("#numitemincart").val());
-        var total = 0;
-        var i;
-        for (i = 1; i <= numitemincart; i++) {
-            total += numeral($(".pr" + i).val()).value() * numeral($("#sl" + i).val()).value();
-            
-            $(".thanhtien" + i).html(numeral(numeral($(".pr" + i).val()).value() * numeral($("#sl" + i).val()).value()).format('0,0').replace(",", ".").replace(",", ".").replace(",", ".") + " ") ;
-        }
-        $(".totals_price .prnum").html(numeral(total).format('0,0').replace(",", ".").replace(",", ".").replace(",", ".") + " ") ;
-       // $(".total2 .prnum").html(numeral(total).format('0,0').replace(",", ".").replace(",", ".").replace(",", ".") + " ");
-    });
-    $(document).on("change", '#ddlcity', function () {
-        var id = $(this).val();
-        $.ajax({
-            type: "POST",
-            url: "/webservices/srv.asmx/GetDistrict",
-            data: "{ city: '" + id + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                $("#ddlqh").html("");
-                $("#ddlqh").html(data.d);
-                px();
-            },
-            error: function (data) {
-            }
-        })
-    });
-    $(document).on("change", '#ddlqh', function () {
-        px();
-    });
-    function px() {
-        var id = $("#ddlqh").val();
-        $.ajax({
-            type: "POST",
-            url: "/webservices/srv.asmx/GetPX",
-            data: "{ qh: '" + id + "'}",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                $("#ddlpx").html("");
-                $("#ddlpx").html(data.d);
-            },
-            error: function (data) {
-            }
-        })
-    }
-</script>
+
 
             </div>
         </div>

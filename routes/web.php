@@ -82,6 +82,15 @@ Route::post('admin/payment/edit/{id}', 'HomeController@postEditPayment')->name('
 Route::get('admin/payment/delete/{id}', 'HomeController@deletePayment')->name('deletePayment');
 // End Payment
 
+// Nội dung độc lập
+Route::get('admin/nddls', 'HomeController@nddls')->name('nddls');
+Route::get('admin/nddls/add', 'HomeController@addNddl')->name('addNddl');
+Route::post('admin/nddls/add', 'HomeController@postAddNddl')->name('postAddNddl');
+Route::get('admin/nddls/edit/{id}', 'HomeController@editNddl')->name('editNddl');
+Route::post('admin/nddls/edit/{id}', 'HomeController@postEditNddl')->name('postEditNddl');
+Route::get('admin/nddls/delete/{id}', 'HomeController@deleteNddl')->name('deleteNddl');
+// End
+
 // page route
 Route::get('admin/pages', 'HomeController@pages')->name('pages');
 Route::get('admin/page/add', 'HomeController@addPage')->name('addPage');
@@ -264,6 +273,7 @@ Route::get('/findProductVariation/{id}', 'Controller@findProductVariation')->nam
 Route::get('/gio-hang', 'Controller@cart')->name('cart');
 Route::post('/dat-hang', 'Controller@postAddOrder')->name('postAddOrder');
 Route::get('/add-to-cart/{id}-{qty}', 'Controller@addToCart')->name('addToCart');
+Route::get('/updateCart/{id}-{qty}', 'Controller@updateCart')->name('updateCart');
 Route::get('/remove-item-cart/{id}', 'Controller@removeItemCart')->name('removeItemCart');
 // end add to cart
 
@@ -294,6 +304,7 @@ Route::group(['middleware' => 'locale'], function() {
    Route::get('search', 'Controller@search')->name('search');
    Route::get('search-b', 'Controller@searchBan')->name('searchBan');
    Route::get('search-t', 'Controller@searchThue')->name('searchThue');
+   Route::get('tim-kiem', 'Controller@search')->name('search');
    Route::get('change-language/{language}', 'Controller@changeLanguage')->name('change-language');
    Route::get('/{url}', 'Controller@page')->name('page');
    Route::get('/', 'Controller@index')->name('index');

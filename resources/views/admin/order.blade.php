@@ -40,7 +40,7 @@
                             <li class="breadcrumb-item"><a href="{{URL::route('home')}}">Bảng điều khiển</a></li>
             
         
-                            <li class="breadcrumb-item"><a href="{{URL::route('yeucaus')}}">Đơn hàng</a></li>
+                            <li class="breadcrumb-item"><a href="{{URL::route('orders')}}">Đơn hàng</a></li>
             
         
                             <li class="breadcrumb-item active">Chi tiết đơn hàng</li>
@@ -108,10 +108,12 @@
 										@php
 											$i=1;
 											$products = $order->products;
+											$subtotal = 0;
 										@endphp
 										@foreach($products as $product)
 											@php
-												$order_detail = App\OrderDetail::where('order_id',$order->id)->get();
+												$order_detail = App\OrderDetail::where('orders_id',$order->id)->where('products_id',$product->id)->get()->first();
+												$subtotal = $subtotal + $order_detail->amount;
 											@endphp
 											@if($i%2 ==1 )
 												<tr role="row" class="odd">
@@ -126,19 +128,30 @@
 													</td>
 													<td class=" text-left column-key-name"><a href="/{{$product->url}}" title="{{$product->name}}" target="_blank">{!! \Illuminate\Support\Str::words($product->name, 8,'...')  !!}</a></td>
 													
-													<td class=" text-left column-key-name"><a href="">{!!number_format($product->price)!!}</a></td>
+													<td class=" text-left column-key-name">{!!number_format($product->price)!!} đ</td>
 													
 													<td class=" no-sort column-key-updated_at">
-														{{$order}}
+														{{$order_detail->qty}}
 													</td>
-													<td class="  column-key-created_at">{{$product->created_at}}</td>
+													<td class="  column-key-created_at">{!!number_format($order_detail->amount)!!} đ</td>
 													
 													
 										        </tr>
+
 								        @endforeach
+								        <tr role="row" style="background: #fff!important;">
+								        	<td class=" column-key"></td>
+								        	<td class=" column-key"></td>
+								        	<td class=" column-key"></td>
+								        	<td class=" column-key"></td>
+								        	<td class=" column-key"></td>
+								        	<td class=" column-key">Tổng tiền</td>
+								        	<td class=" column-key">{!!number_format($subtotal)!!} đ</td>
+								        </tr>
 								        
 								    </tbody>
 								</table>
+								
 								
 							</div>
 							

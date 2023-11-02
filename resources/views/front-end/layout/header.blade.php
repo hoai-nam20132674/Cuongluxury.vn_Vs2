@@ -104,7 +104,7 @@
                         @endforeach
                         
                         <li class="logo-pcs">
-                            <a class='logo-wrapper'  href='/'><img  src='https://cuongluxury.vn/uploads/banners/logo-w.png'  alt='Cuong Luxury'/></a>
+                            <a class='logo-wrapper'  href='/'><img  src="{{asset('uploads/images/systems/'.$system->logo)}}"  alt='{{$system->name}}'/></a>
                         </li>
                     </ul>
                 </nav>

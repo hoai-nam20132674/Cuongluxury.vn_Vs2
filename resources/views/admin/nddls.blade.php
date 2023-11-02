@@ -16,10 +16,6 @@
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/admin/dataTables.bootstrap.min.css')}}">
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/admin/table.css')}}">
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/admin/language.css')}}">
-    
-
-	
-
 @endsection
 @section('content')
 	<div class="page-content ">
@@ -28,8 +24,7 @@
             <li class="breadcrumb-item"><a href="{{URL::route('home')}}">Bảng điều khiển</a></li>
 
 
-            <li class="breadcrumb-item active">Danh mục sản phẩm</li>
-
+            <li class="breadcrumb-item active">Dang sách nội dung độc lập</li>
         
         </ol>
 
@@ -76,104 +71,71 @@
                             		<label><input type="search" class="form-control form-control-sm" placeholder="Search..." aria-controls="table-categories"></label>
                             	</div>
                             	<div class="dt-buttons btn-group"> 
-                            		<button class="btn btn-secondary action-item" tabindex="0" aria-controls="table-categories"><span><span data-action="create" data-href="{{URL::route('addProductCategorie')}}"><i class="fa fa-plus"></i> Tạo mới</span></span></button> 
+                            		<button class="btn btn-secondary action-item" tabindex="0" aria-controls="table-categories"><span><span data-action="create" data-href="{{URL::route('addNddl')}}"><i class="fa fa-plus"></i> Tạo mới</span></span></button> 
                             		<button class="btn btn-secondary buttons-reload" tabindex="0" aria-controls="table-categories"><span><i class="fas fa-sync"></i> Tải lại</span></button> 
                             	</div>
                             	<div id="table-categories_processing" class="dataTables_processing card" style="display: none;"></div>
                             	<table class="table table-striped table-hover vertical-middle dataTable no-footer" id="table-categories" role="grid" aria-describedby="table-categories_info" style="width: 1582px;">
                             		<thead>
-                            			<tr role="row">
-                            				<th width="100px" class="text-left no-sort sorting_disabled" title="<input class=&quot;table-check-all&quot; data-set=&quot;.dataTable .checkboxes&quot; type=&quot;checkbox&quot;>" rowspan="1" colspan="1" aria-label=""><input disabled class="table-check-all" data-set=".dataTable .checkboxes" type="checkbox"></th>
-                            				<th title="ID" width="20px" class="column-key-id sorting" tabindex="0" aria-controls="table-categories" rowspan="1" colspan="1" aria-label="IDorderby asc">STT</th>
-                            				<th title="Tên" class="text-left column-key-name sorting" tabindex="0" aria-controls="table-categories" rowspan="1" colspan="1" aria-label="Tênorderby asc" >Tên</th>
-                            				<th title="Ngày tạo" width="150px" class="column-key-created_at sorting" tabindex="0" aria-controls="table-categories" rowspan="1" colspan="1" aria-label="Ngày tạoorderby asc" >Ngày tạo</th>
-                            				<th title="Ngày cập nhật" width="150px" class="column-key-updated_at sorting" tabindex="0" aria-controls="table-categories" rowspan="1" colspan="1" aria-label="Ngày cập nhậtorderby asc">Ngày cập nhật</th>
-                            				<th title="Trạng thái" width="100px" class="column-key-status sorting" tabindex="0" aria-controls="table-categories" rowspan="1" colspan="1" aria-label="Trạng tháiorderby asc" >Trạng thái</th>
-                            				<th title="Ngôn ngữ" width="50px" class="text-center" width="100px">
-												
-												<img src="https://cms.botble.com/vendor/core/core/base/images/flags/vn.svg" title="Tiếng Việt" width="16" alt="Tiếng Việt">
-												
+										<tr>
+											<th  width="10px" class="text-left no-sort" title="&lt;input class=&quot;table-check-all&quot; data-set=&quot;.dataTable .checkboxes&quot; type=&quot;checkbox&quot;&gt;">
+												<input class="table-check-all" data-set=".dataTable .checkboxes" type="checkbox">
 											</th>
-                            				<th title="Tác vụ" width="134px" class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Tác vụ" >Tác vụ</th>
-                            			</tr>
-                            		</thead>
-                            		<tbody>
-                            			@php
-                            				$i=1;
-                            				$items = $categories;
-                            			@endphp
-                            			@foreach($categories as $cate)
-	                            			<tr role="row" class="odd">
-	                            				<td class=" text-left no-sort">
-		                            				<div class="text-left">
-													    <div class="checkbox checkbox-primary table-checkbox">
-													        <input disabled type="checkbox" class="checkboxes" name="id[]" value="{{$cate->id}}">
-													    </div>
-													</div>
-												</td>
-												<td class="  column-key-id">{{$i}}</td>
-												<td class=" text-left column-key-name"><a href="{{URL::route('productsCate',$cate->id)}}">{{$cate->name}}</a></td>
-												<td class="  column-key-created_at">{{$cate->created_at}}</td>
-												<td class="  column-key-updated_at">{{$cate->updated_at}}</td>
-												@if($cate->display ==1)
-													<td class="  column-key-status"><span class="label-success status-label">Xuất bản</span></td>
-												@else
-													<td class="  column-key-status"><span class="label-danger status-label">Bản nháp</span></td>
-												@endif
-												<td class=" text-center language-header no-sort">
-													<div class="text-center language-column">
-														<a href="#" class="tip" title=""><i class="fa fa-check text-success"></i></a>
-														
-													</div>
-												</td>
-												<td class=" text-center">
-													<a href="{{URL::route('editProductCategorie',$cate->id)}}" class="btn btn-icon btn-primary" data-toggle="tooltip" data-original-title="Sửa"><i class="fa fa-edit"></i></a>
-													<a href="#" class="btn btn-icon btn-danger deleteDialog delete" data-toggle="tooltip" data-section="{{URL::route('deleteProductCategorie',$cate->id)}}" role="button" data-original-title="Xóa bản ghi"><i class="fa fa-trash"></i></a>
-												</td>
-											</tr>
-											@php
-                                                $cate_childrens = App\ProductCate::where('parent_id',$cate->id)->get();
-                                                $j = 1;
-                                            @endphp
-                                            @foreach($cate_childrens as $cate_children)
-                                            	<tr role="row" class="odd">
-		                            				<td class=" text-left no-sort" style="padding-left: 35px !important;">
-		                            					
-			                            				<div class="text-left">
-			                            					
+											<th  title="ID" width="20px" class=" column-key-id">STT</th>
+											<th  title="Tên" class="text-left column-key-name">Tiêu Đề</th>
+											<th  title="keyword" width="100px" class="text-left column-key-keyword">Keyword</th>
+											<th  title="Ngày tạo" width="200px" class=" column-key-created_at">Ngày tạo</th>
+											<th  title="Trạng thái" width="100px" class=" column-key-status">Trạng thái</th>
+											
+											<th  title="Tác vụ" width="134px" class="text-center">Tác vụ</th>
+										</tr>
+									</thead>
+									<tbody>
+										@php
+											$i=1;
+											$items = $nddls;
+										@endphp
+										@foreach($nddls as $nddls)
+											@if($i%2 ==1 )
+												<tr role="row" class="odd">
+											@else
+												<tr role="row" class="even">
+											@endif
+													<td class=" text-left no-sort">
+														<div class="text-left">
 														    <div class="checkbox checkbox-primary table-checkbox">
-														    	<i class='bx bx-subdirectory-right'></i>
-														        <input disabled type="checkbox" class="checkboxes" name="id[]" value="{{$cate_children->id}}">
+														        <input type="checkbox" class="checkboxes" name="id[]" value="{{$nddls->id}}">
 														    </div>
 														</div>
 													</td>
-													<td class="  column-key-id">{{$i}}.{{$j++}}</td>
-													<td class=" text-left column-key-name"><a href="{{URL::route('productsCate',$cate_children->id)}}">{{$cate_children->name}}</a></td>
-													<td class="  column-key-created_at">{{$cate_children->created_at}}</td>
-													<td class="  column-key-updated_at">{{$cate_children->updated_at}}</td>
-													@if($cate_children->display ==1)
+													<td class="column-key-id sorting_{{$i}}">{{$i++}}</td>
+													
+													<td class=" text-left column-key-name">{{$nddls->name}}</td>
+													<td class=" text-left column-key-keyword">{{$nddls->keyword}}</td>
+													<td class="  column-key-created_at">{{$nddls->created_at}}</td>
+													@if($nddls->status ==1 )
 														<td class="  column-key-status"><span class="label-success status-label">Xuất bản</span></td>
 													@else
 														<td class="  column-key-status"><span class="label-danger status-label">Bản nháp</span></td>
+
 													@endif
-													<td class=" text-center language-header no-sort">
-														<div class="text-center language-column">
-															<a href="#" class="tip" title=""><i class="fa fa-check text-success"></i></a>
-															
-														</div>
-													</td>
+													
 													<td class=" text-center">
-														<a href="{{URL::route('editProductCategorie',$cate_children->id)}}" class="btn btn-icon btn-primary" data-toggle="tooltip" data-original-title="Sửa"><i class="fa fa-edit"></i></a>
-														<a href="#" class="btn btn-icon btn-danger deleteDialog delete" data-toggle="tooltip" data-section="{{URL::route('deleteProductCategorie',$cate_children->id)}}" role="button" data-original-title="Xóa bản ghi"><i class="fa fa-trash"></i></a>
-													</td>
-												</tr>
-                                            @endforeach
-                                            @php
-                                            	$i++;
-                                            @endphp
-										@endforeach
-										
-									</tbody>
+														<div class="table-actions">
+
+										                    <a href="{{URL::route('editNddl',$nddls->id)}}" class="btn btn-icon btn-sm btn-primary" data-toggle="tooltip" data-original-title="Sửa">
+										                    	<i class="fa fa-edit"></i>
+										                    </a>
+										        
+										                    <a href="#" class="btn btn-icon btn-sm btn-danger deleteDialog delete" data-toggle="tooltip" data-section="{{URL::route('deleteNddl',$nddls->id)}}" role="button" data-original-title="Xóa bản ghi">
+										                    	<i class="fa fa-trash"></i>
+										                    </a>
+										                </div>
+										            </td>
+										        </tr>
+								        @endforeach
+								        
+								    </tbody>
 								</table>
 								@include('admin.layout.table-footer')
 							</div>
@@ -274,4 +236,5 @@
     <script src="{{asset('js/admin/bootstrap3-typeahead.min.js')}}"></script>
     <script src="{{asset('js/admin/table.js')}}"></script>
     <script src="{{asset('js/admin/filter.js')}}"></script>
+    
 @endsection

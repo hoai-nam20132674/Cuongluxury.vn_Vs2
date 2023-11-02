@@ -47,87 +47,11 @@
         </div>
         <div class=' hidden-xs'>
 
-        <section class="services-st">
-            <div class="container">
-                <div class="row">
-                    <div class="qcservices-box">
-                        
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <div class="qcservices-item">
-                                        <div class="qcservices-thumb">
-                                            <a href="#" title="BẢO HÀNH TOÀN QUỐC">
-                                                <img src="https://cuongluxury.vn/uploads/qc/icon-11.png" alt="BẢO HÀNH TOÀN QUỐC" />
-                                            </a>
-                                        </div>
-                                        <div class="qcservices-content">
-                                            <div class="qcservices-title">
-                                                BẢO HÀNH TOÀN QUỐC
-                                            </div>
-                                            <div class="qcservices-desc">
-                                                Sản phẩm được bảo trì và bảo hành trên Toàn Quốc
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <div class="qcservices-item">
-                                        <div class="qcservices-thumb">
-                                            <a href="#" title="MUA SẮM UY TÍN">
-                                                <img src="https://cuongluxury.vn/uploads/qc/icon-22.png" alt="MUA SẮM UY TÍN" />
-                                            </a>
-                                        </div>
-                                        <div class="qcservices-content">
-                                            <div class="qcservices-title">
-                                                MUA SẮM UY TÍN
-                                            </div>
-                                            <div class="qcservices-desc">
-                                                Là địa chỉ uy tín tại Việt Nam được thành lập từ năm 2008
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <div class="qcservices-item">
-                                        <div class="qcservices-thumb">
-                                            <a href="#" title="QUÀ TẶNG HẤP DẪN">
-                                                <img src="https://cuongluxury.vn/uploads/qc/icon-3.png" alt="QUÀ TẶNG HẤP DẪN" />
-                                            </a>
-                                        </div>
-                                        <div class="qcservices-content">
-                                            <div class="qcservices-title">
-                                                QUÀ TẶNG HẤP DẪN
-                                            </div>
-                                            <div class="qcservices-desc">
-                                                Luôn có những ưu đãi hấp dẫn cho Quý khách hàng
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <div class="qcservices-item">
-                                        <div class="qcservices-thumb">
-                                            <a href="#" title="CAM KẾT CHÍNH HÃNG">
-                                                <img src="https://cuongluxury.vn/uploads/qc/icon-4.png" alt="CAM KẾT CHÍNH HÃNG" />
-                                            </a>
-                                        </div>
-                                        <div class="qcservices-content">
-                                            <div class="qcservices-title">
-                                                CAM KẾT CHÍNH HÃNG
-                                            </div>
-                                            <div class="qcservices-desc">
-                                                Sản phẩm được nhập khẩu chính hãng 100%
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                    </div>
-                </div>
-            </div>
-        </section></div>
+            <!-- Cam kết -->
+            @include('front-end.layout.section_pledge')
+            <!-- End cam kết -->
+                
+        </div>
         <div class="section_product" style="background: url(/uploads/products/bg1/);background-size: cover;">
             <div class="container" itemscope="" itemtype="http://schema.org/Product">
                 <div class="row">
@@ -144,11 +68,7 @@
                                     <div class="row">
 
                                         <div class="filter-box">
-                                            <div class="col-lg-2 col-md-2 col-sm-3 hidden">
-                                                <div class="search-form-other">
-                                                    <input type="search" id="input-search-other" placeholder="Nhập từ khóa cần tìm " />
-                                                </div>
-                                            </div>
+                                            
                                             @foreach($categorie->properties as $item)
                                             <div class='col-lg-2 col-md-2 col-sm-3 col-xs-6 margin-bottom-10'>
                                                 <aside class='aside-item filter-vendor '>
@@ -158,7 +78,23 @@
                                                     <div class='aside-content filter-group'>
                                                         <ul>
                                                             @foreach($item->propertie_values as $item2)
-                                                            <li class='filter-item filter-item--check-box filter-item--green '><span><label for='filter-{{$item2->id}}'><input  type='checkbox'  name='thuong-hieu'  class='attribute-products' id='filter-{{$item2->id}}' value='{{$item2->id}}'><i class='fa'></i>{{$item2->value}}</label></span></li>
+                                                            <li class='filter-item filter-item--check-box filter-item--green '>
+                                                                <span>
+                                                                    <label for='filter-{{$item2->id}}'>
+                                                                        @if(isset($request->attr))
+                                                                            @if(in_array($item2->id,$ids))
+                                                                                <input  type='checkbox' checked  name='properties{{$item->id}}' class='attribute-products' id='filter-{{$item2->id}}' value='{{$item2->id}}'>
+                                                                            @else
+                                                                                <input  type='checkbox'  name='properties{{$item->id}}' class='attribute-products' id='filter-{{$item2->id}}' value='{{$item2->id}}'>
+                                                                            @endif
+                                                                        @else
+                                                                            <input  type='checkbox'  name='properties{{$item->id}}' class='attribute-products' id='filter-{{$item2->id}}' value='{{$item2->id}}'>
+                                                                        @endif
+                                                                        <i class='fa'></i>
+                                                                        {{$item2->value}}
+                                                                    </label>
+                                                                </span>
+                                                            </li>
                                                             @endforeach
                                                             
                                                         </ul>
@@ -170,7 +106,7 @@
                                             
                                             <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12 margin-bottom-10">
                                                 <div class="search-form-other-button">
-                                                    <a onclick="handleKeyPress7();" title="Tìm kiếm">Tìm kiếm</a>
+                                                    <a class="btn-search" data-href="{{$categorie->url}}" title="Tìm kiếm">Tìm kiếm</a>
                                                 </div>
                                                 <script>
                                                     function handleKeyPress7() {
@@ -225,7 +161,7 @@
                         <div class="category-products products category-products-grids">
                             <section class="products-view products-view-grid">
                                 <div class="row">
-                                            @foreach($categorie->products()->where('display',1)->orderBy('id','DESC')->paginate(16) as $item)
+                                            @foreach($products as $item)
                                             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 margin-bottom-15">
                                                 <div class='prdboxsli-item'>
                                                       <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
@@ -242,32 +178,34 @@
                                         
                                 </div>
                             </section>
-                            @php
-                                $items = $categorie->products()->where('display',1)->orderBy('id','DESC')->paginate(16);
-                            @endphp
-                            <div class="d_page">
-                                @if($items->currentPage() != 1)
-                                    
-                                    <a href="{{$items->url($items->currentPage()-1)}}"><</a>
-                                @else
-                                    <b href="{{$items->url($items->currentPage()-1)}}"><</b>
-                                @endif
-                                @for($i =1; $i<=$items->lastPage();$i++)
-                                    @if($request->page == $i)
+                            @if(!isset($request->attr))
+                                @php
+                                    $items = $products;
+                                @endphp
+                                <div class="d_page">
+                                    @if($items->currentPage() != 1)
                                         
-                                        <b>{{$i}}</b>
+                                        <a href="{{$items->url($items->currentPage()-1)}}"><</a>
                                     @else
-                                        <a href="{{$items->url($i)}}">{{$i}}</a>
+                                        <b href="{{$items->url($items->currentPage()-1)}}"><</b>
                                     @endif
-                                @endfor
-                                
-                                @if( $items->currentPage() != $items->lastPage())
-                                    <a href="{{$items->url($items->currentPage()+1)}}">></a>
-                                @else
-                                    <b href="{{$items->url($items->currentPage()+1)}}">></b>
-                                @endif
+                                    @for($i =1; $i<=$items->lastPage();$i++)
+                                        @if($request->page == $i)
+                                            
+                                            <b>{{$i}}</b>
+                                        @else
+                                            <a href="{{$items->url($i)}}">{{$i}}</a>
+                                        @endif
+                                    @endfor
+                                    
+                                    @if( $items->currentPage() != $items->lastPage())
+                                        <a href="{{$items->url($items->currentPage()+1)}}">></a>
+                                    @else
+                                        <b href="{{$items->url($items->currentPage()+1)}}">></b>
+                                    @endif
 
-                            </div>
+                                </div>
+                            @endif
                         </div>
                         <div class="description-ss">
                             {!!$categorie->content!!}
@@ -280,11 +218,46 @@
             margin-top: 10px;
         }</style>
 
-            </section>
+</section>
 
 @endsection
 
 @section('js')
-    
+    <script type="text/javascript">
+        $(document).on("click", ".btn-search", function (event) {
+            var selected = $('input.attribute-products');
+            url = $(this).attr('data-href');
+            var str_ids = '';
+            selected.each(function(){
+                if($(this).is(":checked")){
+                    str_ids = $(this).attr('value')+','+str_ids;
+                    
+                }
+                else{
+                    
+                }
+            });
+            if(str_ids ==''){
+                
+            }
+            else{
+                str_ids = str_ids.substring(0, str_ids.length - 1);
+                url = url+'?attr='+str_ids;
+                location.href = url;
+                console.log(url);
+            }
+        });
+        $(document).on("click", "input:checkbox", function (event) {
+            var box = $(this);
+            if (box.is(":checked")) {
+                var group = "input:checkbox[name='" + box.attr("name") + "']";
+                $(group).prop("checked", false);
+                box.prop("checked", true);
+            }else {
+                box.prop("checked", false);
+            }
+        });
+        
+    </script>
 
 @endsection

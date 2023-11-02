@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdersTable extends Migration
+class CreateNddlsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('nddls', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('address')->nullable();
-            $table->string('messages')->nullable();
-            $table->boolean('status');
-            $table->string('payment')->nullable();
+            $table->string('keyword')->nullable();
+            $table->longText('content')->nullable();
+            $table->boolean('status')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('nddls');
     }
 }

@@ -44,87 +44,9 @@
         </div>
         <div class=' hidden-xs'>
             
-        <section class="services-st">
-            <div class="container">
-                <div class="row">
-                    <div class="qcservices-box">
-                        
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <div class="qcservices-item">
-                                        <div class="qcservices-thumb">
-                                            <a href="#" title="BẢO HÀNH TOÀN QUỐC">
-                                                <img src="https://cuongluxury.vn/uploads/qc/icon-11.png" alt="BẢO HÀNH TOÀN QUỐC" />
-                                            </a>
-                                        </div>
-                                        <div class="qcservices-content">
-                                            <div class="qcservices-title">
-                                                BẢO HÀNH TOÀN QUỐC
-                                            </div>
-                                            <div class="qcservices-desc">
-                                                Sản phẩm được bảo trì và bảo hành trên Toàn Quốc
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <div class="qcservices-item">
-                                        <div class="qcservices-thumb">
-                                            <a href="#" title="MUA SẮM UY TÍN">
-                                                <img src="https://cuongluxury.vn/uploads/qc/icon-22.png" alt="MUA SẮM UY TÍN" />
-                                            </a>
-                                        </div>
-                                        <div class="qcservices-content">
-                                            <div class="qcservices-title">
-                                                MUA SẮM UY TÍN
-                                            </div>
-                                            <div class="qcservices-desc">
-                                                Là địa chỉ uy tín tại Việt Nam được thành lập từ năm 2008
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <div class="qcservices-item">
-                                        <div class="qcservices-thumb">
-                                            <a href="#" title="QUÀ TẶNG HẤP DẪN">
-                                                <img src="https://cuongluxury.vn/uploads/qc/icon-3.png" alt="QUÀ TẶNG HẤP DẪN" />
-                                            </a>
-                                        </div>
-                                        <div class="qcservices-content">
-                                            <div class="qcservices-title">
-                                                QUÀ TẶNG HẤP DẪN
-                                            </div>
-                                            <div class="qcservices-desc">
-                                                Luôn có những ưu đãi hấp dẫn cho Quý khách hàng
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <div class="qcservices-item">
-                                        <div class="qcservices-thumb">
-                                            <a href="#" title="CAM KẾT CHÍNH HÃNG">
-                                                <img src="https://cuongluxury.vn/uploads/qc/icon-4.png" alt="CAM KẾT CHÍNH HÃNG" />
-                                            </a>
-                                        </div>
-                                        <div class="qcservices-content">
-                                            <div class="qcservices-title">
-                                                CAM KẾT CHÍNH HÃNG
-                                            </div>
-                                            <div class="qcservices-desc">
-                                                Sản phẩm được nhập khẩu chính hãng 100%
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                    </div>
-                </div>
-            </div>
-        </section>
+            <!-- Cam kết -->
+            @include('front-end.layout.section_pledge')
+            <!-- End cam kết -->
         </div>
         <section class="product products-details" product-id='{{$product->id}}' itemscope itemtype="http://schema.org/Product">
             <div class="container">
@@ -161,8 +83,13 @@
                                     <div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
 
                                         <div class="price-box clearfix">
-
-                                            <span class='special-price'><span class='price product-price'>Giá bán: {!!number_format($product->price)!!}<span class='dvtt'>@if($product->tiente == 0) đ @else $ @endif</span></span></span>
+                                            @if($product->sale == null)
+                                                <span class='special-price'><span class='price product-price'>Giá bán: {!!number_format($product->price)!!}<span class='dvtt'>@if($product->tiente == 0) đ @else $ @endif</span></span></span>
+                                            @else
+                                                <span class='special-price'><span class='price product-price'>Giá bán: {!!number_format($product->sale)!!}<span class='dvtt'>@if($product->tiente == 0) đ @else $ @endif</span></span></span>
+                                                <span class="old-price">Giá Niêm Yết:<del class="price product-price-old">{!!number_format($product->price)!!}<span class="dvtt">@if($product->tiente == 0) đ @else $ @endif</span></del></span>
+                                            @endif
+                                            
                                         </div>
                                     </div>
                                     <div class="product-summary product_description margin-bottom-15 margin-top-15">
@@ -205,14 +132,10 @@
                                                     </div>
                                                     <div class="sidebar-block service-block">
                                                         <div class="sidebar-content">
-                                                           <p>
-            Hỗ trợ trả g&oacute;p với l&atilde;i suất 0%</p>
-        <p>
-            Tặng g&oacute;i Spa miễn ph&iacute; 1 năm trị gi&aacute; 1.500.000 đồng</p>
-        <p>
-            Tặng Voucher l&ecirc;n tới 2.000.000 đồng cho c&aacute;c đơn h&agrave;ng tiếp theo</p>
-        <p>
-            Giảm ngay 1.000.000 đồng cho kh&aacute;ch h&agrave;ng đặt h&agrave;ng tr&ecirc;n Website</p>
+                                                            @php
+                                                                $khuyenmai = App\Nddl::where('keyword','khuyenmai')->get()->first();
+                                                            @endphp
+                                                            {!!$khuyenmai->content!!}
 
                                                         </div>
                                                     </div>
@@ -331,103 +254,10 @@
                                     </div>
 
                                     <div id="tab-2" class="tab-content">
-                                        
-                                                <div style="text-align: justify;">
-            Bạn đ&atilde; t&igrave;m hiểu về rất nhiều d&ograve;ng sản phẩm sang trọng v&agrave; quyết định dừng lại ở đ&acirc;y. C&oacute; lẽ mẫu sản phẩm tr&ecirc;n đang khiến bạn rất th&iacute;ch th&uacute; v&agrave; h&agrave;o hứng để sở hữu. N&oacute; quả l&agrave; một mẫu sản phẩm ấn tượng v&agrave; ph&ugrave; hợp với phong c&aacute;ch của bạn. Bạn tin chắc rằng n&oacute; sẽ gi&uacute;p bạn trở n&ecirc;n nổi bật, tự tin v&agrave; cuốn h&uacute;t hơn.</div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <div style="text-align: justify;">
-            Nhưng giờ bạn đang tự hỏi: Tại sao bạn n&ecirc;n chọn mua mẫu sản phẩm n&agrave;y tại Cuong Luxury? Hay Cuong Luxury c&oacute; ưu điểm g&igrave; khiến bạn thực sự thỏa m&atilde;n với quyết định mua h&agrave;ng của m&igrave;nh? Đừng lo, ch&uacute;ng t&ocirc;i sẽ giải đ&aacute;p ngay những thắc mắc n&agrave;y của bạn với 7 l&yacute; do sau đ&acirc;y:</div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <h4 style="text-align: justify;">
-            <strong>1. Cuong Luxury l&agrave; thương hiệu c&oacute; uy t&iacute;n l&acirc;u đời</strong></h4>
-        <div style="text-align: justify;">
-            Được th&agrave;nh lập từ th&aacute;ng 10 năm 2008, Cuong Luxury l&agrave; một trong những thương hiệu ti&ecirc;n phong trong ng&agrave;nh h&agrave;ng xa xỉ, với c&aacute;c d&ograve;ng sản phẩm kinh doanh chủ đạo bao gồm điện thoại Vertu, đồng hồ v&agrave; trang sức cao cấp. Cho đến thời điểm hiện tại, Cuong Luxury đ&atilde; c&oacute; hơn 14 năm kinh doanh v&agrave; ph&aacute;t triển trong ng&agrave;nh nghề đặc th&ugrave; n&agrave;y.</div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <div style="text-align: justify;">
-            <img alt="" src="https://cuongluxury.vn/uploads/images/images/a/Cuong-Luxury-0.jpg" style="width: 1222px; height: 812px;" /></div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <div style="text-align: justify;">
-            Lẽ dĩ nhi&ecirc;n, kh&ocirc;ng phải t&igrave;nh cờ m&agrave; một thương hiệu c&oacute; thể ph&aacute;t triển mạnh mẽ trong suốt 14 năm li&ecirc;n tiếp. N&oacute; thực sự l&agrave; t&acirc;m huyết của cả một đội ngũ nh&acirc;n vi&ecirc;n với chất lượng của từng mẫu sản phẩm c&ugrave;ng dịch vụ kh&aacute;ch h&agrave;ng. V&agrave; với bề d&agrave;y kinh nghiệm của m&igrave;nh, Cuong Luxury lu&ocirc;n tự tin l&agrave; thương hiệu c&oacute; uy t&iacute;n l&acirc;u đời với cam kết sẽ đem đến cho kh&aacute;ch h&agrave;ng những sản phẩm c&oacute; chất lượng v&agrave; gi&aacute; trị ho&agrave;n hảo nhất.</div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <h4 style="text-align: justify;">
-            <strong>2. Đa dạng sản phẩm v&agrave; mẫu m&atilde;</strong></h4>
-        <div style="text-align: justify;">
-            Tại Showroom của Cuong Luxury lu&ocirc;n sẵn c&oacute; h&agrave;ng trăm sản phẩm thuộc nhiều thương hiệu nổi tiếng thế giới như Vertu, Hublot, Rolex, Patek Philippe hay Richard Mille,... với thiết kế, chất liệu v&agrave; gi&aacute; th&agrave;nh đa dạng để bạn c&oacute; thể thỏa th&iacute;ch trải nghiệm sản phẩm v&agrave; lựa chọn được những mẫu m&atilde; thiết kế ph&ugrave; hợp nhất với bản th&acirc;n m&igrave;nh.</div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <div style="text-align: justify;">
-            <img alt="" src="https://cuongluxury.vn/uploads/images/images/a/Cuong_Luxury-01.jpg" style="width: 1222px; height: 812px;" /></div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <h4 style="text-align: justify;">
-            <strong>3. Lu&ocirc;n tận t&acirc;m từ những điều nhỏ nhất</strong></h4>
-        <div style="text-align: justify;">
-            Cuong Luxury lu&ocirc;n quan niệm chất lượng sản phẩm v&agrave; dịch vụ l&agrave; những yếu tố cốt l&otilde;i m&agrave; thương hiệu cần phải hướng đến, do đ&oacute;, c&aacute;c sản phẩm tại Cuong Luxury đều l&agrave; sản phẩm thật, với gi&aacute; trị thật v&agrave; được nhập khẩu ch&iacute;nh h&atilde;ng hoặc th&ocirc;ng qua c&aacute;c đại l&yacute; ủy quyền với th&ocirc;ng tin đầy đủ v&agrave; ch&iacute;nh x&aacute;c.&nbsp;</div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <div style="text-align: justify;">
-            <img alt="" src="https://cuongluxury.vn/uploads/images/images/a/Cuong-Luxury-1.jpg" style="width: 1222px; height: 812px;" /></div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <div style="text-align: justify;">
-            Ngo&agrave;i ra, trước khi tới tay kh&aacute;ch h&agrave;ng, c&aacute;c sản phẩm cũng phải được kiểm tra, đ&aacute;nh gi&aacute; một c&aacute;ch hết sức kỹ c&agrave;ng bởi những chuy&ecirc;n vi&ecirc;n c&oacute; nhiều năm kinh nghiệm tại Cuong Luxury, nhằm đảm bảo sản phẩm lu&ocirc;n c&oacute; được chất lượng cao nhất, gi&uacute;p Qu&yacute; kh&aacute;ch c&oacute; thể an t&acirc;m v&agrave; thoải m&aacute;i sử dụng ch&uacute;ng thường xuy&ecirc;n.</div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <h4 style="text-align: justify;">
-            <strong>4. Gi&aacute; cả hợp l&yacute;, cạnh tranh</strong></h4>
-        <div style="text-align: justify;">
-            Tại Cuong Luxury, c&aacute;c sản phẩm lu&ocirc;n c&oacute; nguồn gốc uy t&iacute;n, r&otilde; r&agrave;ng v&agrave; được đặt h&agrave;ng trực tiếp từ c&aacute;c h&atilde;ng lớn hoặc c&aacute;c đại l&yacute; ủy quyền với mức chiết khấu cao, đảm bảo chất lượng sản phẩm tốt, mức gi&aacute; th&agrave;nh cực kỳ hợp l&yacute; v&agrave; cạnh tranh so với thị trường chung.</div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <h4 style="text-align: justify;">
-            <strong>5. Dịch vụ chăm s&oacute;c tận t&igrave;nh, chu đ&aacute;o</strong></h4>
-        <div style="text-align: justify;">
-            Một sản phẩm tốt lu&ocirc;n phải đi k&egrave;m với những dịch vụ c&oacute; chất lượng xứng tầm. Vậy n&ecirc;n, ngo&agrave;i việc được đ&agrave;o tạo kỹ lưỡng về kỹ năng chuy&ecirc;n m&ocirc;n, am hiểu t&acirc;m l&yacute; kh&aacute;ch h&agrave;ng, th&igrave; đội ngũ nh&acirc;n vi&ecirc;n v&agrave; kỹ thuật vi&ecirc;n tại Cuong Luxury lu&ocirc;n phải l&agrave; những con người y&ecirc;u nghề, y&ecirc;u sản phẩm v&agrave; thực sự tận t&acirc;m với c&ocirc;ng việc, với kh&aacute;ch h&agrave;ng.&nbsp;</div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <div style="text-align: justify;">
-            <img alt="" src="https://cuongluxury.vn/uploads/images/images/a/Cuong-Luxury-5.jpg" style="width: 1222px; height: 812px;" /></div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <div style="text-align: justify;">
-            Tất cả điều n&agrave;y đều hướng đến chỉ một điều duy nhất l&agrave; gi&uacute;p bạn c&oacute; được những trải nghiệm ho&agrave;n hảo nhất trong suốt qu&aacute; tr&igrave;nh từ khi mua h&agrave;ng cho tới l&uacute;c sử dụng sản phẩm. V&agrave; dịch vụ chăm s&oacute;c tận t&igrave;nh, chu đ&aacute;o cũng ch&iacute;nh l&agrave; cam kết h&agrave;ng đầu m&agrave; Cuong Luxury muốn d&agrave;nh cho bạn.</div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <h4 style="text-align: justify;">
-            <strong>6. Ch&iacute;nh s&aacute;ch đổi trả r&otilde; r&agrave;ng</strong></h4>
-        <div style="text-align: justify;">
-            Cuong Luxury lu&ocirc;n đảm bảo c&ocirc;ng khai minh bạch v&agrave; r&otilde; r&agrave;ng mọi th&ocirc;ng tin về ch&iacute;nh s&aacute;ch bảo h&agrave;nh v&agrave; ch&iacute;nh s&aacute;ch đổi trả cho từng mẫu sản phẩm. Vậy n&ecirc;n, bạn ho&agrave;n to&agrave;n c&oacute; thể y&ecirc;n t&acirc;m sở hữu v&agrave; sử dụng sản phẩm với sự chăm s&oacute;c tận t&igrave;nh đến từ Cuong Luxury. Ngo&agrave;i ra, khi c&oacute; nhu cầu quay đầu sản phẩm, bạn cũng sẽ được hỗ trợ tốt nhất với mức chi ph&iacute; bỏ ra hết sức hợp l&yacute;.</div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <div style="text-align: justify;">
-            <img alt="" src="https://cuongluxury.vn/uploads/images/images/a/Cuong-Luxury-02.jpg" style="width: 1222px; height: 812px;" /></div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <h4 style="text-align: justify;">
-            <strong>7. Sự tin tưởng, lựa chọn của nhiều kh&aacute;ch h&agrave;ng</strong></h4>
-        <div style="text-align: justify;">
-            Với lợi thế ti&ecirc;n phong trong ng&agrave;nh h&agrave;ng xa xỉ, c&ugrave;ng niềm đam m&ecirc; v&agrave; sự tận t&acirc;m với nghề, trong suốt 14 năm qua, Cuong Luxury đ&atilde; phục vụ hơn 35.000 kh&aacute;ch h&agrave;ng tr&ecirc;n khắp mọi miền Tổ quốc với h&agrave;ng chục ngh&igrave;n sản phẩm ho&agrave;n hảo, chất lượng. Rất nhiều kh&aacute;ch h&agrave;ng trong số đ&oacute; đ&atilde; quay trở lại mua h&agrave;ng lần tiếp theo v&agrave; xem đ&acirc;y l&agrave; điểm đến đầu ti&ecirc;n khi muốn sở hữu một m&oacute;n đồ cao cấp.</div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <div style="text-align: justify;">
-            <img alt="" src="https://cuongluxury.vn/uploads/images/images/a/Cuong-Luxury-4.jpg" style="width: 1222px; height: 812px;" /></div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <div style="text-align: justify;">
-            Cuối c&ugrave;ng, bằng niềm đam m&ecirc; bất tận v&agrave; những nỗ lực kh&ocirc;ng ngừng nghỉ của m&igrave;nh, Cuong Luxury đ&atilde;, đang, v&agrave; sẽ ng&agrave;y c&agrave;ng ph&aacute;t triển tốt hơn để đem đến cho bạn những mẫu sản phẩm chất lượng c&ugrave;ng dịch vụ kh&aacute;ch h&agrave;ng ho&agrave;n hảo nhất. Do đ&oacute;, Cuong Luxury lu&ocirc;n tự tin v&agrave; khẳng định rằng việc sở hữu những sản phẩm tại Cuong Luxury sẽ lu&ocirc;n l&agrave; sự lựa chọn đ&uacute;ng đắn nhất d&agrave;nh cho bạn.</div>
-        <div style="text-align: justify;">
-            &nbsp;</div>
-        <div style="text-align: justify;">
-            Vậy n&ecirc;n, đừng chần chừ nữa, bạn h&atilde;y chọn đặt h&agrave;ng ngay b&acirc;y giờ để c&oacute; thể sớm nhận về cho m&igrave;nh mẫu sản phẩm m&agrave; bản th&acirc;n y&ecirc;u th&iacute;ch nhất nh&eacute;!</div>
-        <div>
-            &nbsp;</div>
-
-                                            
+                                        @php
+                                            $tscct = App\Nddl::where('keyword','tscct')->get()->first();
+                                        @endphp
+                                        {!!$tscct->content!!}
                                     </div>
                                     <div id="tab-3" class="tab-content">
                                         

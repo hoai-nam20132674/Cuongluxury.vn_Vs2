@@ -31,34 +31,26 @@ class System extends Model
             $file_name = $request->file('shortcut_logo')->getClientOriginalName();
             $system->shortcut_logo = $file_name;
             $path = public_path('uploads/images/systems/' . $file_name);
-            Image::make($request->file('shortcut_logo'))->resize(50, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($path);
+            Image::make($request->file('shortcut_logo'))->save($path);
             
         }
         if($request->hasFile('logo')){ 
             $file_name = $request->file('logo')->getClientOriginalName();
             $system->logo = $file_name;
             $path = public_path('uploads/images/systems/' . $file_name);
-            Image::make($request->file('logo'))->resize(300, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($path);
+            Image::make($request->file('logo'))->save($path);
         }
         if($request->hasFile('popup')){ 
             $file_name = $request->file('popup')->getClientOriginalName();
             $system->popup = $file_name;
             $path = public_path('uploads/images/popup/' . $file_name);
-            Image::make($request->file('popup'))->resize(600, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($path);
+            Image::make($request->file('popup'))->save($path);
         }
         if($request->hasFile('ogimage')){ 
             $file_name = $request->file('ogimage')->getClientOriginalName();
             $system->ogimage = $file_name;
             $path = public_path('uploads/images/ogimage/' . $file_name);
-            Image::make($request->file('ogimage'))->resize(600, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })->save($path);
+            Image::make($request->file('ogimage'))->save($path);
         }
         $system->save();
         

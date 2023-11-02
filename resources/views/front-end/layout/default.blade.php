@@ -4,8 +4,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Language" content="vi" />
-    <meta name="copyright" content="Copyright" />
-    <meta name="geo.placename" content="39 Quang Trung, Hoàn Kiếm" />
+    <meta name="geo.placename" content="{{$system->address}}" />
+    <meta property="og:locale" content="vi_VN" />
+    <link rel="icon" type="image/x-icon" href="{{asset('uploads/images/systems/'.$system->shortcut_logo)}}">
+    {!!$system->script!!}
     @yield('head')
     <link href="{{asset('css/Roboto.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}" />
@@ -81,17 +83,10 @@ return true;
 <body class="">
 
 
-<div class="aspNetHidden">
-<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTMxOTM5NzI4MGRkyo/NfuWFUgAhZm1AcQzeE1rOBmg=" />
-</div>
-
-<div class="aspNetHidden">
-
-    <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="90059987" />
-</div>
+{!!$system->script_body!!}
         
 @include('front-end.layout.header')
-    <h1 class="hidden">Cường Luxury</h1>
+    <h1 class="hidden">{{$system->name}}</h1>
     <!-- <p>&nbsp;</p> -->
 @yield('content')
         
@@ -252,17 +247,7 @@ return true;
 
 <div class="backdrop__body-backdrop___1rvky"></div>
 
-<div class="mobile-main-menu">
-    <div class="la-scroll-fix-infor-user">
-        <div class="la-nav-menu-items">
-            <div class="la-title-nav-items"><strong>Danh mục sản phẩm</strong></div>
-            <ul class="la-nav-list-items">
-                <li  class='ng-scope ng-has-child1'><a title='Đồng hồ' class='' href='/dong-ho' style='float: left;width: 90%;'>Đồng hồ</a> <i class='fa fa-sort-desc fa1' ></i><ul class='ul-has-child1'><li class='ng-scope' ><a class='' title='Richard Mille' href='/richard-mille'>Richard Mille</a></li><li class='ng-scope' ><a class='' title='Patek Philippe' href='/patek-philippe'>Patek Philippe</a></li><li class='ng-scope' ><a class='' title='Rolex' href='/rolex'>Rolex</a></li><li class='ng-scope' ><a class='' title='Hublot' href='/hublot'>Hublot</a></li><li class='ng-scope' ><a class='' title='Franck Muller' href='/franck-muller'>Franck Muller</a></li></ul></li><li  class='ng-scope'><a class='' title='Vertu' href='/vertu'>Vertu</a></li><li  class='ng-scope'><a class='' title='Trang sức' href='/trang-suc'>Trang sức</a></li>
-          
-            </ul>
-        </div>
-    </div>
-</div>
+@include('front-end.layout.mobile_menu')
 
 <link href="{{asset('css/social.css')}}" rel="stylesheet" />
 <script src="{{asset('js/social.js')}}"></script>
@@ -324,7 +309,7 @@ return true;
             <div class="aml-head-body">
                 <p class="aml-modal-title aml-line-clamp-2 aml-modal-title-desktop-one-phone" style="text-align: center;"></p>
                 <div class="aml-input-phone">
-                    <img class="aml-input-icon" src="https://cuongluxury.vn/templates/home/images/gray-calls.svg">
+                    <img class="aml-input-icon" src="{{asset('uploads/images/systems/gray-calls.svg')}}">
                     <input class="aml-input-field" id="autoAdsMaxLead_widget_form_CallbackPhone" data-required="phone" style="border: none" placeholder="Số điện thoại của bạn...">
                     <button type="button" class="aml-btn-require-callback aml-btn" onclick="sendphone()">Yêu cầu gọi lại</button>
                 </div>
@@ -337,7 +322,7 @@ return true;
                     <span class="aml-desktop-devider-bar"></span><span class="aml-desktop-devider-text">Hoặc</span><span class="aml-desktop-devider-bar"></span>
                 </div>
                 <div class="aml-bold-contact-title">Hoặc liên hệ với chúng tôi theo hotline:</div>
-                <div class="aml-bold-phone-number">0987565656</div>
+                <div class="aml-bold-phone-number">{{$system->phone}}</div>
             </div>
             <div class="aml-modal-footer"></div>
         </div>
@@ -394,7 +379,14 @@ return true;
 </div>
 <style>
 #modal{display:none !important}
-.backdrop__body-backdrop___1rvky{opacity:0 !important;display:none !important}
+.backdrop__body-backdrop___1rvky{
+    opacity:0 !important;
+    display:none !important
+}
+.backdrop__body-backdrop___1rvky.active{
+    opacity:0 !important;
+    display:block !important
+}
 </style>
 
 <div class="modal" id="modal">
@@ -521,8 +513,9 @@ function setCookie(cname, cvalue, exdays) {
     <script src="{{asset('js/main.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/JavaScript.js')}}"></script>
     <script src="{{asset('js/clipboard.min.js')}}"></script>
-    <script src="{{asset('js/toastr.min.js')}}" rel="stylesheet">
+    <script src="{{asset('js/toastr.min.js')}}" rel="stylesheet"></script>
     <script>
+    
         var clipboard = new ClipboardJS('.btn-copy');
 
         clipboard.on('success', function (e) {
@@ -535,6 +528,12 @@ function setCookie(cname, cvalue, exdays) {
             alert("Bạn copy nội dung thất bại");
         });
     </script>
+    <script type="text/javascript">
+        function sendphone(){
+            
+        }
+    </script>
+
     @yield('js')
 </body>
 </html>

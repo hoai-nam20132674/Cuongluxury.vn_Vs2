@@ -71,7 +71,7 @@
 
                         <div class="form-group">
                             <label for="content" class="control-label">Mô tả ngắn</label>
-                            <textarea class="form-control" rows="6" placeholder="Mô tả ngắn" data-counter="400" name="content" cols="50" id="content">{{$video->content}}</textarea>
+                            <textarea class="form-control" rows="6" placeholder="Mô tả ngắn" name="content" cols="50" id="content">{{$video->content}}</textarea>
                         </div>
     
                         <div class="form-group"  >

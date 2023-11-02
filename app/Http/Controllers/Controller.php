@@ -43,6 +43,7 @@ use App\Popup;
 use App\Payment;
 use App\Properties;
 use App\PropertiesValue;
+use App\VideoCate;
 use App\ProductVariationsPropertiesValue;
 use Cart;
 use App\Notification;
@@ -98,8 +99,14 @@ class Controller extends BaseController
             }])->get()->first();
         $pledges = Ads::where('type',0)->where('display',1)->get();
         $adsCates = Ads::where('type',1)->where('display',1)->get();
+        $cnkhs = BlogCate::where('name','Cảm nhận khách hàng')->get()->first();
+        $cnkhs = $cnkhs->blogs()->take(6)->get();
+        $blogs = BlogCate::where('name','Chuyên mục tin tức')->get()->first();
+        $blogs = $blogs->blogs()->take(4)->get();
+        $videos = VideoCate::where('name','Review sản phẩm')->get()->first();
+        $videos = $videos->videos()->take(6)->get();
         // return view('front-end.index',compact('system','menus','categories','products_hl','hct','hcn','cdt','hdb','blogs','slides','popup'));
-        return view('front-end.index',compact('slides','patek','rolex','hublot','fm','vertu','trangsuc','pledges','adsCates','menus'));
+        return view('front-end.index',compact('slides','patek','rolex','hublot','fm','vertu','trangsuc','pledges','adsCates','menus','system','cnkhs','blogs','videos'));
 
     }
     public function findProductCateTranslate($cate,$locale){
@@ -230,6 +237,7 @@ class Controller extends BaseController
     	if($key=='pi'){
             // $adss = Ads::where('display',1)->where('type',1)->get();
             $product = Product::where('id',$id)->with('categories','images')->get()->first();
+            $pledges = Ads::where('type',0)->where('display',1)->get();
             $locale = $product->lang;
             config(['app.locale' => $locale]);
             \Session::put('website_language', $locale);
@@ -278,10 +286,10 @@ class Controller extends BaseController
                     }
                     $properties = Properties::whereIn('id',$array_properties_id)->get();
                     $properties_value = PropertiesValue::whereIn('id',$array_properties_value_id)->get();
-                    return view('front-end.product',compact('menus','product','images','system','products','policys','contacts','properties','properties_value'));
+                    return view('front-end.product',compact('menus','product','images','system','products','policys','contacts','properties','properties_value','pledges'));
                 }
                 else{
-                    return view('front-end.product',compact('menus','product','images','system','products','policys','contacts'));
+                    return view('front-end.product',compact('menus','product','images','system','products','policys','contacts','pledges'));
                     // dd($cate_pr->products);
 
                 }
@@ -336,12 +344,43 @@ class Controller extends BaseController
             $categorie = ProductCate::where('id',$id)->with(['products' => function ($query) {
                 $query->where('display',1)->orderBy('id','DESC');
             }])->get()->first();
+            $pledges = Ads::where('type',0)->where('display',1)->get();
             // $locale = $categorie->lang;
             // config(['app.locale' => $locale]);
             // \Session::put('website_language', $locale);
+            if(isset($request->attr)){
+                $ids = array();
+                $productSearch = array();
+                $ids = explode(",",$request->attr);
+                $i = 0;
+                foreach($categorie->products as $product){
+                    $attr_id = array();
+                    $attr = $product->properties_value_filter;
+                    $attr_id = $this->arrayColumn($attr,'id');
+                    $check = false;
+                    foreach($ids as $id){
+                        if(in_array($id, $attr_id)){
+                            $check = true;
+                        }
+                        else{
+                            $check = false;
+                            break;
+                        }
+                    }
+                    if($check){
+                        $productSearch[$i] = $product;
+                        $i++;
+                    }
+
+                }
+                $products = $productSearch;
+                return view('front-end.products',compact('categories','menus','categorie','request','system','pledges','products','ids'));
+                // dd($productSearch);
+            }
             
             if($categorie->lang == $locale){
-                return view('front-end.products',compact('categories','menus','categorie','request','system'));
+                $products = $categorie->products()->where('display',1)->orderBy('id','DESC')->paginate(16);
+                return view('front-end.products',compact('categories','menus','categorie','request','system','pledges','products'));
             }
             else{
                 if($categorie->lang == 'vi'){
@@ -544,8 +583,8 @@ class Controller extends BaseController
     public function search(Request $request){
         $locale = config('app.locale');
         $products = Product::where('display',1)->where('lang',$locale)->orderBy('id','DESC');
-        if($request->has('keyword') && $request->keyword != null){
-            $products = $products->where('name', 'like', '%' .$request->keyword.'%')->orWhere('ma', 'like', '%' .$request->keyword.'%');
+        if($request->has('key') && $request->key != null){
+            $products = $products->where('name', 'like', '%' .$request->key.'%')->orWhere('ma', 'like', '%' .$request->key.'%');
         }
         if($request->has('bed') && $request->bed != null){
             $products = $products->where('bed',$request->bed);
@@ -567,7 +606,17 @@ class Controller extends BaseController
         $products = $products->where('lang',$locale)->paginate(30);
         $system = System::where('id',1)->get()->first();
         $menus = Menu::whereNull('parent_id')->orderBy('stt','ASC')->get();
-        return view('front-end.product-search',compact('menus','products','request','system'));
+        $cate = ProductCate::where('name', 'like', '%' .$request->key.'%')->get()->first();
+        $pledges = Ads::where('type',0)->where('display',1)->get();
+        if(isset($cate)){
+            $img = $cate->banner;
+        }
+        else{
+            
+            $img = 'tim-kiem.jpg';
+        }
+        
+        return view('front-end.search',compact('menus','products','request','system','img','pledges'));
         // echo $minPrice."-".$maxPrice;
     }
 
@@ -683,6 +732,37 @@ class Controller extends BaseController
         
 
         
+    }
+    public function updateCart($id,$qty){
+        $product = Product::where('id',$id)->get()->first();
+        $item_cart = Cart::content();
+        $check_item = array();
+        if(Cart::count()){
+            $check_item = Cart::search(function($cartItem, $rowId) use($id) {
+                return $cartItem->id == $id;
+            });
+
+        }
+        
+        if(count($check_item)){
+            $check_item = $check_item->first();
+            Cart::update($check_item->rowId,$qty);
+        }
+        else{
+            if($product->sale == null){
+                Cart::add($product->id, $product->name, $qty, $product->price, 0, ['img'=>$product->avata,'url'=>$product->url,'oldprice'=>$product->price,'variation_id'=>$request->variation_id,'sku'=>$product->ma]);
+            }
+            else{
+                Cart::add($product->id, $product->name, $qty, $product->sale, 0, ['img'=>$product->avata,'url'=>$product->url,'oldprice'=>$product->price,'variation_id'=>$request->variation_id,'sku'=>$product->ma]);
+            }
+        }
+        
+        
+        $array = array();
+        $array[0]=Cart::count();
+        $array[1]=Cart::subtotal();
+        $array[2]=$check_item->price*$qty;
+        return $array;
     }
     public function addToCart($id,$qty, Request $request){
         $product = Product::where('id',$id)->get()->first();

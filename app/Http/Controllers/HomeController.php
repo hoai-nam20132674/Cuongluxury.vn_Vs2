@@ -33,6 +33,7 @@ use App\Page;
 use App\Payment;
 use App\BlogCate;
 use App\VideoCate;
+use App\Nddl;
 use App\Blog;
 use App\Order;
 use App\Video;
@@ -565,6 +566,36 @@ class HomeController extends Controller
         return redirect()->route('payments')->with(['flash_level'=>'success','flash_message'=>'Xóa phương thức thanh toán thành công']); 
     }
     // End Payment
+
+    // Nội dung độc lập
+    public function nddls(Request $request){
+        $nddls = Nddl::paginate(15);
+        return view('admin.nddls',compact('nddls','request'));
+    }
+    public function addNddl(Request $request){
+        return view('admin.addNddl',compact('request'));
+    }
+    public function postAddNddl(Request $request){
+        $item = new Nddl;
+        $item -> add($request);
+        return redirect()->route('nddls')->with(['flash_level'=>'success','flash_message'=>'Thêm thành công']); 
+        // dd($request->blog_id);
+    }
+    public function editNddl(Request $request, $id){
+        $nddl = Nddl::where('id',$id)->get()->first();
+        return view('admin.editNddl',compact('nddl','request'));
+    }
+    public function postEditNddl(Request $request, $id){
+        $item = new Nddl;
+        $item->edit($request,$id);
+        return redirect()->route('editNddl',$id)->with(['flash_level'=>'success','flash_message'=>'Sửa thành công']);
+    }
+    public function deleteNddl($id){
+        $item = Nddl::where('id',$id)->get()->first();
+        $item->delete();
+        return redirect()->route('nddls')->with(['flash_level'=>'success','flash_message'=>'Xóa nội dung thành công']); 
+    }
+    // End 
 
     //Popups
     public function popups(Request $request){

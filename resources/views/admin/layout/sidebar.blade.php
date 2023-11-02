@@ -82,7 +82,7 @@
                             </li>
                             <li class="nav-item " id="cms-plugins-product-categories">
                                 <a href="{{URL::route('orders')}}" class="nav-link">
-                                    <i class="fas fa-glass-martini"></i>
+                                    <i class="fa fa-shopping-bag"></i>
                                     Đơn hàng
                                 </a>
                             </li>
@@ -91,7 +91,7 @@
                     </li>
                     <li class="nav-item " id="cms-plugins-ecommerce">
                         <a href="#" class="nav-link nav-toggle">
-                            <i class="fa fa-cube"></i>
+                            <i class="fa fa-camera"></i>
                             <span class="title">Video</span>
                             <span class="arrow "></span>
                         </a>
@@ -172,8 +172,14 @@
                             </li>
                             <li class="nav-item " id="cms-core-appearance-custom-css">
                                 <a href="{{URL::route('sliders')}}" class="nav-link">
-                                    <i class="fa fa-window-restore"></i>
+                                    <i class="far fa-image"></i>
                                     Slider
+                                </a>
+                            </li>
+                            <li class="nav-item " id="cms-core-appearance-custom-css">
+                                <a href="{{URL::route('nddls')}}" class="nav-link">
+                                    <i class="far fa-image"></i>
+                                    Nội dung độc lập
                                 </a>
                             </li>
                         </ul>
