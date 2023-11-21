@@ -23,7 +23,7 @@
 
 
 @section('content')
-    <section id="content">
+<section id="content">
 
 
         <section class="bread-crumb margin-bottom-10 hidden">
@@ -62,8 +62,8 @@
                             </span>
                         </h1>
                        
-                        <div class="row title-head-products" style="clear: both">
-                            <div class="col-xs-12 col-md-10">
+                        <div class="row title-head-products " style="clear: both">
+                            <div class="col-xs-12 col-md-10 hidden-xs">
                                 <div class="filter-block ">
                                     <div class="row">
 
@@ -145,7 +145,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-12 col-md-2">
+                            <div class="col-xs-12 col-md-2 hidden-xs">
                                 <div class="">
                                     <select name="ctl19$ctl00$ctl00$ctl00$ddlsort" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl19$ctl00$ctl00$ctl00$ddlsort\&#39;,\&#39;\&#39;)&#39;, 0)" id="ddlsort" class="dsort-styles">
             <option selected="selected" value="-1">Sắp xếp: H&#224;ng mới</option>
@@ -219,6 +219,181 @@
         }</style>
 
 </section>
+<div class="filter-bar hidden-md hidden-lg">
+    <i class="fa fa-search" aria-hidden="true"></i>
+</div>
+<div class="filter-bar-box">
+    <div class="filter-bar-box-headding">
+        Tìm kiếm 
+    </div>
+    <div class="filter-bar-box-item">
+        <div class="filter-box">
+
+            <div class="search-form-other">
+                <!-- <input type="search" id="input-search-other2" placeholder="Nhập từ khóa tìm kiếm..." /> -->
+                <input type="search" id="txt_search" onkeypress="return handleKeyPress(event);" value="" placeholder="Tìm kiếm sản phẩm..." class="input input-group-field st-default-search-input search-text search-voice" autocomplete="off">
+            </div>
+
+            <div class='scroll-milfilter'>
+                @foreach($categorie->properties as $item)
+                <div class="margin-bottom-10">
+                    <aside class="aside-item filter-vendor ">
+                        <div class="aside-title">
+                            <h2 class="title-head margin-top-0 "><span>{{$item->name}}</span></h2>
+                        </div>
+                        <div class="aside-content filter-group cates-filters2">
+                            <ul>
+                                @foreach($item->propertie_values as $item2)
+                                    <li class='filter-item filter-item--check-box filter-item--green '>
+                                        <span>
+                                            <label for='filter-mobile-{{$item2->id}}'>
+                                                @if(isset($request->attr))
+                                                    @if(in_array($item2->id,$ids))
+                                                        <input  type='checkbox' checked  name='properties{{$item->id}}' class='attribute-products' id='filter-mobile-{{$item2->id}}' value='{{$item2->id}}'>
+                                                    @else
+                                                        <input  type='checkbox'  name='properties{{$item->id}}' class='attribute-products' id='filter-mobile-{{$item2->id}}' value='{{$item2->id}}'>
+                                                    @endif
+                                                @else
+                                                    <input  type='checkbox'  name='properties{{$item->id}}' class='attribute-products' id='filter-mobile-{{$item2->id}}' value='{{$item2->id}}'>
+                                                @endif
+                                                <i class='fa'></i>
+                                                {{$item2->value}}
+                                            </label>
+                                        </span>
+                                    </li>
+                                @endforeach
+                                
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+                @endforeach
+                
+                
+            </div>
+
+            <div id="kk2">
+            </div>
+            <div class="search-btn-f ">
+                <div class="search-form-other-button">
+                    <a class="btn-search" data-href="{{$categorie->url}}" title="Tìm kiếm">Tìm kiếm</a>
+                </div>
+            </div>
+
+            <script>
+                $(document).ready(function () {
+                    var stralias = "";
+                    var strfl = "";
+
+                    if (stralias.length > 0) {
+                        var venderid = "";
+                        $.ajax({
+                            type: "POST",
+                            url: "webservices/SearchAirport.asmx/GetAtri2",
+                            data: "{iid: '" + stralias + "',checkstr:'" + strfl + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data) {
+                                // $('#kk2').html(data.d);
+                            },
+                            error: function (data) {
+                              //  alert("Lỗi");
+                            }
+                        });
+                    }
+
+                });
+                $(".cates-filters2 input:checkbox").on('click', function () {
+                    var $box = $(this);
+                    var strfl = "";
+                    if ($box.is(":checked")) {
+                        //var group = "input:checkbox[name='" + $box.attr("name") + "']";
+                        //var vender = $('input[name="thuong-hieus"]:checked').val();
+                        //$(group).prop("checked", false);
+                        //$box.prop("checked", true);
+                        //if (vender != null || vender != "") {
+                        //    //   alert(vender);
+                        //    $.ajax({
+                        //        type: "POST",
+                        //        url: "webservices/SearchAirport.asmx/GetAtri2",
+                        //        data: "{iid: '" + vender + "',checkstr:'" + strfl + "'}",
+                        //        contentType: "application/json; charset=utf-8",
+                        //        dataType: "json",
+                        //        success: function (data) {
+                        //            $('#kk2').html(data.d);
+
+                        //        },
+                        //        error: function (data) {
+                        //            alert("Lỗi");
+                        //        }
+                        //    });
+                        //}
+
+                    } else {
+                        $box.prop("checked", false);
+                        //  $('#kk2').html("");
+                    }
+
+                });
+
+                function handleKeyPress8() {
+                    var vender = $('input[name="thuong-hieus"]:checked').val();
+                    var selectedCountry = new Array();
+                    var temp = new Array();
+                    var n = jQuery(".attribute-products2:checked").length;
+                    if (n > 0) {
+                        jQuery(".attribute-products2:checked").each(function () {
+                            selectedCountry += ($(this).val() + ";");
+                        });
+                    }
+                    var temp = new Array();
+                    var obj = {}; // Define object
+                    jQuery(".attribute-products2:checked").each(function () {
+                        var name = $(this).attr('name'); // Get name of this checkbox
+                        if (obj[name]) {
+                            obj[name].push($(this).val()); // Push value
+
+                        } else {
+                            obj[name] = [$(this).val()]; // Create array and push value
+                        }
+
+                    });
+                    for (var key in obj) {
+                        temp += key + ':' + obj[key] + "|";
+                    }
+                    // alert(temp);
+                    var kw = $("#input-search-other").val();
+                    // alert(temp);
+                    location.replace("/tim-kiem?venderp=" + vender + "&key=" + kw + "&fl=" + temp);
+                    //var key = $("#input-search-other2").val();
+                    //if (vender != "" && selectedCountry != "" && selectedCountry != "" && key.length > 0) {
+                    //    if (key.length < 1) {
+                    //        location.replace("/tim-kiem?venderp=" + vender + "&key=%20&fl=" + temp);
+                    //    }
+
+                    //    else {
+                    //        location.replace("/tim-kiem?venderp=" + vender + "&key=" + key + "&fl=" + temp);
+                    //    }
+                    //}
+                    //else if (key.length != "" && vender != "" && vender != "") {
+
+                    //    location.replace("/tim-kiem?venderp=" + vender + "&key=" + key);
+                    //}
+                    //else if (key.length != "" && selectedCountry != "" && selectedCountry != "") {
+
+                    //    location.replace("/tim-kiem?key=" + key + "&fl=" + temp);
+                    //}
+                    //else if (key.length != "" || selectedCountry == "") {
+                    //    location.replace("/tim-kiem?key=" + key);
+                    //} else if (key.length != "" || vender == null) {
+                    //    location.replace("/tim-kiem?key=" + key);
+                    //}
+                    return false;
+                }
+            </script>
+        </div>
+    </div>
+</div>
 
 @endsection
 

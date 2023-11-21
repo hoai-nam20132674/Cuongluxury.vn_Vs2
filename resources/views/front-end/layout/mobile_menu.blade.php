@@ -8,7 +8,7 @@
                         $childs = App\Menu::where('parent_id',$item->id)->get();
                     @endphp
                     @if(count($childs))
-                    	<li  class='ng-scope ng-has-child1'><a title='{{$item->title}}' class='' href='{{$item->url}}' style='float: left;width: 90%;'>{{$item->title}}</a>
+                    	<li  class='ng-scope ng-has-child1 @if($item->title == "Đồng Hồ") open @endif'><a title='{{$item->title}}' class='' href='{{$item->url}}' style='float: left;width: 90%;'>{{$item->title}}</a>
                     		<i class='fa fa-sort-desc fa1' ></i>
 		                	<ul class='ul-has-child1'>
 		                		@foreach($childs as $child)

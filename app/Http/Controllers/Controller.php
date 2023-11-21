@@ -141,15 +141,25 @@ class Controller extends BaseController
         $ids = array();
         $ids = explode(",",$str_ids);
         $ids = array_filter($ids);
+        $selected = array();
+        $empty = 0;
         foreach($products_variation as $product_var){
             $pro_var_pro_val = ProductVariationsPropertiesValue::where('pro_var_id',$product_var->id)->whereIn('propertie_value_id',$ids)->get();
             if(count($pro_var_pro_val) == count($properties)){
-                return $product_var;
+                // return $product_var;
+                $selected = $product_var;
+                $empty = 1;
                 break;
             }
             else{
-                return 0;
+                // return 0;
             }
+        }
+        if($empty){
+            return $selected;
+        }
+        else{
+            return 0;
         }
         // return $product->products_variation()->first();
     }
@@ -236,6 +246,7 @@ class Controller extends BaseController
 
     	if($key=='pi'){
             // $adss = Ads::where('display',1)->where('type',1)->get();
+            $productsHighlight = Product::where('highlight',1)->get()->take(4);
             $product = Product::where('id',$id)->with('categories','images')->get()->first();
             $pledges = Ads::where('type',0)->where('display',1)->get();
             $locale = $product->lang;
@@ -265,8 +276,10 @@ class Controller extends BaseController
                 $j=0;
                 $products_variation = $product->products_variation;
                 if(count($products_variation)){
+                    $properties_value_default = array();
                     foreach($products_variation as $product_var){
                         $properties_value = $product_var->properties_value;
+                        $properties_value_default = $this->arrayColumn($properties_value,'id');
                         foreach($properties_value as $propertie_val){
                             if(in_array($propertie_val->id, $array_properties_value_id)){
 
@@ -284,12 +297,14 @@ class Controller extends BaseController
                             }
                         }
                     }
+
                     $properties = Properties::whereIn('id',$array_properties_id)->get();
                     $properties_value = PropertiesValue::whereIn('id',$array_properties_value_id)->get();
-                    return view('front-end.product',compact('menus','product','images','system','products','policys','contacts','properties','properties_value','pledges'));
+                    return view('front-end.product',compact('menus','product','images','system','products','policys','contacts','properties','properties_value','pledges','productsHighlight','properties_value_default'));
+                    // dd($properties_value_default);
                 }
                 else{
-                    return view('front-end.product',compact('menus','product','images','system','products','policys','contacts','pledges'));
+                    return view('front-end.product',compact('menus','product','images','system','products','policys','contacts','pledges','productsHighlight'));
                     // dd($cate_pr->products);
 
                 }

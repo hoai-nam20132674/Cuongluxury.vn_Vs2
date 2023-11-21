@@ -156,9 +156,19 @@
 													</td>
 													<td class="  column-key-created_at">{{$product->created_at}}</td>
 													@if($product->display ==1 )
-														<td class="  column-key-status"><span class="label-success status-label">Xuất bản</span></td>
+														<td class="  column-key-status">
+															<span class="label-success status-label">Xuất bản</span>
+															@if($product->highlight)
+																<span class="label-danger status-label">Nổi bật</span>
+															@endif
+														</td>
 													@else
-														<td class="  column-key-status"><span class="label-danger status-label">Bản nháp</span></td>
+														<td class="  column-key-status">
+															<span class="label-danger status-label">Bản nháp</span>
+															@if($product->highlight)
+																<span class="label-danger status-label">Nổi bật</span>
+															@endif
+														</td>
 
 													@endif
 													<td class=" text-center language-header no-sort">

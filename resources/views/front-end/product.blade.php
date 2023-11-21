@@ -36,11 +36,11 @@
             </div>
         </section>
 
-        <div class="cates-images-ppp">
+        <div class="cates-images-ppp hidden-xs">
             @php
                 $c = $product->categories()->get()->first();
             @endphp
-            <img src="{{asset('uploads/images/products/categories/'.$c->banner)}}" alt='Hublot' />
+            <img src="{{asset('uploads/images/products/categories/'.$c->banner)}}" alt='{{$c->title}}' />
         </div>
         <div class=' hidden-xs'>
             
@@ -101,7 +101,7 @@
                                                         <ul class="ttp">
                                                             @foreach($properties_value as $propertie_val)
                                                                 @if($propertie_val->properties_id == $propertie->id)
-                                                                    <li propertie-id='{{$propertie->id}}' class="propertie-value-item tttxt" data-vl="{{$propertie_val->id}}">
+                                                                    <li propertie-id='{{$propertie->id}}' class="propertie-value-item tttxt @if(in_array($propertie_val->id,$properties_value_default)) selected @endif" data-vl="{{$propertie_val->id}}">
                                                                         <span class="tttt">
                                                                             {{$propertie_val->value}}
                                                                         </span>
@@ -266,21 +266,39 @@
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
                                 
-        <div class="right_module">
+                                <div class="right_module">
 
-            <div class="similar-product">
-                <div class="right-bestsell">
-                    <h2>
-                        <a title="Sản phẩm bán chạy">
-                           Sản phẩm bán chạy
-                        </a>
-                    </h2>
-                    <div class="section-tour-owl23 owl-carousel not-dqowl products-view-grid margin-top-10" data-md-items="1" data-sm-items="1" data-xs-items="1" data-margin="10">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+                                    <div class="similar-product">
+                                        <div class="right-bestsell">
+                                            <h2>
+                                                <a title="Sản phẩm nổi bật">
+                                                   Sản phẩm nổi bật
+                                                </a>
+                                            </h2>
+                                            <div class="section-tour-owl23 product-hl owl-carousel not-dqowl products-view-grid margin-top-10" data-md-items="1" data-sm-items="1" data-xs-items="1" data-margin="10">
+                                                @foreach($productsHighlight as $item )
+                                                <div class="item">
+                                                    <div class="prdboxsli-item">
+                                                        <div class="prdboxsli-thumb">
+                                                            <a href="{{$item->url}}" title="{{$item->name}}">
+                                                                <img src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt="{{$item->name}}"></a>
+                                                        </div>
+                                                        @php
+                                                            $c = $item->categories()->get()->first();
+                                                        @endphp
+                                                        <div class="prdboxsli-ccname">{{$c->name}}</div>
+                                                        <div class="prdboxsli-key">MSP: {{$item->ma}}</div>
+                                                        <div class="prdboxsli-title"><a href="{{$item->url}}" title="{{$item->name}}">{{$item->name}}</a></div>
+                                                        <div class='prdboxsli-price'>
+                                                            <div class='item-price'><span class='special-price'><span class='price-container'><span class='price-wrapper'><span class='price'>{!!number_format($item->price)!!}<span class='dvtt'>@if($item->tiente == 0) đ @else $ @endif </span></span></span></span></span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -414,12 +432,7 @@
                 }
                 return x1 + x2;
             }
-            $(document).on("click", ".propertie-value-item", function (event) {
-                var propertie_id = $(this).attr('propertie-id')
-                $('.propertie-value-item[propertie-id='+propertie_id+']').each(function(){
-                    $(this).removeClass('selected');
-                });
-                $(this).addClass("selected");
+            function findProductVariation(){
                 var str_ids = '';
                 var product_id = $('.products-details').attr('product-id');
                 $('.propertie-value-item').each(function(){
@@ -447,6 +460,17 @@
 
                     }
                 });
+            }
+            $(document).ready(function () {
+                findProductVariation();
+            });
+            $(document).on("click", ".propertie-value-item", function (event) {
+                var propertie_id = $(this).attr('propertie-id')
+                $('.propertie-value-item[propertie-id='+propertie_id+']').each(function(){
+                    $(this).removeClass('selected');
+                });
+                $(this).addClass("selected");
+                findProductVariation();
                 
             });
             function addContact(){

@@ -281,7 +281,7 @@
                     
                   @endforeach
                 </div>
-               <div class="comment_button "><a href="cam-nhan-khach-hang-bc2">XEM THÊM</a></div>
+               <div class="comment_button "><a href="#">XEM THÊM</a></div>
             </div>
             
         </div>
@@ -295,61 +295,58 @@
                 <img src="https://cuongluxury.vn/templates/home/images/line-3.png" alt="Tin tức" />
             </div>
         </div>
-        <div class="new-block container">
-            <div class="row">
+        <div class="container">
+            <div class="ykkh owl-carousel ">
                @php
                   $tt = 0;
                   $count = count($blogs);
                @endphp
                @foreach($blogs as $item)
                   @if($count == 1)
-                     <div class='col-lg-6 col-xs-12'>
-                        <div class='new-one'>
-                           <div class='new-one-img'>
-                              <a href='{{$item->url}}' title='{{$item->title}}'>
-                                 <img src="{{asset('uploads/images/blogs/'.$item->avata)}}" alt='{{$item->title}}'>
-                              </a>
+                     <div class='item'>
+                        <div class='ykkh-item'>
+                           <div class='ykkh-img'>
+                              <a href='{{$item->url}}' title='{{$item->title}}'><img alt='{{$item->title}}' src="{{asset('uploads/images/blogs/'.$item->avata)}}"></a>
                            </div>
-                           <div class='new-one-contents'>
-                              <div class='new-one-title'>
+                           <div class='ykkh-content'>
+                              <div class='ykkh-title'>
                                  <a href='{{$item->url}}' title='{{$item->title}}'>{!! \Illuminate\Support\Str::words($item->title,15,'...')  !!}</a>
                               </div>
-                              <div class='new-one-desc'>{!! \Illuminate\Support\Str::words($item->short_description,20,'...')  !!}</div>
+                              <div class='ykkh-desc'>{!! \Illuminate\Support\Str::words($item->short_description,20,'...')  !!}</div>
+                              <div class='ykkh-readmore hidden'><a href='/chuyen-muc-tin-tuc' title='Xem thêm'>Xem thêm</a></div>
                            </div>
                         </div>
                      </div>
                   @elseif($tt%2 == 0 && $tt+1 != $count)
-                     <div class='col-lg-6 col-xs-12'>
-                        <div class='new-one'>
-                           <div class='new-one-img'>
-                              <a href='{{$item->url}}' title='{{$item->title}}'>
-                                 <img src="{{asset('uploads/images/blogs/'.$item->avata)}}" alt='{{$item->title}}'>
-                              </a>
+                     <div class='item'>
+                        <div class='ykkh-item'>
+                           <div class='ykkh-img'>
+                              <a href='{{$item->url}}' title='{{$item->title}}'><img alt='{{$item->title}}' src="{{asset('uploads/images/blogs/'.$item->avata)}}"></a>
                            </div>
-                           <div class='new-one-contents'>
-                              <div class='new-one-title'>
+                           <div class='ykkh-content'>
+                              <div class='ykkh-title'>
                                  <a href='{{$item->url}}' title='{{$item->title}}'>{!! \Illuminate\Support\Str::words($item->title,15,'...')  !!}</a>
                               </div>
-                              <div class='new-one-desc'>{!! \Illuminate\Support\Str::words($item->short_description,20,'...')  !!}</div>
+                              <div class='ykkh-desc'>{!! \Illuminate\Support\Str::words($item->short_description,20,'...')  !!}</div>
+                              <div class='ykkh-readmore hidden'><a href='/chuyen-muc-tin-tuc' title='Xem thêm'>Xem thêm</a></div>
                            </div>
                         </div>
-                     
                      @php
                         $tt++;
                      @endphp
+
                   @elseif($tt%2 == 0 && $tt+1 == $count)
-                     <div class='col-lg-6 col-xs-12'>
-                        <div class='new-one'>
-                           <div class='new-one-img'>
-                              <a href='{{$item->url}}' title='{{$item->title}}'>
-                                 <img src="{{asset('uploads/images/blogs/'.$item->avata)}}" alt='{{$item->title}}'>
-                              </a>
+                     <div class='item'>
+                        <div class='ykkh-item'>
+                           <div class='ykkh-img'>
+                              <a href='{{$item->url}}' title='{{$item->title}}'><img alt='{{$item->title}}' src="{{asset('uploads/images/blogs/'.$item->avata)}}"></a>
                            </div>
-                           <div class='new-one-contents'>
-                              <div class='new-one-title'>
+                           <div class='ykkh-content'>
+                              <div class='ykkh-title'>
                                  <a href='{{$item->url}}' title='{{$item->title}}'>{!! \Illuminate\Support\Str::words($item->title,15,'...')  !!}</a>
                               </div>
-                              <div class='new-one-desc'>{!! \Illuminate\Support\Str::words($item->short_description,20,'...')  !!}</div>
+                              <div class='ykkh-desc'>{!! \Illuminate\Support\Str::words($item->short_description,20,'...')  !!}</div>
+                              <div class='ykkh-readmore hidden'><a href='/chuyen-muc-tin-tuc' title='Xem thêm'>Xem thêm</a></div>
                            </div>
                         </div>
                      </div>
@@ -358,29 +355,29 @@
                      @endphp
                   @elseif($tt%2 != 0 )
                         
-                        <div class='new-one'>
-                           <div class='new-one-img'>
-                              <a href='{{$item->url}}' title='{{$item->title}}'>
-                                 <img src="{{asset('uploads/images/blogs/'.$item->avata)}}" alt='{{$item->title}}'>
-                              </a>
+                        <div class='ykkh-item'>
+                           <div class='ykkh-img'>
+                              <a href='{{$item->url}}' title='{{$item->title}}'><img alt='{{$item->title}}' src="{{asset('uploads/images/blogs/'.$item->avata)}}"></a>
                            </div>
-                           <div class='new-one-contents'>
-                              <div class='new-one-title'>
+                           <div class='ykkh-content'>
+                              <div class='ykkh-title'>
                                  <a href='{{$item->url}}' title='{{$item->title}}'>{!! \Illuminate\Support\Str::words($item->title,15,'...')  !!}</a>
                               </div>
-                              <div class='new-one-desc'>{!! \Illuminate\Support\Str::words($item->short_description,20,'...')  !!}</div>
+                              <div class='ykkh-desc'>{!! \Illuminate\Support\Str::words($item->short_description,20,'...')  !!}</div>
+                              <div class='ykkh-readmore hidden'><a href='/chuyen-muc-tin-tuc' title='Xem thêm'>Xem thêm</a></div>
                            </div>
                         </div>
                      </div>
                      @php
                         $tt++;
                      @endphp
-                  @endif
-               @endforeach
-                
 
-           <div class='col-xs-12'><div class="comment_button "><a href="chuyen-muc-tin-tuc-bc1">XEM THÊM</a></div>
-              </div></div>
+                  @endif
+                  
+                 
+               @endforeach
+            </div>
+            <div class="comment_button "><a href="#">XEM THÊM</a></div>
         </div>
     </section>
 

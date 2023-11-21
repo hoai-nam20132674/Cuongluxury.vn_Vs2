@@ -1,8 +1,35 @@
 <header class="header header-bg header-fixed">
     <div class="header-main">
         <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-100-h">
+            <!-- <div class="row"> -->
+                <div class="head-demo hidden-lg hidden-md">
+                    <div class="menu-icon">
+                        <button type="button" class="navbar-toggle collapsed" id="trigger-mobile">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    
+                    <div class="logo">
+                        <a class='logo-wrapper'  href='/'><img  src="{{asset('uploads/images/systems/'.$system->logo)}}"  alt='Cuong Luxury'/></a>
+                    </div>
+                    <div class="list-icon-head">
+                        <ul class="list-icon hidden-lg hidden-md ">
+                            <li>
+                                
+                                <a href="{{URL::route('cart')}}" title="Giỏ hàng">
+                                    <!-- <img src="{{asset('images/i-map.png')}}" alt="Giỏ hàng" /> -->
+                                    <i class="fa fa-shopping-cart" style="font-size: 28px; color: #fff;" aria-hidden="true"></i>
+                                </a>
+                                    
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div class="col-md-3 col-100-h">
                     <button type="button" class="navbar-toggle collapsed visible-sm visible-xs" id="trigger-mobile">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -31,10 +58,49 @@
                             </span>
                         </li>
                     </ul>
-                </div>
-            </div>
+                </div> -->
+            <!-- </div> -->
         </div>
     </div>
+    <style type="text/css">
+        .menu-icon {
+            display: flex;
+        }
+        .menu-icon .navbar-toggle{
+            margin: 0px !important;
+        }
+        .head-demo{
+            display: flex;
+            justify-content: space-between;
+        }
+        .logo{
+            padding: 15px 0 !important;
+        }
+        .logo img {
+            max-width: 70px;
+
+        }
+        .list-icon-head{
+            display: flex;
+            align-items: center;
+        }
+        .list-icon-head .list-icon{
+            display: flex;
+        }
+        .list-icon{
+            padding: 0px 5px;
+        }
+        .list-icon li{
+            margin: 0px 5px;
+        }
+        #trigger-mobile .icon-bar{
+            background-color: white;
+            display: block;
+            width: 22px;
+            height: 4px;
+            border-radius: 1px;
+        }
+    </style>
     
 <div class="header-bottom">
     <div class="container">

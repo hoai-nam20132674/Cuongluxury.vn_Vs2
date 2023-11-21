@@ -1,4 +1,4 @@
-<section class="banner-sp-st">
+<section class="banner-sp-st hidden-xs">
     <div class="container">
         <div class="row">
             <div class="banner-sp-box">

@@ -646,21 +646,22 @@ $(".productscates-boxslider").owlCarousel({
     singleItem: true,
     pagination: false,
     dots: false,
-    autoplay: false,
+    autoplay: true,
     lazyLoad: true,
     navText: ["<i class='fa fa-caret-left' aria-hidden='true'></i>", "<i class='fa fa-caret-right' aria-hidden='true'></i>"],
     margin: 10,
-    autoplayTimeout: 6000,
+    autoplayTimeout: 3000,
     autoplayHoverPause: true,
     autoHeight: false,
-    loop: false,
+    loop: true,
     responsive: {
         0: {
             items: 2,
-            margin: 10
+            margin: 0
         },
         543: {
-            items: 2
+            items: 2,
+            margin: 0
         },
         768: {
             items: 3
@@ -681,6 +682,12 @@ $(".productscates-boxslider").owlCarousel({
             items: 4
         }
     }
+});
+$(".product-hl").owlCarousel({
+    autoplay: true,
+    autoplayTimeout: 6000,
+    autoplayHoverPause: true,
+    loop: true
 });
 function mgsc_backtotop() {
     if ($('.back-to-top').length) {

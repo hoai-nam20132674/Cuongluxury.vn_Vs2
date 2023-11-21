@@ -1,4 +1,4 @@
-<section class="services-st">
+<section class="services-st hidden-xs">
     <div class="container">
         <div class="row">
             <div class="qcservices-box">

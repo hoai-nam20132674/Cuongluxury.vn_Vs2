@@ -2371,7 +2371,7 @@ li.lictotal {
 
 .banner-st {
     /* background: #080808; */
-    padding: 3px 0 25px;
+    padding: 25px 0 25px;
 }
 
 .banner-boxsh {
@@ -3160,7 +3160,21 @@ color: #d0d0d0;
 color:white;
 padding:100px 0 30px 0;}
 @media(max-width:480px){
-.home-slider .item iframe{
-height: 300px;
+    .home-slider .item iframe{
+    height: 300px;
+    }
 }
+@media (max-width: 767px){
+    .headding-prd-ss{
+        padding: 0px;
+        margin-bottom: 20px;
+    }
+    .headding-prd-ss span  {
+        
+        font-size: 20px;
+        
+    }
+    .productscates-st{
+        padding: 25px 0px;
+    }
 }
