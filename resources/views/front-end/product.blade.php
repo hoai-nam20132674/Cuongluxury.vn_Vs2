@@ -240,7 +240,7 @@
                                             <li class="tab-link " data-tab="tab-2">
                                                 <h3><span>Tại sao chọn chúng tôi</span></h3>
                                             </li>
-                                            <li class="tab-link " data-tab="tab-3">
+                                            <li class="tab-link hidden" data-tab="tab-3">
                                                 <h3><span>Video</span></h3>
                                             </li>
                                         </ul>
