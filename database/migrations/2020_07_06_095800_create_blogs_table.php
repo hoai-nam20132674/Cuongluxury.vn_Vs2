@@ -22,7 +22,7 @@ class CreateBlogsTable extends Migration
             $table->longText('content')->nullable();
             $table->longText('short_description')->nullable();
             $table->longText('seo_description')->nullable();
-            $table->string('seo_keyword');
+            $table->longText('seo_keyword')->nullable();
             $table->string('url');
             $table->boolean('display');
             $table->boolean('type')->nullable();

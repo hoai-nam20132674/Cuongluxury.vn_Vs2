@@ -74,7 +74,7 @@
                                 <div class="form-group"  >
             
                                     <label for="name" class="control-label required">Tên sản phẩm</label>
-                                    <input class="form-control" onchange="seo_preview()" placeholder="Nhập tên" data-counter="120" value="{{old('name')}}" name="name" type="text" required id="name" style="text-transform: capitalize;">
+                                    <input class="form-control" onchange="seo_preview()" placeholder="Nhập tên" data-counter="190" value="{{old('name')}}" name="name" type="text" required id="name" style="text-transform: capitalize;">
                                 </div>
             
                                 

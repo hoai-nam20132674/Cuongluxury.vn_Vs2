@@ -18,6 +18,58 @@
             margin-right: 0px !important;
 
         }
+        .filter-bar-animation{
+            color: #fff;
+            background: black;
+            border: 1px solid #ba8562;
+            box-shadow: 0px 1px 18px #ba8562;
+            position: relative;
+            overflow: hidden;
+            border-right: 0;
+            text-align: center;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 9999;
+            font-size: 18px;
+            -webkit-transition: all 0.35s ease;
+            -o-transition: all 0.35s ease;
+            transition: all 0.35s ease;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+        
+        .filter-bar-animation::before { 
+            content: '';
+            background: conic-gradient(transparent 270deg, white, transparent);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            aspect-ratio: 1;
+            width: 100%;
+            animation: rotate 2s linear infinite;
+        }
+
+        /* Overlay */
+        .filter-bar-animation::after {
+            content: '';
+            background: inherit;
+            border-radius: inherit;
+            position: absolute;
+            inset: var(--offset);
+            height: calc(100% - 2 * var(--offset));
+            width: calc(100% - 2 * var(--offset));
+        }
+        @keyframes rotate {
+            from {
+                transform: translate(-50%, -50%) scale(1.4) rotate(0turn);
+            }
+
+            to {
+                transform: translate(-50%, -50%) scale(1.4) rotate(1turn);
+            }
+        }
+        
     </style>
 @endsection
 
@@ -219,8 +271,11 @@
         }</style>
 
 </section>
-<div class="filter-bar hidden-md hidden-lg">
-    <i class="fa fa-search" aria-hidden="true"></i>
+<div class="filter-bar hidden-md hidden-lg ">
+    <div class="filter-bar-animation">
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </div>
+    
 </div>
 <div class="filter-bar-box">
     <div class="filter-bar-box-headding">

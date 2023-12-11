@@ -67,7 +67,7 @@
                         <div class="form-group"  >
     
                             <label for="name" class="control-label required">T&ecirc;n</label>
-                            <input class="form-control" placeholder="Nhập tên" data-counter="120" name="name" value="{{old('name')}}" type="text" required id="name">
+                            <input class="form-control" placeholder="Nhập tên" data-counter="190" name="name" value="{{old('name')}}" type="text" required id="name">
                         </div>
     
                         
@@ -75,7 +75,7 @@
 
                         <div class="form-group">
                             <label for="short_description" class="control-label">Mô tả ngắn</label>
-                            <textarea class="form-control" rows="4" placeholder="Mô tả ngắn" data-counter="400" name="short_description" cols="50" id="short_description">{{old('short_description')}}</textarea>
+                            <textarea class="form-control" rows="4" placeholder="Mô tả ngắn" data-counter="500" name="short_description" cols="50" id="short_description">{{old('short_description')}}</textarea>
                         </div>
     
                         <div class="form-group"  >

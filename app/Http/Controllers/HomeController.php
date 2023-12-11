@@ -261,13 +261,13 @@ class HomeController extends Controller
     }
     public function blogs(Request $request){
         $categories = BlogCate::select()->get();
-        $blogs = Blog::where('lang','vi')->with('langs')->paginate(15);
+        $blogs = Blog::where('lang','vi')->orderBy('id','DESC')->with('langs')->paginate(15);
         return view('admin.blogs',compact('blogs','request','categories'));
     }
     public function blogsCate(Request $request, $id){
         $cate = BlogCate::where('id',$id)->get()->first();
         $categories = BlogCate::select()->get();
-        $blogs = $cate->blogs()->paginate(15);
+        $blogs = $cate->blogs()->orderBy('id','DESC')->paginate(15);
         return view('admin.blogs',compact('blogs','request','categories'));
     }
     public function addBlog(Request $request){
