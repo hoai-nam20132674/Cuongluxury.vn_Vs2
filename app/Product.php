@@ -62,6 +62,7 @@ class Product extends Model
         $this->ma = $request->ma;
         $this->short_description = $request->short_description;
         $this->highlight = $request->highlight;
+        $this->stock = $request->stock;
         $this->tiente = $request->tiente;
         $this->price = preg_replace( '/\D/', '', $request->price);
         if(isset($request->sale)){
@@ -225,6 +226,7 @@ class Product extends Model
         $product->display = $request->display;
         $product->ma = $request->ma;
         $product->highlight = $request->highlight;
+        $product->stock = $request->stock;
         $product->lang=$request->lang;
         $product->tiente = $request->tiente;
         $product->short_description = $request->short_description;

@@ -66,7 +66,9 @@
 
                                         <div id="gallery_01" class="owl-carousel owl-theme thumbnail-product margin-top-15" data-lg-items="4" data-md-items="4" data-sm-items="4" data-xs-items="4" data-xss-items="3" data-margin="10" data-nav="true">
 
-                                            <div class='item'><a class='thumb-link' href='javascript:void(0);' data-image="{{asset('uploads/images/products/details/'.$product->avata)}}" data-zoom-image="{{asset('uploads/images/products/details/'.$product->avata)}}"><img src="{{asset('uploads/images/products/details/'.$product->avata)}}" alt='' data-image="{{asset('uploads/images/products/details/'.$product->avata)}}"></a></div>
+                                            @foreach($product->images as $item)
+                                            <div class='item'><a class='thumb-link' href='javascript:void(0);' data-image="{{asset('uploads/images/products/details/'.$item->url)}}" data-zoom-image="{{asset('uploads/images/products/details/'.$item->url)}}"><img src="{{asset('uploads/images/products/details/'.$item->url)}}" alt='' data-image="{{asset('uploads/images/products/details/'.$item->url)}}"></a></div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -190,7 +192,7 @@
             
                     <div class="so1top">
                         <a href="" title="Số 1 việt nam">
-                            <img src="https://cuongluxury.vn/uploads/independent/Untitled-1.png" alt="Số 1 việt nam" />
+                            <img src="https://cuongluxury.vn/images/Untitled-1.png" alt="Số 1 việt nam" />
                         </a>
                     </div>
                 
@@ -286,7 +288,7 @@
                                                         @php
                                                             $c = $item->categories()->get()->first();
                                                         @endphp
-                                                        <div class="prdboxsli-ccname">{{$c->name}}</div>
+                                                        <!-- <div class="prdboxsli-ccname">{{$c->name}}</div> -->
                                                         <div class="prdboxsli-key">MSP: {{$item->ma}}</div>
                                                         <div class="prdboxsli-title"><a href="{{$item->url}}" title="{{$item->name}}">{{$item->name}}</a></div>
                                                         <div class='prdboxsli-price'>
@@ -316,7 +318,7 @@
                                                 <div class='item'>
                                                     <div class='prdboxsli-item'>
                                                        <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
-                                                       <div class='prdboxsli-ccname'>{{$c->title}}</div>
+                                                       <!-- <div class='prdboxsli-ccname'>{{$c->title}}</div> -->
                                                        <div class='prdboxsli-key'>MSP: {{$item->ma}}</div>
                                                        <div class='prdboxsli-title'><a href='/{{$item->url}}' title='Patek Philippe Complications 5905R-001 Like New 2020'>{{$item->name}}</a></div>
                                                        <div class='prdboxsli-price'>
@@ -462,7 +464,11 @@
                 });
             }
             $(document).ready(function () {
-                findProductVariation();
+                if($('.propertie-value-item').length){
+                    findProductVariation();
+                }
+
+                
             });
             $(document).on("click", ".propertie-value-item", function (event) {
                 var propertie_id = $(this).attr('propertie-id')

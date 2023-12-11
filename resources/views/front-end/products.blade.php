@@ -217,7 +217,6 @@
                                             <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 margin-bottom-15">
                                                 <div class='prdboxsli-item'>
                                                       <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
-                                                      <div class='prdboxsli-ccname'>Hublot</div>
                                                       <div class='prdboxsli-key'>MSP: {{$item->ma}}</div>
                                                       <div class='prdboxsli-title'><a href='/{{$item->url}}' title='{{$item->name}}'>{{$item->name}}</a></div>
                                                       <div class='prdboxsli-price'>

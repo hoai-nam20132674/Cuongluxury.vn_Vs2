@@ -110,13 +110,13 @@
                     <li>
                         
                                 <a href="https://goo.gl/maps/qVviiThbaiisCa5e8" target="_blank" title="Bản đồ"> 
-                                    <img src="https://cuongluxury.vn/templates/home/images/i-map.png" alt="Bản đồ" />
+                                    <img src="https://cuongluxury.vn/images/i-map.png" alt="Bản đồ" />
                                 </a>
                             
                     </li>
                     <li>
                         <a href="tel:0987.56.56.56" title="0987.56.56.56">
-                            <img src="https://cuongluxury.vn/templates/home/images/i-phone.png" alt="0987.56.56.56" />
+                            <img src="https://cuongluxury.vn/images/i-phone.png" alt="0987.56.56.56" />
                         </a>
                     </li>
                 </ul>
@@ -212,7 +212,7 @@
 
                 <div class="carti-box">
                     <a href="/gio-hang" title="Giỏ hàng">
-                        <img src="https://cuongluxury.vn/templates/home/images/i-cart.png" />
+                        <img src="https://cuongluxury.vn/images/i-cart.png" />
                     </a>
                     <div class="counter">
                         0

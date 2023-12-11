@@ -68,7 +68,7 @@
 
                         
                                 <div class="thongbao-bct">
-                                    <img src="https://cuongluxury.vn/uploads/independent/icon-bct.png" alt="Thông báo Bộ Công Thương" />
+                                    <img src="https://cuongluxury.vn/images/icon-bct.png" alt="Thông báo Bộ Công Thương" />
                                 </div>
                             
                     </div>

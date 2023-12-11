@@ -99,6 +99,7 @@ class Controller extends BaseController
             }])->get()->first();
         $pledges = Ads::where('type',0)->where('display',1)->get();
         $adsCates = Ads::where('type',1)->where('display',1)->get();
+        $adsBottom = Ads::where('type',2)->where('display',1)->get();
         $cnkhs = BlogCate::where('name','Cảm nhận khách hàng')->get()->first();
         $cnkhs = $cnkhs->blogs()->take(6)->get();
         $blogs = BlogCate::where('name','Chuyên mục tin tức')->get()->first();
@@ -106,7 +107,7 @@ class Controller extends BaseController
         $videos = VideoCate::where('name','Review sản phẩm')->get()->first();
         $videos = $videos->videos()->take(6)->get();
         // return view('front-end.index',compact('system','menus','categories','products_hl','hct','hcn','cdt','hdb','blogs','slides','popup'));
-        return view('front-end.index',compact('slides','patek','rolex','hublot','fm','vertu','trangsuc','pledges','adsCates','menus','system','cnkhs','blogs','videos'));
+        return view('front-end.index',compact('slides','patek','rolex','hublot','fm','vertu','trangsuc','pledges','adsCates','menus','system','cnkhs','blogs','videos','adsBottom'));
 
     }
     public function findProductCateTranslate($cate,$locale){
@@ -234,8 +235,37 @@ class Controller extends BaseController
         else{
             $locale = 'vi';
         }
-        $strrpos = strrpos($url,"-");
-        $url = substr($url,$strrpos+1);
+        if($url=='dong-ho'){
+            $url = 'pc1';
+        }
+        else if($url=='hublot'){
+            $url = 'pc4';
+        }
+        else if($url=='franck-muller'){
+            $url = 'pc5';
+        }
+        else if($url=='rolex'){
+            $url = 'pc6';
+        }
+        else if($url=='patek-philippe'){
+            $url = 'pc7';
+        }
+        else if($url=='richard-mille'){
+            $url = 'pc8';
+        }
+        else if($url=='vertu'){
+            $url = 'pc2';
+        }
+        else if($url=='trang-suc'){
+            $url = 'pc3';
+        }
+        else if($url=='chuyen-muc-tin-tuc'){
+            $url = 'bc1';
+        }
+        else{
+            $strrpos = strrpos($url,"-");
+            $url = substr($url,$strrpos+1);
+        }
         $key = substr($url,0,2);
         $id = substr($url,2);
         

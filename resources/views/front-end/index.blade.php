@@ -50,7 +50,7 @@
                 <div class='item'>
                    <div class='prdboxsli-item'>
                       <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
-                      <div class='prdboxsli-ccname'>Patek Philippe</div>
+                      <!-- <div class='prdboxsli-ccname'>Patek Philippe</div> -->
                       <div class='prdboxsli-key'>MSP: {{$item->ma}}</div>
                       <div class='prdboxsli-title'><a href='/{{$item->url}}' title='Patek Philippe Complications 5905R-001 Like New 2020'>{{$item->name}}</a></div>
                       <div class='prdboxsli-price'>
@@ -72,7 +72,7 @@
                   <div class='item'>
                    <div class='prdboxsli-item'>
                       <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
-                      <div class='prdboxsli-ccname'>Rolex</div>
+                      <!-- <div class='prdboxsli-ccname'>Rolex</div> -->
                       <div class='prdboxsli-key'>MSP: {{$item->ma}}</div>
                       <div class='prdboxsli-title'><a href='/{{$item->url}}' title='Patek Philippe Complications 5905R-001 Like New 2020'>{{$item->name}}</a></div>
                       <div class='prdboxsli-price'>
@@ -94,7 +94,7 @@
                   <div class='item'>
                    <div class='prdboxsli-item'>
                       <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
-                      <div class='prdboxsli-ccname'>Hublot</div>
+                      <!-- <div class='prdboxsli-ccname'>Hublot</div> -->
                       <div class='prdboxsli-key'>MSP: {{$item->ma}}</div>
                       <div class='prdboxsli-title'><a href='/{{$item->url}}' title='{{$item->name}}'>{{$item->name}}</a></div>
                       <div class='prdboxsli-price'>
@@ -116,7 +116,7 @@
                   <div class='item'>
                    <div class='prdboxsli-item'>
                       <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
-                      <div class='prdboxsli-ccname'>Franck Muller</div>
+                      <!-- <div class='prdboxsli-ccname'>Franck Muller</div> -->
                       <div class='prdboxsli-key'>MSP: {{$item->ma}}</div>
                       <div class='prdboxsli-title'><a href='/{{$item->url}}' title='Patek Philippe Complications 5905R-001 Like New 2020'>{{$item->name}}</a></div>
                       <div class='prdboxsli-price'>
@@ -139,7 +139,7 @@
                <div class='item'>
                 <div class='prdboxsli-item'>
                    <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
-                   <div class='prdboxsli-ccname'>Vertu</div>
+                   <!-- <div class='prdboxsli-ccname'>Vertu</div> -->
                    <div class='prdboxsli-key'>MSP: {{$item->ma}}</div>
                    <div class='prdboxsli-title'><a href='/{{$item->url}}' title='Patek Philippe Complications 5905R-001 Like New 2020'>{{$item->name}}</a></div>
                    <div class='prdboxsli-price'>
@@ -157,12 +157,13 @@
        <div class='container'>
           <div class='row'>
              <div class='banner-boxsh'>
+                @foreach($adsBottom as $item)
                 <div class='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
-                   <div class='banner-boxh'><a href='' title='Banner 1'><img src='https://cuongluxury.vn/uploads/qc/baner-12233333333333.jpg?width=600&mode=crop' alt='Banner 1' /></a></div>
+
+                   <div class='banner-boxh'><a href='{{$item->href}}' target="{{$item->target}}" title='{{$item->title}}'><img src="{{asset('uploads/images/adss/'.$item->url)}}" alt='{{$item->title}}' /></a></div>
+
                 </div>
-                <div class='col-lg-6 col-md-6 col-sm-6 col-xs-12'>
-                   <div class='banner-boxh'><a href='https://cuongluxury.vn/cuong-luxury-diem-den-ly-tuong-de-trai-nghiem-va-mua-sam-dong-ho-cao-cap' title='Banner 2'><img src='https://cuongluxury.vn/uploads/qc/baner-23-nen.jpg?width=600&mode=crop' alt='Banner 2' /></a></div>
-                </div>
+               @endforeach
              </div>
           </div>
        </div>
@@ -175,7 +176,7 @@
                <div class='item'>
                 <div class='prdboxsli-item'>
                    <div class='prdboxsli-thumb'><a href='/{{$item->url}}' title='{{$item->name}}'><img loading='lazy' src="{{asset('uploads/images/products/details/'.$item->avata)}}" alt='{{$item->name}}' /></a></div>
-                   <div class='prdboxsli-ccname'>Trang sức</div>
+                   <!-- <div class='prdboxsli-ccname'>Trang sức</div> -->
                    <div class='prdboxsli-key'>MSP: {{$item->ma}}</div>
                    <div class='prdboxsli-title'><a href='/{{$item->url}}' title='Patek Philippe Complications 5905R-001 Like New 2020'>{{$item->name}}</a></div>
                    <div class='prdboxsli-price'>
