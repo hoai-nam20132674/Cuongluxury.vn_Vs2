@@ -294,6 +294,7 @@ Route::get('/resizes/{size}/{imagePath}', 'Controller@flyResize')->where('imageP
 
 
 Route::group(['middleware' => 'locale'], function() {
+	Route::get('/sitemap', 'Controller@sitemap')->name('sitemap');
    Route::get('/san-pham-noi-bat', 'Controller@productsHot')->name('productsHot');
    Route::post('/addContact', 'Controller@addContact')->name('addContact');
    Route::get('/addContact2', 'Controller@addContact2')->name('addContact2');

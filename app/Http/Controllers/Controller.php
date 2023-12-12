@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\addUserRequest;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Sitemap\Tags\Url;
+use Spatie\Sitemap\Sitemap;
 use App\User;
 use App\BlogCate;
 use App\BlogCategorieLang;
@@ -609,7 +611,7 @@ class Controller extends BaseController
             
         }
         else {
-            return view('front-end.error',compact('categories','menus','request','system'));
+            return redirect()->route('index');
         }
 
 
@@ -893,5 +895,14 @@ class Controller extends BaseController
         $image->fit(600, 600)->save($savedPath . '.jpg', 90);
          
         return 'Done';
+    }
+    public function sitemap(){
+        $sitemap = Sitemap::create()
+        ->add(Url::create('/hublot')->setPriority(0.8))
+        ->add(Url::create('rolex')->setPriority(0.8))
+        ->add(Url::create('vertu')->setPriority(0.8));
+        $sitemap->writeTofile(public_path('sitemap.xml'));
+        return "Tạo sitemap thành công";
+
     }
 }
